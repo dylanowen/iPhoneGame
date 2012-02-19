@@ -173,25 +173,25 @@
 
 - (void) modChange:(CGPoint) loci
 {
-	if(loci.x < 20)
+	if(loci.x < 30)
 	{
-		change[0] = loci.x - 20;
+		change[0] = loci.x - 30;
 	}
-	else if(loci.x > self.view.bounds.size.width - 20)
+	else if(loci.x > self.view.bounds.size.width - 30)
 	{
-		change[0] = loci.x - self.view.bounds.size.width + 20;
+		change[0] = loci.x - self.view.bounds.size.width + 30;
 	}
 	else
 	{
 		change[0] = 0;
 	}
-	if(loci.y < 20)
+	if(loci.y < 30)
 	{
-		change[1] = loci.y - 20;
+		change[1] = loci.y - 30;
 	}
-	else if(loci.y > self.view.bounds.size.height - 20)
+	else if(loci.y > self.view.bounds.size.height - 30)
 	{
-		change[1] = loci.y - self.view.bounds.size.height + 20;
+		change[1] = loci.y - self.view.bounds.size.height + 30;
 	}
 	else
 	{
