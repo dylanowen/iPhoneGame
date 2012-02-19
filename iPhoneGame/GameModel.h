@@ -9,19 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-#define WIDTH 500
-#define HEIGHT 500
+#define WIDTH 800
+#define HEIGHT 1000
 
 typedef struct
 {
-	float position[3];
-	float color[4];
+	float position[2];
+	GLKVector4 color;
 } DirtVertex;
 
 @interface GameModel : NSObject
 {
 @public
-	DirtVertex dirt[WIDTH][HEIGHT];
+	DirtVertex dirt[WIDTH * HEIGHT];
 	GLubyte dirtIndices[WIDTH * HEIGHT];
 }
 

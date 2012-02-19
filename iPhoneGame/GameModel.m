@@ -28,16 +28,15 @@
 		{
 			for(unsigned j = 0; j < HEIGHT; j++)
 			{
-				dirt[i][j].position[0] = i;
-				dirt[i][j].position[1] = j;
-				dirt[i][j].position[2] = 0;
+				unsigned offset = i * WIDTH + j;
+				dirt[offset].position[0] = (float) i;
+				dirt[offset].position[1] = (float) j;
 				
-				dirt[i][j].color[0] = 0.0f;
-				dirt[i][j].color[1] = 1.0f;
-				dirt[i][j].color[2] = 0.0f;
-				dirt[i][j].color[3] = 1.0f;
+				dirt[offset].color = GLKVector4Make((float) i / WIDTH, (float) j / HEIGHT, 1, 1.0);
 				
-				dirtIndices[i * WIDTH + j] = i * WIDTH + j;
+				//NSLog(@"%f, %f", (float) i / WIDTH, (float) j / HEIGHT	);
+				
+				dirtIndices[offset] = offset;
 			}
 		}
 		return self;
