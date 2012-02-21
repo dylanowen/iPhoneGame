@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E9E7F6D14F17878005A9B5C /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E7F6C14F17878005A9B5C /* Shape.m */; };
 		CE7A794814ECB05E00B8FA24 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794714ECB05E00B8FA24 /* UIKit.framework */; };
 		CE7A794A14ECB05E00B8FA24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794914ECB05E00B8FA24 /* Foundation.framework */; };
 		CE7A794C14ECB05E00B8FA24 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794B14ECB05E00B8FA24 /* CoreGraphics.framework */; };
@@ -20,9 +21,13 @@
 		CE7A797314EDECC800B8FA24 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797214EDECC800B8FA24 /* OpenGLES.framework */; };
 		CE7A797514EDECCE00B8FA24 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797414EDECCE00B8FA24 /* GLKit.framework */; };
 		CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A797714EDED5E00B8FA24 /* GameModel.m */; };
+		CEB48AA714F3089700E5AD9E /* DirtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AA614F3089700E5AD9E /* DirtPixel.m */; };
+		CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AAA14F3190F00E5AD9E /* Environment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E9E7F6B14F17878005A9B5C /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
+		2E9E7F6C14F17878005A9B5C /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		CE7A794314ECB05E00B8FA24 /* iPhoneGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7A794714ECB05E00B8FA24 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE7A794914ECB05E00B8FA24 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -43,6 +48,10 @@
 		CE7A797414EDECCE00B8FA24 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		CE7A797614EDED5E00B8FA24 /* GameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModel.h; sourceTree = "<group>"; };
 		CE7A797714EDED5E00B8FA24 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModel.m; sourceTree = "<group>"; };
+		CEB48AA514F3089700E5AD9E /* DirtPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirtPixel.h; sourceTree = "<group>"; };
+		CEB48AA614F3089700E5AD9E /* DirtPixel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirtPixel.m; sourceTree = "<group>"; };
+		CEB48AA914F3190F00E5AD9E /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
+		CEB48AAA14F3190F00E5AD9E /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,15 +104,21 @@
 		CE7A794D14ECB05E00B8FA24 /* iPhoneGame */ = {
 			isa = PBXGroup;
 			children = (
+				CE7A795914ECB05E00B8FA24 /* MainStoryboard.storyboard */,
 				CE7A795614ECB05E00B8FA24 /* AppDelegate.h */,
 				CE7A795714ECB05E00B8FA24 /* AppDelegate.m */,
-				CE7A795914ECB05E00B8FA24 /* MainStoryboard.storyboard */,
 				CE7A795C14ECB05E00B8FA24 /* ViewController.h */,
 				CE7A795D14ECB05E00B8FA24 /* ViewController.m */,
 				CE7A797614EDED5E00B8FA24 /* GameModel.h */,
 				CE7A797714EDED5E00B8FA24 /* GameModel.m */,
+				CEB48AA914F3190F00E5AD9E /* Environment.h */,
+				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
 				CE7A796C14EDEC1200B8FA24 /* GameViewController.h */,
 				CE7A796D14EDEC1200B8FA24 /* GameViewController.m */,
+				2E9E7F6B14F17878005A9B5C /* Shape.h */,
+				2E9E7F6C14F17878005A9B5C /* Shape.m */,
+				CEB48AA514F3089700E5AD9E /* DirtPixel.h */,
+				CEB48AA614F3089700E5AD9E /* DirtPixel.m */,
 				CE7A794E14ECB05E00B8FA24 /* Supporting Files */,
 			);
 			path = iPhoneGame;
@@ -187,6 +202,9 @@
 				CE7A795E14ECB05E00B8FA24 /* ViewController.m in Sources */,
 				CE7A796E14EDEC1200B8FA24 /* GameViewController.m in Sources */,
 				CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */,
+				2E9E7F6D14F17878005A9B5C /* Shape.m in Sources */,
+				CEB48AA714F3089700E5AD9E /* DirtPixel.m in Sources */,
+				CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,42 +6,86 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import <GLKit/GLKit.h>
+
 #import "GameModel.h"
+
+#import "Environment.h"
 
 @interface GameModel()
 {
-	
-	
+	float left, right, bottom, top;	
 }
+
 
 
 @end
 
 @implementation GameModel
 
--(id) init
+@synthesize context = _context;
+@synthesize effect = _effect;
+@synthesize projectionMatrix = _projectionMatrix;
+
+@synthesize env = _env;
+
+- (id)initWithContext:(EAGLContext *) context effect:(GLKBaseEffect *) effect
 {
 	self = [super init];
 	if(self)
 	{
-		for(unsigned i = 0; i < WIDTH; i++)
-		{
-			for(unsigned j = 0; j < HEIGHT; j++)
-			{
-				unsigned offset = i * WIDTH + j;
-				dirt[offset].position[0] = (float) i;
-				dirt[offset].position[1] = (float) j;
-				
-				dirt[offset].color = GLKVector4Make((float) i / WIDTH, (float) j / HEIGHT, 1, 1.0);
-				
-				//NSLog(@"%f, %f", (float) i / WIDTH, (float) j / HEIGHT	);
-				
-				dirtIndices[offset] = offset;
-			}
-		}
+		self.effect = effect;
+		self.context = context;
+		self.env = [[Environment alloc] initWithWidth: 400 height: 400];
+		
+		left = 0.0f;
+		right = left + VIEW_WIDTH;
+		top = 0.0f;
+		bottom = top + VIEW_HEIGHT;
+		
 		return self;
 	}
 	return nil;
+}
+
+- (void)update
+{
+	//do all the main stuff of the game
+	self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
+}
+
+- (void)render
+{
+	[self.effect prepareToDraw];
+	
+	/*
+	float vertices[8] = {3, 3,
+								3, 100,
+								100, 100,
+								100, 3};
+	float vertices1[8] = {103, 103,
+								103, 200,
+								200, 200,
+								200, 103};
+	*/
+	
+	//glEnableVertexAttribArray(GLKVertexAttribColor);
+	//glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, self.vertexColors);
+	
+	[self.env render];
+	
+	
+	
+}
+
+-(GLKMatrix4)projectionMatrix
+{
+	return GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
+}
+
+- (void)touchesBegan:(CGPoint) point
+{
+	[self.env delete: point radius: 10];
 }
 
 @end

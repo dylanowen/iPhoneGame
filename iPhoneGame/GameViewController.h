@@ -8,6 +8,6 @@
 
 #import <GLKit/GLKit.h>
 
-@interface GameViewController : GLKViewController
+@interface GameViewController : GLKViewController <GLKViewControllerDelegate>
 
 @end

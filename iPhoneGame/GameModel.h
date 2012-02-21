@@ -7,24 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GLKit/GLKit.h>
 
-#define WIDTH 800
-#define HEIGHT 1000
+#define VIEW_WIDTH 200
+#define VIEW_HEIGHT 300
 
-typedef struct
-{
-	float position[2];
-	GLKVector4 color;
-} DirtVertex;
+@class Environment;
 
 @interface GameModel : NSObject
 {
 @public
-	DirtVertex dirt[WIDTH * HEIGHT];
-	GLubyte dirtIndices[WIDTH * HEIGHT];
+	//DirtPixel *dirt[DIRT_WIDTH][DIRT_HEIGHT];
+	//GLubyte dirtIndices[WIDTH * HEIGHT * 3];
 }
 
--(id) init;
+@property (strong, nonatomic) EAGLContext *context;
+@property (strong, nonatomic) GLKBaseEffect *effect;
+@property (readonly) GLKMatrix4 projectionMatrix;
+
+@property (strong, nonatomic) Environment *env;
+
+- (id)initWithContext:(EAGLContext *) context effect:(GLKBaseEffect *) effect;
+- (void)touchesBegan:(CGPoint) CGPoint;
+
+- (void)update;
+- (void)render;
 
 @end
