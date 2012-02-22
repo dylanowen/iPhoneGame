@@ -8,14 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-#define VIEW_WIDTH 200
-#define VIEW_HEIGHT 300
+#define VIEW_WIDTH 120
+#define VIEW_HEIGHT 80
+
+#define ENV_WIDTH 200
+#define ENV_HEIGHT 200
 
 @class Environment;
 
 @interface GameModel : NSObject
 {
 @public
+	GLuint _program;
 	//DirtPixel *dirt[DIRT_WIDTH][DIRT_HEIGHT];
 	//GLubyte dirtIndices[WIDTH * HEIGHT * 3];
 }
@@ -26,7 +30,7 @@
 
 @property (strong, nonatomic) Environment *env;
 
-- (id)initWithContext:(EAGLContext *) context effect:(GLKBaseEffect *) effect;
+- (id)initWithContext:(EAGLContext *) context effect:(GLKBaseEffect *) effect shaders:(GLuint) shaders;
 - (void)touchesBegan:(CGPoint) CGPoint;
 
 - (void)update;

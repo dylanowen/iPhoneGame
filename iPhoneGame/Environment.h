@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class GameModel;
+
 @interface Environment : NSObject
 {
-
 	float *color;
-
 }
+
+@property (nonatomic, strong) GameModel *game;
 
 @property (nonatomic) int width;
 @property (nonatomic) int height;
@@ -21,10 +23,7 @@
 @property (nonatomic) GLuint vertexBuffer;
 @property (nonatomic) GLuint colorBuffer;
 
-@property (nonatomic) unsigned vertexBufferSize;
-@property (nonatomic) unsigned colorBufferSize;
-
-- (id)initWithWidth:(int) width height:(int) height;
+- (id)initWithModel:(GameModel *) game;
 
 - (void)delete:(CGPoint) point radius:(unsigned) radius;
 

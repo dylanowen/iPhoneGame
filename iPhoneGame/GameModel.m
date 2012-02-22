@@ -14,10 +14,10 @@
 
 @interface GameModel()
 {
-	float left, right, bottom, top;	
+	float left, right, bottom, top;
+	float viewWidth;
+	float viewHeight;
 }
-
-
 
 @end
 
@@ -29,19 +29,21 @@
 
 @synthesize env = _env;
 
-- (id)initWithContext:(EAGLContext *) context effect:(GLKBaseEffect *) effect
+- (id)initWithContext:(EAGLContext *) context effect:(GLKBaseEffect *) effect shaders:(GLuint) shaders
 {
 	self = [super init];
 	if(self)
 	{
 		self.effect = effect;
 		self.context = context;
-		self.env = [[Environment alloc] initWithWidth: 400 height: 400];
+		_program = shaders;
+		
+		self.env = [[Environment alloc] initWithModel: self];
 		
 		left = 0.0f;
-		right = left + VIEW_WIDTH;
+		right = left + VIEW_HEIGHT;
 		top = 0.0f;
-		bottom = top + VIEW_HEIGHT;
+		bottom = top + VIEW_WIDTH;
 		
 		return self;
 	}
@@ -56,26 +58,12 @@
 
 - (void)render
 {
+	glClearColor(1.0, 0.0, 0.0, 1.0);
+	glClear(GL_COLOR_BUFFER_BIT);
+	
 	[self.effect prepareToDraw];
 	
-	/*
-	float vertices[8] = {3, 3,
-								3, 100,
-								100, 100,
-								100, 3};
-	float vertices1[8] = {103, 103,
-								103, 200,
-								200, 200,
-								200, 103};
-	*/
-	
-	//glEnableVertexAttribArray(GLKVertexAttribColor);
-	//glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, self.vertexColors);
-	
 	[self.env render];
-	
-	
-	
 }
 
 -(GLKMatrix4)projectionMatrix
@@ -85,7 +73,9 @@
 
 - (void)touchesBegan:(CGPoint) point
 {
-	[self.env delete: point radius: 10];
+	point.x = (int) point.x / 4;
+	point.y = (int) point.y / 4;
+	[self.env delete: point radius: 5];
 }
 
 @end

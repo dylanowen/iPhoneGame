@@ -23,6 +23,9 @@
 		CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A797714EDED5E00B8FA24 /* GameModel.m */; };
 		CEB48AA714F3089700E5AD9E /* DirtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AA614F3089700E5AD9E /* DirtPixel.m */; };
 		CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AAA14F3190F00E5AD9E /* Environment.m */; };
+		CEC570B914F4B04B003F345A /* shader.vsh in Sources */ = {isa = PBXBuildFile; fileRef = CEC570B814F4B04B003F345A /* shader.vsh */; };
+		CEC570BE14F4B2A2003F345A /* shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CEC570B814F4B04B003F345A /* shader.vsh */; };
+		CEC570C214F4B3EA003F345A /* shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CEC570C114F4B3EA003F345A /* shader.fsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,8 @@
 		CEB48AA614F3089700E5AD9E /* DirtPixel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirtPixel.m; sourceTree = "<group>"; };
 		CEB48AA914F3190F00E5AD9E /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		CEB48AAA14F3190F00E5AD9E /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
+		CEC570B814F4B04B003F345A /* shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.vsh; sourceTree = "<group>"; };
+		CEC570C114F4B3EA003F345A /* shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shader.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +124,7 @@
 				2E9E7F6C14F17878005A9B5C /* Shape.m */,
 				CEB48AA514F3089700E5AD9E /* DirtPixel.h */,
 				CEB48AA614F3089700E5AD9E /* DirtPixel.m */,
+				CEC570B514F4B00F003F345A /* Shaders */,
 				CE7A794E14ECB05E00B8FA24 /* Supporting Files */,
 			);
 			path = iPhoneGame;
@@ -133,6 +139,15 @@
 				CE7A795514ECB05E00B8FA24 /* iPhoneGame-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEC570B514F4B00F003F345A /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				CEC570B814F4B04B003F345A /* shader.vsh */,
+				CEC570C114F4B3EA003F345A /* shader.fsh */,
+			);
+			name = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,6 +200,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC570C214F4B3EA003F345A /* shader.fsh in Resources */,
+				CEC570BE14F4B2A2003F345A /* shader.vsh in Resources */,
 				CE7A795214ECB05E00B8FA24 /* InfoPlist.strings in Resources */,
 				CE7A795B14ECB05E00B8FA24 /* MainStoryboard.storyboard in Resources */,
 			);
@@ -205,6 +222,7 @@
 				2E9E7F6D14F17878005A9B5C /* Shape.m in Sources */,
 				CEB48AA714F3089700E5AD9E /* DirtPixel.m in Sources */,
 				CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */,
+				CEC570B914F4B04B003F345A /* shader.vsh in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
