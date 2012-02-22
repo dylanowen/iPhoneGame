@@ -45,22 +45,25 @@ enum
 {
 	[super viewDidLoad];
 	
-	self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES2];
-	[EAGLContext setCurrentContext:self.context];
-	
-	[self loadShaders];
-	
-	GLKView *view = (GLKView *) self.view;
-	view.context = self.context;
 	self.delegate = self;
 	
-	self.effect = [[GLKBaseEffect alloc] init];
-	 
+	self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES2];
 	if(!self.context)
 	{
 		NSLog(@"Failed to create ES context");
 	}
-	 
+	
+	GLKView *view = (GLKView *) self.view;
+	view.context = self.context;
+	
+	[EAGLContext setCurrentContext:self.context];
+	
+	[self loadShaders];
+	
+	self.effect = [[GLKBaseEffect alloc] init];
+	
+	self.preferredFramesPerSecond = 30;
+	
 	self.mainGame = [[GameModel alloc] initWithContext:self.context effect:self.effect shaders:_program];
 }
 
@@ -77,14 +80,40 @@ enum
 	{
 		[EAGLContext setCurrentContext:nil];
 	}
+	self.context = nil;
 	
 	if(_program)
 	{
 		glDeleteProgram(_program);
 		_program = 0;
 	}
-	 
-	self.context = nil;
+	
+	switch(glGetError())
+	{
+		case GL_NO_ERROR:
+			NSLog(@"GL_NO_ERROR");
+			break;
+		case GL_INVALID_ENUM:
+			NSLog(@"GL_INVALID_ENUM");
+			break;
+		case GL_INVALID_VALUE:
+			NSLog(@"GL_INVALID_VALUE");
+			break;
+		case GL_INVALID_OPERATION:
+			NSLog(@"GL_INVALID_OPERATION");
+			break;
+		case GL_STACK_OVERFLOW:
+			NSLog(@"GL_STACK_OVERFLOW");
+			break;
+		case GL_STACK_UNDERFLOW:
+			NSLog(@"GL_STACK_UNDERFLOW");
+			break;
+		case GL_OUT_OF_MEMORY:
+			NSLog(@"GL_OUT_OF_MEMORY");
+			break;
+		default:
+			NSLog(@"dunnno");	
+	}
 }
 
 - (void)glkViewControllerUpdate:(GLKViewController *)controller
@@ -106,6 +135,35 @@ enum
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
 	*/
 	[self.mainGame render];
+	
+	
+	
+	switch(glGetError())
+	{
+		case GL_NO_ERROR:
+			NSLog(@"GL_NO_ERROR");
+			break;
+		case GL_INVALID_ENUM:
+			NSLog(@"GL_INVALID_ENUM");
+			break;
+		case GL_INVALID_VALUE:
+			NSLog(@"GL_INVALID_VALUE");
+			break;
+		case GL_INVALID_OPERATION:
+			NSLog(@"GL_INVALID_OPERATION");
+			break;
+		case GL_STACK_OVERFLOW:
+			NSLog(@"GL_STACK_OVERFLOW");
+			break;
+		case GL_STACK_UNDERFLOW:
+			NSLog(@"GL_STACK_UNDERFLOW");
+			break;
+		case GL_OUT_OF_MEMORY:
+			NSLog(@"GL_OUT_OF_MEMORY");
+			break;
+		default:
+			NSLog(@"dunnno");	
+	}
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

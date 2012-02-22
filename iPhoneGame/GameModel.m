@@ -61,11 +61,10 @@
 	glClearColor(1.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	
+	//[self.env render];
+	
 	[self.effect prepareToDraw];
 	
-	[self.env render];
-	
-	/*
 	float vertices[] = {1, 1, 40, 40, 20, 40};
 	
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
@@ -73,7 +72,6 @@
 	
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
-	*/
 }
 
 -(GLKMatrix4)projectionMatrix

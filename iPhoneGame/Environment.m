@@ -13,6 +13,9 @@
 #import "GameModel.h"
 
 @implementation Environment
+{
+	GLuint gVAO;
+}
 
 @synthesize game = _game;
 
@@ -28,6 +31,8 @@
 	if(self)
 	{
 		self.game = game;
+		
+		//glBindVertexArrayOES(gVAO);
 		
 		//the size is the width * height * components of vertices
 		unsigned vertexBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2;
@@ -85,6 +90,7 @@
 		
 		//remove vertexBufferData we don't need its data anymore because it's in a buffer
 		free(vertexBufferData);
+		//glBindVertexArrayOES(0);
 		
 		return self;
 	}
@@ -94,6 +100,8 @@
 - (void)dealloc
 {
 	free(color);
+	glDeleteBuffers(1, &_vertexBuffer);
+	glDeleteBuffers(1, &_colorBuffer);
 }
 
 - (void)delete:(CGPoint) point radius:(unsigned) radius
@@ -120,28 +128,58 @@
 	free(temp);
 }
 
+- (void)checkError
+{
+	switch(glGetError())
+	{
+		case GL_NO_ERROR:
+			NSLog(@"GL_NO_ERROR");
+			break;
+		case GL_INVALID_ENUM:
+			NSLog(@"GL_INVALID_ENUM");
+			break;
+		case GL_INVALID_VALUE:
+			NSLog(@"GL_INVALID_VALUE");
+			break;
+		case GL_INVALID_OPERATION:
+			NSLog(@"GL_INVALID_OPERATION");
+			break;
+		case GL_STACK_OVERFLOW:
+			NSLog(@"GL_STACK_OVERFLOW");
+			break;
+		case GL_STACK_UNDERFLOW:
+			NSLog(@"GL_STACK_UNDERFLOW");
+			break;
+		case GL_OUT_OF_MEMORY:
+			NSLog(@"GL_OUT_OF_MEMORY");
+			break;
+		default:
+			NSLog(@"dunnno");	
+	}
+}
+
 - (void)render
 {
-	//assume that [self.effect prepareToDraw] has already been called
-	glEnable(GL_POINT_SPRITE_OES);
+	[self.game.effect prepareToDraw];
+	//glEnable(GL_POINT_SPRITE_OES);
 	
 	glBindBuffer(GL_ARRAY_BUFFER, self.vertexBuffer);
 	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	
+
 	glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
 	glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	glEnableVertexAttribArray(GLKVertexAttribColor);
-	
+
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
-	
+
 	glUseProgram(self.game->_program);
-	
+
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
-	
+
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glDisable(GLKVertexAttribPosition);
-	glDisable(GLKVertexAttribColor);
+	glDisableVertexAttribArray(GLKVertexAttribPosition);
+	glDisableVertexAttribArray(GLKVertexAttribColor);
 }
 
 
