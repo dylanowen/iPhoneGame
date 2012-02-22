@@ -64,6 +64,16 @@
 	[self.effect prepareToDraw];
 	
 	[self.env render];
+	
+	/*
+	float vertices[] = {1, 1, 40, 40, 20, 40};
+	
+	glEnableVertexAttribArray(GLKVertexAttribPosition);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDisableVertexAttribArray(GLKVertexAttribPosition);
+	*/
 }
 
 -(GLKMatrix4)projectionMatrix

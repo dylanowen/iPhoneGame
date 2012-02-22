@@ -29,11 +29,12 @@
 	{
 		self.game = game;
 		
-		//the size is the width * height * number of necessary vertices * components of vertices
+		//the size is the width * height * components of vertices
 		unsigned vertexBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2;
 		unsigned colorBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 4;
 		
 		color = malloc(colorBufferSize);
+		
 		/*
 		for(unsigned i = 0; i < ENV_WIDTH; i++)
 		{
@@ -75,12 +76,14 @@
 		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize, vertexBufferData, GL_STATIC_DRAW);
 		
 		glGenBuffers(1, &_colorBuffer);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _colorBuffer);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, colorBufferSize, color, GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
+		glBufferData(GL_ARRAY_BUFFER, colorBufferSize, color, GL_DYNAMIC_DRAW);
+		
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		
 		NSLog(@"%fMBs of vertex data %fMBs of color data", (float) vertexBufferSize / 1000 / 1000, (float) colorBufferSize / 1000 / 1000);
 		
-		//remove this we don't need this data anymore because it's in a buffer
+		//remove vertexBufferData we don't need its data anymore because it's in a buffer
 		free(vertexBufferData);
 		
 		return self;
@@ -136,6 +139,7 @@
 	
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
 	
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDisable(GLKVertexAttribPosition);
 	glDisable(GLKVertexAttribColor);
 }

@@ -44,7 +44,7 @@ enum
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	 
+	
 	self.context = [[EAGLContext alloc] initWithAPI: kEAGLRenderingAPIOpenGLES2];
 	[EAGLContext setCurrentContext:self.context];
 	
