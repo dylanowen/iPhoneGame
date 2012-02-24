@@ -12,7 +12,7 @@
 
 @interface Environment : NSObject
 {
-	float *color;
+	
 }
 
 @property (nonatomic, strong) GameModel *game;

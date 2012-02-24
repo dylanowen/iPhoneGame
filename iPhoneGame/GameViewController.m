@@ -10,14 +10,6 @@
 
 #import "GameModel.h"
 
-// Attribute index.
-enum
-{
-    ATTRIB_VERTEX,
-    ATTRIB_NORMAL,
-    NUM_ATTRIBUTES
-};
-
 @interface GameViewController()
 {
 	GLuint _program;
@@ -87,33 +79,6 @@ enum
 		glDeleteProgram(_program);
 		_program = 0;
 	}
-	
-	switch(glGetError())
-	{
-		case GL_NO_ERROR:
-			NSLog(@"GL_NO_ERROR");
-			break;
-		case GL_INVALID_ENUM:
-			NSLog(@"GL_INVALID_ENUM");
-			break;
-		case GL_INVALID_VALUE:
-			NSLog(@"GL_INVALID_VALUE");
-			break;
-		case GL_INVALID_OPERATION:
-			NSLog(@"GL_INVALID_OPERATION");
-			break;
-		case GL_STACK_OVERFLOW:
-			NSLog(@"GL_STACK_OVERFLOW");
-			break;
-		case GL_STACK_UNDERFLOW:
-			NSLog(@"GL_STACK_UNDERFLOW");
-			break;
-		case GL_OUT_OF_MEMORY:
-			NSLog(@"GL_OUT_OF_MEMORY");
-			break;
-		default:
-			NSLog(@"dunnno");	
-	}
 }
 
 - (void)glkViewControllerUpdate:(GLKViewController *)controller
@@ -135,35 +100,6 @@ enum
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
 	*/
 	[self.mainGame render];
-	
-	
-	
-	switch(glGetError())
-	{
-		case GL_NO_ERROR:
-			NSLog(@"GL_NO_ERROR");
-			break;
-		case GL_INVALID_ENUM:
-			NSLog(@"GL_INVALID_ENUM");
-			break;
-		case GL_INVALID_VALUE:
-			NSLog(@"GL_INVALID_VALUE");
-			break;
-		case GL_INVALID_OPERATION:
-			NSLog(@"GL_INVALID_OPERATION");
-			break;
-		case GL_STACK_OVERFLOW:
-			NSLog(@"GL_STACK_OVERFLOW");
-			break;
-		case GL_STACK_UNDERFLOW:
-			NSLog(@"GL_STACK_UNDERFLOW");
-			break;
-		case GL_OUT_OF_MEMORY:
-			NSLog(@"GL_OUT_OF_MEMORY");
-			break;
-		default:
-			NSLog(@"dunnno");	
-	}
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -230,7 +166,8 @@ enum
     
     // Bind attribute locations.
     // This needs to be done prior to linking.
-    //glBindAttribLocation(_program, ATTRIB_VERTEX, "position");
+    glBindAttribLocation(_program, GLKVertexAttribPosition, "position");
+	 glBindAttribLocation(_program, GLKVertexAttribColor, "color");
     
     // Link program.
     if (![self linkProgram:_program]) {
@@ -251,6 +188,10 @@ enum
         
         return NO;
     }
+	 
+	 // Get uniform locations.
+	 uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
+    uniforms[UNIFORM_NORMAL_MATRIX] = glGetUniformLocation(_program, "normalMatrix");
     
     // Release vertex and fragment shaders.
     if (vertShader) {

@@ -53,15 +53,21 @@
 - (void)update
 {
 	//do all the main stuff of the game
+	//left += 1;
+	//right += 1;
+	//bottom += 2;
+	//top += 2;
 	self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 }
 
 - (void)render
 {
-	glClearColor(1.0, 0.0, 0.0, 1.0);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	
-	//[self.env render];
+	[self.env render];
+	
+	
 	
 	[self.effect prepareToDraw];
 	
@@ -72,6 +78,7 @@
 	
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
+	
 }
 
 -(GLKMatrix4)projectionMatrix
@@ -81,8 +88,8 @@
 
 - (void)touchesBegan:(CGPoint) point
 {
-	point.x = (int) point.x / 4;
-	point.y = (int) point.y / 4;
+	point.x = (int) point.x / 2;
+	point.y = (int) point.y / 2;
 	[self.env delete: point radius: 5];
 }
 

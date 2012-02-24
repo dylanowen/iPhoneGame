@@ -8,11 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-#define VIEW_WIDTH 120
-#define VIEW_HEIGHT 80
+#define VIEW_WIDTH 240
+#define VIEW_HEIGHT 160
 
-#define ENV_WIDTH 200
-#define ENV_HEIGHT 200
+#define ENV_WIDTH 400
+#define ENV_HEIGHT 600
+
+// Uniform index.
+enum
+{
+    UNIFORM_MODELVIEWPROJECTION_MATRIX,
+    UNIFORM_NORMAL_MATRIX,
+    NUM_UNIFORMS
+};
+GLint uniforms[NUM_UNIFORMS];
 
 @class Environment;
 
