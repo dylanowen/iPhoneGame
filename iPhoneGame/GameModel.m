@@ -65,9 +65,7 @@
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	
-	[self.env render];
-	
-	
+	[self.env render];	
 	
 	[self.effect prepareToDraw];
 	
