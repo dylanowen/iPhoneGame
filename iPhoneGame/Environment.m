@@ -11,16 +11,30 @@
 #import <GLKit/GLKit.h>
 
 #import "GameModel.h"
+#import "GLProgram.h"
 
-@implementation Environment
+@interface Environment()
 {
 	float vertices[ENV_WIDTH][ENV_HEIGHT][2];
 	float colors[ENV_WIDTH][ENV_HEIGHT][4];
 	
-	GLuint gVAO;
+	GLuint positionAttribute;
+	GLuint colorAttribute;
+	GLuint modelViewUniform;
+	
+	//GLuint gVAO;
 }
 
+
+@property (nonatomic, strong) GameModel *game;
+@property (nonatomic, strong) GLProgram *program;
+
+@end
+
+@implementation Environment
+
 @synthesize game = _game;
+@synthesize program = _program;
 
 @synthesize width = _width;
 @synthesize height = _height;
@@ -34,6 +48,31 @@
 	if(self)
 	{
 		self.game = game;
+		self.program = [[GLProgram alloc] initWithVertexShaderFilename: @"environmentShader" fragmentShaderFilename: @"environmentShader"];
+		
+		/*
+		regaring bind attribute:
+			for some reason using my own enums doesn't work :/ so I had to use the built in ones
+			This is most likely my fault but I can't for the life of my figure out why it gives bad alloc when I do
+		*/
+		glBindAttribLocation(self.program->program, GLKVertexAttribPosition, "position");
+		glBindAttribLocation(self.program->program, GLKVertexAttribColor, "color");
+		
+		if(![self.program link])
+		{
+			NSLog(@"Link failed");
+			NSLog(@"Program Log: %@", [self.program programLog]); 
+			NSLog(@"Frag Log: %@", [self.program fragmentShaderLog]);
+			NSLog(@"Vert Log: %@", [self.program vertexShaderLog]);
+			self.program = nil;
+		}
+		else
+		{
+			NSLog(@"Environment shaders successfully loaded.");
+		}
+
+		modelViewUniform = [self.program uniformIndex:@"modelViewProjectionMatrix"];
+		
 		
 		//glBindVertexArrayOES(gVAO);
 		
@@ -166,7 +205,6 @@
 - (void)render
 {
 	[self.game.effect prepareToDraw];
-	//glEnable(GL_POINT_SPRITE_OES);
 	
 	//glBindBuffer(GL_ARRAY_BUFFER, self.vertexBuffer);
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
@@ -179,11 +217,10 @@
 
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
 
-	glUseProgram(self.game->_program);
+	[self.program use];
 	
-	glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, self.game.projectionMatrix.m);
-	glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, self.game.effect.transform.modelviewMatrix.m);
-
+	glUniformMatrix4fv(modelViewUniform, 1, 0, self.game->projectionMatrix.m);
+	
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
 
 	//glBindBuffer(GL_ARRAY_BUFFER, 0);

@@ -25,18 +25,16 @@
 
 @synthesize context = _context;
 @synthesize effect = _effect;
-@synthesize projectionMatrix = _projectionMatrix;
 
 @synthesize env = _env;
 
-- (id)initWithContext:(EAGLContext *) context effect:(GLKBaseEffect *) effect shaders:(GLuint) shaders
+- (id)initWithContext:(EAGLContext *) context effect:(GLKBaseEffect *) effect
 {
 	self = [super init];
 	if(self)
 	{
 		self.effect = effect;
 		self.context = context;
-		_program = shaders;
 		
 		self.env = [[Environment alloc] initWithModel: self];
 		
@@ -57,6 +55,7 @@
 	//right += 1;
 	//bottom += 2;
 	//top += 2;
+	projectionMatrix = GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 	self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 }
 
@@ -77,11 +76,6 @@
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
 	
-}
-
--(GLKMatrix4)projectionMatrix
-{
-	return GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 }
 
 - (void)touchesBegan:(CGPoint) point

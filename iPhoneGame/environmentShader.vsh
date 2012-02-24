@@ -2,7 +2,6 @@ attribute vec4 position;
 attribute vec4 color;
 
 uniform mat4 modelViewProjectionMatrix;
-uniform mat3 normalMatrix;
 
 varying lowp vec4 fragmentColor;
 

@@ -9,13 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @class GameModel;
+@class GLProgram;
 
 @interface Environment : NSObject
 {
 	
 }
-
-@property (nonatomic, strong) GameModel *game;
 
 @property (nonatomic) int width;
 @property (nonatomic) int height;

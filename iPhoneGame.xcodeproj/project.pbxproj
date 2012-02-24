@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E9E7F6D14F17878005A9B5C /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E7F6C14F17878005A9B5C /* Shape.m */; };
 		CE7A794814ECB05E00B8FA24 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794714ECB05E00B8FA24 /* UIKit.framework */; };
 		CE7A794A14ECB05E00B8FA24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794914ECB05E00B8FA24 /* Foundation.framework */; };
 		CE7A794C14ECB05E00B8FA24 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794B14ECB05E00B8FA24 /* CoreGraphics.framework */; };
@@ -21,15 +20,13 @@
 		CE7A797314EDECC800B8FA24 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797214EDECC800B8FA24 /* OpenGLES.framework */; };
 		CE7A797514EDECCE00B8FA24 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797414EDECCE00B8FA24 /* GLKit.framework */; };
 		CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A797714EDED5E00B8FA24 /* GameModel.m */; };
-		CEB48AA714F3089700E5AD9E /* DirtPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AA614F3089700E5AD9E /* DirtPixel.m */; };
+		CE884EE214F73981001B26DA /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = CE884EE114F73981001B26DA /* GLProgram.m */; };
+		CE884EE714F73E40001B26DA /* environmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CE884EE314F73E2E001B26DA /* environmentShader.fsh */; };
+		CE884EE814F73E40001B26DA /* environmentShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CE884EE414F73E2E001B26DA /* environmentShader.vsh */; };
 		CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AAA14F3190F00E5AD9E /* Environment.m */; };
-		CEC570BE14F4B2A2003F345A /* shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CEC570B814F4B04B003F345A /* shader.vsh */; };
-		CEC570C214F4B3EA003F345A /* shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CEC570C114F4B3EA003F345A /* shader.fsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2E9E7F6B14F17878005A9B5C /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
-		2E9E7F6C14F17878005A9B5C /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		CE7A794314ECB05E00B8FA24 /* iPhoneGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7A794714ECB05E00B8FA24 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE7A794914ECB05E00B8FA24 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -50,12 +47,12 @@
 		CE7A797414EDECCE00B8FA24 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		CE7A797614EDED5E00B8FA24 /* GameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModel.h; sourceTree = "<group>"; };
 		CE7A797714EDED5E00B8FA24 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModel.m; sourceTree = "<group>"; };
-		CEB48AA514F3089700E5AD9E /* DirtPixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirtPixel.h; sourceTree = "<group>"; };
-		CEB48AA614F3089700E5AD9E /* DirtPixel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirtPixel.m; sourceTree = "<group>"; };
+		CE884EE014F73981001B26DA /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
+		CE884EE114F73981001B26DA /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
+		CE884EE314F73E2E001B26DA /* environmentShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = environmentShader.fsh; sourceTree = "<group>"; };
+		CE884EE414F73E2E001B26DA /* environmentShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = environmentShader.vsh; sourceTree = "<group>"; };
 		CEB48AA914F3190F00E5AD9E /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		CEB48AAA14F3190F00E5AD9E /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
-		CEC570B814F4B04B003F345A /* shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.vsh; sourceTree = "<group>"; };
-		CEC570C114F4B3EA003F345A /* shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shader.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,10 +116,8 @@
 				CE7A797714EDED5E00B8FA24 /* GameModel.m */,
 				CEB48AA914F3190F00E5AD9E /* Environment.h */,
 				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
-				2E9E7F6B14F17878005A9B5C /* Shape.h */,
-				2E9E7F6C14F17878005A9B5C /* Shape.m */,
-				CEB48AA514F3089700E5AD9E /* DirtPixel.h */,
-				CEB48AA614F3089700E5AD9E /* DirtPixel.m */,
+				CE884EE014F73981001B26DA /* GLProgram.h */,
+				CE884EE114F73981001B26DA /* GLProgram.m */,
 				CEC570B514F4B00F003F345A /* Shaders */,
 				CE7A794E14ECB05E00B8FA24 /* Supporting Files */,
 			);
@@ -143,8 +138,8 @@
 		CEC570B514F4B00F003F345A /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				CEC570B814F4B04B003F345A /* shader.vsh */,
-				CEC570C114F4B3EA003F345A /* shader.fsh */,
+				CE884EE414F73E2E001B26DA /* environmentShader.vsh */,
+				CE884EE314F73E2E001B26DA /* environmentShader.fsh */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -199,8 +194,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEC570C214F4B3EA003F345A /* shader.fsh in Resources */,
-				CEC570BE14F4B2A2003F345A /* shader.vsh in Resources */,
+				CE884EE714F73E40001B26DA /* environmentShader.fsh in Resources */,
+				CE884EE814F73E40001B26DA /* environmentShader.vsh in Resources */,
 				CE7A795214ECB05E00B8FA24 /* InfoPlist.strings in Resources */,
 				CE7A795B14ECB05E00B8FA24 /* MainStoryboard.storyboard in Resources */,
 			);
@@ -218,9 +213,8 @@
 				CE7A795E14ECB05E00B8FA24 /* ViewController.m in Sources */,
 				CE7A796E14EDEC1200B8FA24 /* GameViewController.m in Sources */,
 				CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */,
-				2E9E7F6D14F17878005A9B5C /* Shape.m in Sources */,
-				CEB48AA714F3089700E5AD9E /* DirtPixel.m in Sources */,
 				CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */,
+				CE884EE214F73981001B26DA /* GLProgram.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
