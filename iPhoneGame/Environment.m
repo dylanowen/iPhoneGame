@@ -167,7 +167,7 @@
 	//glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
 	//glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * 50, clearer);
 	
-	int tempY, i = (1 - radius), end = radius;
+	int tempY, i = -radius, iEnd = radius, j, jEnd;
 	unsigned offset;
 	
 	//keep inside bounds
@@ -175,37 +175,48 @@
 	{
 		i = -x;
 	}
-	if(end + x > ENV_WIDTH)
+	if(iEnd + x > ENV_WIDTH)
 	{
-		end = ENV_WIDTH - x;
+		iEnd = ENV_WIDTH - x;
 	}
 	
 	glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
-	while(i < end)
+	while(i < iEnd)
 	{
 		tempY = (int) sqrt((radius * radius) - (i * i));
+		
 		//more bound checking
 		if(y - tempY < 0)
 		{
-			offset = ((i + x) * ENV_HEIGHT) * 4 * sizeof(float);
-			tempY = sizeof(float) * (tempY + y) * 4;
+			j = 0;
+			jEnd = tempY + y;
 		}
 		else if(y + tempY > ENV_WIDTH)
 		{
-			offset = ((i + x) * ENV_HEIGHT + y - tempY) * 4 * sizeof(float);
-			tempY = sizeof(float) * (tempY + ENV_WIDTH - y) * 4;
+			j = y - tempY;
+			jEnd = tempY + ENV_WIDTH - y;
 		}
 		else
 		{
-			offset = ((i + x) * ENV_HEIGHT + y - tempY) * 4 * sizeof(float);
-			tempY = sizeof(float) * (tempY * 2) * 4;
+			j = y - tempY;
+			jEnd = tempY * 2;
 		}
-
+		
+		offset = ((i + x) * ENV_HEIGHT + j) * 4 * sizeof(float);
+		tempY = sizeof(float) * jEnd * 4;
+		
+		//clear out the buffer
 		glBufferSubData(GL_ARRAY_BUFFER, offset, tempY, clearer);
+		
+		//clear our own local array
+		jEnd += j;
+		while(j <= jEnd)
+		{
+			dirt[i + x][j] = NO;
+			j++;
+		}
 		i++;
 	}
-	
-	NSLog(@"%d, %d", x, y);
 }
 
 - (void)checkError

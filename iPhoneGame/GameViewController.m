@@ -49,6 +49,10 @@
 	
 	self.preferredFramesPerSecond = 30;
 	
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
+	
 	self.mainGame = [[GameModel alloc] initWithContext:self.context effect:self.effect];
 }
 
