@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define MAX_DELETE_RADIUS 50
+
 @class GameModel;
 @class GLProgram;
 
@@ -24,7 +26,7 @@
 
 - (id)initWithModel:(GameModel *) game;
 
-- (void)delete:(CGPoint) point radius:(unsigned) radius;
+- (void)deleteRadius:(int) radius x:(int) x y:(int) y;
 
 - (void)render;
 

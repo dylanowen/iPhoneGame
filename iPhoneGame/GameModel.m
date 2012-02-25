@@ -25,6 +25,7 @@
 
 @synthesize context = _context;
 @synthesize effect = _effect;
+@synthesize projectionMatrix = _projectionMatrix;
 
 @synthesize env = _env;
 
@@ -39,9 +40,9 @@
 		self.env = [[Environment alloc] initWithModel: self];
 		
 		left = 0.0f;
-		right = left + VIEW_HEIGHT;
+		right = left + VIEW_WIDTH;
 		top = 0.0f;
-		bottom = top + VIEW_WIDTH;
+		bottom = top + VIEW_HEIGHT;
 		
 		return self;
 	}
@@ -55,7 +56,6 @@
 	//right += 1;
 	//bottom += 2;
 	//top += 2;
-	projectionMatrix = GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 	self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 }
 
@@ -67,23 +67,18 @@
 	[self.env render];	
 	
 	[self.effect prepareToDraw];
-	
-	/*
-	float vertices[] = {1, 1, 40, 40, 20, 40};
-	
-	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
-	
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-	glDisableVertexAttribArray(GLKVertexAttribPosition);
-	*/
+}
+
+-(GLKMatrix4)projectionMatrix
+{
+	return GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 }
 
 - (void)touchesBegan:(CGPoint) point
 {
-	point.x = (int) point.x / 2;
-	point.y = (int) point.y / 2;
-	[self.env delete: point radius: 5];
+	//account for our own coordinate system
+	[self.env deleteRadius: (arc4random() % 15) + 5 x:((int) point.x / 2) y:((int) point.y / 2)];
+	//[self.env deleteRadius: 10 x:5 y:5];
 }
 
 @end

@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define VIEW_WIDTH 240
-#define VIEW_HEIGHT 160
+#define VIEW_WIDTH 160
+#define VIEW_HEIGHT 240
 
 #define ENV_WIDTH 400
 #define ENV_HEIGHT 600
@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
+@property (readonly) GLKMatrix4 projectionMatrix;
 
 @property (strong, nonatomic) Environment *env;
 

@@ -15,8 +15,11 @@
 
 @interface Environment()
 {
-	float vertices[ENV_WIDTH][ENV_HEIGHT][2];
-	float colors[ENV_WIDTH][ENV_HEIGHT][4];
+	//float vertices[ENV_WIDTH][ENV_HEIGHT][2];
+	//float colors[ENV_WIDTH][ENV_HEIGHT][4];
+	bool dirt[ENV_WIDTH][ENV_HEIGHT];
+	
+	float clearer[MAX_DELETE_RADIUS][4];
 	
 	GLuint positionAttribute;
 	GLuint colorAttribute;
@@ -48,7 +51,6 @@
 	if(self)
 	{
 		self.game = game;
-		self.program = [[GLProgram alloc] initWithVertexShaderFilename: @"environmentShader" fragmentShaderFilename: @"environmentShader"];
 		
 		float browns[5][3] = {
 			{128/256.0f, 68/256.0f, 8/256.0f},
@@ -57,6 +59,18 @@
 			{136/256.0f ,72/256.0f ,12/256.0f},
 			{120/256.0f ,64/256.0f ,8/256.0f}
 		};
+		
+		//setup the clearing array
+		for(unsigned i = 0; i < MAX_DELETE_RADIUS; i++)
+		{
+			for(unsigned j = 0; j < 4; j++)
+			{
+				clearer[i][j] = 0.0f;
+			}
+		}
+		
+		//load and setup the shaders
+		self.program = [[GLProgram alloc] initWithVertexShaderFilename: @"environmentShader" fragmentShaderFilename: @"environmentShader"];
 
 		positionAttribute = [self.program addAttribute: @"position"];
 		colorAttribute = [self.program addAttribute: @"color"];
@@ -80,35 +94,32 @@
 		//glBindVertexArrayOES(gVAO);
 		
 		//the size is the width * height * components of vertices
-		//vertexBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2;
-		//colorBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 4;
+		unsigned vertexBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2;
+		unsigned colorBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 4;
 		
-		//vertices = malloc(vertexBufferSize);
-		//color = malloc(colorBufferSize);
-		
-		
-		/*
-		for(unsigned i = 0; i < ENV_WIDTH; i++)
-		{
-			//vertex[i] = malloc(sizeof(float) * ENV_HEIGHT * 8);
-			//color[i] = malloc(sizeof(float) * ENV_HEIGHT * 4);
-			for(unsigned j = 0; j < ENV_HEIGHT; j++)
-			{ 
-				unsigned offsetColor = (i * ENV_HEIGHT + j) * 4;
-				color[offsetColor + 0] = (float) (arc4random() % 10) / 10;
-				color[offsetColor + 1] = (float) (arc4random() % 10) / 10;
-				color[offsetColor + 2] = (float) (arc4random() % 10) / 10;
-				color[offsetColor + 3] = 1.0f;
-			}
-		}
-		*/
-		
-		//float *vertexBufferData = malloc(vertexBufferSize);
+		float *vertices = malloc(vertexBufferSize);
+		float *colors = malloc(colorBufferSize);
 
 		for(unsigned i = 0; i < ENV_WIDTH; i++)
 		{
 			for(unsigned j = 0; j < ENV_HEIGHT; j++)
 			{				
+				unsigned off = i * ENV_HEIGHT + j;
+				unsigned offVertices = off * 2;
+				unsigned offColor = off * 4;
+				
+				vertices[offVertices + 0] = (float) i;
+				vertices[offVertices + 1] = (float) j;
+				
+				int randomBrown = (arc4random() % 5);
+				colors[offColor + 0] = browns[randomBrown][0];
+				colors[offColor + 1] = browns[randomBrown][1];
+				colors[offColor + 2] = browns[randomBrown][2];
+				colors[offColor + 3] = 1.0f;
+				
+				dirt[i][j] = YES;
+				
+				/*
 				vertices[i][j][0] = (float) i;
 				vertices[i][j][1] = (float) j;
 				
@@ -117,25 +128,27 @@
 				colors[i][j][1] = browns[randomBrown][1];
 				colors[i][j][2] = browns[randomBrown][2];
 				colors[i][j][3] = 1.0f;
+				*/
 			}
 		}
 		
-		/*
+		
 		glGenBuffers(1, &_vertexBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
-		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize, vertexBufferData, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize, vertices, GL_STATIC_DRAW);
 		
 		glGenBuffers(1, &_colorBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
-		glBufferData(GL_ARRAY_BUFFER, colorBufferSize, color, GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, colorBufferSize, colors, GL_DYNAMIC_DRAW);
 		
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		*/
+		//glBindBuffer(GL_ARRAY_BUFFER, 0);
+		
 		
 		NSLog(@"%fMBs of vertex data %fMBs of color data", (float) (sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2) / 1000 / 1000, (float) (sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 4) / 1000 / 1000);
 		
 		//remove vertexBufferData we don't need its data anymore because it's in a buffer
-		//free(vertexBufferData);
+		free(colors);
+		free(vertices);
 		//glBindVertexArrayOES(0);
 		
 		return self;
@@ -145,48 +158,54 @@
 
 - (void)dealloc
 {
-	//free(color);
-	//glDeleteBuffers(1, &_vertexBuffer);
-	//glDeleteBuffers(1, &_colorBuffer);
+	glDeleteBuffers(1, &_vertexBuffer);
+	glDeleteBuffers(1, &_colorBuffer);
 }
 
-- (void)delete:(CGPoint) point radius:(unsigned) radius
+- (void)deleteRadius:(int) radius x:(int) x y:(int) y
 {
-	int tempX, tempY;
-	for(int i = point.x - radius; i <= point.x + radius; i++)
+	//glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
+	//glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(float) * 50, clearer);
+	
+	int tempY, i = (1 - radius), end = radius;
+	unsigned offset;
+	
+	//keep inside bounds
+	if((i + x) < 0)
 	{
-		tempY = i - point.x;
-		tempX = (int) sqrt((radius * radius) - (tempY * tempY));
-		for(int j = point.y - tempX; j <= point.y + tempX; j++)
-		{
-			colors[i][j][0] = 0.0f;
-			colors[i][j][1] = 0.0f;
-			colors[i][j][2] = 0.0f;
-			colors[i][j][3] = 0.0f;
-		}
+		i = -x;
 	}
-	/*
+	if(end + x > ENV_WIDTH)
+	{
+		end = ENV_WIDTH - x;
+	}
+	
 	glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
-	unsigned maxWidth = radius * 4 * 2;
-	float *temp = malloc(sizeof(float) * maxWidth);
-	for(unsigned i = 0; i < maxWidth; i++)
+	while(i < end)
 	{
-		temp[i] = 0.0f;
-	}
-	for(unsigned i = point.x - radius; i <= point.x + radius && i < ENV_WIDTH; i++)
-	{
-		unsigned offset = (i * ENV_HEIGHT + point.y - radius) * 4;
-		color[offset + 0] = 0.0f;
-		color[offset + 1] = 0.0f;
-		color[offset + 2] = 0.0f;
-		color[offset + 3] = 0.0f;
-		glBufferSubData(GL_ARRAY_BUFFER, offset * sizeof(float), sizeof(float) * maxWidth, temp);
+		tempY = (int) sqrt((radius * radius) - (i * i));
+		//more bound checking
+		if(y - tempY < 0)
+		{
+			offset = ((i + x) * ENV_HEIGHT) * 4 * sizeof(float);
+			tempY = sizeof(float) * (tempY + y) * 4;
+		}
+		else if(y + tempY > ENV_WIDTH)
+		{
+			offset = ((i + x) * ENV_HEIGHT + y - tempY) * 4 * sizeof(float);
+			tempY = sizeof(float) * (tempY + ENV_WIDTH - y) * 4;
+		}
+		else
+		{
+			offset = ((i + x) * ENV_HEIGHT + y - tempY) * 4 * sizeof(float);
+			tempY = sizeof(float) * (tempY * 2) * 4;
+		}
+
+		glBufferSubData(GL_ARRAY_BUFFER, offset, tempY, clearer);
+		i++;
 	}
 	
-	NSLog(@"%f, %f", point.x, point.y);
-	
-	free(temp);
-	*/
+	NSLog(@"%d, %d", x, y);
 }
 
 - (void)checkError
@@ -222,16 +241,18 @@
 - (void)render
 {
 	[self.program use];
-	//glBindBuffer(GL_ARRAY_BUFFER, self.vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, self.vertexBuffer);
 	glEnableVertexAttribArray(positionAttribute);
-	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	//glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
 
-	//glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
 	glEnableVertexAttribArray(colorAttribute);
-	glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, colors);
+	//glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, colors);
+	glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
-	glUniformMatrix4fv(modelViewUniform, 1, 0, self.game->projectionMatrix.m);
+	glUniformMatrix4fv(modelViewUniform, 1, 0, self.game.projectionMatrix.m);
 	
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
 
