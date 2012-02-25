@@ -13,12 +13,7 @@
 //copied from http://iphonedevelopment.blogspot.com/2010/11/opengl-es-20-for-ios-chapter-4.html
 
 @interface GLProgram : NSObject 
-{
-@public 
-	GLuint program;
-}
-- (id)initWithVertexShaderFilename:(NSString *)vShaderFilename 
-fragmentShaderFilename:(NSString *)fShaderFilename;
+- (id)initWithVertexShaderFilename:(NSString *)vShaderFilename fragmentShaderFilename:(NSString *)fShaderFilename;
 - (GLuint)addAttribute:(NSString *)attributeName;
 - (GLuint)attributeIndex:(NSString *)attributeName;
 - (GLuint)uniformIndex:(NSString *)uniformName;

@@ -50,13 +50,16 @@
 		self.game = game;
 		self.program = [[GLProgram alloc] initWithVertexShaderFilename: @"environmentShader" fragmentShaderFilename: @"environmentShader"];
 		
-		/*
-		regaring bind attribute:
-			for some reason using my own enums doesn't work :/ so I had to use the built in ones
-			This is most likely my fault but I can't for the life of my figure out why it gives bad alloc when I do
-		*/
-		glBindAttribLocation(self.program->program, GLKVertexAttribPosition, "position");
-		glBindAttribLocation(self.program->program, GLKVertexAttribColor, "color");
+		float browns[5][3] = {
+			{128/256.0f, 68/256.0f, 8/256.0f},
+			{152/256.0f ,84/256.0f ,20/256.0f},
+			{144/256.0f ,80/256.0f ,16/256.0f},
+			{136/256.0f ,72/256.0f ,12/256.0f},
+			{120/256.0f ,64/256.0f ,8/256.0f}
+		};
+
+		positionAttribute = [self.program addAttribute: @"position"];
+		colorAttribute = [self.program addAttribute: @"color"];
 		
 		if(![self.program link])
 		{
@@ -109,9 +112,10 @@
 				vertices[i][j][0] = (float) i;
 				vertices[i][j][1] = (float) j;
 				
-				colors[i][j][0] = (float) (i % 10) / 10;
-				colors[i][j][1] = (float) (j % 10) / 10;
-				colors[i][j][2] = 0.0f;
+				int randomBrown = (arc4random() % 5);
+				colors[i][j][0] = browns[randomBrown][0];
+				colors[i][j][1] = browns[randomBrown][1];
+				colors[i][j][2] = browns[randomBrown][2];
 				colors[i][j][3] = 1.0f;
 			}
 		}
@@ -148,6 +152,19 @@
 
 - (void)delete:(CGPoint) point radius:(unsigned) radius
 {
+	int tempX, tempY;
+	for(int i = point.x - radius; i <= point.x + radius; i++)
+	{
+		tempY = i - point.x;
+		tempX = (int) sqrt((radius * radius) - (tempY * tempY));
+		for(int j = point.y - tempX; j <= point.y + tempX; j++)
+		{
+			colors[i][j][0] = 0.0f;
+			colors[i][j][1] = 0.0f;
+			colors[i][j][2] = 0.0f;
+			colors[i][j][3] = 0.0f;
+		}
+	}
 	/*
 	glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
 	unsigned maxWidth = radius * 4 * 2;
@@ -204,28 +221,23 @@
 
 - (void)render
 {
-	[self.game.effect prepareToDraw];
-	
+	[self.program use];
 	//glBindBuffer(GL_ARRAY_BUFFER, self.vertexBuffer);
-	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	glEnableVertexAttribArray(positionAttribute);
+	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 	
 
 	//glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
-	glEnableVertexAttribArray(GLKVertexAttribColor);
-	glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, colors);
-
-	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
-
-	[self.program use];
+	glEnableVertexAttribArray(colorAttribute);
+	glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, colors);
 	
 	glUniformMatrix4fv(modelViewUniform, 1, 0, self.game->projectionMatrix.m);
 	
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
 
 	//glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glDisableVertexAttribArray(GLKVertexAttribColor);
-	glDisableVertexAttribArray(GLKVertexAttribPosition);
+	glDisableVertexAttribArray(colorAttribute);
+	glDisableVertexAttribArray(positionAttribute);
 }
 
 

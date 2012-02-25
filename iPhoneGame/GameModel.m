@@ -68,6 +68,7 @@
 	
 	[self.effect prepareToDraw];
 	
+	/*
 	float vertices[] = {1, 1, 40, 40, 20, 40};
 	
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
@@ -75,7 +76,7 @@
 	
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
-	
+	*/
 }
 
 - (void)touchesBegan:(CGPoint) point
