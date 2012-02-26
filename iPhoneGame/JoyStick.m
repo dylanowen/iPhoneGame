@@ -8,8 +8,6 @@
 
 #import "JoyStick.h"
 
-#import <GLKit/GLKit.h>
-
 #import "GameConstants.h"
 
 @interface JoyStick()
@@ -45,9 +43,10 @@
 		self.effect = [[GLKBaseEffect alloc] init];
 		
 		lastTouch = CGPointMake(-1, -1);
+		velocity = GLKVector2Make(0, 0);
 		
 		region = CGRectMake(position.x - JOY_LENGTH, position.y - JOY_LENGTH, JOY_LENGTH * 2, JOY_LENGTH * 2);
-		NSLog(@"%@ (%f, %f: %f %f)", self, region.origin.x, region.origin.y, region.size.width, region.size.height);
+		//NSLog(@"%@ (%f, %f: %f %f)", self, region.origin.x, region.origin.y, region.size.width, region.size.height);
 		
 		vertices[0] = 0;
 		vertices[1] = 0;
@@ -70,7 +69,8 @@
 	if(CGRectContainsPoint(region, loci))
 	{
 		position = lastTouch = loci;
-		NSLog(@"%f, %f", loci.x, loci.y);
+		velocity = GLKVector2Make(position.x - origin.x, position.y - origin.y);
+		//NSLog(@"%f, %f", loci.x, loci.y);
 		return YES;
 	}
 
@@ -82,6 +82,7 @@
 	if(CGPointEqualToPoint(lastTouch, last))
 	{
 		position = lastTouch = loci;
+		velocity = GLKVector2Make(position.x - origin.x, position.y - origin.y);
 		return YES;
 	}
 	return NO;
@@ -90,6 +91,7 @@
 - (void)touchesEnded
 {
 	position = origin;
+	velocity = GLKVector2Make(0, 0);
 }
 
 - (void)render

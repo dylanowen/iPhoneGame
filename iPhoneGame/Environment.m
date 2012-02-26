@@ -191,10 +191,10 @@
 			j = 0;
 			jEnd = tempY + y;
 		}
-		else if(y + tempY > ENV_WIDTH)
+		else if(y + tempY > ENV_HEIGHT)
 		{
 			j = y - tempY;
-			jEnd = tempY + ENV_WIDTH - y;
+			jEnd = tempY + ENV_HEIGHT - y;
 		}
 		else
 		{

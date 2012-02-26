@@ -21,9 +21,6 @@
 
 @property (strong, nonatomic) GameModel *game;
 
-@property (strong, nonatomic) JoyStick *move;
-@property (strong, nonatomic) JoyStick *look;
-
 @end
 
 @implementation Controls

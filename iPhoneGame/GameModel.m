@@ -9,12 +9,15 @@
 #import "GameModel.h"
 
 #import "Environment.h"
+#import "JoyStick.h"
 
 @interface GameModel()
 {
 	float left, right, bottom, top;
 	float viewWidth;
 	float viewHeight;
+	
+	CGPoint deleter;
 }
 
 @end
@@ -39,10 +42,12 @@
 		self.env = [[Environment alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
 		
-		left = -10.0f;
+		left = 0.0f;
 		right = left + VIEW_WIDTH;
-		top = -10.0f;
-		bottom = top + VIEW_HEIGHT;
+		bottom = 0.0f;
+		top = bottom + VIEW_HEIGHT;
+		
+		deleter = CGPointMake(0, 0);
 		
 		return self;
 	}
@@ -52,11 +57,50 @@
 - (void)update
 {
 	//do all the main stuff of the game
-	//left += 1;
-	//right += 1;
-	//bottom += 2;
-	//top += 2;
+	left += self.controls.move->velocity.x / 8;
+	bottom -= (float) self.controls.move->velocity.y / 8;
+	if(left < -10.0f)
+	{
+		left = -10.0f;
+	}
+	else if(left + VIEW_WIDTH > ENV_WIDTH + 10)
+	{
+		left = ENV_WIDTH+ 10 - VIEW_WIDTH;
+	}
+	if(bottom < -10.0f)
+	{
+		bottom = -10.0f;
+	}
+	else if(bottom + VIEW_HEIGHT > ENV_HEIGHT + 10)
+	{
+		bottom = ENV_HEIGHT + 10 - VIEW_HEIGHT;
+	}
+	
+	right = left + VIEW_WIDTH;
+	top = bottom + VIEW_HEIGHT;
+	
 	self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
+	
+	deleter.x += self.controls.look->velocity.x / 8;
+	deleter.y -= self.controls.look->velocity.y / 8;
+	if(deleter.x < 0)
+	{
+		deleter.x = 0;
+	}
+	else if(deleter.x > ENV_WIDTH)
+	{
+		deleter.x = ENV_WIDTH;
+	}
+	if(deleter.y < 0)
+	{
+		deleter.y = 0;
+	}
+	else if(deleter.y > ENV_HEIGHT)
+	{
+		deleter.y = ENV_HEIGHT;
+	}
+	
+	[self.env deleteRadius: 10 x:deleter.x y:deleter.y];
 }
 
 - (void)render

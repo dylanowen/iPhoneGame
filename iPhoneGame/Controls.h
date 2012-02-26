@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @class GameModel;
+@class JoyStick;
 
 @interface Controls : NSObject
+
+@property (strong, nonatomic) JoyStick *move;
+@property (strong, nonatomic) JoyStick *look;
 
 - (id)initWithModel: (GameModel *) game;
 - (void)render;
