@@ -141,7 +141,7 @@
 		glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
 		glBufferData(GL_ARRAY_BUFFER, colorBufferSize, colors, GL_DYNAMIC_DRAW);
 		
-		//glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		
 		
 		NSLog(@"%fMBs of vertex data %fMBs of color data", (float) (sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2) / 1000 / 1000, (float) (sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 4) / 1000 / 1000);
@@ -254,20 +254,17 @@
 	[self.program use];
 	glBindBuffer(GL_ARRAY_BUFFER, self.vertexBuffer);
 	glEnableVertexAttribArray(positionAttribute);
-	//glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, vertices);
 	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
-
 	glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
 	glEnableVertexAttribArray(colorAttribute);
-	//glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, colors);
 	glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
 	glUniformMatrix4fv(modelViewUniform, 1, 0, self.game.projectionMatrix.m);
 	
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
 
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDisableVertexAttribArray(colorAttribute);
 	glDisableVertexAttribArray(positionAttribute);
 }

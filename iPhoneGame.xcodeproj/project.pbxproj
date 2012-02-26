@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE7A4A8314F9E06E0039101B /* JoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A4A8214F9E06E0039101B /* JoyStick.m */; };
 		CE7A794814ECB05E00B8FA24 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794714ECB05E00B8FA24 /* UIKit.framework */; };
 		CE7A794A14ECB05E00B8FA24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794914ECB05E00B8FA24 /* Foundation.framework */; };
 		CE7A794C14ECB05E00B8FA24 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794B14ECB05E00B8FA24 /* CoreGraphics.framework */; };
@@ -20,6 +21,7 @@
 		CE7A797314EDECC800B8FA24 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797214EDECC800B8FA24 /* OpenGLES.framework */; };
 		CE7A797514EDECCE00B8FA24 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797414EDECCE00B8FA24 /* GLKit.framework */; };
 		CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A797714EDED5E00B8FA24 /* GameModel.m */; };
+		CE7ADDAD14F9752400FBD2EC /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7ADDAC14F9752400FBD2EC /* Controls.m */; };
 		CE884EE214F73981001B26DA /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = CE884EE114F73981001B26DA /* GLProgram.m */; };
 		CE884EE714F73E40001B26DA /* environmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CE884EE314F73E2E001B26DA /* environmentShader.fsh */; };
 		CE884EE814F73E40001B26DA /* environmentShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CE884EE414F73E2E001B26DA /* environmentShader.vsh */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE7A4A8114F9E06E0039101B /* JoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoyStick.h; sourceTree = "<group>"; };
+		CE7A4A8214F9E06E0039101B /* JoyStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoyStick.m; sourceTree = "<group>"; };
 		CE7A794314ECB05E00B8FA24 /* iPhoneGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7A794714ECB05E00B8FA24 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE7A794914ECB05E00B8FA24 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -47,12 +51,15 @@
 		CE7A797414EDECCE00B8FA24 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		CE7A797614EDED5E00B8FA24 /* GameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModel.h; sourceTree = "<group>"; };
 		CE7A797714EDED5E00B8FA24 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModel.m; sourceTree = "<group>"; };
+		CE7ADDAB14F9752400FBD2EC /* Controls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controls.h; sourceTree = "<group>"; };
+		CE7ADDAC14F9752400FBD2EC /* Controls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controls.m; sourceTree = "<group>"; };
 		CE884EE014F73981001B26DA /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
 		CE884EE114F73981001B26DA /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
 		CE884EE314F73E2E001B26DA /* environmentShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = environmentShader.fsh; sourceTree = "<group>"; };
 		CE884EE414F73E2E001B26DA /* environmentShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = environmentShader.vsh; sourceTree = "<group>"; };
 		CEB48AA914F3190F00E5AD9E /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		CEB48AAA14F3190F00E5AD9E /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
+		CEBEF6B914FAD553008913F4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				CE7A795914ECB05E00B8FA24 /* MainStoryboard.storyboard */,
+				CEBEF6B914FAD553008913F4 /* GameConstants.h */,
 				CE7A795614ECB05E00B8FA24 /* AppDelegate.h */,
 				CE7A795714ECB05E00B8FA24 /* AppDelegate.m */,
 				CE7A795C14ECB05E00B8FA24 /* ViewController.h */,
@@ -116,6 +124,10 @@
 				CE7A797714EDED5E00B8FA24 /* GameModel.m */,
 				CEB48AA914F3190F00E5AD9E /* Environment.h */,
 				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
+				CE7ADDAB14F9752400FBD2EC /* Controls.h */,
+				CE7ADDAC14F9752400FBD2EC /* Controls.m */,
+				CE7A4A8114F9E06E0039101B /* JoyStick.h */,
+				CE7A4A8214F9E06E0039101B /* JoyStick.m */,
 				CE884EE014F73981001B26DA /* GLProgram.h */,
 				CE884EE114F73981001B26DA /* GLProgram.m */,
 				CEC570B514F4B00F003F345A /* Shaders */,
@@ -215,6 +227,8 @@
 				CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */,
 				CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */,
 				CE884EE214F73981001B26DA /* GLProgram.m in Sources */,
+				CE7ADDAD14F9752400FBD2EC /* Controls.m in Sources */,
+				CE7A4A8314F9E06E0039101B /* JoyStick.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,30 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
 
-#define VIEW_WIDTH 160
-#define VIEW_HEIGHT 240
-
-#define ENV_WIDTH 400
-#define ENV_HEIGHT 600
+#import "GameConstants.h"
+#import "Controls.h"
 
 @class Environment;
+@class Controls;
 
 @interface GameModel : NSObject
 {
 @public
 	GLKMatrix4 projectionMatrix;
-
 }
 
-@property (strong, nonatomic) EAGLContext *context;
+@property (strong, nonatomic) UIView *view;
 @property (strong, nonatomic) GLKBaseEffect *effect;
 @property (readonly) GLKMatrix4 projectionMatrix;
 
 @property (strong, nonatomic) Environment *env;
+@property (strong, nonatomic) Controls *controls;
 
-- (id)initWithContext:(EAGLContext *) context effect:(GLKBaseEffect *) effect;
-- (void)touchesBegan:(CGPoint) CGPoint;
+- (id)initWithView:(UIView *) view;
 
 - (void)update;
 - (void)render;

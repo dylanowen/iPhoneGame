@@ -16,9 +16,7 @@
 }
 
 @property (nonatomic, strong) GameModel *mainGame;
-
 @property (strong, nonatomic) EAGLContext *context;
-@property (strong, nonatomic) GLKBaseEffect *effect;
 
 @end
 
@@ -26,7 +24,6 @@
 
 @synthesize mainGame = _mainGame;
 @synthesize context = _context;
-@synthesize effect = _effect;
 
 - (void)viewDidLoad
 {
@@ -42,10 +39,9 @@
 	
 	GLKView *view = (GLKView *) self.view;
 	view.context = self.context;
+	view.multipleTouchEnabled = YES;
 	
 	[EAGLContext setCurrentContext:self.context];
-	
-	self.effect = [[GLKBaseEffect alloc] init];
 	
 	self.preferredFramesPerSecond = 30;
 	
@@ -53,7 +49,7 @@
 	glEnable(GL_BLEND);
 
 	
-	self.mainGame = [[GameModel alloc] initWithContext:self.context effect:self.effect];
+	self.mainGame = [[GameModel alloc] initWithView:self.view];
 }
 
 - (void)viewDidUnload
@@ -62,8 +58,6 @@
 	
 	//tear down openGL
 	[EAGLContext setCurrentContext:self.context];
-	
-	self.effect = nil;
     
 	if([EAGLContext currentContext] == self.context)
 	{
@@ -84,15 +78,19 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[self.mainGame touchesBegan: [[touches anyObject] locationInView: self.view]];
+	[self.mainGame.controls touchesBegan: touches];
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[self.mainGame touchesBegan: [[touches anyObject] locationInView: self.view]];
+	[self.mainGame.controls touchesMoved: touches];
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	
+	[self.mainGame.controls touchesEnded: touches];
+}
+- (void)touchesCancelled:(NSSet *)touches
+{
+	[self.mainGame.controls touchesCancelled: touches];
 }
 
 - (void)didReceiveMemoryWarning
