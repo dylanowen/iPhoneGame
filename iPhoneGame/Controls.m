@@ -36,8 +36,8 @@
 	if(self)
 	{
 		self.game = game;
-		self.move = [[JoyStick alloc] initWithCenter: CGPointMake(80, self.game.view.bounds.size.height - 80 - JOY_LENGTH_HALF) view:self.game.view];
-		self.look = [[JoyStick alloc] initWithCenter: CGPointMake(self.game.view.bounds.size.width - 80 - JOY_LENGTH_HALF, self.game.view.bounds.size.height - 80 - JOY_LENGTH_HALF) view:self.game.view];
+		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, self.game.view.bounds.size.height - 80) view:self.game.view];
+		self.look = [[JoyStick alloc] initWithCenter: GLKVector2Make(self.game.view.bounds.size.width - 80, self.game.view.bounds.size.height - 80) view:self.game.view];
 		/*
 		effect.texturingEnabled = YES;
 		effect.texture2d0.envMode = GLKTextureEnvModeReplace;
@@ -55,18 +55,19 @@
 	for(UITouch *touch in touches)
 	{
 		CGPoint loci = [touch locationInView: touch.view];
-		if([self.move touchesBegan: loci])
+		GLKVector2 vLoci = GLKVector2Make(loci.x, loci.y);
+		if([self.move touchesBegan: vLoci])
 		{
 		
 		}
-		else if([self.look touchesBegan: loci])
+		else if([self.look touchesBegan: vLoci])
 		{
 		
 		}
 		else
 		{
 			
-			//NSLog(@"Not grabbed (%f, %f)", loci.x, loci.y);
+			//NSLog(@"Not grabbed (%f, %f)", vLoci.x, vLoci.y);
 		}
 	}
 	//self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(100.0f, 0.0f, 0.0f);
@@ -77,11 +78,13 @@
 	{
 		CGPoint loci = [touch locationInView: touch.view];
 		CGPoint last = [touch previousLocationInView: touch.view];
-		if([self.move touchesMoved: loci lastTouch: last])
+		GLKVector2 vLoci = GLKVector2Make(loci.x, loci.y);
+		GLKVector2 vLast = GLKVector2Make(last.x, last.y);
+		if([self.move touchesMoved: vLoci lastTouch: vLast])
 		{
 		
 		}
-		else if([self.look touchesMoved: loci lastTouch: last])
+		else if([self.look touchesMoved: vLoci lastTouch: vLast])
 		{
 		
 		}
@@ -94,27 +97,24 @@
 }
 - (void)touchesEnded:(NSSet *)touches
 {
+	[self.move touchesCancelled];
+	[self.look touchesCancelled];
+	/*
 	for(UITouch *touch in touches)
 	{
-		CGPoint last = [touch locationInView: touch.view];
-		if([self.move touchesEnded: last])
-		{
-		
-		}
-		else if([self.look touchesEnded: last])
-		{
-		
-		}
-		else
-		{
-			
-			//NSLog(@"last (%f, %f)", last.x, last.y);
-		}
+		CGPoint loci = [touch locationInView: touch.view];
+		CGPoint last = [touch previousLocationInView: touch.view];
+		GLKVector2 vLoci = GLKVector2Make(loci.x, loci.y);
+		GLKVector2 vLast = GLKVector2Make(last.x, last.y);
+		[self.move touchesMoved: vLoci lastTouch: vLast];
+		[self.look touchesMoved: vLoci lastTouch: vLast];
 	}
+	*/
 }
 - (void)touchesCancelled:(NSSet *)touches
 {
-	
+	[self.move touchesCancelled];
+	[self.look touchesCancelled];
 }
 
 - (void)render

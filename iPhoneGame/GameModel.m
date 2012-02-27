@@ -58,8 +58,8 @@
 - (void)update
 {
 	//do all the main stuff of the game
-	left += self.controls.move->velocity.x / 8;
-	top += self.controls.move->velocity.y / 8;
+	left += self.controls.move->velocity.x * 7;
+	top += self.controls.move->velocity.y * 7;
 	if(left < -10.0f)
 	{
 		left = -10.0f;
@@ -82,8 +82,8 @@
 	
 	self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 	
-	deleter.x += self.controls.look->velocity.x / 8;
-	deleter.y += self.controls.look->velocity.y / 8;
+	deleter.x += self.controls.look->velocity.x * 7;
+	deleter.y += self.controls.look->velocity.y * 7;
 	if(deleter.x < 0)
 	{
 		deleter.x = 0;

@@ -20,11 +20,12 @@
 	GLKVector2 velocity;
 }
 
-- (id)initWithCenter:(CGPoint) posit view:(UIView *) view;
+- (id)initWithCenter:(GLKVector2) posit view:(UIView *) view;
 
-- (bool)touchesBegan:(CGPoint) loci;
-- (bool)touchesMoved:(CGPoint) loci lastTouch:(CGPoint) last;
-- (bool)touchesEnded:(CGPoint) last;
+- (bool)touchesBegan:(GLKVector2) loci;
+- (bool)touchesMoved:(GLKVector2) loci lastTouch:(GLKVector2) last;
+- (void)touchesEnded:(GLKVector2) loci lastTouch:(GLKVector2) last;
+- (void)touchesCancelled;
 
 - (void)render;
 

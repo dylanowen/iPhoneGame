@@ -12,20 +12,23 @@
 
 @interface JoyStick()
 {
-	CGPoint position;
+	GLKVector2 position;
 	
-	CGPoint lastTouch;
-	CGPoint origin;
+	GLKVector2 lastTouch;
+	GLKVector2 origin;
 	
 	CGRect region;
 	
 	float radius;
 	
-	float vertices[8];
+	float joystickVertices[8];
+	float boundingVertices[8];
 }
 
 @property (strong, nonatomic) UIView *view;
 @property (strong, nonatomic) GLKBaseEffect *effect;
+
+- (GLKVector2) calculateVelocity;
 
 @end
 
@@ -34,7 +37,7 @@
 @synthesize view = _view;
 @synthesize effect = _effect;
 
-- (id)initWithCenter:(CGPoint) posit view:(UIView *) view
+- (id)initWithCenter:(GLKVector2) posit view:(UIView *) view
 {
 	self = [super init];
 	if(self)
@@ -44,19 +47,28 @@
 		
 		self.effect = [[GLKBaseEffect alloc] init];
 		
-		lastTouch = CGPointMake(-1, -1);
+		lastTouch = GLKVector2Make(-1, -1);
 		velocity = GLKVector2Make(0, 0);
 		
 		//NSLog(@"%@ (%f, %f: %f %f)", self, region.origin.x, region.origin.y, region.size.width, region.size.height);
 		
-		vertices[0] = 0;
-		vertices[1] = 0;
-		vertices[2] = JOY_LENGTH;
-		vertices[3] = 0;
-		vertices[4] = 0;
-		vertices[5] = JOY_LENGTH;
-		vertices[6] = JOY_LENGTH;
-		vertices[7] = JOY_LENGTH;
+		joystickVertices[0] = 0;
+		joystickVertices[1] = 0;
+		joystickVertices[2] = JOY_LENGTH;
+		joystickVertices[3] = 0;
+		joystickVertices[4] = 0;
+		joystickVertices[5] = JOY_LENGTH;
+		joystickVertices[6] = JOY_LENGTH;
+		joystickVertices[7] = JOY_LENGTH;
+		
+		boundingVertices[0] = -JOY_LENGTH;
+		boundingVertices[1] = -JOY_LENGTH;
+		boundingVertices[2] = JOY_LENGTH * 2;
+		boundingVertices[3] = -JOY_LENGTH;
+		boundingVertices[4] = -JOY_LENGTH;
+		boundingVertices[5] = JOY_LENGTH * 2;
+		boundingVertices[6] = JOY_LENGTH * 2;
+		boundingVertices[7] = JOY_LENGTH * 2;
 		
 		self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, self.view.bounds.size.width, self.view.bounds.size.height, 0, 1, -1);
 		
@@ -65,61 +77,104 @@
 	return nil;
 }
 
-- (bool)touchesBegan:(CGPoint) loci
+- (bool)touchesBegan:(GLKVector2) loci
 {
-	if(sqrt(powf(origin.x - loci.x, 2) + powf(origin.y - loci.y, 2)) <= JOY_LENGTH)
+	GLKVector2 temp = GLKVector2Subtract(loci, origin);
+	if(GLKVector2Length(temp) <= JOY_LENGTH)
 	{
 		position = lastTouch = loci;
-		velocity = GLKVector2Make(position.x - origin.x, position.y - origin.y);
-		//NSLog(@"%f, %f", loci.x, loci.y);
+		velocity = [self calculateVelocity];
 		return YES;
 	}
 
 	return NO;
 }
 
-- (bool)touchesMoved:(CGPoint) loci lastTouch:(CGPoint) last
+- (bool)touchesMoved:(GLKVector2) loci lastTouch:(GLKVector2) last
 {
-	if(CGPointEqualToPoint(lastTouch, last))
+	if(GLKVector2AllEqualToVector2(lastTouch, last))
 	{
-		position = lastTouch = loci;
-		velocity = GLKVector2Make(position.x - origin.x, position.y - origin.y);
+		GLKVector2 temp = GLKVector2Subtract(loci, origin);
+		if(GLKVector2Length(temp) > JOY_LENGTH)
+		{
+			position = GLKVector2Add(origin, GLKVector2MultiplyScalar(GLKVector2Normalize(temp), JOY_LENGTH));
+		}
+		else
+		{
+			position = loci;
+		}
+		lastTouch = loci;
+		velocity = [self calculateVelocity];
 		return YES;
 	}
 	return NO;
 }
 
-- (bool)touchesEnded:(CGPoint) last
+- (void)touchesEnded:(GLKVector2) loci lastTouch:(GLKVector2) last
 {
-	//if(CGPointEqualToPoint(lastTouch, last))
-	//{
-		position = origin;
-		velocity = GLKVector2Make(0, 0);
-	//	return YES;
-	//}
-	//NSLog(@"last (%f, %f) != (%f, %f)", last.x, last.y, lastTouch.x, lastTouch.y);
-	return NO;
+	if(GLKVector2AllEqualToVector2(lastTouch, last))
+	{
+		GLKVector2 temp = GLKVector2Subtract(loci, origin);
+		if(GLKVector2Length(temp) > JOY_LENGTH)
+		{
+			position = GLKVector2Add(origin, GLKVector2MultiplyScalar(GLKVector2Normalize(temp), JOY_LENGTH));
+		}
+		else
+		{
+			position = loci;
+		}
+		lastTouch = loci;
+		velocity = [self calculateVelocity];
+		return;
+	}
+	position = origin;
+	velocity = GLKVector2Make(0, 0);
+}
+
+- (void)touchesCancelled
+{
+	position = origin;
+	velocity = GLKVector2Make(0, 0);
+}
+
+- (GLKVector2) calculateVelocity
+{
+	//based on position and origin so make sure to update position before calling this
+	GLKVector2 temp = GLKVector2Subtract(position, origin);
+	float normLength = powf((GLKVector2Length(temp) / 40.0f), 2);
+	return GLKVector2MultiplyScalar(GLKVector2Normalize(temp), normLength);
 }
 
 - (void)render
 {
-	//move the shape to the correct spot
+	
+	float colors[] = {
+		0.0, 0.0, 0.0, .2,
+		0.0, 0.0, 0.0, .2,
+		0.0, 0.0, 0.0, .2,
+		0.0, 0.0, 0.0, .2,
+	};
+	
+	self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(origin.x - JOY_LENGTH_HALF, origin.y - JOY_LENGTH_HALF, 0);
+
+	[self.effect prepareToDraw];
+	
+	glEnableVertexAttribArray(GLKVertexAttribPosition);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, boundingVertices);
+	
+	glEnableVertexAttribArray(GLKVertexAttribColor);
+	glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, colors);
+	
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	
+	glDisableVertexAttribArray(GLKVertexAttribPosition);
+	
 	self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - JOY_LENGTH_HALF, position.y - JOY_LENGTH_HALF, 0);
 
 	[self.effect prepareToDraw];
 	
-	float colors[] = {
-		1.0, 0.0, 0.0, .6,
-		0.0, 0.0, 0.0, .6,
-		0.0, 0.0, 0.0, .6,
-		0.0, 0.0, 0.0, .6,
-	};
-	
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
-	
-	glEnableVertexAttribArray(GLKVertexAttribColor);
-	glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, colors);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, joystickVertices);
 	
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	
