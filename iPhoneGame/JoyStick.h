@@ -24,7 +24,7 @@
 
 - (bool)touchesBegan:(CGPoint) loci;
 - (bool)touchesMoved:(CGPoint) loci lastTouch:(CGPoint) last;
-- (void)touchesEnded;
+- (bool)touchesEnded:(CGPoint) last;
 
 - (void)render;
 

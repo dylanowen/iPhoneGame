@@ -44,10 +44,11 @@
 		
 		left = 0.0f;
 		right = left + VIEW_WIDTH;
-		bottom = 0.0f;
-		top = bottom + VIEW_HEIGHT;
+		top = 0.0f;
+		bottom = top + VIEW_HEIGHT;
 		
-		deleter = CGPointMake(0, 0);
+		
+		deleter = CGPointMake(20, 20);
 		
 		return self;
 	}
@@ -58,7 +59,7 @@
 {
 	//do all the main stuff of the game
 	left += self.controls.move->velocity.x / 8;
-	bottom -= (float) self.controls.move->velocity.y / 8;
+	top += self.controls.move->velocity.y / 8;
 	if(left < -10.0f)
 	{
 		left = -10.0f;
@@ -67,22 +68,22 @@
 	{
 		left = ENV_WIDTH+ 10 - VIEW_WIDTH;
 	}
-	if(bottom < -10.0f)
+	if(top < -10.0f)
 	{
-		bottom = -10.0f;
+		top = -10.0f;
 	}
-	else if(bottom + VIEW_HEIGHT > ENV_HEIGHT + 10)
+	else if(top + VIEW_HEIGHT > ENV_HEIGHT + 10)
 	{
-		bottom = ENV_HEIGHT + 10 - VIEW_HEIGHT;
+		top = ENV_HEIGHT + 10 - VIEW_HEIGHT;
 	}
 	
 	right = left + VIEW_WIDTH;
-	top = bottom + VIEW_HEIGHT;
+	bottom = top + VIEW_HEIGHT;
 	
 	self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 	
 	deleter.x += self.controls.look->velocity.x / 8;
-	deleter.y -= self.controls.look->velocity.y / 8;
+	deleter.y += self.controls.look->velocity.y / 8;
 	if(deleter.x < 0)
 	{
 		deleter.x = 0;

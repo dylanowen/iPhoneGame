@@ -19,6 +19,8 @@
 	
 	CGRect region;
 	
+	float radius;
+	
 	float vertices[8];
 }
 
@@ -45,7 +47,6 @@
 		lastTouch = CGPointMake(-1, -1);
 		velocity = GLKVector2Make(0, 0);
 		
-		region = CGRectMake(position.x - JOY_LENGTH, position.y - JOY_LENGTH, JOY_LENGTH * 2, JOY_LENGTH * 2);
 		//NSLog(@"%@ (%f, %f: %f %f)", self, region.origin.x, region.origin.y, region.size.width, region.size.height);
 		
 		vertices[0] = 0;
@@ -57,7 +58,7 @@
 		vertices[6] = JOY_LENGTH;
 		vertices[7] = JOY_LENGTH;
 		
-		self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, self.view.bounds.size.height, self.view.bounds.size.width, 0, 1, -1);
+		self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, self.view.bounds.size.width, self.view.bounds.size.height, 0, 1, -1);
 		
 		return self;
 	}
@@ -66,7 +67,7 @@
 
 - (bool)touchesBegan:(CGPoint) loci
 {
-	if(CGRectContainsPoint(region, loci))
+	if(sqrt(powf(origin.x - loci.x, 2) + powf(origin.y - loci.y, 2)) <= JOY_LENGTH)
 	{
 		position = lastTouch = loci;
 		velocity = GLKVector2Make(position.x - origin.x, position.y - origin.y);
@@ -88,10 +89,16 @@
 	return NO;
 }
 
-- (void)touchesEnded
+- (bool)touchesEnded:(CGPoint) last
 {
-	position = origin;
-	velocity = GLKVector2Make(0, 0);
+	//if(CGPointEqualToPoint(lastTouch, last))
+	//{
+		position = origin;
+		velocity = GLKVector2Make(0, 0);
+	//	return YES;
+	//}
+	//NSLog(@"last (%f, %f) != (%f, %f)", last.x, last.y, lastTouch.x, lastTouch.y);
+	return NO;
 }
 
 - (void)render

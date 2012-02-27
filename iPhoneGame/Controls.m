@@ -36,8 +36,8 @@
 	if(self)
 	{
 		self.game = game;
-		self.move = [[JoyStick alloc] initWithCenter: CGPointMake(80, 80) view:self.game.view];
-		self.look = [[JoyStick alloc] initWithCenter: CGPointMake(80, self.game.view.bounds.size.width - 80 - JOY_LENGTH_HALF) view:self.game.view];
+		self.move = [[JoyStick alloc] initWithCenter: CGPointMake(80, self.game.view.bounds.size.height - 80 - JOY_LENGTH_HALF) view:self.game.view];
+		self.look = [[JoyStick alloc] initWithCenter: CGPointMake(self.game.view.bounds.size.width - 80 - JOY_LENGTH_HALF, self.game.view.bounds.size.height - 80 - JOY_LENGTH_HALF) view:self.game.view];
 		/*
 		effect.texturingEnabled = YES;
 		effect.texture2d0.envMode = GLKTextureEnvModeReplace;
@@ -66,7 +66,7 @@
 		else
 		{
 			
-			NSLog(@"Not grabbed (%f, %f)", loci.x, loci.y);
+			//NSLog(@"Not grabbed (%f, %f)", loci.x, loci.y);
 		}
 	}
 	//self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(100.0f, 0.0f, 0.0f);
@@ -88,14 +88,29 @@
 		else
 		{
 			
-			NSLog(@"Not grabbed (%f, %f)", last.x, last.y);
+			//NSLog(@"Not grabbed (%f, %f)", last.x, last.y);
 		}
 	}
 }
 - (void)touchesEnded:(NSSet *)touches
 {
-	[self.move touchesEnded];
-	[self.look touchesEnded];
+	for(UITouch *touch in touches)
+	{
+		CGPoint last = [touch locationInView: touch.view];
+		if([self.move touchesEnded: last])
+		{
+		
+		}
+		else if([self.look touchesEnded: last])
+		{
+		
+		}
+		else
+		{
+			
+			//NSLog(@"last (%f, %f)", last.x, last.y);
+		}
+	}
 }
 - (void)touchesCancelled:(NSSet *)touches
 {
