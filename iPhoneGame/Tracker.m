@@ -115,7 +115,7 @@
 		{
 			y = -heightD2;
 		}
-		NSLog(@"wh(%d, %d) (%f, %f) => (%f, %f)", width, height, temp.x, temp.y, x, y);
+		//NSLog(@"wh(%d, %d) (%f, %f) => (%f, %f)", width, height, temp.x, temp.y, x, y);
 		GLKMatrix4 modelViewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(x + widthD2 + (8 * scale.x), y + heightD2 + (8 * scale.y), 0.0f), GLKMatrix4MakeScale(scale.x, scale.y, 1));
 		//GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(x + widthD2, y + heightD2, 0.0f);
 		self.effect.transform.modelviewMatrix = GLKMatrix4Rotate(modelViewMatrix, atan2f(temp.y, temp.x), 0, 0, 1);
