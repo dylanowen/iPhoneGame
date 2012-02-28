@@ -14,11 +14,7 @@
 #import "GLProgram.h"
 
 @interface Environment()
-{
-	//float vertices[ENV_WIDTH][ENV_HEIGHT][2];
-	//float colors[ENV_WIDTH][ENV_HEIGHT][4];
-	bool dirt[ENV_WIDTH][ENV_HEIGHT];
-	
+{	
 	float clearer[MAX_DELETE_RADIUS][4];
 	
 	GLuint positionAttribute;
@@ -103,7 +99,7 @@
 		for(unsigned i = 0; i < ENV_WIDTH; i++)
 		{
 			for(unsigned j = 0; j < ENV_HEIGHT; j++)
-			{				
+			{
 				unsigned off = i * ENV_HEIGHT + j;
 				unsigned offVertices = off * 2;
 				unsigned offColor = off * 4;
@@ -171,13 +167,13 @@
 	unsigned offset;
 	
 	//keep inside bounds
-	if((i + x) < 0)
+	if((i + x) < 1)
 	{
-		i = -x;
+		i = 1 - x;
 	}
-	if(iEnd + x > ENV_WIDTH)
+	if(iEnd + x > (ENV_WIDTH - 1))
 	{
-		iEnd = ENV_WIDTH - x;
+		iEnd = ENV_WIDTH - 1 - x;
 	}
 	
 	glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
@@ -186,35 +182,39 @@
 		tempY = (int) sqrt((radius * radius) - (i * i));
 		
 		//more bound checking
-		if(y - tempY < 0)
+		if(tempY > 0)
 		{
-			j = 0;
-			jEnd = tempY + y;
-		}
-		else if(y + tempY > ENV_HEIGHT)
-		{
-			j = y - tempY;
-			jEnd = tempY + ENV_HEIGHT - y;
-		}
-		else
-		{
-			j = y - tempY;
-			jEnd = tempY * 2;
+			if(y - tempY < 1)
+			{
+				j = 1;
+				jEnd = tempY + y - 1;
+			}
+			else if(y + tempY > (ENV_HEIGHT - 1))
+			{
+				j = y - tempY;
+				jEnd = tempY + ENV_HEIGHT - 1 - y;
+			}
+			else
+			{
+				j = y - tempY;
+				jEnd = tempY * 2;
+			}
+		
+			offset = ((i + x) * ENV_HEIGHT + j) * 4 * sizeof(float);
+			tempY = sizeof(float) * jEnd * 4;
+		
+			//clear out the buffer
+			glBufferSubData(GL_ARRAY_BUFFER, offset, tempY, clearer);
+		
+			//clear our own local array
+			jEnd += j;
+			while(j <= jEnd)
+			{
+				dirt[i + x][j] = NO;
+				j++;
+			}
 		}
 		
-		offset = ((i + x) * ENV_HEIGHT + j) * 4 * sizeof(float);
-		tempY = sizeof(float) * jEnd * 4;
-		
-		//clear out the buffer
-		glBufferSubData(GL_ARRAY_BUFFER, offset, tempY, clearer);
-		
-		//clear our own local array
-		jEnd += j;
-		while(j <= jEnd)
-		{
-			dirt[i + x][j] = NO;
-			j++;
-		}
 		i++;
 	}
 }

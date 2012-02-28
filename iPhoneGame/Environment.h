@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "GameConstants.h"
+
 #define MAX_DELETE_RADIUS 50
 
 @class GameModel;
@@ -15,7 +17,8 @@
 
 @interface Environment : NSObject
 {
-	
+@public
+	bool dirt[ENV_WIDTH][ENV_HEIGHT];
 }
 
 @property (nonatomic) int width;

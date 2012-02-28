@@ -47,7 +47,6 @@
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
-
 	
 	self.mainGame = [[GameModel alloc] initWithView:self.view];
 }
@@ -68,7 +67,7 @@
 
 - (void)glkViewControllerUpdate:(GLKViewController *)controller
 {
-	[self.mainGame update];
+	[self.mainGame updateWithLastUpdate: self.timeSinceLastUpdate];
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect

@@ -27,6 +27,8 @@
 		CE884EE814F73E40001B26DA /* environmentShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CE884EE414F73E2E001B26DA /* environmentShader.vsh */; };
 		CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AAA14F3190F00E5AD9E /* Environment.m */; };
 		CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC12C6B14FC70F700EF1392 /* Tracker.m */; };
+		CEECC22C14FC95CB008D2D13 /* PhysicsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECC22B14FC95CB008D2D13 /* PhysicsObject.m */; };
+		CEECC23014FC99C3008D2D13 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECC22F14FC99C3008D2D13 /* Character.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,10 @@
 		CEBEF6B914FAD553008913F4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
 		CEC12C6A14FC70F700EF1392 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; };
 		CEC12C6B14FC70F700EF1392 /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tracker.m; sourceTree = "<group>"; };
+		CEECC22A14FC95CB008D2D13 /* PhysicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsObject.h; sourceTree = "<group>"; };
+		CEECC22B14FC95CB008D2D13 /* PhysicsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsObject.m; sourceTree = "<group>"; };
+		CEECC22E14FC99C3008D2D13 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		CEECC22F14FC99C3008D2D13 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,10 @@
 				CE7A797714EDED5E00B8FA24 /* GameModel.m */,
 				CEB48AA914F3190F00E5AD9E /* Environment.h */,
 				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
+				CEECC22A14FC95CB008D2D13 /* PhysicsObject.h */,
+				CEECC22B14FC95CB008D2D13 /* PhysicsObject.m */,
+				CEECC22E14FC99C3008D2D13 /* Character.h */,
+				CEECC22F14FC99C3008D2D13 /* Character.m */,
 				CE7ADDAB14F9752400FBD2EC /* Controls.h */,
 				CE7ADDAC14F9752400FBD2EC /* Controls.m */,
 				CE7A4A8114F9E06E0039101B /* JoyStick.h */,
@@ -235,6 +245,8 @@
 				CE7ADDAD14F9752400FBD2EC /* Controls.m in Sources */,
 				CE7A4A8314F9E06E0039101B /* JoyStick.m in Sources */,
 				CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */,
+				CEECC22C14FC95CB008D2D13 /* PhysicsObject.m in Sources */,
+				CEECC23014FC99C3008D2D13 /* Character.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
