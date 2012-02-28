@@ -10,6 +10,7 @@
 
 #import "Environment.h"
 #import "JoyStick.h"
+#import "Tracker.h"
 
 @interface GameModel()
 {
@@ -17,8 +18,11 @@
 	float viewWidth;
 	float viewHeight;
 	
-	CGPoint deleter;
+	GLKVector2 deleter;
 }
+
+@property (strong, nonatomic) Environment *env;
+@property (strong, nonatomic) Tracker *enemyTracker;
 
 @end
 
@@ -29,6 +33,7 @@
 @synthesize projectionMatrix = _projectionMatrix;
 
 @synthesize env = _env;
+@synthesize enemyTracker = _enemyTracker;
 @synthesize controls = _controls;
 
 - (id)initWithView:(UIView *) view
@@ -41,6 +46,8 @@
 		self.effect = [[GLKBaseEffect alloc] init];
 		self.env = [[Environment alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
+		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
+		self.enemyTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 8.0f green: 0.0f blue: 0.0f];
 		
 		left = 0.0f;
 		right = left + VIEW_WIDTH;
@@ -48,7 +55,7 @@
 		bottom = top + VIEW_HEIGHT;
 		
 		
-		deleter = CGPointMake(20, 20);
+		deleter = GLKVector2Make(20, 20);
 		
 		return self;
 	}
@@ -102,6 +109,7 @@
 	}
 	
 	[self.env deleteRadius: 10 x:deleter.x y:deleter.y];
+	[self.enemyTracker updateTrackee: deleter center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
 }
 
 - (void)render
@@ -113,7 +121,7 @@
 	
 	[self.env render];
 	[self.controls render];
-	
+	[self.enemyTracker render];
 	
 }
 

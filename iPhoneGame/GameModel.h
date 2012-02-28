@@ -25,7 +25,6 @@
 @property (strong, nonatomic) GLKBaseEffect *effect;
 @property (readonly) GLKMatrix4 projectionMatrix;
 
-@property (strong, nonatomic) Environment *env;
 @property (strong, nonatomic) Controls *controls;
 
 - (id)initWithView:(UIView *) view;

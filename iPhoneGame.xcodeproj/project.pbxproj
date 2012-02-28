@@ -26,6 +26,7 @@
 		CE884EE714F73E40001B26DA /* environmentShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CE884EE314F73E2E001B26DA /* environmentShader.fsh */; };
 		CE884EE814F73E40001B26DA /* environmentShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CE884EE414F73E2E001B26DA /* environmentShader.vsh */; };
 		CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AAA14F3190F00E5AD9E /* Environment.m */; };
+		CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC12C6B14FC70F700EF1392 /* Tracker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,8 @@
 		CEB48AA914F3190F00E5AD9E /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		CEB48AAA14F3190F00E5AD9E /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
 		CEBEF6B914FAD553008913F4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
+		CEC12C6A14FC70F700EF1392 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; };
+		CEC12C6B14FC70F700EF1392 /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tracker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 				CE7ADDAC14F9752400FBD2EC /* Controls.m */,
 				CE7A4A8114F9E06E0039101B /* JoyStick.h */,
 				CE7A4A8214F9E06E0039101B /* JoyStick.m */,
+				CEC12C6A14FC70F700EF1392 /* Tracker.h */,
+				CEC12C6B14FC70F700EF1392 /* Tracker.m */,
 				CE884EE014F73981001B26DA /* GLProgram.h */,
 				CE884EE114F73981001B26DA /* GLProgram.m */,
 				CEC570B514F4B00F003F345A /* Shaders */,
@@ -229,6 +234,7 @@
 				CE884EE214F73981001B26DA /* GLProgram.m in Sources */,
 				CE7ADDAD14F9752400FBD2EC /* Controls.m in Sources */,
 				CE7A4A8314F9E06E0039101B /* JoyStick.m in Sources */,
+				CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
