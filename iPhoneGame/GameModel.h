@@ -18,7 +18,6 @@
 @interface GameModel : NSObject
 
 @property (strong, nonatomic) UIView *view;
-@property (strong, nonatomic) GLKBaseEffect *effect;
 @property (readonly) GLKMatrix4 projectionMatrix;
 
 @property (strong, nonatomic) Environment *env;

@@ -23,6 +23,7 @@
 }
 
 @property (strong, nonatomic) Tracker *enemyTracker;
+@property (strong, nonatomic) Tracker *tempTracker;
 
 @property (strong, nonatomic) Character *player;
 @property (strong, nonatomic) NSMutableArray *physObjects;
@@ -32,11 +33,11 @@
 @implementation GameModel
 
 @synthesize view = _view;
-@synthesize effect = _effect;
 @synthesize projectionMatrix = _projectionMatrix;
 
 @synthesize env = _env;
 @synthesize enemyTracker = _enemyTracker;
+@synthesize tempTracker = _tempTracker;
 @synthesize physObjects = _physObjects;
 @synthesize player = _player;
 @synthesize controls = _controls;
@@ -48,14 +49,14 @@
 	{
 		self.view = view;
 		
-		self.effect = [[GLKBaseEffect alloc] init];
 		self.env = [[Environment alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
 		self.physObjects = [[NSMutableArray arrayWithCapacity: 0] init];
 		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
-		self.enemyTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 8.0f green: 0.0f blue: 0.0f];
+		self.enemyTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.8f green: 0.0f blue: 0.0f];
+		self.tempTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.8f blue: 0.0f];
 		
-		self.player = [[Character alloc] initWithModel:self position:CGPointMake(20, 20)];
+		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(20, 20)];
 		
 		left = 0.0f;
 		right = left + VIEW_WIDTH;
@@ -65,8 +66,6 @@
 		
 		deleter = GLKVector2Make(20, 20);
 		
-		[self.env deleteRadius: 10 x:30 y:5];
-		
 		return self;
 	}
 	return nil;
@@ -74,8 +73,6 @@
 
 - (void)updateWithLastUpdate:(float) time
 {
-	self.effect.transform.projectionMatrix = self.projectionMatrix;
-
 	//do all the main stuff of the game
 	left += self.controls.move->velocity.x * 7;
 	top += self.controls.move->velocity.y * 7;
@@ -128,6 +125,7 @@
 	}
 	
 	[self.enemyTracker updateTrackee: deleter center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
+	[self.tempTracker updateTrackee: self.player->position center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
 }
 
 - (void)render
@@ -140,6 +138,7 @@
 	[self.physObjects makeObjectsPerformSelector:@selector(render)];
 	[self.controls render];
 	[self.enemyTracker render];
+	[self.tempTracker render];
 	
 	//debug
 	switch(glGetError())
@@ -173,17 +172,5 @@
 {
 	return GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 }
-
-/*
-- (void)touchesBegan:(CGPoint) point
-{
-	//account for our own coordinate system
-	int x = (int) point.x / 2 + left;
-	int y = (int) point.y / 2 + top;
-	[self.env deleteRadius: (arc4random() % 15) + 5 x:x y:y];
-	//[self.env deleteRadius: 10 x:5 y:5];
-	NSLog(@"(%f, %f)", point.x, point.y);
-}
-*/
 
 @end

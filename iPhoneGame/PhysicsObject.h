@@ -16,14 +16,15 @@
 @interface PhysicsObject : NSObject
 {
 @public
-	CGPoint position;
+	GLKVector2 position;
 	GLKVector2 velocity;
 }
 
+@property (nonatomic, strong) NSMutableArray *collisionVertices;
 @property (nonatomic, strong) GameModel *game;
 @property (strong, nonatomic) GLKBaseEffect *effect;
 
-- (id)initWithModel:(GameModel *) model position:(CGPoint) posit;
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
 - (bool)updateAndKeep:(float) time;
 - (void)render;
 

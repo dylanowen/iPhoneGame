@@ -16,7 +16,8 @@
 - (bool)updateAndKeep:(float) time
 {
 	velocity.y += GRAVITY * time;
-	if(position.x > ENV_WIDTH || position.y > ENV_HEIGHT || self.game.env->dirt[(int) position.x][(int) position.y])
+	velocity.x += 1 * time;
+	if(position.x < 0 || position.y < 0 || position.x > ENV_WIDTH || position.y > ENV_HEIGHT || self.game.env->dirt[(int) position.x][(int) position.y])
 	{
 		velocity.x = 0;
 		velocity.y = 0;
@@ -26,19 +27,21 @@
 	self.effect.transform.projectionMatrix = self.game.projectionMatrix;
 	self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x, position.y, 0);
 	self.effect.useConstantColor = YES;
-	self.effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.8f);;
+	self.effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.8f);
 	return YES;
 }
 
 - (void)render
 {
 	float vertices[] = {
-		0, 0,
-		0, 5,
-		5, 0,
-		5, 5
+		-2.5, -2.5,
+		-2.5, 2.5,
+		2.5, -2.5,
+		2.5, 2.5
 	};
-
+	
+	self.effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.8f);
+	
 	[self.effect prepareToDraw];
 	
 	glEnableVertexAttribArray(GLKVertexAttribPosition);

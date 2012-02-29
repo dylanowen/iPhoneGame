@@ -12,8 +12,9 @@
 
 @synthesize game = _game;
 @synthesize effect = _effect;
+@synthesize collisionVertices = _collisionVertices;
 
-- (id)initWithModel:(GameModel *) model position:(CGPoint) posit
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
 {
 	self = [super init];
 	if(self)
@@ -22,6 +23,7 @@
 		position = posit;
 		
 		self.effect = [[GLKBaseEffect alloc] init];
+		self.collisionVertices = [[NSMutableArray alloc] init];
 		
 		return self;
 	}

@@ -201,22 +201,22 @@
 			}
 		
 			offset = ((i + x) * ENV_HEIGHT + j) * 4 * sizeof(float);
-			tempY = sizeof(float) * jEnd * 4;
+			tempY = jEnd * 4 * sizeof(float);
 		
 			//clear out the buffer
 			glBufferSubData(GL_ARRAY_BUFFER, offset, tempY, clearer);
 		
 			//clear our own local array
 			jEnd += j;
-			while(j <= jEnd)
+			while(j < jEnd)
 			{
 				dirt[i + x][j] = NO;
 				j++;
 			}
 		}
-		
 		i++;
 	}
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 - (void)checkError
