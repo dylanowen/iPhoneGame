@@ -1,24 +1,34 @@
 //
-//  Character.m
+//  BulletParticle.m
 //  iPhoneGame
 //
-//  Created by Lion User on 27/02/2012.
+//  Created by Lion User on 01/03/2012.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Character.h"
+#import "BulletParticle.h"
 
 #import "GameModel.h"
 #import "Environment.h"
 
-@implementation Character
+@implementation BulletParticle
+
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc
+{
+	self = [super initWithModel:model position:posit];
+	if(self)
+	{
+		velocity = veloc;
+		return self;
+	}
+	return nil;
+}
 
 - (bool)updateAndKeep:(float) time
 {
 	bool collision = NO, start = YES;
 	int intI, intJ, lastI, lastJ;
 	float i, j, stepX = 1.0f, stepY = 1.0f;
-	velocity.x += 0;
 	velocity.y += GRAVITY * time;
 	
 	//NSLog(@"%f, %f", velocity.x, velocity.y);
@@ -139,30 +149,28 @@
 	}
 	else
 	{
+		[self.game.env deleteRadius:10 x:(int) position.x y:(int) position.y];
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
+		return NO;
 	}
-	
-	
 	
 	self.effect.transform.projectionMatrix = self.game.projectionMatrix;
 	self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x, position.y, 0);
 	self.effect.useConstantColor = YES;
-	self.effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.8f);
+	self.effect.constantColor = GLKVector4Make(0.6f, 0.6f, 0.6f, 1.0f);
 	return YES;
 }
 
 - (void)render
 {
 	float vertices[] = {
-		-2.5, -2.5,
-		-2.5, 2.5,
-		2.5, -2.5,
-		2.5, 2.5
+		-0.5, -0.5,
+		-0.5, 0.5,
+		0.5, -0.5,
+		0.5, 0.5
 	};
-	
-	self.effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.8f);
-	
+
 	[self.effect prepareToDraw];
 	
 	glEnableVertexAttribArray(GLKVertexAttribPosition);

@@ -15,7 +15,7 @@
 
 @interface Environment()
 {	
-	float clearer[MAX_DELETE_RADIUS][4];
+	float clearer[MAX_DELETE_RADIUS * 2][4];
 	
 	GLuint positionAttribute;
 	GLuint colorAttribute;

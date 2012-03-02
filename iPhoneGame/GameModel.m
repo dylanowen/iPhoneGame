@@ -12,17 +12,15 @@
 #import "JoyStick.h"
 #import "Tracker.h"
 #import "Character.h"
+#import "BulletParticle.h"
 
 @interface GameModel()
 {
 	float left, right, bottom, top;
 	float viewWidth;
 	float viewHeight;
-	
-	GLKVector2 deleter;
 }
 
-@property (strong, nonatomic) Tracker *enemyTracker;
 @property (strong, nonatomic) Tracker *tempTracker;
 
 @property (strong, nonatomic) Character *player;
@@ -36,7 +34,6 @@
 @synthesize projectionMatrix = _projectionMatrix;
 
 @synthesize env = _env;
-@synthesize enemyTracker = _enemyTracker;
 @synthesize tempTracker = _tempTracker;
 @synthesize physObjects = _physObjects;
 @synthesize player = _player;
@@ -53,7 +50,6 @@
 		self.controls = [[Controls alloc] initWithModel: self];
 		self.physObjects = [[NSMutableArray arrayWithCapacity: 0] init];
 		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
-		self.enemyTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.8f green: 0.0f blue: 0.0f];
 		self.tempTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.8f blue: 0.0f];
 		
 		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(20, 20)];
@@ -62,9 +58,6 @@
 		right = left + VIEW_WIDTH;
 		top = 0.0f;
 		bottom = top + VIEW_HEIGHT;
-		
-		
-		deleter = GLKVector2Make(20, 20);
 		
 		return self;
 	}
@@ -96,35 +89,22 @@
 	right = left + VIEW_WIDTH;
 	bottom = top + VIEW_HEIGHT;
 	
-	deleter.x += self.controls.look->velocity.x * 7;
-	deleter.y += self.controls.look->velocity.y * 7;
-	if(deleter.x < 0)
-	{
-		deleter.x = 0;
-	}
-	else if(deleter.x > ENV_WIDTH)
-	{
-		deleter.x = ENV_WIDTH;
-	}
-	if(deleter.y < 0)
-	{
-		deleter.y = 0;
-	}
-	else if(deleter.y > ENV_HEIGHT)
-	{
-		deleter.y = ENV_HEIGHT;
-	}
-	
-	[self.env deleteRadius: 10 x:deleter.x y:deleter.y];
+	//generate a new bullet (every freaking single frame :)
+	[self.physObjects addObject: [[BulletParticle alloc]initWithModel:self position:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 8)]];
 	
 	[self.player updateAndKeep: time];
 	
+	//remove objects that say they're done
+	NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
 	for(unsigned i = 0; i < [self.physObjects count]; i++)
 	{
-		//update the physics stuff
+		if(![[self.physObjects objectAtIndex: i] updateAndKeep: time])
+		{
+			[indexes addIndex: i];
+		}
 	}
+	[self.physObjects removeObjectsAtIndexes: indexes];
 	
-	[self.enemyTracker updateTrackee: deleter center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
 	[self.tempTracker updateTrackee: self.player->position center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
 }
 
@@ -137,7 +117,6 @@
 	[self.player render];
 	[self.physObjects makeObjectsPerformSelector:@selector(render)];
 	[self.controls render];
-	[self.enemyTracker render];
 	[self.tempTracker render];
 	
 	//debug
