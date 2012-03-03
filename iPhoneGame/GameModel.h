@@ -13,6 +13,7 @@
 #import "Controls.h"
 
 @class Environment;
+@class Bullets;
 @class Controls;
 
 @interface GameModel : NSObject
@@ -21,6 +22,7 @@
 @property (readonly) GLKMatrix4 projectionMatrix;
 
 @property (strong, nonatomic) Environment *env;
+@property (strong, nonatomic) Bullets *bullets;
 @property (strong, nonatomic) Controls *controls;
 
 - (id)initWithView:(UIView *) view;

@@ -27,6 +27,9 @@
 		CE884EE814F73E40001B26DA /* environmentShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CE884EE414F73E2E001B26DA /* environmentShader.vsh */; };
 		CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AAA14F3190F00E5AD9E /* Environment.m */; };
 		CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC12C6B14FC70F700EF1392 /* Tracker.m */; };
+		CED880BA150189DE00F74341 /* Bullets.m in Sources */ = {isa = PBXBuildFile; fileRef = CED880B9150189DD00F74341 /* Bullets.m */; };
+		CED880C015018EB400F74341 /* bulletShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CED880BC15018B2600F74341 /* bulletShader.vsh */; };
+		CED880C115018EB400F74341 /* bulletShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CED880BE15018B3500F74341 /* bulletShader.fsh */; };
 		CEECC22C14FC95CB008D2D13 /* PhysicsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECC22B14FC95CB008D2D13 /* PhysicsObject.m */; };
 		CEECC23014FC99C3008D2D13 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECC22F14FC99C3008D2D13 /* Character.m */; };
 		CEF52FFC1500914300C0029F /* BulletParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF52FFB1500914300C0029F /* BulletParticle.m */; };
@@ -66,6 +69,10 @@
 		CEBEF6B914FAD553008913F4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
 		CEC12C6A14FC70F700EF1392 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; };
 		CEC12C6B14FC70F700EF1392 /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tracker.m; sourceTree = "<group>"; };
+		CED880B8150189DD00F74341 /* Bullets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullets.h; sourceTree = "<group>"; };
+		CED880B9150189DD00F74341 /* Bullets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bullets.m; sourceTree = "<group>"; };
+		CED880BC15018B2600F74341 /* bulletShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bulletShader.vsh; sourceTree = "<group>"; };
+		CED880BE15018B3500F74341 /* bulletShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bulletShader.fsh; sourceTree = "<group>"; };
 		CEECC22A14FC95CB008D2D13 /* PhysicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsObject.h; sourceTree = "<group>"; };
 		CEECC22B14FC95CB008D2D13 /* PhysicsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsObject.m; sourceTree = "<group>"; };
 		CEECC22E14FC99C3008D2D13 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
@@ -136,12 +143,14 @@
 				CE7A797714EDED5E00B8FA24 /* GameModel.m */,
 				CEB48AA914F3190F00E5AD9E /* Environment.h */,
 				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
+				CED880B8150189DD00F74341 /* Bullets.h */,
+				CED880B9150189DD00F74341 /* Bullets.m */,
+				CEF52FFA1500914300C0029F /* BulletParticle.h */,
+				CEF52FFB1500914300C0029F /* BulletParticle.m */,
 				CEECC22A14FC95CB008D2D13 /* PhysicsObject.h */,
 				CEECC22B14FC95CB008D2D13 /* PhysicsObject.m */,
 				CEECC22E14FC99C3008D2D13 /* Character.h */,
 				CEECC22F14FC99C3008D2D13 /* Character.m */,
-				CEF52FFA1500914300C0029F /* BulletParticle.h */,
-				CEF52FFB1500914300C0029F /* BulletParticle.m */,
 				CE7ADDAB14F9752400FBD2EC /* Controls.h */,
 				CE7ADDAC14F9752400FBD2EC /* Controls.m */,
 				CE7A4A8114F9E06E0039101B /* JoyStick.h */,
@@ -170,6 +179,8 @@
 		CEC570B514F4B00F003F345A /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				CED880BC15018B2600F74341 /* bulletShader.vsh */,
+				CED880BE15018B3500F74341 /* bulletShader.fsh */,
 				CE884EE414F73E2E001B26DA /* environmentShader.vsh */,
 				CE884EE314F73E2E001B26DA /* environmentShader.fsh */,
 			);
@@ -226,6 +237,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED880C015018EB400F74341 /* bulletShader.vsh in Resources */,
+				CED880C115018EB400F74341 /* bulletShader.fsh in Resources */,
 				CE884EE714F73E40001B26DA /* environmentShader.fsh in Resources */,
 				CE884EE814F73E40001B26DA /* environmentShader.vsh in Resources */,
 				CE7A795214ECB05E00B8FA24 /* InfoPlist.strings in Resources */,
@@ -253,6 +266,7 @@
 				CEECC22C14FC95CB008D2D13 /* PhysicsObject.m in Sources */,
 				CEECC23014FC99C3008D2D13 /* Character.m in Sources */,
 				CEF52FFC1500914300C0029F /* BulletParticle.m in Sources */,
+				CED880BA150189DE00F74341 /* Bullets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

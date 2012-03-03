@@ -13,7 +13,6 @@
 #define MAX_DELETE_RADIUS 50
 
 @class GameModel;
-@class GLProgram;
 
 @interface Environment : NSObject
 {

@@ -12,7 +12,7 @@
 #import "JoyStick.h"
 #import "Tracker.h"
 #import "Character.h"
-#import "BulletParticle.h"
+#import "Bullets.h"
 
 @interface GameModel()
 {
@@ -24,7 +24,6 @@
 @property (strong, nonatomic) Tracker *tempTracker;
 
 @property (strong, nonatomic) Character *player;
-@property (strong, nonatomic) NSMutableArray *physObjects;
 
 @end
 
@@ -35,7 +34,7 @@
 
 @synthesize env = _env;
 @synthesize tempTracker = _tempTracker;
-@synthesize physObjects = _physObjects;
+@synthesize bullets = _bullets;
 @synthesize player = _player;
 @synthesize controls = _controls;
 
@@ -47,8 +46,8 @@
 		self.view = view;
 		
 		self.env = [[Environment alloc] initWithModel: self];
+		self.bullets = [[Bullets alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
-		self.physObjects = [[NSMutableArray arrayWithCapacity: 0] init];
 		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
 		self.tempTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.8f blue: 0.0f];
 		
@@ -89,21 +88,17 @@
 	right = left + VIEW_WIDTH;
 	bottom = top + VIEW_HEIGHT;
 	
-	//generate a new bullet (every freaking single frame :)
-	[self.physObjects addObject: [[BulletParticle alloc]initWithModel:self position:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 8)]];
+	//generate a new bullet
+	if(self.controls.look->velocity.x != 0 || self.controls.look->velocity.y != 0)
+	{
+		[self.bullets addBulletWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 250) destructionRadius:10];
+		[self.bullets addBulletWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, -250) destructionRadius:10];
+		[self.bullets addBulletWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2Multiply(self.controls.look->velocity, GLKVector2Make(250, -250)) destructionRadius:10];
+		[self.bullets addBulletWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2Multiply(self.controls.look->velocity, GLKVector2Make(-250, 250)) destructionRadius:10];
+	}
 	
 	[self.player updateAndKeep: time];
-	
-	//remove objects that say they're done
-	NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
-	for(unsigned i = 0; i < [self.physObjects count]; i++)
-	{
-		if(![[self.physObjects objectAtIndex: i] updateAndKeep: time])
-		{
-			[indexes addIndex: i];
-		}
-	}
-	[self.physObjects removeObjectsAtIndexes: indexes];
+	[self.bullets updateWithLastUpdate: time];
 	
 	[self.tempTracker updateTrackee: self.player->position center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
 }
@@ -115,7 +110,7 @@
 	
 	[self.env render];
 	[self.player render];
-	[self.physObjects makeObjectsPerformSelector:@selector(render)];
+	[self.bullets render];
 	[self.controls render];
 	[self.tempTracker render];
 	

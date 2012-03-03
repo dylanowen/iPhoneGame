@@ -6,10 +6,16 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "PhysicsObject.h"
+#import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
 
-@interface BulletParticle : PhysicsObject
+@class Bullets;
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc;
+@interface BulletParticle : NSObject
+
+- (id)initWithBulletsModel:(Bullets *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius;
+
+- (bool)updateAndKeep:(float) time;
+- (void)render;
 
 @end

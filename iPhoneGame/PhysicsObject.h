@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-#define GRAVITY 5.8f
+#import "GameConstants.h"
 
 @class GameModel;
 

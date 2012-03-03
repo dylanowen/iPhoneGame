@@ -81,7 +81,7 @@
 		}
 		else
 		{
-			NSLog(@"Environment shaders successfully loaded.");
+			NSLog(@"Environment shaders loaded.");
 		}
 
 		modelViewUniform = [self.program uniformIndex:@"modelViewProjectionMatrix"];

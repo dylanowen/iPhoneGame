@@ -8,17 +8,40 @@
 
 #import "BulletParticle.h"
 
+#import "GameConstants.h"
 #import "GameModel.h"
+#import "Bullets.h"
 #import "Environment.h"
+
+@interface BulletParticle()
+{
+	GLKVector2 velocity;
+	GLuint positionAttribute;
+	
+	Environment *env;
+	
+	float position[2];
+	unsigned destructionRadius;
+}
+
+@end
 
 @implementation BulletParticle
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc
+- (id)initWithBulletsModel:(Bullets *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius
 {
-	self = [super initWithModel:model position:posit];
+	self = [super init];
 	if(self)
 	{
+		position[0] = posit.x;
+		position[1] = posit.y;
 		velocity = veloc;
+		
+		positionAttribute = model->positionAttribute;
+		env = model.game.env;
+		
+		destructionRadius = radius;
+		
 		return self;
 	}
 	return nil;
@@ -26,49 +49,48 @@
 
 - (bool)updateAndKeep:(float) time
 {
-	bool collision = NO, start = YES;
-	int intI, intJ, lastI, lastJ;
+	bool start = YES;
+	int intI, intJ, lastI = -1000, lastJ = -1000;
 	float i, j, stepX = 1.0f, stepY = 1.0f;
-	velocity.y += GRAVITY * time;
+	velocity.y += GRAVITY;
+	GLKVector2 movement = GLKVector2MultiplyScalar(velocity, time);
 	
-	//NSLog(@"%f, %f", velocity.x, velocity.y);
+	//NSLog(@"%f, %f", movement.x, movement.y);
 	
-	if(velocity.x != 0.0f || velocity.y != 0.0f)
+	if(movement.x != 0.0f || movement.y != 0.0f)
 	{
-		//NSLog(@"velocity: %f, %f", velocity.x, velocity.y);
-		if(velocity.x == 0)
+		//NSLog(@"movement: %f, %f time: %f", movement.x, movement.y, time);
+		if(movement.x == 0)
 		{
-			stepY = fabs(velocity.y) / velocity.y;
+			stepY = fabs(movement.y) / movement.y;
 		}
-		else if(velocity.y == 0)
+		else if(movement.y == 0)
 		{
-			stepX = fabs(velocity.x) / velocity.x;
+			stepX = fabs(movement.x) / movement.x;
 		}
-		else if(fabs(velocity.x) > fabs(velocity.y))
+		else if(fabs(movement.x) > fabs(movement.y))
 		{
-			stepY = velocity.y / velocity.x;
+			stepY = movement.y / movement.x;
 		}
-		else if(fabs(velocity.x) < fabs(velocity.y))
+		else if(fabs(movement.x) < fabs(movement.y))
 		{
-			stepX = velocity.x / velocity.y;
+			stepX = movement.x / movement.y;
 		}
 		else
 		{
-			stepX = fabs(velocity.x) / velocity.x;
-			stepY = fabs(velocity.y) / velocity.y;
+			stepX = fabs(movement.x) / movement.x;
+			stepY = fabs(movement.y) / movement.y;
 		}
-	
-		//NSLog(@"%f, %f", stepX, stepY);
+		stepX *= 3;
+		stepY *= 3;
 		
-		i = position.x;
-		j = position.y;
-		lastI = -10000;
-		lastJ = -10000;
+		i = position[0];
+		j = position[1];
 		
-		float lowX = i - fabs(velocity.x);
-		float highX = i + fabs(velocity.x);
-		float lowY = j - fabs(velocity.y);
-		float highY = j + fabs(velocity.y);
+		float lowX = i - fabs(movement.x);
+		float highX = i + fabs(movement.x);
+		float lowY = j - fabs(movement.y);
+		float highY = j + fabs(movement.y);
 		
 		while(i <= highX && i >= lowX && j <= highY && j >= lowY)
 		{			
@@ -78,57 +100,57 @@
 			{
 				if(intI <= 1 && intJ <= 1)
 				{
-					position.x = 1.0f;
-					position.y = 1.0f;
-					collision = YES;
-					break;
+					position[0] = 1.0f;
+					position[1] = 1.0f;
+					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					return NO;
 				}
 				else if(intI <= 1)
 				{
-					position.x = 1.0f;
-					position.y = j;
-					collision = YES;
-					break;
+					position[0] = 1.0f;
+					position[1] = j;
+					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					return NO;
 				}
 				else if(intJ <= 1)
 				{
-					position.x = i;
-					position.y = 1.0f;
-					collision = YES;
-					break;
+					position[0] = i;
+					position[1] = 1.0f;
+					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					return NO;
 				}
 				else if(intI >= ENV_WIDTH - 1 && intJ >= ENV_HEIGHT - 1)
 				{
-					position.x = (float) (ENV_WIDTH - 1);
-					position.y = (float) (ENV_HEIGHT - 1);
-					collision = YES;
-					break;
+					position[0] = (float) (ENV_WIDTH - 1);
+					position[1] = (float) (ENV_HEIGHT - 1);
+					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					return NO;
 				}
 				else if(intI >= ENV_WIDTH - 1)
 				{
-					position.x = (float) (ENV_WIDTH - 1);
-					position.y = j;
-					collision = YES;
-					break;
+					position[0] = (float) (ENV_WIDTH - 1);
+					position[1] = j;
+					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					return NO;
 				}
 				else if(intJ >= ENV_HEIGHT - 1)
 				{
-					position.x = i;
-					position.y = (float) (ENV_HEIGHT - 1);
-					collision = YES;
-					break;
+					position[0] = i;
+					position[1] = (float) (ENV_HEIGHT - 1);
+					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					return NO;
 				}
 			
 			
-				if(self.game.env->dirt[intI][intJ])
+				if(env->dirt[intI][intJ])
 				{
 					if(!start)
 					{
-						position.x = i - stepX;
-						position.y = j - stepY;
+						position[0] = i - stepX;
+						position[1] = j - stepY;
 					}
-					collision = YES;
-					break;
+					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					return NO;
 				}
 			}
 			lastI = intI;
@@ -142,43 +164,20 @@
 		}
 	}
 	
-	if(!collision)
-	{
-		position.x += velocity.x;
-		position.y += velocity.y;
-	}
-	else
-	{
-		[self.game.env deleteRadius:10 x:(int) position.x y:(int) position.y];
-		velocity.x = 0.0f;
-		velocity.y = 0.0f;
-		return NO;
-	}
-	
-	self.effect.transform.projectionMatrix = self.game.projectionMatrix;
-	self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x, position.y, 0);
-	self.effect.useConstantColor = YES;
-	self.effect.constantColor = GLKVector4Make(0.6f, 0.6f, 0.6f, 1.0f);
+	position[0] += movement.x;
+	position[1] += movement.y;
 	return YES;
 }
 
 - (void)render
 {
-	float vertices[] = {
-		-0.5, -0.5,
-		-0.5, 0.5,
-		0.5, -0.5,
-		0.5, 0.5
-	};
-
-	[self.effect prepareToDraw];
+	//assume bullet shaders have already been called
+	glEnableVertexAttribArray(positionAttribute);
+	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, position);
 	
-	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	glDrawArrays(GL_POINTS, 0, 1);
 	
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	
-	glDisableVertexAttribArray(GLKVertexAttribPosition);
+	glDisableVertexAttribArray(positionAttribute);
 }
 
 @end
