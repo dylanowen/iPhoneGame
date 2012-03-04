@@ -29,10 +29,10 @@
 	
 	float radius;
 	
-	float joystickVertices[8];
-	float textureVertices[8];
-	
 	GLKTextureInfo *circleTexture;
+	
+	GLuint vertexBuffer;
+	GLuint textureVertexBuffer;
 }
 
 - (id)initWithCenter:(GLKVector2) posit view:(UIView *) view;

@@ -23,9 +23,6 @@
 @property (nonatomic) int width;
 @property (nonatomic) int height;
 
-@property (nonatomic) GLuint vertexBuffer;
-@property (nonatomic) GLuint colorBuffer;
-
 - (id)initWithModel:(GameModel *) game;
 
 - (void)deleteRadius:(int) radius x:(int) x y:(int) y;

@@ -21,6 +21,9 @@
 	GLuint colorAttribute;
 	GLuint modelViewUniform;
 	
+	GLuint vertexBuffer;
+	GLuint colorBuffer;
+	
 	//GLuint gVAO;
 }
 
@@ -37,9 +40,6 @@
 
 @synthesize width = _width;
 @synthesize height = _height;
-
-@synthesize vertexBuffer = _vertexBuffer;
-@synthesize colorBuffer = _colorBuffer;
 
 - (id)initWithModel:(GameModel *) game
 {
@@ -118,12 +118,12 @@
 		}
 		
 		
-		glGenBuffers(1, &_vertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+		glGenBuffers(1, &vertexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize, vertices, GL_STATIC_DRAW);
 		
-		glGenBuffers(1, &_colorBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, _colorBuffer);
+		glGenBuffers(1, &colorBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
 		glBufferData(GL_ARRAY_BUFFER, colorBufferSize, colors, GL_DYNAMIC_DRAW);
 		
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -142,8 +142,8 @@
 
 - (void)dealloc
 {
-	glDeleteBuffers(1, &_vertexBuffer);
-	glDeleteBuffers(1, &_colorBuffer);
+	glDeleteBuffers(1, &vertexBuffer);
+	glDeleteBuffers(1, &colorBuffer);
 }
 
 - (void)deleteRadius:(int) radius x:(int) x y:(int) y
@@ -161,7 +161,7 @@
 		iEnd = ENV_WIDTH - 1 - x;
 	}
 	
-	glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
 	while(i < iEnd)
 	{
 		tempY = (int) sqrt((radius * radius) - (i * i));
@@ -210,23 +210,23 @@
 	unsigned length = 3 * sizeof(float);
 	unsigned change = 4 * sizeof(float);
 
-	glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
 	//original position
-	if(x > 0 && x < ENV_WIDTH && y > 0 && y < ENV_HEIGHT)
+	if(x >= 0 && x < ENV_WIDTH && y >= 0 && y < ENV_HEIGHT)
 	{
 		offset = (x * ENV_HEIGHT + y) * change;
 		glBufferSubData(GL_ARRAY_BUFFER, offset, length, newColor);
 	}
 	//left
 	x--;
-	if(x > 0 && x < ENV_WIDTH && y > 0 && y < ENV_HEIGHT)
+	if(x >= 0 && x < ENV_WIDTH && y >= 0 && y < ENV_HEIGHT)
 	{
 		offset = (x * ENV_HEIGHT + y) * change;
 		glBufferSubData(GL_ARRAY_BUFFER, offset, length, newColor);
 	}
 	//right
 	x += 2;
-	if(x > 0 && x < ENV_WIDTH && y > 0 && y < ENV_HEIGHT)
+	if(x >= 0 && x < ENV_WIDTH && y >= 0 && y < ENV_HEIGHT)
 	{
 		offset = (x * ENV_HEIGHT + y) * change;
 		glBufferSubData(GL_ARRAY_BUFFER, offset, length, newColor);
@@ -234,14 +234,14 @@
 	//up
 	x--;
 	y--;
-	if(x > 0 && x < ENV_WIDTH && y > 0 && y < ENV_HEIGHT)
+	if(x >= 0 && x < ENV_WIDTH && y >= 0 && y < ENV_HEIGHT)
 	{
 		offset = (x * ENV_HEIGHT + y) * change;
 		glBufferSubData(GL_ARRAY_BUFFER, offset, length, newColor);
 	}
 	//down
 	y += 2;
-	if(x > 0 && x < ENV_WIDTH && y > 0 && y < ENV_HEIGHT)
+	if(x >= 0 && x < ENV_WIDTH && y >= 0 && y < ENV_HEIGHT)
 	{
 		offset = (x * ENV_HEIGHT + y) * change;
 		glBufferSubData(GL_ARRAY_BUFFER, offset, length, newColor);
@@ -283,11 +283,11 @@
 - (void)render
 {
 	[self.program use];
-	glBindBuffer(GL_ARRAY_BUFFER, self.vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glEnableVertexAttribArray(positionAttribute);
 	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
-	glBindBuffer(GL_ARRAY_BUFFER, self.colorBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
 	glEnableVertexAttribArray(colorAttribute);
 	glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	

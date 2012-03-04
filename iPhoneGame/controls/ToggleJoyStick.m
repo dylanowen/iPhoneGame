@@ -11,7 +11,8 @@
 @interface ToggleJoyStick()
 {
 	GLKTextureInfo *redCircleTexture;
-	float boundingVertices[8];
+	
+	GLuint boundingVertexBuffer;
 }
 
 @end
@@ -25,6 +26,11 @@
 	{
 		toggle = NO;
 		
+		
+		
+		unsigned size = 8 * 2 * sizeof(float);
+		float *boundingVertices = malloc(size);
+
 		boundingVertices[0] = JOY_BOUNDS + 20;
 		boundingVertices[1] = -JOY_BOUNDS - 20;
 		boundingVertices[2] = JOY_BOUNDS + 20;
@@ -33,6 +39,14 @@
 		boundingVertices[5] = JOY_BOUNDS + 20;
 		boundingVertices[6] = -JOY_BOUNDS - 20;
 		boundingVertices[7] = -JOY_BOUNDS - 20;
+		
+		glGenBuffers(1, &boundingVertexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, boundingVertexBuffer);
+		glBufferData(GL_ARRAY_BUFFER, size, boundingVertices, GL_STATIC_DRAW);
+		
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		
+		free(boundingVertices);
 		
 		NSError *error;
 		redCircleTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"circleRed.png"].CGImage options:nil error:&error];
@@ -44,6 +58,11 @@
 		return self;
 	}
 	return nil;
+}
+
+- (void)dealloc
+{
+	glDeleteBuffers(1, &boundingVertexBuffer);
 }
 
 - (bool)touchesBegan:(GLKVector2) loci
@@ -80,45 +99,32 @@
 }
 
 - (void)render
-{	
-	
-	//NSLog(@"%f, %f", origin.x - JOY_LENGTH_HALF, origin.y - JOY_LENGTH_HALF);
-	self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-	self.effect.texture2d0.target = GLKTextureTarget2D;
+{
 	if(toggle)
 	{
+		self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
+		self.effect.texture2d0.target = GLKTextureTarget2D;
 		self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(origin.x, origin.y, 0);
 		self.effect.texture2d0.name = redCircleTexture.name;
 		
 		[self.effect prepareToDraw];
 		
+		glBindBuffer(GL_ARRAY_BUFFER, boundingVertexBuffer);
 		glEnableVertexAttribArray(GLKVertexAttribPosition);
-		glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, boundingVertices);
+		glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
+		glBindBuffer(GL_ARRAY_BUFFER, textureVertexBuffer);
 		glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-		glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, textureVertices);
+		glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	
-		glDisableVertexAttribArray(GLKVertexAttribPosition);	
-		glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glDisableVertexAttribArray(GLKVertexAttribTexCoord0);	
+		glDisableVertexAttribArray(GLKVertexAttribPosition);
 	}
 	
-	self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - JOY_LENGTH_HALF, position.y - JOY_LENGTH_HALF, 0);
-	self.effect.texture2d0.name = circleTexture.name;
-	
-	[self.effect prepareToDraw];
-	
-	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, joystickVertices);
-	
-	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, textureVertices);
-	
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-	
-	glDisableVertexAttribArray(GLKVertexAttribPosition);	
-	glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
+	[super render];
 }
 
 @end

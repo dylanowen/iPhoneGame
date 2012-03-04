@@ -16,9 +16,6 @@
 #import "ToggleJoyStick.h"
 
 @interface Controls()
-{
-	
-}
 
 @property (strong, nonatomic) GameModel *game;
 
@@ -39,12 +36,6 @@
 		self.game = game;
 		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, self.game.view.bounds.size.height - 80) view:self.game.view];
 		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(self.game.view.bounds.size.width - 80, self.game.view.bounds.size.height - 80) view:self.game.view];
-		/*
-		effect.texturingEnabled = YES;
-		effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-		effect.texture2d0.target = GLKTextureTarget2D;
-		effect.texture2d0.glName = texture.glName;
-		*/
 		
 		return self;
 	}

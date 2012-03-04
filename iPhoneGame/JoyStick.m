@@ -28,8 +28,14 @@
 		lastTouch = GLKVector2Make(-1, -1);
 		velocity = GLKVector2Make(0, 0);
 		
-		//NSLog(@"%@ (%f, %f: %f %f)", self, region.origin.x, region.origin.y, region.size.width, region.size.height);
 		
+		
+		
+		
+		unsigned size = 8 * 2 * sizeof(float);
+		float *joystickVertices = malloc(size);
+		float *textureVertices = malloc(size);
+
 		joystickVertices[0] = JOY_LENGTH;
 		joystickVertices[1] = 0;
 		joystickVertices[2] = JOY_LENGTH;
@@ -48,6 +54,20 @@
 		textureVertices[6] = 0;
 		textureVertices[7] = 0;
 		
+		
+		glGenBuffers(1, &vertexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+		glBufferData(GL_ARRAY_BUFFER, size, joystickVertices, GL_STATIC_DRAW);
+		
+		glGenBuffers(1, &textureVertexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, textureVertexBuffer);
+		glBufferData(GL_ARRAY_BUFFER, size, textureVertices, GL_STATIC_DRAW);
+		
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		
+		free(joystickVertices);
+		free(textureVertices);		
+		
 		self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, self.view.bounds.size.width, self.view.bounds.size.height, 0, 1, -1);
 		
 		NSError *error;
@@ -60,6 +80,12 @@
 		return self;
 	}
 	return nil;
+}
+
+- (void)dealloc
+{
+	glDeleteBuffers(1, &vertexBuffer);
+	glDeleteBuffers(1, &textureVertexBuffer);
 }
 
 - (bool)touchesBegan:(GLKVector2) loci
@@ -130,16 +156,19 @@
 	
 	[self.effect prepareToDraw];
 	
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, joystickVertices);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
+	glBindBuffer(GL_ARRAY_BUFFER, textureVertexBuffer);
 	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, textureVertices);
+	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	
-	glDisableVertexAttribArray(GLKVertexAttribPosition);	
-	glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDisableVertexAttribArray(GLKVertexAttribTexCoord0);	
+	glDisableVertexAttribArray(GLKVertexAttribPosition);
 }
 
 @end
