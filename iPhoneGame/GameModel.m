@@ -12,7 +12,7 @@
 #import "JoyStick.h"
 #import "Tracker.h"
 #import "Character.h"
-#import "Bullets.h"
+#import "Particles.h"
 
 @interface GameModel()
 {
@@ -34,7 +34,7 @@
 
 @synthesize env = _env;
 @synthesize tempTracker = _tempTracker;
-@synthesize bullets = _bullets;
+@synthesize particles = _particles;
 @synthesize player = _player;
 @synthesize controls = _controls;
 
@@ -46,7 +46,7 @@
 		self.view = view;
 		
 		self.env = [[Environment alloc] initWithModel: self];
-		self.bullets = [[Bullets alloc] initWithModel: self];
+		self.particles = [[Particles alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
 		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
 		self.tempTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.8f blue: 0.0f];
@@ -84,21 +84,24 @@
 	{
 		top = ENV_HEIGHT + 10 - VIEW_HEIGHT;
 	}
-	
 	right = left + VIEW_WIDTH;
 	bottom = top + VIEW_HEIGHT;
+	
+	//delete this stuff!!!
+	float debugLeft = left;
+	float debugRight = right;
+	float debugBottom = bottom;
+	float dubugTop = top;
 	
 	//generate a new bullet
 	if(self.controls.look->velocity.x != 0 || self.controls.look->velocity.y != 0)
 	{
-		[self.bullets addBulletWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 250) destructionRadius:10];
-		[self.bullets addBulletWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, -250) destructionRadius:10];
-		[self.bullets addBulletWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2Multiply(self.controls.look->velocity, GLKVector2Make(250, -250)) destructionRadius:10];
-		[self.bullets addBulletWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2Multiply(self.controls.look->velocity, GLKVector2Make(-250, 250)) destructionRadius:10];
+		[self.particles addBulletWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 250) destructionRadius:10];
+		[self.particles addBloodWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) power:50];
 	}
 	
 	[self.player updateAndKeep: time];
-	[self.bullets updateWithLastUpdate: time];
+	[self.particles updateWithLastUpdate: time];
 	
 	[self.tempTracker updateTrackee: self.player->position center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
 }
@@ -110,7 +113,7 @@
 	
 	[self.env render];
 	[self.player render];
-	[self.bullets render];
+	[self.particles render];
 	[self.controls render];
 	[self.tempTracker render];
 	
@@ -139,7 +142,7 @@
 			break;
 		default:
 			NSLog(@"dunnno");	
-	}	
+	}
 }
 
 -(GLKMatrix4)projectionMatrix

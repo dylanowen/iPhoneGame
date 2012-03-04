@@ -30,6 +30,8 @@
 
 - (void)deleteRadius:(int) radius x:(int) x y:(int) y;
 
+- (void)changeColor:(float[4]) newColor x:(int) x y:(int) y;
+
 - (void)render;
 
 @end

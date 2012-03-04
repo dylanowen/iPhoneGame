@@ -1,5 +1,5 @@
 //
-//  BulletParticle.h
+//  BloodParticle.h
 //  iPhoneGame
 //
 //  Created by Lion User on 01/03/2012.
@@ -11,9 +11,9 @@
 
 @class Particles;
 
-@interface BulletParticle : NSObject
+@interface BloodParticle : NSObject
 
-- (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius;
+- (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc;
 
 - (bool)updateAndKeep:(float) time;
 - (void)render;

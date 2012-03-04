@@ -1,34 +1,35 @@
 //
-//  BulletParticle.m
+//  BloodParticle.m
 //  iPhoneGame
 //
 //  Created by Lion User on 01/03/2012.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "BulletParticle.h"
+#import "BloodParticle.h"
 
 #import "GameConstants.h"
 #import "GameModel.h"
 #import "Particles.h"
 #import "Environment.h"
 
-@interface BulletParticle()
+@interface BloodParticle()
 {
 	GLKVector2 velocity;
 	GLuint positionAttribute;
+	GLuint colorAttribute;
 	
 	Environment *env;
 	
 	float position[2];
-	unsigned destructionRadius;
+	float color[4];
 }
 
 @end
 
-@implementation BulletParticle
+@implementation BloodParticle
 
-- (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius
+- (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc
 {
 	self = [super init];
 	if(self)
@@ -37,10 +38,16 @@
 		position[1] = posit.y;
 		velocity = veloc;
 		
-		positionAttribute = model->bulletPositionAttribute;
-		env = model.game.env;
+		float temp = ((float) (arc4random() % 20)) / 100;
 		
-		destructionRadius = radius;
+		color[0] = ((float) (arc4random() % 60)) / 100 + .3f;
+		color[1] = temp;
+		color[2] = temp;
+		color[3] = 1.0f;
+		
+		positionAttribute = model->bloodPositionAttribute;
+		colorAttribute = model->bloodColorAttribute;
+		env = model.game.env;
 		
 		return self;
 	}
@@ -59,12 +66,11 @@
 	
 	if(movement.x != 0.0f || movement.y != 0.0f)
 	{
-		//NSLog(@"movement: %f, %f time: %f", movement.x, movement.y, time);
-		if(movement.x == 0)
+		if(movement.x == 0.0f)
 		{
 			stepY = fabs(movement.y) / movement.y;
 		}
-		else if(movement.y == 0)
+		else if(movement.y == 0.0f)
 		{
 			stepX = fabs(movement.x) / movement.x;
 		}
@@ -81,8 +87,8 @@
 			stepX = fabs(movement.x) / movement.x;
 			stepY = fabs(movement.y) / movement.y;
 		}
-		stepX *= 3;
-		stepY *= 3;
+		stepX *= 2.0f;
+		stepY *= 2.0f;
 		
 		i = position[0];
 		j = position[1];
@@ -98,57 +104,18 @@
 			intJ = floor(j);
 			if(intI != lastI || intJ != lastJ)
 			{
-				if(intI < 1 && intJ < 1)
+				if(intI < 0 || intJ < 0 || intI >= ENV_WIDTH || intJ >= ENV_HEIGHT)
 				{
-					position[0] = 1.0f;
-					position[1] = 1.0f;
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
 					return NO;
-				}
-				else if(intI < 1)
-				{
-					position[0] = 1.0f;
-					position[1] = j;
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
-					return NO;
-				}
-				else if(intJ < 1)
-				{
-					position[0] = i;
-					position[1] = 1.0f;
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
-					return NO;
-				}
-				else if(intI >= ENV_WIDTH - 1 && intJ >= ENV_HEIGHT - 1)
-				{
-					position[0] = (float) (ENV_WIDTH - 1);
-					position[1] = (float) (ENV_HEIGHT - 1);
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
-					return NO;
-				}
-				else if(intI >= ENV_WIDTH - 1)
-				{
-					position[0] = (float) (ENV_WIDTH - 1);
-					position[1] = j;
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
-					return NO;
-				}
-				else if(intJ >= ENV_HEIGHT - 1)
-				{
-					position[0] = i;
-					position[1] = (float) (ENV_HEIGHT - 1);
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
-					return NO;
-				}
-			
+				}	
 				if(env->dirt[intI][intJ])
 				{
-					if(!start)
-					{
-						position[0] = i - stepX;
-						position[1] = j - stepY;
-					}
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					//if(!start)
+					//{
+					//	position[0] = i - stepX;
+					//	position[1] = j - stepY;
+					//}
+					[env changeColor:color x:intI y:intJ];
 					return NO;
 				}
 			}
@@ -170,12 +137,16 @@
 
 - (void)render
 {
-	//assume bullet shaders have already been called
+	//assume blood shaders have already been called
 	glEnableVertexAttribArray(positionAttribute);
 	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, position);
 	
+	glEnableVertexAttribArray(colorAttribute);
+	glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, color);
+	
 	glDrawArrays(GL_POINTS, 0, 1);
 	
+	glDisableVertexAttribArray(colorAttribute);
 	glDisableVertexAttribArray(positionAttribute);
 }
 
