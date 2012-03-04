@@ -80,6 +80,9 @@
 		CGPoint last = [touch previousLocationInView: touch.view];
 		GLKVector2 vLoci = GLKVector2Make(loci.x, loci.y);
 		GLKVector2 vLast = GLKVector2Make(last.x, last.y);
+		
+		//NSLog(@"M %d:(%.1f, %.1f) L:(%.1f, %.1f) %d", index, loci.x, loci.y, last.x, last.y, touch.phase);
+		
 		if([self.move touchesMoved: vLoci lastTouch: vLast])
 		{
 		
@@ -97,19 +100,29 @@
 }
 - (void)touchesEnded:(NSSet *)touches
 {
-	[self.move touchesCancelled];
-	[self.look touchesCancelled];
-	/*
 	for(UITouch *touch in touches)
 	{
 		CGPoint loci = [touch locationInView: touch.view];
 		CGPoint last = [touch previousLocationInView: touch.view];
 		GLKVector2 vLoci = GLKVector2Make(loci.x, loci.y);
 		GLKVector2 vLast = GLKVector2Make(last.x, last.y);
-		[self.move touchesMoved: vLoci lastTouch: vLast];
-		[self.look touchesMoved: vLoci lastTouch: vLast];
+		
+		//NSLog(@"M %d:(%.1f, %.1f) L:(%.1f, %.1f) %d", index, loci.x, loci.y, last.x, last.y, touch.phase);
+		
+		if([self.move touchesEnded: vLoci lastTouch: vLast])
+		{
+		
+		}
+		else if([self.look touchesEnded: vLoci lastTouch: vLast])
+		{
+		
+		}
+		else
+		{
+			
+			//NSLog(@"Not grabbed (%f, %f)", last.x, last.y);
+		}
 	}
-	*/
 }
 - (void)touchesCancelled:(NSSet *)touches
 {

@@ -24,7 +24,7 @@
 
 - (bool)touchesBegan:(GLKVector2) loci;
 - (bool)touchesMoved:(GLKVector2) loci lastTouch:(GLKVector2) last;
-- (void)touchesEnded:(GLKVector2) loci lastTouch:(GLKVector2) last;
+- (bool)touchesEnded:(GLKVector2) loci lastTouch:(GLKVector2) last;
 - (void)touchesCancelled;
 
 - (void)render;

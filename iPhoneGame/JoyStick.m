@@ -110,25 +110,16 @@
 	return NO;
 }
 
-- (void)touchesEnded:(GLKVector2) loci lastTouch:(GLKVector2) last
+- (bool)touchesEnded:(GLKVector2) loci lastTouch:(GLKVector2) last
 {
-	if(GLKVector2AllEqualToVector2(lastTouch, last))
+	if(GLKVector2AllEqualToVector2(lastTouch, loci) || GLKVector2AllEqualToVector2(lastTouch, last))
 	{
-		GLKVector2 temp = GLKVector2Subtract(loci, origin);
-		if(GLKVector2Length(temp) > JOY_LENGTH)
-		{
-			position = GLKVector2Add(origin, GLKVector2MultiplyScalar(GLKVector2Normalize(temp), JOY_LENGTH));
-		}
-		else
-		{
-			position = loci;
-		}
-		lastTouch = loci;
-		velocity = [self calculateVelocity];
-		return;
+		position = origin;
+		lastTouch = GLKVector2Make(-1, -1);
+		velocity = GLKVector2Make(0, 0);
+		return YES;
 	}
-	position = origin;
-	velocity = GLKVector2Make(0, 0);
+	return NO;
 }
 
 - (void)touchesCancelled
