@@ -23,6 +23,8 @@
 		CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A797714EDED5E00B8FA24 /* GameModel.m */; };
 		CE7ADDAD14F9752400FBD2EC /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7ADDAC14F9752400FBD2EC /* Controls.m */; };
 		CE884EE214F73981001B26DA /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = CE884EE114F73981001B26DA /* GLProgram.m */; };
+		CEAEABA715032D74000F7448 /* ToggleJoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAEABA615032D74000F7448 /* ToggleJoyStick.m */; };
+		CEAEABAA150330CB000F7448 /* circleRed.png in Resources */ = {isa = PBXBuildFile; fileRef = CEAEABA9150330CB000F7448 /* circleRed.png */; };
 		CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AAA14F3190F00E5AD9E /* Environment.m */; };
 		CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC12C6B14FC70F700EF1392 /* Tracker.m */; };
 		CEC5BCE615030A64003724F5 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC5BCE515030A64003724F5 /* circle.png */; };
@@ -63,6 +65,9 @@
 		CE7ADDAC14F9752400FBD2EC /* Controls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controls.m; sourceTree = "<group>"; };
 		CE884EE014F73981001B26DA /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
 		CE884EE114F73981001B26DA /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
+		CEAEABA515032D74000F7448 /* ToggleJoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToggleJoyStick.h; path = controls/ToggleJoyStick.h; sourceTree = "<group>"; };
+		CEAEABA615032D74000F7448 /* ToggleJoyStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToggleJoyStick.m; path = controls/ToggleJoyStick.m; sourceTree = "<group>"; };
+		CEAEABA9150330CB000F7448 /* circleRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleRed.png; sourceTree = "<group>"; };
 		CEB48AA914F3190F00E5AD9E /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		CEB48AAA14F3190F00E5AD9E /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
 		CEBEF6B914FAD553008913F4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
@@ -204,6 +209,8 @@
 				CE7ADDAC14F9752400FBD2EC /* Controls.m */,
 				CE7A4A8114F9E06E0039101B /* JoyStick.h */,
 				CE7A4A8214F9E06E0039101B /* JoyStick.m */,
+				CEAEABA515032D74000F7448 /* ToggleJoyStick.h */,
+				CEAEABA615032D74000F7448 /* ToggleJoyStick.m */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -211,6 +218,7 @@
 		CEC5BCE415030A64003724F5 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				CEAEABA9150330CB000F7448 /* circleRed.png */,
 				CEC5BCE515030A64003724F5 /* circle.png */,
 			);
 			name = Textures;
@@ -273,6 +281,7 @@
 				CE7A795214ECB05E00B8FA24 /* InfoPlist.strings in Resources */,
 				CE7A795B14ECB05E00B8FA24 /* MainStoryboard.storyboard in Resources */,
 				CEC5BCE615030A64003724F5 /* circle.png in Resources */,
+				CEAEABAA150330CB000F7448 /* circleRed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +307,7 @@
 				CEF52FFC1500914300C0029F /* BulletParticle.m in Sources */,
 				CEE52F921502D18300DDF174 /* BloodParticle.m in Sources */,
 				CEE52F961502D18F00DDF174 /* Particles.m in Sources */,
+				CEAEABA715032D74000F7448 /* ToggleJoyStick.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,31 +10,6 @@
 
 #import "GameConstants.h"
 
-@interface JoyStick()
-{
-	GLKVector2 position;
-	
-	GLKVector2 lastTouch;
-	GLKVector2 origin;
-	
-	CGRect region;
-	
-	float radius;
-	
-	float joystickVertices[8];
-	float boundingVertices[8];
-	float textureVertices[8];
-	
-	GLKTextureInfo *circleTexture;
-}
-
-@property (strong, nonatomic) UIView *view;
-@property (strong, nonatomic) GLKBaseEffect *effect;
-
-- (GLKVector2) calculateVelocity;
-
-@end
-
 @implementation JoyStick
 
 @synthesize view = _view;
@@ -64,15 +39,6 @@
 		joystickVertices[6] = 0;
 		joystickVertices[7] = 0;
 		
-		boundingVertices[0] = JOY_LENGTH * 2;
-		boundingVertices[1] = -JOY_LENGTH;
-		boundingVertices[2] = JOY_LENGTH * 2;
-		boundingVertices[3] = JOY_LENGTH * 2;
-		boundingVertices[4] = -JOY_LENGTH;
-		boundingVertices[5] = JOY_LENGTH * 2;
-		boundingVertices[6] = -JOY_LENGTH;
-		boundingVertices[7] = -JOY_LENGTH;
-		
 		textureVertices[0] = 1;
 		textureVertices[1] = 0;
 		textureVertices[2] = 1;
@@ -99,7 +65,7 @@
 - (bool)touchesBegan:(GLKVector2) loci
 {
 	GLKVector2 temp = GLKVector2Subtract(loci, origin);
-	if(GLKVector2Length(temp) <= JOY_LENGTH)
+	if(GLKVector2Length(temp) <= JOY_BOUNDS)
 	{
 		position = lastTouch = loci;
 		velocity = [self calculateVelocity];
@@ -114,9 +80,9 @@
 	if(GLKVector2AllEqualToVector2(lastTouch, last))
 	{
 		GLKVector2 temp = GLKVector2Subtract(loci, origin);
-		if(GLKVector2Length(temp) > JOY_LENGTH)
+		if(GLKVector2Length(temp) > JOY_BOUNDS)
 		{
-			position = GLKVector2Add(origin, GLKVector2MultiplyScalar(GLKVector2Normalize(temp), JOY_LENGTH));
+			position = GLKVector2Add(origin, GLKVector2MultiplyScalar(GLKVector2Normalize(temp), JOY_BOUNDS));
 		}
 		else
 		{
@@ -150,7 +116,7 @@
 {
 	//based on position and origin so make sure to update position before calling this
 	GLKVector2 temp = GLKVector2Subtract(position, origin);
-	float normLength = powf((GLKVector2Length(temp) / 40.0f), 2);
+	float normLength = powf((GLKVector2Length(temp) / (float) JOY_BOUNDS), 2);
 	return GLKVector2MultiplyScalar(GLKVector2Normalize(temp), normLength);
 }
 
@@ -163,18 +129,6 @@
 	self.effect.texture2d0.name = circleTexture.name;
 	
 	[self.effect prepareToDraw];
-	
-	/*glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, boundingVertices);
-	
-	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, textureVertices);
-	
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-	
-	glDisableVertexAttribArray(GLKVertexAttribPosition);	
-	glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
-	*/
 	
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
 	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, joystickVertices);

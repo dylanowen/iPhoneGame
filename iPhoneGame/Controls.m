@@ -13,6 +13,7 @@
 #import "GameConstants.h"
 #import "GameModel.h"
 #import "JoyStick.h"
+#import "ToggleJoyStick.h"
 
 @interface Controls()
 {
@@ -37,7 +38,7 @@
 	{
 		self.game = game;
 		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, self.game.view.bounds.size.height - 80) view:self.game.view];
-		self.look = [[JoyStick alloc] initWithCenter: GLKVector2Make(self.game.view.bounds.size.width - 80, self.game.view.bounds.size.height - 80) view:self.game.view];
+		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(self.game.view.bounds.size.width - 80, self.game.view.bounds.size.height - 80) view:self.game.view];
 		/*
 		effect.texturingEnabled = YES;
 		effect.texture2d0.envMode = GLKTextureEnvModeReplace;

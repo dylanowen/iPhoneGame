@@ -10,11 +10,12 @@
 
 @class GameModel;
 @class JoyStick;
+@class ToggleJoyStick;
 
 @interface Controls : NSObject
 
 @property (strong, nonatomic) JoyStick *move;
-@property (strong, nonatomic) JoyStick *look;
+@property (strong, nonatomic) ToggleJoyStick *look;
 
 - (id)initWithModel: (GameModel *) game;
 - (void)render;

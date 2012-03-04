@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-#define JOY_LENGTH 40
+#define JOY_BOUNDS 50
+#define JOY_LENGTH 60
 #define JOY_LENGTH_HALF JOY_LENGTH / 2
 
 @class GLKBaseEffect;
@@ -18,6 +19,20 @@
 {
 @public
 	GLKVector2 velocity;
+@protected
+	GLKVector2 position;
+	
+	GLKVector2 lastTouch;
+	GLKVector2 origin;
+	
+	CGRect region;
+	
+	float radius;
+	
+	float joystickVertices[8];
+	float textureVertices[8];
+	
+	GLKTextureInfo *circleTexture;
 }
 
 - (id)initWithCenter:(GLKVector2) posit view:(UIView *) view;
@@ -28,5 +43,10 @@
 - (void)touchesCancelled;
 
 - (void)render;
+
+@property (strong, nonatomic) UIView *view;
+@property (strong, nonatomic) GLKBaseEffect *effect;
+
+- (GLKVector2) calculateVelocity;
 
 @end
