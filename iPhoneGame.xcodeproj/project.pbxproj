@@ -25,6 +25,7 @@
 		CE884EE214F73981001B26DA /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = CE884EE114F73981001B26DA /* GLProgram.m */; };
 		CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AAA14F3190F00E5AD9E /* Environment.m */; };
 		CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC12C6B14FC70F700EF1392 /* Tracker.m */; };
+		CEC5BCE615030A64003724F5 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC5BCE515030A64003724F5 /* circle.png */; };
 		CEE52F891502BE1D00DDF174 /* particleShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CEE52F821502BE0200DDF174 /* particleShader.fsh */; };
 		CEE52F8A1502BE1D00DDF174 /* particleShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CEE52F831502BE0200DDF174 /* particleShader.vsh */; };
 		CEE52F8B1502BE1D00DDF174 /* particleShaderConstantColor.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CEE52F841502BE0200DDF174 /* particleShaderConstantColor.vsh */; };
@@ -67,6 +68,7 @@
 		CEBEF6B914FAD553008913F4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
 		CEC12C6A14FC70F700EF1392 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; };
 		CEC12C6B14FC70F700EF1392 /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tracker.m; sourceTree = "<group>"; };
+		CEC5BCE515030A64003724F5 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		CEE52F821502BE0200DDF174 /* particleShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = particleShader.fsh; path = shaders/particleShader.fsh; sourceTree = "<group>"; };
 		CEE52F831502BE0200DDF174 /* particleShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = particleShader.vsh; path = shaders/particleShader.vsh; sourceTree = "<group>"; };
 		CEE52F841502BE0200DDF174 /* particleShaderConstantColor.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = particleShaderConstantColor.vsh; path = shaders/particleShaderConstantColor.vsh; sourceTree = "<group>"; };
@@ -144,25 +146,16 @@
 				CE7A797714EDED5E00B8FA24 /* GameModel.m */,
 				CEB48AA914F3190F00E5AD9E /* Environment.h */,
 				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
-				CEE52F941502D18F00DDF174 /* Particles.h */,
-				CEE52F951502D18F00DDF174 /* Particles.m */,
-				CEF52FFA1500914300C0029F /* BulletParticle.h */,
-				CEF52FFB1500914300C0029F /* BulletParticle.m */,
-				CEE52F901502D18300DDF174 /* BloodParticle.h */,
-				CEE52F911502D18300DDF174 /* BloodParticle.m */,
 				CEECC22A14FC95CB008D2D13 /* PhysicsObject.h */,
 				CEECC22B14FC95CB008D2D13 /* PhysicsObject.m */,
 				CEECC22E14FC99C3008D2D13 /* Character.h */,
 				CEECC22F14FC99C3008D2D13 /* Character.m */,
-				CE7ADDAB14F9752400FBD2EC /* Controls.h */,
-				CE7ADDAC14F9752400FBD2EC /* Controls.m */,
-				CE7A4A8114F9E06E0039101B /* JoyStick.h */,
-				CE7A4A8214F9E06E0039101B /* JoyStick.m */,
 				CEC12C6A14FC70F700EF1392 /* Tracker.h */,
 				CEC12C6B14FC70F700EF1392 /* Tracker.m */,
-				CE884EE014F73981001B26DA /* GLProgram.h */,
-				CE884EE114F73981001B26DA /* GLProgram.m */,
+				CEC5BCE115030367003724F5 /* Particles */,
+				CEC5BCE315030373003724F5 /* Controls */,
 				CEC570B514F4B00F003F345A /* Shaders */,
+				CEC5BCE415030A64003724F5 /* Textures */,
 				CE7A794E14ECB05E00B8FA24 /* Supporting Files */,
 			);
 			path = iPhoneGame;
@@ -182,11 +175,46 @@
 		CEC570B514F4B00F003F345A /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				CE884EE014F73981001B26DA /* GLProgram.h */,
+				CE884EE114F73981001B26DA /* GLProgram.m */,
 				CEE52F821502BE0200DDF174 /* particleShader.fsh */,
 				CEE52F831502BE0200DDF174 /* particleShader.vsh */,
 				CEE52F841502BE0200DDF174 /* particleShaderConstantColor.vsh */,
 			);
 			name = Shaders;
+			sourceTree = "<group>";
+		};
+		CEC5BCE115030367003724F5 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				CEE52F941502D18F00DDF174 /* Particles.h */,
+				CEE52F951502D18F00DDF174 /* Particles.m */,
+				CEF52FFA1500914300C0029F /* BulletParticle.h */,
+				CEF52FFB1500914300C0029F /* BulletParticle.m */,
+				CEE52F901502D18300DDF174 /* BloodParticle.h */,
+				CEE52F911502D18300DDF174 /* BloodParticle.m */,
+			);
+			name = Particles;
+			sourceTree = "<group>";
+		};
+		CEC5BCE315030373003724F5 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				CE7ADDAB14F9752400FBD2EC /* Controls.h */,
+				CE7ADDAC14F9752400FBD2EC /* Controls.m */,
+				CE7A4A8114F9E06E0039101B /* JoyStick.h */,
+				CE7A4A8214F9E06E0039101B /* JoyStick.m */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
+		CEC5BCE415030A64003724F5 /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				CEC5BCE515030A64003724F5 /* circle.png */,
+			);
+			name = Textures;
+			path = textures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +272,7 @@
 				CEE52F8B1502BE1D00DDF174 /* particleShaderConstantColor.vsh in Resources */,
 				CE7A795214ECB05E00B8FA24 /* InfoPlist.strings in Resources */,
 				CE7A795B14ECB05E00B8FA24 /* MainStoryboard.storyboard in Resources */,
+				CEC5BCE615030A64003724F5 /* circle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
