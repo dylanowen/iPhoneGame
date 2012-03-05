@@ -6,8 +6,20 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "PhysicsObject.h"
+#import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
 
-@interface Character : PhysicsObject
+@class GameModel;
+
+@interface Character : NSObject
+{
+@public
+	GLKVector2 position;
+	GLKVector2 velocity;
+}
+
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
+- (bool)update:(float) time;
+- (void)render;
 
 @end

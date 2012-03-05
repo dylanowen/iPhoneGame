@@ -28,10 +28,6 @@
 		lastTouch = GLKVector2Make(-1, -1);
 		velocity = GLKVector2Make(0, 0);
 		
-		
-		
-		
-		
 		unsigned size = 8 * 2 * sizeof(float);
 		float *joystickVertices = malloc(size);
 		float *textureVertices = malloc(size);

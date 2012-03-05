@@ -148,6 +148,7 @@
 
 - (void)deleteRadius:(int) radius x:(int) x y:(int) y
 {
+	radius = (radius > MAX_DELETE_RADIUS)?MAX_DELETE_RADIUS:radius; //keep the radius in bounds
 	int tempY, i = -radius, iEnd = radius, j, jEnd;
 	unsigned offset;
 	

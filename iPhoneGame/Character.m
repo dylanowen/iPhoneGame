@@ -11,54 +11,79 @@
 #import "GameModel.h"
 #import "Environment.h"
 
+@interface Character()
+{
+	GameModel *game;
+	Environment *env;
+	
+	GLKBaseEffect *effect;
+}
+
+@end
+
 @implementation Character
 
-- (bool)updateAndKeep:(float) time
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
+{
+	self = [super init];
+	if(self)
+	{
+		game = model;
+		position = posit;
+		
+		env = game.env;
+		
+		velocity = GLKVector2Make(0, 0);
+		effect = [[GLKBaseEffect alloc] init];
+		effect.useConstantColor = YES;
+		effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.8f);
+		
+		return self;
+	}
+	return nil;
+}
+
+- (bool)update:(float) time
 {
 	bool collision = NO, start = YES;
-	int intI, intJ, lastI, lastJ;
+	int intI, intJ, lastI = -1000, lastJ = -1000;
 	float i, j, stepX = 1.0f, stepY = 1.0f;
-	velocity.x += 0;
-	velocity.y += GRAVITY * time;
+	velocity.y += GRAVITY;
+	GLKVector2 movement = GLKVector2MultiplyScalar(velocity, time);
+	//NSLog(@"%f, %f", movement.x, movement.y);
 	
-	//NSLog(@"%f, %f", velocity.x, velocity.y);
-	
-	if(velocity.x != 0.0f || velocity.y != 0.0f)
+	if(movement.x != 0.0f || movement.y != 0.0f)
 	{
-		//NSLog(@"velocity: %f, %f", velocity.x, velocity.y);
-		if(velocity.x == 0)
+		//NSLog(@"movement: %f, %f time: %f", movement.x, movement.y, time);
+		if(movement.x == 0)
 		{
-			stepY = fabs(velocity.y) / velocity.y;
+			stepY = fabs(movement.y) / movement.y;
 		}
-		else if(velocity.y == 0)
+		else if(movement.y == 0)
 		{
-			stepX = fabs(velocity.x) / velocity.x;
+			stepX = fabs(movement.x) / movement.x;
 		}
-		else if(fabs(velocity.x) > fabs(velocity.y))
+		else if(fabs(movement.x) > fabs(movement.y))
 		{
-			stepY = velocity.y / velocity.x;
+			stepY = movement.y / movement.x;
 		}
-		else if(fabs(velocity.x) < fabs(velocity.y))
+		else if(fabs(movement.x) < fabs(movement.y))
 		{
-			stepX = velocity.x / velocity.y;
+			stepX = movement.x / movement.y;
 		}
 		else
 		{
-			stepX = fabs(velocity.x) / velocity.x;
-			stepY = fabs(velocity.y) / velocity.y;
+			stepX = fabs(movement.x) / movement.x;
+			stepY = fabs(movement.y) / movement.y;
 		}
-	
-		//NSLog(@"%f, %f", stepX, stepY);
 		
 		i = position.x;
 		j = position.y;
-		lastI = -10000;
-		lastJ = -10000;
 		
-		float lowX = i - fabs(velocity.x);
-		float highX = i + fabs(velocity.x);
-		float lowY = j - fabs(velocity.y);
-		float highY = j + fabs(velocity.y);
+		float lowX = i - fabs(movement.x);
+		float highX = i + fabs(movement.x);
+		float lowY = j - fabs(movement.y);
+		float highY = j + fabs(movement.y);
 		
 		while(i <= highX && i >= lowX && j <= highY && j >= lowY)
 		{			
@@ -66,21 +91,21 @@
 			intJ = floor(j);
 			if(intI != lastI || intJ != lastJ)
 			{
-				if(intI <= 1 && intJ <= 1)
+				if(intI < 1 && intJ < 1)
 				{
 					position.x = 1.0f;
 					position.y = 1.0f;
 					collision = YES;
 					break;
 				}
-				else if(intI <= 1)
+				else if(intI < 1)
 				{
 					position.x = 1.0f;
 					position.y = j;
 					collision = YES;
 					break;
 				}
-				else if(intJ <= 1)
+				else if(intJ < 1)
 				{
 					position.x = i;
 					position.y = 1.0f;
@@ -109,8 +134,7 @@
 					break;
 				}
 			
-			
-				if(self.game.env->dirt[intI][intJ])
+				if(env->dirt[intI][intJ])
 				{
 					if(!start)
 					{
@@ -134,8 +158,8 @@
 	
 	if(!collision)
 	{
-		position.x += velocity.x;
-		position.y += velocity.y;
+		position.x += movement.x;
+		position.y += movement.y;
 	}
 	else
 	{
@@ -143,12 +167,8 @@
 		velocity.y = 0.0f;
 	}
 	
-	
-	
-	self.effect.transform.projectionMatrix = self.game.projectionMatrix;
-	self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x, position.y, 0);
-	self.effect.useConstantColor = YES;
-	self.effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.8f);
+	effect.transform.projectionMatrix = game.projectionMatrix;
+	effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x, position.y, 0);
 	return YES;
 }
 
@@ -161,9 +181,9 @@
 		2.5, 2.5
 	};
 	
-	self.effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.8f);
+	effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.8f);
 	
-	[self.effect prepareToDraw];
+	[effect prepareToDraw];
 	
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
 	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);

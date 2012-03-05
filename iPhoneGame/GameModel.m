@@ -52,7 +52,7 @@
 		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
 		self.tempTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.8f blue: 0.0f];
 		
-		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(20, 20)];
+		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(40, 40)];
 		
 		left = 0.0f;
 		right = left + VIEW_WIDTH;
@@ -101,7 +101,7 @@
 		[self.particles addBloodWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) power:50];
 	}
 	
-	[self.player updateAndKeep: time];
+	[self.player update: time];
 	[self.particles updateWithLastUpdate: time];
 	
 	[self.tempTracker updateTrackee: self.player->position center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];

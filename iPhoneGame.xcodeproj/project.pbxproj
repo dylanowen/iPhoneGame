@@ -33,7 +33,6 @@
 		CEE52F8B1502BE1D00DDF174 /* particleShaderConstantColor.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CEE52F841502BE0200DDF174 /* particleShaderConstantColor.vsh */; };
 		CEE52F921502D18300DDF174 /* BloodParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE52F911502D18300DDF174 /* BloodParticle.m */; };
 		CEE52F961502D18F00DDF174 /* Particles.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE52F951502D18F00DDF174 /* Particles.m */; };
-		CEECC22C14FC95CB008D2D13 /* PhysicsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECC22B14FC95CB008D2D13 /* PhysicsObject.m */; };
 		CEECC23014FC99C3008D2D13 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECC22F14FC99C3008D2D13 /* Character.m */; };
 		CEF52FFC1500914300C0029F /* BulletParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF52FFB1500914300C0029F /* BulletParticle.m */; };
 /* End PBXBuildFile section */
@@ -81,8 +80,6 @@
 		CEE52F911502D18300DDF174 /* BloodParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BloodParticle.m; sourceTree = "<group>"; };
 		CEE52F941502D18F00DDF174 /* Particles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particles.h; sourceTree = "<group>"; };
 		CEE52F951502D18F00DDF174 /* Particles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particles.m; sourceTree = "<group>"; };
-		CEECC22A14FC95CB008D2D13 /* PhysicsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsObject.h; sourceTree = "<group>"; };
-		CEECC22B14FC95CB008D2D13 /* PhysicsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsObject.m; sourceTree = "<group>"; };
 		CEECC22E14FC99C3008D2D13 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		CEECC22F14FC99C3008D2D13 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
 		CEF52FFA1500914300C0029F /* BulletParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletParticle.h; sourceTree = "<group>"; };
@@ -151,8 +148,6 @@
 				CE7A797714EDED5E00B8FA24 /* GameModel.m */,
 				CEB48AA914F3190F00E5AD9E /* Environment.h */,
 				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
-				CEECC22A14FC95CB008D2D13 /* PhysicsObject.h */,
-				CEECC22B14FC95CB008D2D13 /* PhysicsObject.m */,
 				CEECC22E14FC99C3008D2D13 /* Character.h */,
 				CEECC22F14FC99C3008D2D13 /* Character.m */,
 				CEC12C6A14FC70F700EF1392 /* Tracker.h */,
@@ -302,7 +297,6 @@
 				CE7ADDAD14F9752400FBD2EC /* Controls.m in Sources */,
 				CE7A4A8314F9E06E0039101B /* JoyStick.m in Sources */,
 				CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */,
-				CEECC22C14FC95CB008D2D13 /* PhysicsObject.m in Sources */,
 				CEECC23014FC99C3008D2D13 /* Character.m in Sources */,
 				CEF52FFC1500914300C0029F /* BulletParticle.m in Sources */,
 				CEE52F921502D18300DDF174 /* BloodParticle.m in Sources */,

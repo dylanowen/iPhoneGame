@@ -68,21 +68,30 @@
 - (bool)touchesBegan:(GLKVector2) loci
 {
 	bool result = [super touchesBegan: loci];
-	toggle = GLKVector2Length(GLKVector2Subtract(position, origin)) > TOGGLE_BOUNDS;
+	if(result)
+	{
+		toggle = GLKVector2Length(GLKVector2Subtract(position, origin)) > TOGGLE_BOUNDS;
+	}
 	return result;
 }
 
 - (bool)touchesMoved:(GLKVector2) loci lastTouch:(GLKVector2) last
 {
 	bool result = [super touchesMoved: loci lastTouch: last];
-	toggle = GLKVector2Length(GLKVector2Subtract(position, origin)) > TOGGLE_BOUNDS;
+	if(result)
+	{
+		toggle = GLKVector2Length(GLKVector2Subtract(position, origin)) > TOGGLE_BOUNDS;
+	}
 	return result;
 }
 
 - (bool)touchesEnded:(GLKVector2) loci lastTouch:(GLKVector2) last
 {
 	bool result = [super touchesEnded: loci lastTouch: last];
-	toggle = GLKVector2Length(GLKVector2Subtract(position, origin)) > TOGGLE_BOUNDS;
+	if(result)
+	{
+		toggle = GLKVector2Length(GLKVector2Subtract(position, origin)) > TOGGLE_BOUNDS;
+	}
 	return result;
 }
 
