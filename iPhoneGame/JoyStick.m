@@ -143,7 +143,8 @@
 }
 
 - (void)render
-{	
+{
+	/*interleave joystick data*/
 	self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - JOY_LENGTH_HALF, position.y - JOY_LENGTH_HALF, 0);
 	//NSLog(@"%f, %f", origin.x - JOY_LENGTH_HALF, origin.y - JOY_LENGTH_HALF);
 	self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;

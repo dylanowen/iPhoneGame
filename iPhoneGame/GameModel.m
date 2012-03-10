@@ -98,6 +98,7 @@
 	if(self.controls.look->toggle)
 	{
 		[self.particles addBulletWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 250) destructionRadius:10];
+
 		[self.particles addBloodWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) power:50];
 	}
 	

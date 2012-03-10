@@ -283,6 +283,7 @@
 
 - (void)render
 {
+	//use VAO's
 	[self.program use];
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glEnableVertexAttribArray(positionAttribute);
