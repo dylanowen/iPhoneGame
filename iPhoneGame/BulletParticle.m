@@ -59,29 +59,31 @@
 	{
 		if(movement[0] == 0)
 		{
-            stepX = 0;
+			stepX = 0;
 			stepY = (movement[1] < 0)?-precision:precision;
 		}
 		else if(movement[1] == 0)
 		{
 			stepX = (movement[0] < 0)?-precision:precision;
-            stepY = 0;
+			stepY = 0;
 		}
 		else if(abs(movement[0]) > abs(movement[1]))
 		{
-            stepX = (movement[0] < 0)?-precision:precision;
+			stepX = (movement[0] < 0)?-precision:precision;
 			stepY = movement[1] / movement[0];
 		}
 		else if(abs(movement[0]) < abs(movement[1]))
 		{
 			stepX = movement[0] / movement[1];
-            stepY = (movement[1] < 0)?-precision:precision;
+			stepY = (movement[1] < 0)?-precision:precision;
 		}
 		else
 		{
 			stepX = (movement[0] < 0)?-precision:precision;
 			stepY = (movement[1] < 0)?-precision:precision;
 		}
+		stepX *= 3;
+		stepY *= 3;
 		
 		i = (int) (position[0] * precision);
 		j = (int) (position[1] * precision);

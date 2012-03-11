@@ -25,6 +25,8 @@
     //int boundaryOffsetArray[(CHARACTER_WIDTH + CHARACTER_HEIGHT) * 2][2];
 }
 
+-(bool)checkCollisionVertex:(unsigned) x y:(unsigned) y;
+
 @end
 
 @implementation Character
@@ -53,13 +55,13 @@
             boundaryOffsetTop[i][0] = boundaryOffsetBottom[i][0] = i - (CHARACTER_WIDTH / 2);
             boundaryOffsetTop[i][1] = -CHARACTER_HEIGHT / 2;
             boundaryOffsetBottom[i][1] = CHARACTER_HEIGHT / 2;
-            //NSLog(@"top:(%d, %d) bottom:(%d, %d)", boundaryOffsetTop[i][0], boundaryOffsetTop[i][1], boundaryOffsetBottom[i][0], boundaryOffsetBottom[i][1]);
+            NSLog(@"top:(%d, %d) bottom:(%d, %d)", boundaryOffsetTop[i][0], boundaryOffsetTop[i][1], boundaryOffsetBottom[i][0], boundaryOffsetBottom[i][1]);
         }
         for(int i = 0; i < CHARACTER_HEIGHT; i++){
             boundaryOffsetLeft[i][0] = -CHARACTER_WIDTH / 2;
             boundaryOffsetRight[i][0] = CHARACTER_WIDTH / 2;
             boundaryOffsetLeft[i][1] = boundaryOffsetRight[i][1] = i - (CHARACTER_HEIGHT / 2);
-            //NSLog(@"left:(%d, %d) right:(%d, %d)", boundaryOffsetLeft[i][0], boundaryOffsetLeft[i][1], boundaryOffsetRight[i][0], boundaryOffsetRight[i][1]);
+            NSLog(@"left:(%d, %d) right:(%d, %d)", boundaryOffsetLeft[i][0], boundaryOffsetLeft[i][1], boundaryOffsetRight[i][0], boundaryOffsetRight[i][1]);
         }
 		
 		return self;
@@ -69,8 +71,12 @@
 
 - (bool)update:(float) time
 {
-	bool collision = NO, start = YES;
-	int precision = 1000000, widthBound = (ENV_WIDTH - 1) * precision, heightBound = (ENV_HEIGHT - 1) * precision;
+	bool collisionPositionLeft[CHARACTER_HEIGHT];
+	bool collisionPositionRight[CHARACTER_HEIGHT];
+	bool collisionPositionTop[CHARACTER_WIDTH];
+	bool collisionPositionBottom[CHARACTER_WIDTH];
+	bool collisionLeft = NO, collisionRight = NO, collisionTop = NO, collisionBottom = NO, start = YES;
+	int precision = 1000000;
 	int intI, intJ, lastI, lastJ, i, j, stepX = precision, stepY = precision;
 	velocity.y += GRAVITY;
 	int movement[2] = {(int) (velocity.x * time * precision), (int) (velocity.y * time * precision)};
@@ -79,23 +85,23 @@
 	{
 		if(movement[0] == 0)
 		{
-            stepX = 0;
+			stepX = 0;
 			stepY = (movement[1] < 0)?-precision:precision;
 		}
 		else if(movement[1] == 0)
 		{
 			stepX = (movement[0] < 0)?-precision:precision;
-            stepY = 0;
+			stepY = 0;
 		}
 		else if(abs(movement[0]) > abs(movement[1]))
 		{
-            stepX = (movement[0] < 0)?-precision:precision;
+			stepX = (movement[0] < 0)?-precision:precision;
 			stepY = movement[1] / movement[0];
 		}
 		else if(abs(movement[0]) < abs(movement[1]))
 		{
 			stepX = movement[0] / movement[1];
-            stepY = (movement[1] < 0)?-precision:precision;
+			stepY = (movement[1] < 0)?-precision:precision;
 		}
 		else
 		{
@@ -112,87 +118,66 @@
 		int highY = j + abs(movement[1]);
 		
 		while(i <= highX && i >= lowX && j <= highY && j >= lowY)
-		{			
+		{
+			i += stepX;
+			j += stepY;
 			intI = i / precision;
 			intJ = j / precision;
 			if(intI != lastI || intJ != lastJ)
 			{
-				if(i < precision && j < precision)
+				for(unsigned k = 0; k < CHARACTER_HEIGHT; k++)
 				{
-					position.x = 1.0f;
-					position.y = 1.0f;
-					collision = YES;
-                    break;
+					collisionPositionLeft[k] = [self checkCollisionVertex:(intI + boundaryOffsetLeft[k][0]) y:(intJ + boundaryOffsetLeft[k][1])];
+					collisionPositionRight[k] = [self checkCollisionVertex:(intI + boundaryOffsetRight[k][0]) y:(intJ + boundaryOffsetRight[k][1])];
+					collisionLeft = (collisionPositionLeft[k])?YES:collisionLeft;
+					collisionRight = (collisionPositionRight[k])?YES:collisionRight;
 				}
-				else if(i < precision)
+				for(unsigned k = 0; k < CHARACTER_WIDTH; k++)
 				{
-					position.x = 1.0f;
-					position.y = ((float) j) / precision;
-					collision = YES;
-                    break;
+					collisionPositionTop[k] = [self checkCollisionVertex:(intI + boundaryOffsetTop[k][0]) y:(intJ + boundaryOffsetTop[k][1])];
+					collisionPositionBottom[k] = [self checkCollisionVertex:(intI + boundaryOffsetBottom[k][0]) y:(intJ + boundaryOffsetBottom[k][1])];
+					collisionTop = (collisionPositionTop[k])?YES:collisionTop;
+					collisionBottom = (collisionPositionBottom[k])?YES:collisionBottom;
 				}
-				else if(j < precision)
+				if(collisionLeft || collisionRight || collisionTop || collisionBottom)
 				{
-					position.x = ((float) i) / precision;
-					position.y = 1.0f;
-					collision = YES;
-                    break;
-				}
-				else if(i >= widthBound && j >= heightBound)
-				{
-					position.x = (float) (ENV_WIDTH - 1);
-					position.y = (float) (ENV_HEIGHT - 1);
-					collision = YES;
-                    break;
-				}
-				else if(i >= widthBound)
-				{
-					position.x = (float) (ENV_WIDTH - 1);
-					position.y = ((float) j) / precision;
-					collision = YES;
-                    break;
-				}
-				else if(j >= heightBound)
-				{
-					position.x = ((float) i) / precision;
-					position.y = (float) (ENV_HEIGHT - 1);
-					collision = YES;
-                    break;
-				}
-                
-				if(env->dirt[intI][intJ])
-				{
-					if(!start)
-					{
-						position.x = ((float) (i - stepX)) / precision;
-						position.y = ((float) (j - stepY)) / precision;
-					}
-					collision = YES;
-                    break;
+					position.x = (float) (i - stepX) / precision;
+					position.y = (float) (j - stepY) / precision;
+					break;
 				}
 			}
 			lastI = intI;
 			lastJ = intJ;
-			i += stepX;
-			j += stepY;
 			if(start)
 			{
 				start = NO;
 			}
 		}
 	}
-	
-    //NSLog(@"(%f, %f)", position.x, position.y);
-    
-	if(!collision)
+	if(time > 0.039)
 	{
-		position.x += ((float) movement[0]) / precision;
-		position.y += ((float) movement[1]) / precision;
+		NSLog(@":(");
 	}
-	else
+	NSLog(@"%f %f %f", position.y, (float) movement[1] / precision, time);
+	if((collisionLeft || collisionRight) && (collisionTop || collisionBottom))
 	{
 		velocity.x = 0.0f;
 		velocity.y = 0.0f;
+	}
+	else if(collisionLeft || collisionRight)
+	{
+		velocity.x = 0.0f;
+		position.y += ((float) movement[1]) / precision;
+	}
+	else if(collisionTop || collisionBottom)
+	{
+		velocity.y = 0.0f;
+		position.x += ((float) movement[0]) / precision;
+	}
+	else
+	{
+		position.x += ((float) movement[0]) / precision;
+		position.y += ((float) movement[1]) / precision;
 	}
 	
 	effect.transform.projectionMatrix = game.projectionMatrix;
@@ -200,13 +185,47 @@
 	return YES;
 }
 
+- (bool) checkCollisionVertex:(unsigned) x y:(unsigned) y
+{
+	if(x < 1 && y < 1)
+	{
+		return YES;
+	}
+	else if(x < 1)
+	{
+		return YES;
+	}
+	else if(y < 1)
+	{
+		return YES;
+	}
+	else if(x >= (ENV_WIDTH - 1) && y >= (ENV_HEIGHT - 1))
+	{
+		return YES;
+	}
+	else if(x >= (ENV_WIDTH - 1))
+	{
+		return YES;
+	}
+	else if(y >= (ENV_HEIGHT - 1))
+	{
+		return YES;
+	}
+	if(env->dirt[x][y])
+	{
+		return YES;
+	}
+	
+	return NO;
+}
+
 - (void)render
 {
 	float vertices[] = {
-		-2.5, -2.5,
-		-2.5, 2.5,
-		2.5, -2.5,
-		2.5, 2.5
+		-CHARACTER_WIDTH / 2, -CHARACTER_HEIGHT / 2,
+		-CHARACTER_WIDTH / 2, CHARACTER_HEIGHT / 2,
+		CHARACTER_WIDTH / 2, -CHARACTER_HEIGHT / 2,
+		CHARACTER_WIDTH / 2, CHARACTER_HEIGHT / 2
 	};
 	
 	effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.5f);
@@ -219,19 +238,51 @@
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
-    
-    float vertices2[] = {0,0,10,10,10,0};
-    effect.constantColor = GLKVector4Make(1.0f, 0.0f, 0.0f, 0.3f);
+	
+	
+	float vertices2[(CHARACTER_WIDTH + CHARACTER_HEIGHT) * 2 * 3 * 2];
+	unsigned vert2Offset = 0;
+	for(unsigned k = 0; k < CHARACTER_HEIGHT; k++)
+	{
+		vertices2[vert2Offset++] = boundaryOffsetLeft[k][0];
+		vertices2[vert2Offset++] = boundaryOffsetLeft[k][1];
+		vertices2[vert2Offset++] = boundaryOffsetLeft[k][0] + 1;
+		vertices2[vert2Offset++] = boundaryOffsetLeft[k][1];
+		vertices2[vert2Offset++] = boundaryOffsetLeft[k][0];
+		vertices2[vert2Offset++] = boundaryOffsetLeft[k][1] + 1;
+		vertices2[vert2Offset++] = boundaryOffsetRight[k][0];
+		vertices2[vert2Offset++] = boundaryOffsetRight[k][1];
+		vertices2[vert2Offset++] = boundaryOffsetRight[k][0] + 1;
+		vertices2[vert2Offset++] = boundaryOffsetRight[k][1];
+		vertices2[vert2Offset++] = boundaryOffsetRight[k][0];
+		vertices2[vert2Offset++] = boundaryOffsetRight[k][1] + 1;
+	}
+	for(unsigned k = 0; k < CHARACTER_WIDTH; k++)
+	{
+		vertices2[vert2Offset++] = boundaryOffsetTop[k][0];
+		vertices2[vert2Offset++] = boundaryOffsetTop[k][1];
+		vertices2[vert2Offset++] = boundaryOffsetTop[k][0] + 1;
+		vertices2[vert2Offset++] = boundaryOffsetTop[k][1];
+		vertices2[vert2Offset++] = boundaryOffsetTop[k][0];
+		vertices2[vert2Offset++] = boundaryOffsetTop[k][1] + 1;
+		vertices2[vert2Offset++] = boundaryOffsetBottom[k][0];
+		vertices2[vert2Offset++] = boundaryOffsetBottom[k][1];
+		vertices2[vert2Offset++] = boundaryOffsetBottom[k][0] + 1;
+		vertices2[vert2Offset++] = boundaryOffsetBottom[k][1];
+		vertices2[vert2Offset++] = boundaryOffsetBottom[k][0];
+		vertices2[vert2Offset++] = boundaryOffsetBottom[k][1] + 1;
+	}
+	effect.constantColor = GLKVector4Make(1.0f, 0.0f, 0.0f, 0.3f);
 	
 	[effect prepareToDraw];
 	
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
 	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices2);
 	
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawArrays(GL_TRIANGLES, 0, (CHARACTER_WIDTH + CHARACTER_HEIGHT) * 2 * 3);
 	
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
-    
+
 }
 
 @end

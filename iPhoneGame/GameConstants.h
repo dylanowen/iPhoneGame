@@ -9,14 +9,14 @@
 #ifndef iPhoneGame_GameConstants_h
 #define iPhoneGame_GameConstants_h
 
-#define VIEW_WIDTH 60//240//640//
-#define VIEW_HEIGHT 40//160//960//
+#define VIEW_WIDTH 240//640//
+#define VIEW_HEIGHT 160//960//
 
 #define ENV_WIDTH 400
 #define ENV_HEIGHT 600
 
-#define CHARACTER_WIDTH 20
-#define CHARACTER_HEIGHT 30
+#define CHARACTER_WIDTH 21
+#define CHARACTER_HEIGHT 31
 
 #define GRAVITY 5.8f
 
