@@ -302,7 +302,7 @@
 	glDisableVertexAttribArray(positionAttribute);
 	
 	//debug stuff
-	/*
+	
 	float debugVertices[ENV_WIDTH * ENV_HEIGHT * 2];
 	float debugColor[ENV_WIDTH * ENV_HEIGHT * 4];
 	for(unsigned i = 0; i < ENV_WIDTH; i++)
@@ -335,7 +335,7 @@
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
 	glDisableVertexAttribArray(colorAttribute);
 	glDisableVertexAttribArray(positionAttribute);
-	*/
+	
 }
 
 
