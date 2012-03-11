@@ -286,8 +286,7 @@
 	[self.program use];
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glEnableVertexAttribArray(positionAttribute);
-	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
-	
+	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);	
 	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
 	glEnableVertexAttribArray(colorAttribute);
 	glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
@@ -301,7 +300,7 @@
 	glDisableVertexAttribArray(positionAttribute);
 	
 	//debug stuff
-	
+	/*
 	float debugVertices[ENV_WIDTH * ENV_HEIGHT * 2];
 	float debugColor[ENV_WIDTH * ENV_HEIGHT * 4];
 	for(unsigned i = 0; i < ENV_WIDTH; i++)
@@ -334,7 +333,7 @@
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
 	glDisableVertexAttribArray(colorAttribute);
 	glDisableVertexAttribArray(positionAttribute);
-	
+	*/
 }
 
 

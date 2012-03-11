@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C13BB5C150C72E40002FA77 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C13BB5B150C72E40002FA77 /* character.png */; };
 		CE7A4A8314F9E06E0039101B /* JoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A4A8214F9E06E0039101B /* JoyStick.m */; };
 		CE7A794814ECB05E00B8FA24 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794714ECB05E00B8FA24 /* UIKit.framework */; };
 		CE7A794A14ECB05E00B8FA24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794914ECB05E00B8FA24 /* Foundation.framework */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C13BB5B150C72E40002FA77 /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = character.png; sourceTree = "<group>"; };
 		CE7A4A8114F9E06E0039101B /* JoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoyStick.h; sourceTree = "<group>"; };
 		CE7A4A8214F9E06E0039101B /* JoyStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoyStick.m; sourceTree = "<group>"; };
 		CE7A794314ECB05E00B8FA24 /* iPhoneGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +215,7 @@
 		CEC5BCE415030A64003724F5 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				2C13BB5B150C72E40002FA77 /* character.png */,
 				CEAEABA9150330CB000F7448 /* circleRed.png */,
 				CEC5BCE515030A64003724F5 /* circle.png */,
 			);
@@ -277,6 +280,7 @@
 				CE7A795B14ECB05E00B8FA24 /* MainStoryboard.storyboard in Resources */,
 				CEC5BCE615030A64003724F5 /* circle.png in Resources */,
 				CEAEABAA150330CB000F7448 /* circleRed.png in Resources */,
+				2C13BB5C150C72E40002FA77 /* character.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

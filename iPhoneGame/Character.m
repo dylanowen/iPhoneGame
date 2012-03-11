@@ -17,8 +17,12 @@
 	Environment *env;
 	
 	GLKBaseEffect *effect;
-
-    int boundaryOffsetArray[(CHARACTER_WIDTH + CHARACTER_HEIGHT) * 2][2];
+    
+    int boundaryOffsetLeft[CHARACTER_HEIGHT][2];
+    int boundaryOffsetRight[CHARACTER_HEIGHT][2];
+    int boundaryOffsetTop[CHARACTER_WIDTH][2];
+    int boundaryOffsetBottom[CHARACTER_WIDTH][2];
+    //int boundaryOffsetArray[(CHARACTER_WIDTH + CHARACTER_HEIGHT) * 2][2];
 }
 
 @end
@@ -45,24 +49,18 @@
         offsetY = -1 * CHARACTER_HEIGHT / 2;
         
         // Setting up the offset array
-        for(int i = 0; i < (CHARACTER_WIDTH + CHARACTER_HEIGHT) * 2; i++) {
-            boundaryOffsetArray[i][0] = offsetX;
-            boundaryOffsetArray[i][1] = offsetY;
-            NSLog(@"(%d,%d)", offsetX, offsetY);
-            if(offsetX == -1 * CHARACTER_WIDTH / 2 && offsetY < CHARACTER_HEIGHT / 2) {
-                offsetY += 1;
-            }
-            else if(offsetX == CHARACTER_WIDTH / 2 && offsetY < CHARACTER_HEIGHT / 2) {
-                offsetY += 1;
-            }
-            else if(offsetY > 0){
-                offsetX += 1;
-                offsetY *= -1;
-            }
-            else {
-                offsetY *= -1;
-            }
-        };
+        for(int i = 0; i < CHARACTER_WIDTH; i++) {
+            boundaryOffsetTop[i][0] = boundaryOffsetBottom[i][0] = i - (CHARACTER_WIDTH / 2);
+            boundaryOffsetTop[i][1] = -CHARACTER_HEIGHT / 2;
+            boundaryOffsetBottom[i][1] = CHARACTER_HEIGHT / 2;
+            NSLog(@"top:(%d, %d) bottom:(%d, %d)", boundaryOffsetTop[i][0], boundaryOffsetTop[i][1], boundaryOffsetBottom[i][0], boundaryOffsetBottom[i][1]);
+        }
+        for(int i = 0; i < CHARACTER_HEIGHT; i++){
+            boundaryOffsetLeft[i][0] = -CHARACTER_WIDTH / 2;
+            boundaryOffsetRight[i][0] = CHARACTER_WIDTH / 2;
+            boundaryOffsetLeft[i][1] = boundaryOffsetRight[i][1] = i - (CHARACTER_HEIGHT / 2);
+            NSLog(@"left:(%d, %d) right:(%d, %d)", boundaryOffsetLeft[i][0], boundaryOffsetLeft[i][1], boundaryOffsetRight[i][0], boundaryOffsetRight[i][1]);
+        }
 		
 		return self;
 	}
