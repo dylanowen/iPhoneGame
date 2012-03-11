@@ -53,6 +53,7 @@
 		self.tempTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.8f blue: 0.0f];
 		
 		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, ENV_HEIGHT / 2)];
+        [self.env deleteRadius:50 x:(ENV_WIDTH / 2) y:(ENV_HEIGHT / 2)];
 		
 		left = 0.0f;
 		right = left + VIEW_WIDTH;
@@ -98,20 +99,23 @@
 	right = left + VIEW_WIDTH;
 	bottom = top + VIEW_HEIGHT;
 	
+    [self.particles updateWithLastUpdate: time];
+    
 	//generate a new bullet
 	if(self.controls.look->toggle)
 	{
-		NSLog(@"(%f, %f) (%f, %f)", self.player->position.x, self.player->position.y, self.controls.look->velocity.x, self.controls.look->velocity.y);
+		
 		GLKVector2 temp = GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 5));
+        NSLog(@"(%f, %f) (%f, %f) (%f, %f)", self.player->position.x, self.player->position.y, temp.x, temp.y, self.controls.look->velocity.x, self.controls.look->velocity.y);
 		[self.particles 
-			addBulletWithPosition:GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 5)) 
+			addBulletWithPosition:GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 7)) 
 			velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 250) destructionRadius:5];
 
 		//[self.particles addBloodWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) power:50];
 	}
 	
 	
-	[self.particles updateWithLastUpdate: time];
+	
 	
 	[self.tempTracker updateTrackee: self.player->position center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
 }

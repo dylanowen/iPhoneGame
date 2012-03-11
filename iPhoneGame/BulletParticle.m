@@ -59,19 +59,23 @@
 	{
 		if(movement[0] == 0)
 		{
+            stepX = 0;
 			stepY = (movement[1] < 0)?-precision:precision;
 		}
 		else if(movement[1] == 0)
 		{
 			stepX = (movement[0] < 0)?-precision:precision;
+            stepY = 0;
 		}
 		else if(abs(movement[0]) > abs(movement[1]))
 		{
+            stepX = (movement[0] < 0)?-precision:precision;
 			stepY = movement[1] / movement[0];
 		}
 		else if(abs(movement[0]) < abs(movement[1]))
 		{
 			stepX = movement[0] / movement[1];
+            stepY = (movement[1] < 0)?-precision:precision;
 		}
 		else
 		{
@@ -97,42 +101,42 @@
 				{
 					position[0] = 1.0f;
 					position[1] = 1.0f;
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					[env deleteRadius:destructionRadius x:1 y:1];
 					return NO;
 				}
 				else if(i < precision)
 				{
 					position[0] = 1.0f;
 					position[1] = ((float) j) / precision;
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					[env deleteRadius:destructionRadius x:1 y:intJ];
 					return NO;
 				}
 				else if(j < precision)
 				{
 					position[0] = ((float) i) / precision;
 					position[1] = 1.0f;
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					[env deleteRadius:destructionRadius x:intI y:1];
 					return NO;
 				}
 				else if(i >= widthBound && j >= heightBound)
 				{
 					position[0] = (float) (ENV_WIDTH - 1);
 					position[1] = (float) (ENV_HEIGHT - 1);
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					[env deleteRadius:destructionRadius x:(ENV_WIDTH - 1) y:(ENV_HEIGHT - 1)];
 					return NO;
 				}
 				else if(i >= widthBound)
 				{
 					position[0] = (float) (ENV_WIDTH - 1);
 					position[1] = ((float) j) / precision;
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					[env deleteRadius:destructionRadius x:(ENV_WIDTH - 1) y:intJ];
 					return NO;
 				}
 				else if(j >= heightBound)
 				{
 					position[0] = ((float) i) / precision;
 					position[1] = (float) (ENV_HEIGHT - 1);
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					[env deleteRadius:destructionRadius x:intI y:(ENV_HEIGHT - 1)];
 					return NO;
 				}
 			
@@ -142,8 +146,10 @@
 					{
 						position[0] = ((float) (i - stepX)) / precision;
 						position[1] = ((float) (j - stepY)) / precision;
+                        intI = lastI;
+                        intJ = lastJ;
 					}
-					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
+					[env deleteRadius:destructionRadius x:intI y:intJ];
 					return NO;
 				}
 			}

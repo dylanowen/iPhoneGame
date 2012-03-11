@@ -9,8 +9,8 @@
 #ifndef iPhoneGame_GameConstants_h
 #define iPhoneGame_GameConstants_h
 
-#define VIEW_WIDTH 240//640//
-#define VIEW_HEIGHT 160//960//
+#define VIEW_WIDTH 60//240//640//
+#define VIEW_HEIGHT 40//160//960//
 
 #define ENV_WIDTH 400
 #define ENV_HEIGHT 600

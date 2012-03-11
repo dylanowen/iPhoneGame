@@ -53,13 +53,13 @@
             boundaryOffsetTop[i][0] = boundaryOffsetBottom[i][0] = i - (CHARACTER_WIDTH / 2);
             boundaryOffsetTop[i][1] = -CHARACTER_HEIGHT / 2;
             boundaryOffsetBottom[i][1] = CHARACTER_HEIGHT / 2;
-            NSLog(@"top:(%d, %d) bottom:(%d, %d)", boundaryOffsetTop[i][0], boundaryOffsetTop[i][1], boundaryOffsetBottom[i][0], boundaryOffsetBottom[i][1]);
+            //NSLog(@"top:(%d, %d) bottom:(%d, %d)", boundaryOffsetTop[i][0], boundaryOffsetTop[i][1], boundaryOffsetBottom[i][0], boundaryOffsetBottom[i][1]);
         }
         for(int i = 0; i < CHARACTER_HEIGHT; i++){
             boundaryOffsetLeft[i][0] = -CHARACTER_WIDTH / 2;
             boundaryOffsetRight[i][0] = CHARACTER_WIDTH / 2;
             boundaryOffsetLeft[i][1] = boundaryOffsetRight[i][1] = i - (CHARACTER_HEIGHT / 2);
-            NSLog(@"left:(%d, %d) right:(%d, %d)", boundaryOffsetLeft[i][0], boundaryOffsetLeft[i][1], boundaryOffsetRight[i][0], boundaryOffsetRight[i][1]);
+            //NSLog(@"left:(%d, %d) right:(%d, %d)", boundaryOffsetLeft[i][0], boundaryOffsetLeft[i][1], boundaryOffsetRight[i][0], boundaryOffsetRight[i][1]);
         }
 		
 		return self;
@@ -70,103 +70,105 @@
 - (bool)update:(float) time
 {
 	bool collision = NO, start = YES;
-	int intI, intJ, lastI = -1000, lastJ = -1000;
-	float i, j, stepX = 1.0f, stepY = 1.0f;
+	int precision = 1000000, widthBound = (ENV_WIDTH - 1) * precision, heightBound = (ENV_HEIGHT - 1) * precision;
+	int intI, intJ, lastI, lastJ, i, j, stepX = precision, stepY = precision;
 	velocity.y += GRAVITY;
-	GLKVector2 movement = GLKVector2MultiplyScalar(velocity, time);
-	//NSLog(@"%f, %f", movement.x, movement.y);
+	int movement[2] = {(int) (velocity.x * time * precision), (int) (velocity.y * time * precision)};
 	
-	if(movement.x != 0.0f || movement.y != 0.0f)
+	if(movement[0] != 0 || movement[1] != 0)
 	{
-		//NSLog(@"movement: %f, %f time: %f", movement.x, movement.y, time);
-		if(movement.x == 0)
+		if(movement[0] == 0)
 		{
-			stepY = fabs(movement.y) / movement.y;
+            stepX = 0;
+			stepY = (movement[1] < 0)?-precision:precision;
 		}
-		else if(movement.y == 0)
+		else if(movement[1] == 0)
 		{
-			stepX = fabs(movement.x) / movement.x;
+			stepX = (movement[0] < 0)?-precision:precision;
+            stepY = 0;
 		}
-		else if(fabs(movement.x) > fabs(movement.y))
+		else if(abs(movement[0]) > abs(movement[1]))
 		{
-			stepY = movement.y / movement.x;
+            stepX = (movement[0] < 0)?-precision:precision;
+			stepY = movement[1] / movement[0];
 		}
-		else if(fabs(movement.x) < fabs(movement.y))
+		else if(abs(movement[0]) < abs(movement[1]))
 		{
-			stepX = movement.x / movement.y;
+			stepX = movement[0] / movement[1];
+            stepY = (movement[1] < 0)?-precision:precision;
 		}
 		else
 		{
-			stepX = fabs(movement.x) / movement.x;
-			stepY = fabs(movement.y) / movement.y;
+			stepX = (movement[0] < 0)?-precision:precision;
+			stepY = (movement[1] < 0)?-precision:precision;
 		}
+		//NSLog(@"(%f, %f)", (float) stepX / precision, (float) stepY / precision);
+		i = (int) (position.x * precision);
+		j = (int) (position.y * precision);
 		
-		i = position.x;
-		j = position.y;
-		
-		float lowX = i - fabs(movement.x);
-		float highX = i + fabs(movement.x);
-		float lowY = j - fabs(movement.y);
-		float highY = j + fabs(movement.y);
+		int lowX = i - abs(movement[0]);
+		int highX = i + abs(movement[0]);
+		int lowY = j - abs(movement[1]);
+		int highY = j + abs(movement[1]);
 		
 		while(i <= highX && i >= lowX && j <= highY && j >= lowY)
 		{			
-			intI = floor(i);
-			intJ = floor(j);
+			intI = i / precision;
+			intJ = j / precision;
 			if(intI != lastI || intJ != lastJ)
 			{
-				if(intI < 1 && intJ < 1)
+				if(i < precision && j < precision)
 				{
 					position.x = 1.0f;
 					position.y = 1.0f;
 					collision = YES;
-					break;
+                    break;
 				}
-				else if(intI < 1)
+				else if(i < precision)
 				{
 					position.x = 1.0f;
-					position.y = j;
+					position.y = ((float) j) / precision;
 					collision = YES;
-					break;
+                    break;
 				}
-				else if(intJ < 1)
+				else if(j < precision)
 				{
-					position.x = i;
+					position.x = ((float) i) / precision;
 					position.y = 1.0f;
 					collision = YES;
-					break;
+                    break;
 				}
-				else if(intI >= ENV_WIDTH - 1 && intJ >= ENV_HEIGHT - 1)
+				else if(i >= widthBound && j >= heightBound)
 				{
 					position.x = (float) (ENV_WIDTH - 1);
 					position.y = (float) (ENV_HEIGHT - 1);
 					collision = YES;
-					break;
+                    break;
 				}
-				else if(intI >= ENV_WIDTH - 1)
+				else if(i >= widthBound)
 				{
 					position.x = (float) (ENV_WIDTH - 1);
-					position.y = j;
+					position.y = ((float) j) / precision;
 					collision = YES;
-					break;
+                    break;
 				}
-				else if(intJ >= ENV_HEIGHT - 1)
+				else if(j >= heightBound)
 				{
-					position.x = i;
+					position.x = ((float) i) / precision;
 					position.y = (float) (ENV_HEIGHT - 1);
 					collision = YES;
-					break;
+                    break;
 				}
-			
+                
 				if(env->dirt[intI][intJ])
 				{
 					if(!start)
 					{
-						position.x = i - stepX;
-						position.y = j - stepY;
+						position.x = ((float) (i - stepX)) / precision;
+						position.y = ((float) (j - stepY)) / precision;
 					}
 					collision = YES;
-					break;
+                    break;
 				}
 			}
 			lastI = intI;
@@ -180,10 +182,12 @@
 		}
 	}
 	
+    //NSLog(@"(%f, %f)", position.x, position.y);
+    
 	if(!collision)
 	{
-		position.x += movement.x;
-		position.y += movement.y;
+		position.x += ((float) movement[0]) / precision;
+		position.y += ((float) movement[1]) / precision;
 	}
 	else
 	{
@@ -205,7 +209,7 @@
 		2.5, 2.5
 	};
 	
-	effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.8f);
+	effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.5f);
 	
 	[effect prepareToDraw];
 	
@@ -215,6 +219,19 @@
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
+    
+    float vertices2[] = {0,0,10,10,10,0};
+    effect.constantColor = GLKVector4Make(1.0f, 0.0f, 0.0f, 0.3f);
+	
+	[effect prepareToDraw];
+	
+	glEnableVertexAttribArray(GLKVertexAttribPosition);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices2);
+	
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+	
+	glDisableVertexAttribArray(GLKVertexAttribPosition);
+    
 }
 
 @end
