@@ -52,7 +52,7 @@
 		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
 		self.tempTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.8f blue: 0.0f];
 		
-		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(40, 40)];
+		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, ENV_HEIGHT / 2)];
 		
 		left = 0.0f;
 		right = left + VIEW_WIDTH;
@@ -67,8 +67,18 @@
 - (void)updateWithLastUpdate:(float) time
 {
 	//do all the main stuff of the game
-	left += self.controls.move->velocity.x * 7;
-	top += self.controls.move->velocity.y * 7;
+
+	//delete this stuff!!!
+	float debugLeft = left;
+	float debugRight = right;
+	float debugBottom = bottom;
+	float dubugTop = top;
+	
+	self.player->velocity.x = self.controls.move->velocity.x * 7;
+	[self.player update: time];
+	
+	left = self.player->position.x - (VIEW_WIDTH / 2);
+	top = self.player->position.y - (VIEW_HEIGHT / 2);
 	if(left < -10.0f)
 	{
 		left = -10.0f;
@@ -88,21 +98,19 @@
 	right = left + VIEW_WIDTH;
 	bottom = top + VIEW_HEIGHT;
 	
-	//delete this stuff!!!
-	float debugLeft = left;
-	float debugRight = right;
-	float debugBottom = bottom;
-	float dubugTop = top;
-	
 	//generate a new bullet
 	if(self.controls.look->toggle)
 	{
-		[self.particles addBulletWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 250) destructionRadius:10];
+		NSLog(@"(%f, %f) (%f, %f)", self.player->position.x, self.player->position.y, self.controls.look->velocity.x, self.controls.look->velocity.y);
+		GLKVector2 temp = GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 5));
+		[self.particles 
+			addBulletWithPosition:GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 5)) 
+			velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 250) destructionRadius:5];
 
-		[self.particles addBloodWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) power:50];
+		//[self.particles addBloodWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) power:50];
 	}
 	
-	[self.player update: time];
+	
 	[self.particles updateWithLastUpdate: time];
 	
 	[self.tempTracker updateTrackee: self.player->position center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
@@ -143,7 +151,7 @@
 			NSLog(@"GL_OUT_OF_MEMORY");
 			break;
 		default:
-			NSLog(@"dunnno");	
+			NSLog(@"dunnno");
 	}
 }
 

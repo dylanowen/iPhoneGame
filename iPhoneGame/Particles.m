@@ -135,7 +135,7 @@ GLuint bloodModelViewUniform;
 	}
 	[self.blood removeObjectsAtIndexes: indexes];
 	
-	NSLog(@"%d bullets %d blood", [self.bullets count], [self.blood count]);
+	//NSLog(@"%d bullets %d blood", [self.bullets count], [self.blood count]);
 }
 
 - (void)render
