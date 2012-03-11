@@ -50,92 +50,87 @@
 - (bool)updateAndKeep:(float) time
 {
 	bool start = YES;
-	int intI, intJ, lastI = -1000, lastJ = -1000;
-	float i, j, stepX = 1.0f, stepY = 1.0f;
+	int precision = 1000000, widthBound = (ENV_WIDTH - 1) * precision, heightBound = (ENV_HEIGHT - 1) * precision;
+	int intI, intJ, lastI, lastJ, i, j, stepX = precision, stepY = precision;
 	velocity.y += GRAVITY;
-	GLKVector2 movement = GLKVector2MultiplyScalar(velocity, time);
+	int movement[2] = {(int) (velocity.x * time * precision), (int) (velocity.y * time * precision)};
 	
-	//NSLog(@"%f, %f", movement.x, movement.y);
-	
-	if(movement.x != 0.0f || movement.y != 0.0f)
+	if(movement[0] != 0 || movement[1] != 0)
 	{
-		//NSLog(@"movement: %f, %f time: %f", movement.x, movement.y, time);
-		if(movement.x == 0)
+		if(movement[0] == 0)
 		{
-			stepY = fabs(movement.y) / movement.y;
+			stepY = (movement[1] < 0)?-precision:precision;
 		}
-		else if(movement.y == 0)
+		else if(movement[1] == 0)
 		{
-			stepX = fabs(movement.x) / movement.x;
+			stepX = (movement[0] < 0)?-precision:precision;
 		}
-		else if(fabs(movement.x) > fabs(movement.y))
+		else if(abs(movement[0]) > abs(movement[1]))
 		{
-			stepY = movement.y / movement.x;
+			stepY = movement[1] / movement[0];
 		}
-		else if(fabs(movement.x) < fabs(movement.y))
+		else if(abs(movement[0]) < abs(movement[1]))
 		{
-			stepX = movement.x / movement.y;
+			stepX = movement[0] / movement[1];
 		}
 		else
 		{
-			stepX = fabs(movement.x) / movement.x;
-			stepY = fabs(movement.y) / movement.y;
+			stepX = (movement[0] < 0)?-precision:precision;
+			stepY = (movement[1] < 0)?-precision:precision;
 		}
-		stepX *= 3;
-		stepY *= 3;
 		
-		i = position[0];
-		j = position[1];
+		i = (int) (position[0] * precision);
+		j = (int) (position[1] * precision);
 		
-		float lowX = i - fabs(movement.x);
-		float highX = i + fabs(movement.x);
-		float lowY = j - fabs(movement.y);
-		float highY = j + fabs(movement.y);
+		int lowX = i - abs(movement[0]);
+		int highX = i + abs(movement[0]);
+		int lowY = j - abs(movement[1]);
+		int highY = j + abs(movement[1]);
 		
 		while(i <= highX && i >= lowX && j <= highY && j >= lowY)
 		{			
-			intI = floor(i);
-			intJ = floor(j);
+			intI = i / precision;
+			intJ = j / precision;
 			if(intI != lastI || intJ != lastJ)
 			{
-				if(intI < 1 && intJ < 1)
+				if(i < precision && j < precision)
 				{
 					position[0] = 1.0f;
 					position[1] = 1.0f;
 					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
 					return NO;
 				}
-				else if(intI < 1)
+				else if(i < precision)
 				{
 					position[0] = 1.0f;
-					position[1] = j;
+					position[1] = ((float) j) / precision;
 					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
 					return NO;
 				}
-				else if(intJ < 1)
+				else if(j < precision)
 				{
-					position[0] = i;
+					position[0] = ((float) i) / precision;
 					position[1] = 1.0f;
 					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
 					return NO;
 				}
-				else if(intI >= ENV_WIDTH - 1 && intJ >= ENV_HEIGHT - 1)
+				else if(i >= widthBound && j >= heightBound)
 				{
 					position[0] = (float) (ENV_WIDTH - 1);
 					position[1] = (float) (ENV_HEIGHT - 1);
 					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
 					return NO;
 				}
-				else if(intI >= ENV_WIDTH - 1)
+				else if(i >= widthBound)
 				{
 					position[0] = (float) (ENV_WIDTH - 1);
-					position[1] = j;
+					position[1] = ((float) j) / precision;
 					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
 					return NO;
 				}
-				else if(intJ >= ENV_HEIGHT - 1)
+				else if(j >= heightBound)
 				{
-					position[0] = i;
+					position[0] = ((float) i) / precision;
 					position[1] = (float) (ENV_HEIGHT - 1);
 					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
 					return NO;
@@ -145,8 +140,8 @@
 				{
 					if(!start)
 					{
-						position[0] = i - stepX;
-						position[1] = j - stepY;
+						position[0] = ((float) (i - stepX)) / precision;
+						position[1] = ((float) (j - stepY)) / precision;
 					}
 					[env deleteRadius:destructionRadius x:(int) position[0] y:(int) position[1]];
 					return NO;
@@ -163,8 +158,8 @@
 		}
 	}
 	
-	position[0] += movement.x;
-	position[1] += movement.y;
+	position[0] += ((float) movement[0]) / precision;
+	position[1] += ((float) movement[1]) / precision;
 	return YES;
 }
 

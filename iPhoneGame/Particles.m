@@ -11,7 +11,6 @@ There might be a lot of cost moving the array aroud, but overall I think there w
 faster
 */
 
-
 #import "Particles.h"
 
 #import <GLKit/GLKit.h>
@@ -23,9 +22,9 @@ faster
 
 @interface Particles()
 {
-	GLuint bulletModelViewUniform;
-	GLuint bulletColorUniform;
-	GLuint bloodModelViewUniform;
+GLuint bulletModelViewUniform;
+GLuint bulletColorUniform;
+GLuint bloodModelViewUniform;
 }
 
 @property (nonatomic, strong) GLProgram *bulletProgram;
@@ -50,17 +49,17 @@ faster
 	if(self)
 	{
 		self.game = game;
-		
+
 		self.bullets = [[NSMutableArray arrayWithCapacity: 0] init];
 		self.blood = [[NSMutableArray arrayWithCapacity: 0] init];
-		
+
 		//load and setup the bullet shaders
 		self.bulletProgram = [[GLProgram alloc] initWithVertexShaderFilename: @"particleShaderConstantColor" fragmentShaderFilename: @"particleShader"];
 		bulletPositionAttribute = [self.bulletProgram addAttribute: @"position"];
 		if(![self.bulletProgram link])
 		{
 			NSLog(@"Link failed");
-			NSLog(@"Program Log: %@", [self.bulletProgram programLog]); 
+			NSLog(@"Program Log: %@", [self.bulletProgram programLog]);
 			NSLog(@"Frag Log: %@", [self.bulletProgram fragmentShaderLog]);
 			NSLog(@"Vert Log: %@", [self.bulletProgram vertexShaderLog]);
 			self.bulletProgram = nil;
@@ -71,7 +70,7 @@ faster
 		}
 		bulletModelViewUniform = [self.bulletProgram uniformIndex:@"modelViewProjectionMatrix"];
 		bulletColorUniform = [self.bulletProgram uniformIndex:@"color"];
-		
+
 		//load and setup the blood shaders
 		self.bloodProgram = [[GLProgram alloc] initWithVertexShaderFilename: @"particleShader" fragmentShaderFilename: @"particleShader"];
 		bloodPositionAttribute = [self.bloodProgram addAttribute: @"position"];
@@ -79,7 +78,7 @@ faster
 		if(![self.bloodProgram link])
 		{
 			NSLog(@"Link failed");
-			NSLog(@"Program Log: %@", [self.bloodProgram programLog]); 
+			NSLog(@"Program Log: %@", [self.bloodProgram programLog]);
 			NSLog(@"Frag Log: %@", [self.bloodProgram fragmentShaderLog]);
 			NSLog(@"Vert Log: %@", [self.bloodProgram vertexShaderLog]);
 			self.bloodProgram = nil;
@@ -89,7 +88,7 @@ faster
 			NSLog(@"Blood shaders loaded.");
 		}
 		bloodModelViewUniform = [self.bloodProgram uniformIndex:@"modelViewProjectionMatrix"];
-		
+
 		return self;
 	}
 	return nil;
@@ -122,9 +121,9 @@ faster
 		}
 	}
 	[self.bullets removeObjectsAtIndexes: indexes];
-	
+
 	//NSLog(@"%d bullets", [self.bullets count]);
-	
+
 	//remove blood that say they're done
 	indexes = [NSMutableIndexSet indexSet];
 	for(unsigned i = 0; i < [self.blood count]; i++)
@@ -135,6 +134,8 @@ faster
 		}
 	}
 	[self.blood removeObjectsAtIndexes: indexes];
+	
+	//NSLog(@"%d bullets %d blood", [self.bullets count], [self.blood count]);
 }
 
 - (void)render
@@ -143,8 +144,8 @@ faster
 	glUniformMatrix4fv(bulletModelViewUniform, 1, 0, self.game.projectionMatrix.m);
 	glUniform4f(bulletColorUniform, 0.6, 0.6, 0.6, 1.0);
 	[self.bullets makeObjectsPerformSelector:@selector(render)];
-	
-	
+
+
 	[self.bloodProgram use];
 	glUniformMatrix4fv(bloodModelViewUniform, 1, 0, self.game.projectionMatrix.m);
 	[self.blood makeObjectsPerformSelector:@selector(render)];

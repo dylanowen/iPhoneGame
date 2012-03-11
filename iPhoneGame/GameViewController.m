@@ -43,7 +43,7 @@
 	
 	[EAGLContext setCurrentContext:self.context];
 	
-	self.preferredFramesPerSecond = 30;
+	self.preferredFramesPerSecond = 60;
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
