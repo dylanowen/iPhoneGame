@@ -17,6 +17,8 @@
 	Environment *env;
 	
 	GLKBaseEffect *effect;
+
+    int boundaryOffsetArray[(CHARACTER_WIDTH + CHARACTER_HEIGHT) * 2][2];
 }
 
 @end
@@ -37,6 +39,30 @@
 		effect = [[GLKBaseEffect alloc] init];
 		effect.useConstantColor = YES;
 		effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.8f);
+        
+        int offsetX, offsetY;
+        offsetX = -1 * CHARACTER_WIDTH / 2;
+        offsetY = -1 * CHARACTER_HEIGHT / 2;
+        
+        // Setting up the offset array
+        for(int i = 0; i < (CHARACTER_WIDTH + CHARACTER_HEIGHT) * 2; i++) {
+            boundaryOffsetArray[i][0] = offsetX;
+            boundaryOffsetArray[i][1] = offsetY;
+            NSLog(@"(%d,%d)", offsetX, offsetY);
+            if(offsetX == -1 * CHARACTER_WIDTH / 2 && offsetY < CHARACTER_HEIGHT / 2) {
+                offsetY += 1;
+            }
+            else if(offsetX == CHARACTER_WIDTH / 2 && offsetY < CHARACTER_HEIGHT / 2) {
+                offsetY += 1;
+            }
+            else if(offsetY > 0){
+                offsetX += 1;
+                offsetY *= -1;
+            }
+            else {
+                offsetY *= -1;
+            }
+        };
 		
 		return self;
 	}

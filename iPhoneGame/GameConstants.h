@@ -15,6 +15,9 @@
 #define ENV_WIDTH 400
 #define ENV_HEIGHT 600
 
+#define CHARACTER_WIDTH 20
+#define CHARACTER_HEIGHT 30
+
 #define GRAVITY 5.8f
 
 #endif
