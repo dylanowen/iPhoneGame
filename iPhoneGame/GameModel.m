@@ -68,12 +68,6 @@
 - (void)updateWithLastUpdate:(float) time
 {
 	//do all the main stuff of the game
-
-	//delete this stuff!!!
-	float debugLeft = left;
-	float debugRight = right;
-	float debugBottom = bottom;
-	float dubugTop = top;
 	
 	self.player->velocity.x = self.controls.move->velocity.x * 7;
 	[self.player update: time];
@@ -98,6 +92,12 @@
 	}
 	right = left + VIEW_WIDTH;
 	bottom = top + VIEW_HEIGHT;
+	
+	//delete this stuff!!!
+	float debugLeft = left;
+	float debugRight = right;
+	float debugBottom = bottom;
+	float dubugTop = top;
 	
 	[self.particles updateWithLastUpdate: time];
     
@@ -124,6 +124,8 @@
 {
 	glClearColor(0.2, 0.2, 0.2, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
+	
+	GLKMatrix4 temp = self.projectionMatrix;
 	
 	[self.env render];
 	[self.player render];

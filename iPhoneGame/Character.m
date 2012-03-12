@@ -154,11 +154,8 @@
 			}
 		}
 	}
-	if(time > 0.039)
-	{
-		NSLog(@":(");
-	}
-	NSLog(@"%f %f %f", position.y, (float) movement[1] / precision, time);
+	
+	//NSLog(@"%f %f %f", position.y, (float) movement[1] / precision, time);
 	if((collisionLeft || collisionRight) && (collisionTop || collisionBottom))
 	{
 		velocity.x = 0.0f;
@@ -180,7 +177,6 @@
 		position.y += ((float) movement[1]) / precision;
 	}
 	
-	effect.transform.projectionMatrix = game.projectionMatrix;
 	effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x, position.y, 0);
 	return YES;
 }
@@ -228,6 +224,7 @@
 		CHARACTER_WIDTH / 2, CHARACTER_HEIGHT / 2
 	};
 	
+	effect.transform.projectionMatrix = game.projectionMatrix;
 	effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.5f);
 	
 	[effect prepareToDraw];

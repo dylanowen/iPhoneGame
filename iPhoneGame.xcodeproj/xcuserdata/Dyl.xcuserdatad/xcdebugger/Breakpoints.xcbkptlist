@@ -20,13 +20,13 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "iPhoneGame/Character.m"
-         timestampString = "353149687.564767"
+         filePath = "iPhoneGame/GameModel.m"
+         timestampString = "353220563.460446"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
-         landmarkName = "-update:"
+         startingLineNumber = "127"
+         endingLineNumber = "127"
+         landmarkName = "-render"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
