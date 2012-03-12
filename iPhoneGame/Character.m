@@ -69,7 +69,7 @@
 	return nil;
 }
 
-- (bool)update:(float) time
+- (GLKMatrix4)update:(float) time
 {
 	bool collisionPositionLeft[CHARACTER_HEIGHT];
 	bool collisionPositionRight[CHARACTER_HEIGHT];
@@ -177,8 +177,9 @@
 		position.y += ((float) movement[1]) / precision;
 	}
 	
+	effect.transform.projectionMatrix = [self centerView];
 	effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x, position.y, 0);
-	return YES;
+	return effect.transform.projectionMatrix;
 }
 
 - (bool) checkCollisionVertex:(unsigned) x y:(unsigned) y
@@ -215,6 +216,32 @@
 	return NO;
 }
 
+- (GLKMatrix4)centerView
+{
+	float left, top, right, bottom;
+	left = position.x - (VIEW_WIDTH / 2);
+	top = position.y - (VIEW_HEIGHT / 2);
+	if(left < -10.0f)
+	{
+		left = -10.0f;
+	}
+	else if(left + VIEW_WIDTH > ENV_WIDTH + 10)
+	{
+		left = ENV_WIDTH+ 10 - VIEW_WIDTH;
+	}
+	if(top < -10.0f)
+	{
+		top = -10.0f;
+	}
+	else if(top + VIEW_HEIGHT > ENV_HEIGHT + 10)
+	{
+		top = ENV_HEIGHT + 10 - VIEW_HEIGHT;
+	}
+	right = left + VIEW_WIDTH;
+	bottom = top + VIEW_HEIGHT;
+	return GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
+}
+
 - (void)render
 {
 	float vertices[] = {
@@ -224,7 +251,6 @@
 		CHARACTER_WIDTH / 2, CHARACTER_HEIGHT / 2
 	};
 	
-	effect.transform.projectionMatrix = game.projectionMatrix;
 	effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.5f);
 	
 	[effect prepareToDraw];

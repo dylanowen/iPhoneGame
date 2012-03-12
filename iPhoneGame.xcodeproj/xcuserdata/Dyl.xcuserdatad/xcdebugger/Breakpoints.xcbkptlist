@@ -17,16 +17,16 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "iPhoneGame/GameModel.m"
-         timestampString = "353220563.460446"
+         filePath = "iPhoneGame/Tracker.m"
+         timestampString = "353221731.335987"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "127"
-         endingLineNumber = "127"
-         landmarkName = "-render"
+         startingLineNumber = "77"
+         endingLineNumber = "77"
+         landmarkName = "-updateTrackee:center:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

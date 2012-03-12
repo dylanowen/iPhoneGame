@@ -17,7 +17,6 @@
 
 @interface GameModel()
 {
-	float left, right, bottom, top;
 	float viewWidth;
 	float viewHeight;
 }
@@ -49,16 +48,13 @@
 		self.env = [[Environment alloc] initWithModel: self];
 		self.particles = [[Particles alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
-		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
-		self.tempTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.8f blue: 0.0f];
+		//GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
+		//self.tempTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.8f blue: 0.0f];
 		
 		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 20)];
 		[self.env deleteRadius:300 x:(ENV_WIDTH / 2) y:(ENV_HEIGHT / 2)];
 		
-		left = 0.0f;
-		right = left + VIEW_WIDTH;
-		top = 0.0f;
-		bottom = top + VIEW_HEIGHT;
+		self.projectionMatrix = GLKMatrix4MakeOrtho(0, VIEW_WIDTH, VIEW_HEIGHT, 0, 1, -1);
 		
 		return self;
 	}
@@ -70,34 +66,8 @@
 	//do all the main stuff of the game
 	
 	self.player->velocity.x = self.controls.move->velocity.x * 7;
-	[self.player update: time];
-	
-	left = self.player->position.x - (VIEW_WIDTH / 2);
-	top = self.player->position.y - (VIEW_HEIGHT / 2);
-	if(left < -10.0f)
-	{
-		left = -10.0f;
-	}
-	else if(left + VIEW_WIDTH > ENV_WIDTH + 10)
-	{
-		left = ENV_WIDTH+ 10 - VIEW_WIDTH;
-	}
-	if(top < -10.0f)
-	{
-		top = -10.0f;
-	}
-	else if(top + VIEW_HEIGHT > ENV_HEIGHT + 10)
-	{
-		top = ENV_HEIGHT + 10 - VIEW_HEIGHT;
-	}
-	right = left + VIEW_WIDTH;
-	bottom = top + VIEW_HEIGHT;
-	
-	//delete this stuff!!!
-	float debugLeft = left;
-	float debugRight = right;
-	float debugBottom = bottom;
-	float dubugTop = top;
+	//setup the projectionMatrix for everything (it has to happen first)
+	self.projectionMatrix = [self.player update: time];
 	
 	[self.particles updateWithLastUpdate: time];
     
@@ -117,7 +87,7 @@
 	//NSLog(@"(%f, %f)", self.player->position.x, self.player->position.y);
 	
 	
-	[self.tempTracker updateTrackee: self.player->position center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
+	//[self.tempTracker updateTrackee: self.player->position center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
 }
 
 - (void)render
@@ -125,13 +95,11 @@
 	glClearColor(0.2, 0.2, 0.2, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	
-	GLKMatrix4 temp = self.projectionMatrix;
-	
 	[self.env render];
 	[self.player render];
 	[self.particles render];
 	[self.controls render];
-	[self.tempTracker render];
+	//[self.tempTracker render];
 	
 	//debug
 	switch(glGetError())
@@ -159,11 +127,6 @@
 		default:
 			NSLog(@"dunnno");
 	}
-}
-
--(GLKMatrix4)projectionMatrix
-{
-	return GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 }
 
 @end

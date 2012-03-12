@@ -19,7 +19,7 @@
 }
 
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
-- (bool)update:(float) time;
+- (GLKMatrix4)update:(float) time;
 - (void)render;
 
 @end
