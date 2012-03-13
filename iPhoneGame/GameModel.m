@@ -65,7 +65,7 @@
 {
 	//do all the main stuff of the game
 	
-	self.player->velocity.x = self.controls.move->velocity.x * 7;
+	self.player->velocity.x = self.controls.move->velocity.x * 50;
 	//setup the projectionMatrix for everything (it has to happen first)
 	self.projectionMatrix = [self.player update: time];
 	
@@ -75,8 +75,8 @@
 	if(self.controls.look->toggle)
 	{
 		
-		GLKVector2 temp = GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 5));
-		NSLog(@"(%f, %f) (%f, %f) (%f, %f)", self.player->position.x, self.player->position.y, temp.x, temp.y, self.controls.look->velocity.x, self.controls.look->velocity.y);
+		//GLKVector2 temp = GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 5));
+		//NSLog(@"(%f, %f) (%f, %f) (%f, %f)", self.player->position.x, self.player->position.y, temp.x, temp.y, self.controls.look->velocity.x, self.controls.look->velocity.y);
 		[self.particles 
 			addBulletWithPosition:GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 7)) 
 			velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 250) destructionRadius:5];

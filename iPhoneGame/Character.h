@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
+#define STEP_HEIGHT 3
+
 @class GameModel;
 
 @interface Character : NSObject
