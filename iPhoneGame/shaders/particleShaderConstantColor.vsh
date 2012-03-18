@@ -8,6 +8,6 @@ varying lowp vec4 fragmentColor;
 void main()
 {
 	gl_Position = modelViewProjectionMatrix * position;
-	gl_PointSize = 4.0;
+	gl_PointSize = 6.0;
 	fragmentColor = color;
 }

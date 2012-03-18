@@ -4,68 +4,16 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "iPhoneGame/Tracker.m"
-         timestampString = "353221731.335987"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "77"
-         endingLineNumber = "77"
-         landmarkName = "-updateTrackee:center:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "iPhoneGame/Character.m"
-         timestampString = "353721514.364285"
+         timestampString = "353744936.53601"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "443"
-         endingLineNumber = "443"
+         startingLineNumber = "268"
+         endingLineNumber = "268"
          landmarkName = "-render"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "iPhoneGame/Character.m"
-         timestampString = "353721514.364285"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "539"
-         endingLineNumber = "539"
-         landmarkName = "-setupCollisionArrays"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "iPhoneGame/Character.m"
-         timestampString = "353720137.677744"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "170"
-         endingLineNumber = "170"
-         landmarkName = "-update:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "iPhoneGame/Character.m"
-         timestampString = "353720137.677744"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
-         landmarkName = "-update:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

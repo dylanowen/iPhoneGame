@@ -24,6 +24,8 @@
 @property (strong, nonatomic) Tracker *tempTracker;
 
 @property (strong, nonatomic) Character *player;
+@property (strong, nonatomic) NSMutableArray	 *enemies;
+@property (strong, nonatomic) NSMutableArray	 *enemyTrackers;
 
 @end
 
@@ -36,6 +38,8 @@
 @synthesize tempTracker = _tempTracker;
 @synthesize particles = _particles;
 @synthesize player = _player;
+@synthesize enemies = _enemies;
+@synthesize enemyTrackers = _enemyTrackers;
 @synthesize controls = _controls;
 
 - (id)initWithView:(UIView *) view
@@ -48,11 +52,25 @@
 		self.env = [[Environment alloc] initWithModel: self];
 		self.particles = [[Particles alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
-		//GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
-		//self.tempTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.8f blue: 0.0f];
+		//
+		//;
 		
-		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 20)];
-		[self.env deleteRadius:MAX_DELETE_RADIUS x:(ENV_WIDTH / 2) y:200];
+		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 200)];
+		
+		[self.env deleteRadius:20 x:(ENV_WIDTH / 2) y:200];
+		
+		self.enemies = [[NSMutableArray alloc] initWithCapacity:5];
+		self.enemyTrackers = [[NSMutableArray alloc] initWithCapacity:5];
+		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
+		for(unsigned i = 0; i < 5; i++)
+		{
+			int ranX = arc4random() % (ENV_WIDTH - 20) + 10;
+			int ranY = arc4random() % (ENV_HEIGHT - 20) + 10;
+			[self.enemies addObject:[[Character alloc] initWithModel:self position:GLKVector2Make(ranX, ranY)]];
+			[self.enemyTrackers addObject:[[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.8f green: 0.1f blue: 0.1f]];
+			[self.env deleteRadius:20 x:ranX y:ranY];
+		}
+		
 		//[self.env deleteRadius:MAX_DELETE_RADIUS x:(ENV_WIDTH / 2) y:400];
 		//[self.env deleteRadius:MAX_DELETE_RADIUS x:(ENV_WIDTH / 2) y:600];
 		
@@ -67,11 +85,26 @@
 {
 	//do all the main stuff of the game
 	
-	self.player->velocity.x = self.controls.move->velocity.x * 50;
+	self.player->movement.x = self.controls.move->velocity.x * 60;
+	self.player->movement.y = self.controls.move->velocity.y * 10;
 	//setup the projectionMatrix for everything (it has to happen first)
 	self.projectionMatrix = [self.player update: time];
 	
 	[self.particles updateWithLastUpdate: time];
+	
+	
+	NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
+	for(unsigned i = 0; i < [self.enemies count]; i++)
+	{
+		Character *temp = [self.enemies objectAtIndex:i];
+		if(![temp update: time projection:self.projectionMatrix])
+		{
+			[indexes addIndex: i];
+		}
+		[[self.enemyTrackers objectAtIndex:i] updateTrackee: temp->position center: self.player->position];
+	}
+	[self.enemies removeObjectsAtIndexes: indexes];
+	[self.enemyTrackers removeObjectsAtIndexes: indexes];
     
 	//generate a new bullet
 	if(self.controls.look->toggle)
@@ -81,7 +114,7 @@
 		//NSLog(@"(%f, %f) (%f, %f) (%f, %f)", self.player->position.x, self.player->position.y, temp.x, temp.y, self.controls.look->velocity.x, self.controls.look->velocity.y);
 		[self.particles 
 			addBulletWithPosition:GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 7)) 
-			velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 250) destructionRadius:10];
+			velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 300) destructionRadius:10];
 
 		//[self.particles addBloodWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) power:50];
 	}
@@ -89,7 +122,22 @@
 	//NSLog(@"(%f, %f)", self.player->position.x, self.player->position.y);
 	
 	
-	//[self.tempTracker updateTrackee: self.player->position center: GLKVector2Make((right + left) / 2, (bottom + top) / 2)];
+	
+}
+
+- (bool)checkCharacterHit:(int) x y:(int) y
+{
+	GLKVector2 position = GLKVector2Make(x, y);
+	
+	for(unsigned i = 0; i < [self.enemies count]; i++)
+	{
+		if([[self.enemies objectAtIndex:i] checkBullet:position])
+		{
+			[self.particles addBloodWithPosition:position power:75];
+		}
+	}
+	
+	return NO;
 }
 
 - (void)render
@@ -98,9 +146,11 @@
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	[self.env render];
+	[self.enemies makeObjectsPerformSelector:@selector(render)];
 	[self.player render];
 	[self.particles render];
 	[self.controls render];
+	[self.enemyTrackers makeObjectsPerformSelector:@selector(render)];
 	//[self.tempTracker render];
 	
 	//debug

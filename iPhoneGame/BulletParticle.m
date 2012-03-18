@@ -18,6 +18,7 @@
 	GLKVector2 velocity;
 	GLuint positionAttribute;
 	
+	GameModel *model;
 	Environment *env;
 	
 	float position[2];
@@ -28,7 +29,7 @@
 
 @implementation BulletParticle
 
-- (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius
+- (id)initWithParticles:(Particles *) particles position:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius
 {
 	self = [super init];
 	if(self)
@@ -37,8 +38,9 @@
 		position[1] = posit.y;
 		velocity = veloc;
 		
-		positionAttribute = model->bulletPositionAttribute;
-		env = model.game.env;
+		positionAttribute = particles->bulletPositionAttribute;
+		env = particles.game.env;
+		model = particles.game;
 		
 		destructionRadius = radius;
 		
@@ -99,7 +101,11 @@
 			intJ = j / precision;
 			if(intI != lastI || intJ != lastJ)
 			{
-				if(i < precision && j < precision)
+				if([model checkCharacterHit:intI y:intJ])
+				{
+					return NO;
+				}
+				else if(i < precision && j < precision)
 				{
 					position[0] = 1.0f;
 					position[1] = 1.0f;
