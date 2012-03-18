@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-#define STEP_HEIGHT 3
+#define CHARACTER_WIDTH 16
+#define CHARACTER_HEIGHT 22
 
 @class GameModel;
 

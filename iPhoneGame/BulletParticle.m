@@ -82,8 +82,8 @@
 			stepX = (movement[0] < 0)?-precision:precision;
 			stepY = (movement[1] < 0)?-precision:precision;
 		}
-		stepX *= 3;
-		stepY *= 3;
+		stepX *= 2;
+		stepY *= 2;
 		
 		i = (int) (position[0] * precision);
 		j = (int) (position[1] * precision);

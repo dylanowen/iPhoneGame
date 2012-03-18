@@ -52,7 +52,9 @@
 		//self.tempTracker = [[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.8f blue: 0.0f];
 		
 		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 20)];
-		[self.env deleteRadius:300 x:(ENV_WIDTH / 2) y:(ENV_HEIGHT / 2)];
+		[self.env deleteRadius:MAX_DELETE_RADIUS x:(ENV_WIDTH / 2) y:200];
+		//[self.env deleteRadius:MAX_DELETE_RADIUS x:(ENV_WIDTH / 2) y:400];
+		//[self.env deleteRadius:MAX_DELETE_RADIUS x:(ENV_WIDTH / 2) y:600];
 		
 		self.projectionMatrix = GLKMatrix4MakeOrtho(0, VIEW_WIDTH, VIEW_HEIGHT, 0, 1, -1);
 		
@@ -79,7 +81,7 @@
 		//NSLog(@"(%f, %f) (%f, %f) (%f, %f)", self.player->position.x, self.player->position.y, temp.x, temp.y, self.controls.look->velocity.x, self.controls.look->velocity.y);
 		[self.particles 
 			addBulletWithPosition:GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 7)) 
-			velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 250) destructionRadius:5];
+			velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 250) destructionRadius:10];
 
 		//[self.particles addBloodWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) power:50];
 	}

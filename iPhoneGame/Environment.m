@@ -177,6 +177,7 @@
 			}
 			else if(y + tempY > (ENV_HEIGHT - 1))
 			{
+				//error here if the destruction is larger than the environment height
 				j = y - tempY;
 				jEnd = tempY + ENV_HEIGHT - 1 - y;
 			}
@@ -336,6 +337,5 @@
 	glDisableVertexAttribArray(positionAttribute);
 	*/
 }
-
 
 @end
