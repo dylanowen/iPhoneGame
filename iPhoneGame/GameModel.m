@@ -14,6 +14,7 @@
 #import "Tracker.h"
 #import "Character.h"
 #import "Particles.h"
+#import "BloodParticle.h"
 
 @interface GameModel()
 {
@@ -118,7 +119,8 @@
 		else if(GLKVector2Length(GLKVector2Subtract(self.player->position, temp->position)) < 4)
 		{
 			self.player->health--;
-			[self.particles addBloodWithPosition:self.player->position power:75 colorType:2];
+			[self.particles addBloodWithPosition:self.player->position power:75 colorType:BLOOD_CT_BLUE];
+			[self.particles addBloodWithPosition:self.player->position power:75 colorType:BLOOD_CT_BLUE];
 		}
 		[[self.enemyTrackers objectAtIndex:i] updateTrackee: temp->position center: self.player->position];
 	}

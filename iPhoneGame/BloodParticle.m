@@ -58,7 +58,7 @@
 
 - (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc
 {
-	return [self initWithParticles:model position:posit velocity:veloc colorType:0];
+	return [self initWithParticles:model position:posit velocity:veloc colorType:BLOOD_CT_RED];
 }
 
 - (bool)updateAndKeep:(float) time

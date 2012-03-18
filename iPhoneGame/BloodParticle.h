@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
+#define BLOOD_CT_RED 0
+#define BLOOD_CT_GREEN 1
+#define BLOOD_CT_BLUE 2
+
 @class Particles;
 
 @interface BloodParticle : NSObject
