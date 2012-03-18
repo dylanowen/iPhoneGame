@@ -56,7 +56,6 @@
 			color[2] += .7f;
 		}
 		
-		
 		positionAttribute = model->bloodPositionAttribute;
 		colorAttribute = model->bloodColorAttribute;
 		env = model.game.env;
@@ -73,9 +72,8 @@
 
 - (bool)updateAndKeep:(float) time
 {
-	bool start = YES;
-	int precision = 1000000;
-	int intI, intJ, lastI, lastJ, i, j, stepX = precision, stepY = precision;
+	int precision = 100;
+	int intI, intJ, lastI, lastJ, i, j, stepX = 0, stepY = 0;
 	velocity.y += GRAVITY;
 	int movement[2] = {(int) (velocity.x * time * precision), (int) (velocity.y * time * precision)};
 	
@@ -83,23 +81,21 @@
 	{
 		if(movement[0] == 0)
 		{
-            stepX = 0;
 			stepY = (movement[1] < 0)?-precision:precision;
 		}
 		else if(movement[1] == 0)
 		{
 			stepX = (movement[0] < 0)?-precision:precision;
-            stepY = 0;
 		}
 		else if(abs(movement[0]) > abs(movement[1]))
 		{
-            stepX = (movement[0] < 0)?-precision:precision;
+			stepX = (movement[0] < 0)?-precision:precision;
 			stepY = movement[1] / movement[0];
 		}
 		else if(abs(movement[0]) < abs(movement[1]))
 		{
 			stepX = movement[0] / movement[1];
-            stepY = (movement[1] < 0)?-precision:precision;
+			stepY = (movement[1] < 0)?-precision:precision;
 		}
 		else
 		{
@@ -137,10 +133,6 @@
 			lastJ = intJ;
 			i += stepX;
 			j += stepY;
-			if(start)
-			{
-				start = NO;
-			}
 		}
 	}
 	

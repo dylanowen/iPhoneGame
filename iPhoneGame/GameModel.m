@@ -21,6 +21,8 @@
 {
 	float viewWidth;
 	float viewHeight;
+	
+	float bulletTime;
 }
 
 @property (strong, nonatomic) Tracker *tempTracker;
@@ -77,12 +79,18 @@
 		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
 		for(unsigned i = 0; i < 15; i++)
 		{
-			int ranX = arc4random() % (ENV_WIDTH - 20) + 10;
-			int ranY = arc4random() % (ENV_HEIGHT - 20) + 10;
-			[self.enemies addObject:[[Zombie alloc] initWithModel:self position:GLKVector2Make(ranX, ranY) texture:zombieTexture]];
+			GLKVector2 newPosition;
+			//keep the enemies a certain distance from the player
+			do
+			{
+				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
+			}while(GLKVector2Length(GLKVector2Subtract(newPosition, self.player->position)) < 80);
+			[self.enemies addObject:[[Zombie alloc] initWithModel:self position:newPosition texture:zombieTexture]];
 			[self.zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.8f green: 0.1f blue: 0.1f]];
-			[self.env deleteRadius:20 x:ranX y:ranY];
+			[self.env deleteRadius:20 x:newPosition.x y:newPosition.y];
 		}
+		
+		bulletTime = 0;
 		
 		self.projectionMatrix = GLKMatrix4MakeOrtho(0, VIEW_WIDTH, VIEW_HEIGHT, 0, 1, -1);
 		
@@ -123,7 +131,7 @@
 		}
 		if(![((Zombie *) temp) update: time projection:self.projectionMatrix])
 		{
-			[self.particles addBloodWithPosition:temp->position power:150 colorType:BloodColorBlack count:10];
+			[self.particles addBloodWithPosition:temp->position power:150 colorType:BloodColorBlack count:3];
 			[indexes addIndex: i];
 		}
 		else if(GLKVector2Length(GLKVector2Subtract(self.player->position, temp->position)) < 4)
@@ -137,15 +145,15 @@
 	[self.zombieTracker removeObjectsAtIndexes: indexes];
     
 	//generate a new bullet
-	if(self.controls.look->toggle)
+	if(self.controls.look->toggle && bulletTime > .08)
 	{
-		
-		//GLKVector2 temp = GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 5));
-		//NSLog(@"(%f, %f) (%f, %f) (%f, %f)", self.player->position.x, self.player->position.y, temp.x, temp.y, self.controls.look->velocity.x, self.controls.look->velocity.y);
 		[self.particles 
 			addBulletWithPosition:GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 7)) 
 			velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 150) destructionRadius:10];
+		bulletTime = 0;
 	}
+	bulletTime += time;
+	
 	
 	return YES;
 }
@@ -156,7 +164,8 @@
 	
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
-		if([[self.enemies objectAtIndex:i] checkBullet:position])
+		//make the blood appear 1/2 of the time
+		if([[self.enemies objectAtIndex:i] checkBullet:position] && arc4random() % 2 == 0)
 		{
 			[self.particles addBloodWithPosition:position power:75 colorType:BloodColorGreen];
 		}
