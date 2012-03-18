@@ -106,7 +106,7 @@ GLuint bloodModelViewUniform;
 
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType count:(int) count
 {
-	while(count > 0)
+	while(count >= 0)
 	{
 		[self addBloodWithPosition:posit power:power colorType:colorType];
 		count--;

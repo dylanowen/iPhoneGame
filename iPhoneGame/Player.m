@@ -21,6 +21,17 @@
 
 @implementation Player
 
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit texture:(GLKTextureInfo *) text
+{
+	self = [super initWithModel:model position:posit texture:text];
+	if(self)
+	{
+		health = 100;
+		return self;
+	}
+	return nil;
+}
+
 - (GLKMatrix4)update:(float) time
 {
 	[super update:time];

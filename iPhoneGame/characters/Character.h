@@ -27,6 +27,7 @@
 }
 
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit texture:(GLKTextureInfo *) text;
+- (void)respawn:(GLKVector2) posit;
 - (void)update:(float) time;
 - (BOOL)checkBullet:(GLKVector2) position;
 - (void)render;

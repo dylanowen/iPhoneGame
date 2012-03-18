@@ -17,12 +17,16 @@
 #import "Particles.h"
 #import "BloodParticle.h"
 
+#define NUMBER_OF_ENEMIES 10
+#define BULLET_TIME_INCREMENT 0.05f
+
 @interface GameModel()
 {
 	float viewWidth;
 	float viewHeight;
 	
 	float bulletTime;
+	int zombieKills;
 }
 
 @property (strong, nonatomic) Tracker *tempTracker;
@@ -74,10 +78,10 @@
 		
 		[self.env deleteRadius:20 x:(ENV_WIDTH / 2) y:40];
 		
-		self.enemies = [[NSMutableArray alloc] initWithCapacity:15];
-		self.zombieTracker = [[NSMutableArray alloc] initWithCapacity:15];
+		self.enemies = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ENEMIES];
+		self.zombieTracker = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ENEMIES];
 		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
-		for(unsigned i = 0; i < 15; i++)
+		for(unsigned i = 0; i < NUMBER_OF_ENEMIES; i++)
 		{
 			GLKVector2 newPosition;
 			//keep the enemies a certain distance from the player
@@ -91,6 +95,7 @@
 		}
 		
 		bulletTime = 0;
+		zombieKills = 0;
 		
 		self.projectionMatrix = GLKMatrix4MakeOrtho(0, VIEW_WIDTH, VIEW_HEIGHT, 0, 1, -1);
 		
@@ -116,36 +121,46 @@
 	[self.particles updateWithLastUpdate: time];
 	
 	
-	NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
+	//NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
 		Character *temp = [self.enemies objectAtIndex:i];
-		temp->movement = GLKVector2MultiplyScalar(GLKVector2Normalize(GLKVector2Subtract(self.player->position, temp->position)), 30);
+		temp->movement = GLKVector2MultiplyScalar(GLKVector2Normalize(GLKVector2Subtract(self.player->position, temp->position)), 20);
 		if(arc4random() % 10 == 0)
 		{
 			GLKVector2 dig = GLKVector2Add(GLKVector2Add(temp->position, GLKVector2Normalize(temp->movement)), GLKVector2Make(0, -4));
 			//NSLog(@"(%f %f) + (%f, %f) -> (%f, %f)", temp->position.x, temp->position.y, temp->movement.x, temp->movement.y, dig.x, dig.y);
-			[self.env deleteRadius:4 x:dig.x y:dig.y];
+			[self.env deleteRadius:5 x:dig.x y:dig.y];
 			dig = GLKVector2Add(dig, GLKVector2Make(0, 8));
 			[self.env deleteRadius:4 x:dig.x y:dig.y];
 		}
 		if(![((Zombie *) temp) update: time projection:self.projectionMatrix])
 		{
-			[self.particles addBloodWithPosition:temp->position power:150 colorType:BloodColorBlack count:3];
-			[indexes addIndex: i];
+			[self.particles addBloodWithPosition:temp->position power:150 colorType:BloodColorBlack count:4];
+			GLKVector2 newPosition;
+			//keep the enemies a certain distance from the player
+			do
+			{
+				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
+			}while(GLKVector2Length(GLKVector2Subtract(newPosition, self.player->position)) < 140);
+			
+			[temp respawn:newPosition];
+			zombieKills++;
+			NSLog(@"Kills: %d", zombieKills);
+			//[indexes addIndex: i];
 		}
 		else if(GLKVector2Length(GLKVector2Subtract(self.player->position, temp->position)) < 4)
 		{
 			self.player->health--;
-			[self.particles addBloodWithPosition:self.player->position power:75 colorType:BloodColorRed count:2];
+			[self.particles addBloodWithPosition:self.player->position power:75 colorType:BloodColorRed];
 		}
 		[[self.zombieTracker objectAtIndex:i] updateTrackee: temp->position center: self.player->position];
 	}
-	[self.enemies removeObjectsAtIndexes: indexes];
-	[self.zombieTracker removeObjectsAtIndexes: indexes];
+	//[self.enemies removeObjectsAtIndexes: indexes];
+	//[self.zombieTracker removeObjectsAtIndexes: indexes];
     
 	//generate a new bullet
-	if(self.controls.look->toggle && bulletTime > .08)
+	if(self.controls.look->toggle && bulletTime > BULLET_TIME_INCREMENT)
 	{
 		[self.particles 
 			addBulletWithPosition:GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 7)) 
@@ -165,9 +180,10 @@
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
 		//make the blood appear 1/2 of the time
-		if([[self.enemies objectAtIndex:i] checkBullet:position] && arc4random() % 2 == 0)
+		if([[self.enemies objectAtIndex:i] checkBullet:position])
 		{
 			[self.particles addBloodWithPosition:position power:75 colorType:BloodColorGreen];
+			return YES;
 		}
 	}
 	

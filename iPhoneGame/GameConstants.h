@@ -13,7 +13,7 @@
 #define VIEW_HEIGHT 160//960//
 
 #define ENV_WIDTH 400
-#define ENV_HEIGHT 600
+#define ENV_HEIGHT 400
 
 #define GRAVITY 3.0f
 

@@ -31,6 +31,8 @@ enum
 	
 	GLKVector2 velocity;
 	
+	
+	
 	int precision;
 	float characterCenter[2];
 	
@@ -49,6 +51,8 @@ enum
 
 static GLKBaseEffect static *textureEffect = nil;
 static GLKBaseEffect static *healthEffect = nil;
+static GLuint characterVertexBuffer = 0;
+static GLuint characterTextureBuffer = 0;
 
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit texture:(GLKTextureInfo *) text
 {
@@ -56,11 +60,7 @@ static GLKBaseEffect static *healthEffect = nil;
 	if(self)
 	{
 		game = model;
-		position = posit;
 		env = game.env;
-		
-		velocity = GLKVector2Make(0, 0);
-		movement = GLKVector2Make(0, 0);
 		characterTexture = text;
 		
 		if(textureEffect == nil)
@@ -75,17 +75,51 @@ static GLKBaseEffect static *healthEffect = nil;
 			healthEffect.useConstantColor = YES;
 			healthEffect.constantColor = GLKVector4Make(0.0f, 0.8f, 0.0f, 0.3f);
 		}
+		if(characterVertexBuffer == 0)
+		{
+			float vertices[] = {
+				CHARACTER_WIDTH + 1, -1,
+				CHARACTER_WIDTH + 1, CHARACTER_HEIGHT + 1,
+				-1, CHARACTER_HEIGHT + 1,
+				-1, -1
+			};
+			glGenBuffers(1, &characterVertexBuffer);
+			glBindBuffer(GL_ARRAY_BUFFER, characterVertexBuffer);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+		if(characterTextureBuffer == 0)
+		{
+			float textureVertices[] = {
+				1, 0,
+				1, 1,
+				0, 1,
+				0, 0
+			};
+			glGenBuffers(1, &characterTextureBuffer);
+			glBindBuffer(GL_ARRAY_BUFFER, characterTextureBuffer);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(textureVertices), textureVertices, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
 		
 		precision = 100;
 		characterCenter[0] = ((float) CHARACTER_WIDTH / 2);
 		characterCenter[1] = ((float) CHARACTER_HEIGHT / 2);
 		[self setupCollisionArrays];
 		
-		health = 100;
+		[self respawn:posit];
 		
 		return self;
 	}
 	return nil;
+}
+
+- (void)respawn:(GLKVector2) posit
+{
+	position = posit;
+	health = 100;
+	velocity = GLKVector2Make(0, 0);
+	movement = GLKVector2Make(0, 0);
 }
 
 - (void)update:(float) time
@@ -229,7 +263,7 @@ static GLKBaseEffect static *healthEffect = nil;
 {
 	if(GLKVector2Length(GLKVector2Subtract(bulletPosition, position)) < 6)
 	{
-		health -= 1;
+		health -= 5;
 		return YES;
 	}
 	return NO;
@@ -237,19 +271,7 @@ static GLKBaseEffect static *healthEffect = nil;
 
 - (void)render
 {
-	float vertices[] = {
-		CHARACTER_WIDTH + 1, -1,
-		CHARACTER_WIDTH + 1, CHARACTER_HEIGHT + 1,
-		-1, CHARACTER_HEIGHT + 1,
-		-1, -1
-	};
 	
-	float textureVertices[] = {
-		1, 0,
-		1, 1,
-		0, 1,
-		0, 0
-	};
 	
 	textureEffect.texture2d0.name = characterTexture.name;
 	textureEffect.transform.projectionMatrix = projection;
@@ -258,14 +280,17 @@ static GLKBaseEffect static *healthEffect = nil;
 	
 	[textureEffect prepareToDraw];
 	
+	glBindBuffer(GL_ARRAY_BUFFER, characterVertexBuffer);
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
+	glBindBuffer(GL_ARRAY_BUFFER, characterTextureBuffer);
 	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, textureVertices);
+	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
 	

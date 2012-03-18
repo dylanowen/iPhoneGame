@@ -288,7 +288,7 @@
 	[self.program use];
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glEnableVertexAttribArray(positionAttribute);
-	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);	
+	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
 	glEnableVertexAttribArray(colorAttribute);
 	glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
