@@ -12,7 +12,8 @@
 #import "JoyStick.h"
 #import "ToggleJoyStick.h"
 #import "Tracker.h"
-#import "Character.h"
+#import "Player.h"
+#import "Zombie.h"
 #import "Particles.h"
 #import "BloodParticle.h"
 
@@ -24,9 +25,9 @@
 
 @property (strong, nonatomic) Tracker *tempTracker;
 
-@property (strong, nonatomic) Character *player;
+@property (strong, nonatomic) Player *player;
 @property (strong, nonatomic) NSMutableArray	 *enemies;
-@property (strong, nonatomic) NSMutableArray	 *enemyTrackers;
+@property (strong, nonatomic) NSMutableArray	 *zombieTracker;
 
 @end
 
@@ -40,7 +41,7 @@
 @synthesize particles = _particles;
 @synthesize player = _player;
 @synthesize enemies = _enemies;
-@synthesize enemyTrackers = _enemyTrackers;
+@synthesize zombieTracker = _enemyTrackers;
 @synthesize controls = _controls;
 
 - (id)initWithView:(UIView *) view
@@ -53,27 +54,35 @@
 		self.env = [[Environment alloc] initWithModel: self];
 		self.particles = [[Particles alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
-		//
-		//;
+
+		//load character textures
+		NSError *error;
+		GLKTextureInfo *playerTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"character.png"].CGImage options:nil error:&error];
+		if(error)
+		{
+			NSLog(@"Error loading texture from image: %@", error);
+		}
+		GLKTextureInfo *zombieTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"zombie.png"].CGImage options:nil error:&error];
+		if(error)
+		{
+			NSLog(@"Error loading texture from image: %@", error);
+		}
 		
-		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 40)];
+		self.player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 40) texture:playerTexture];
 		
 		[self.env deleteRadius:20 x:(ENV_WIDTH / 2) y:40];
 		
-		self.enemies = [[NSMutableArray alloc] initWithCapacity:40];
-		self.enemyTrackers = [[NSMutableArray alloc] initWithCapacity:40];
+		self.enemies = [[NSMutableArray alloc] initWithCapacity:15];
+		self.zombieTracker = [[NSMutableArray alloc] initWithCapacity:15];
 		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
-		for(unsigned i = 0; i < 20; i++)
+		for(unsigned i = 0; i < 15; i++)
 		{
 			int ranX = arc4random() % (ENV_WIDTH - 20) + 10;
 			int ranY = arc4random() % (ENV_HEIGHT - 20) + 10;
-			[self.enemies addObject:[[Character alloc] initWithModel:self position:GLKVector2Make(ranX, ranY)]];
-			[self.enemyTrackers addObject:[[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.8f green: 0.1f blue: 0.1f]];
+			[self.enemies addObject:[[Zombie alloc] initWithModel:self position:GLKVector2Make(ranX, ranY) texture:zombieTexture]];
+			[self.zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.8f green: 0.1f blue: 0.1f]];
 			[self.env deleteRadius:20 x:ranX y:ranY];
 		}
-		
-		//[self.env deleteRadius:MAX_DELETE_RADIUS x:(ENV_WIDTH / 2) y:400];
-		//[self.env deleteRadius:MAX_DELETE_RADIUS x:(ENV_WIDTH / 2) y:600];
 		
 		self.projectionMatrix = GLKMatrix4MakeOrtho(0, VIEW_WIDTH, VIEW_HEIGHT, 0, 1, -1);
 		
@@ -103,7 +112,7 @@
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
 		Character *temp = [self.enemies objectAtIndex:i];
-		temp->movement = GLKVector2Subtract(self.player->position, temp->position);
+		temp->movement = GLKVector2MultiplyScalar(GLKVector2Normalize(GLKVector2Subtract(self.player->position, temp->position)), 30);
 		if(arc4random() % 10 == 0)
 		{
 			GLKVector2 dig = GLKVector2Add(GLKVector2Add(temp->position, GLKVector2Normalize(temp->movement)), GLKVector2Make(0, -4));
@@ -112,20 +121,20 @@
 			dig = GLKVector2Add(dig, GLKVector2Make(0, 8));
 			[self.env deleteRadius:4 x:dig.x y:dig.y];
 		}
-		if(![temp update: time projection:self.projectionMatrix])
+		if(![((Zombie *) temp) update: time projection:self.projectionMatrix])
 		{
+			[self.particles addBloodWithPosition:temp->position power:150 colorType:BloodColorBlack count:10];
 			[indexes addIndex: i];
 		}
 		else if(GLKVector2Length(GLKVector2Subtract(self.player->position, temp->position)) < 4)
 		{
 			self.player->health--;
-			[self.particles addBloodWithPosition:self.player->position power:75 colorType:BLOOD_CT_BLUE];
-			[self.particles addBloodWithPosition:self.player->position power:75 colorType:BLOOD_CT_BLUE];
+			[self.particles addBloodWithPosition:self.player->position power:75 colorType:BloodColorRed count:2];
 		}
-		[[self.enemyTrackers objectAtIndex:i] updateTrackee: temp->position center: self.player->position];
+		[[self.zombieTracker objectAtIndex:i] updateTrackee: temp->position center: self.player->position];
 	}
 	[self.enemies removeObjectsAtIndexes: indexes];
-	[self.enemyTrackers removeObjectsAtIndexes: indexes];
+	[self.zombieTracker removeObjectsAtIndexes: indexes];
     
 	//generate a new bullet
 	if(self.controls.look->toggle)
@@ -135,13 +144,8 @@
 		//NSLog(@"(%f, %f) (%f, %f) (%f, %f)", self.player->position.x, self.player->position.y, temp.x, temp.y, self.controls.look->velocity.x, self.controls.look->velocity.y);
 		[self.particles 
 			addBulletWithPosition:GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 7)) 
-			velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 300) destructionRadius:10];
-
-		//[self.particles addBloodWithPosition:GLKVector2Make((left + right) / 2, (top + bottom) / 2) power:50];
+			velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 150) destructionRadius:10];
 	}
-	
-	//NSLog(@"(%f, %f)", self.player->position.x, self.player->position.y);
-	
 	
 	return YES;
 }
@@ -154,7 +158,7 @@
 	{
 		if([[self.enemies objectAtIndex:i] checkBullet:position])
 		{
-			[self.particles addBloodWithPosition:position power:75];
+			[self.particles addBloodWithPosition:position power:75 colorType:BloodColorGreen];
 		}
 	}
 	
@@ -167,11 +171,11 @@
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	[self.env render];
-	[self.enemies makeObjectsPerformSelector:@selector(render)];
 	[self.player render];
+	[self.enemies makeObjectsPerformSelector:@selector(render)];
 	[self.particles render];
 	[self.controls render];
-	[self.enemyTrackers makeObjectsPerformSelector:@selector(render)];
+	[self.zombieTracker makeObjectsPerformSelector:@selector(render)];
 	//[self.tempTracker render];
 	
 	//debug

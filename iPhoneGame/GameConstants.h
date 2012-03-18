@@ -15,6 +15,6 @@
 #define ENV_WIDTH 400
 #define ENV_HEIGHT 600
 
-#define GRAVITY 5.8f
+#define GRAVITY 3.0f
 
 #endif

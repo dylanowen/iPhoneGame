@@ -45,7 +45,17 @@
 		color[2] = temp;
 		color[3] = 1.0f;
 		
-		color[colorType] = ((float) (arc4random() % 60)) / 100 + .3f;
+		if(colorType == BloodColorRed || colorType == BloodColorGreen || colorType == BloodColorBlue)
+		{
+			color[colorType] = ((float) (arc4random() % 60)) / 100 + .3f;
+		}
+		else if(colorType == BloodColorWhite)
+		{
+			color[0] += .7f;
+			color[1] += .7f;
+			color[2] += .7f;
+		}
+		
 		
 		positionAttribute = model->bloodPositionAttribute;
 		colorAttribute = model->bloodColorAttribute;
@@ -58,7 +68,7 @@
 
 - (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc
 {
-	return [self initWithParticles:model position:posit velocity:veloc colorType:BLOOD_CT_RED];
+	return [self initWithParticles:model position:posit velocity:veloc colorType:BloodColorRed];
 }
 
 - (bool)updateAndKeep:(float) time

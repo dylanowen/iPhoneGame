@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2C13BB5C150C72E40002FA77 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C13BB5B150C72E40002FA77 /* character.png */; };
+		2C91258415167CB200BA3DF6 /* Zombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258315167CB200BA3DF6 /* Zombie.m */; };
+		2C91258E15167D2D00BA3DF6 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258D15167D2D00BA3DF6 /* Character.m */; };
+		2C91259115167D5C00BA3DF6 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91259015167D5C00BA3DF6 /* Player.m */; };
+		2C912593151686C500BA3DF6 /* zombie.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C912592151686C500BA3DF6 /* zombie.png */; };
 		CE7A4A8314F9E06E0039101B /* JoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A4A8214F9E06E0039101B /* JoyStick.m */; };
 		CE7A794814ECB05E00B8FA24 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794714ECB05E00B8FA24 /* UIKit.framework */; };
 		CE7A794A14ECB05E00B8FA24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794914ECB05E00B8FA24 /* Foundation.framework */; };
@@ -34,12 +38,18 @@
 		CEE52F8B1502BE1D00DDF174 /* particleShaderConstantColor.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CEE52F841502BE0200DDF174 /* particleShaderConstantColor.vsh */; };
 		CEE52F921502D18300DDF174 /* BloodParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE52F911502D18300DDF174 /* BloodParticle.m */; };
 		CEE52F961502D18F00DDF174 /* Particles.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE52F951502D18F00DDF174 /* Particles.m */; };
-		CEECC23014FC99C3008D2D13 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECC22F14FC99C3008D2D13 /* Character.m */; };
 		CEF52FFC1500914300C0029F /* BulletParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF52FFB1500914300C0029F /* BulletParticle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C13BB5B150C72E40002FA77 /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = character.png; sourceTree = "<group>"; };
+		2C91258215167CB200BA3DF6 /* Zombie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Zombie.h; path = characters/Zombie.h; sourceTree = "<group>"; };
+		2C91258315167CB200BA3DF6 /* Zombie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Zombie.m; path = characters/Zombie.m; sourceTree = "<group>"; };
+		2C91258C15167D2D00BA3DF6 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Character.h; path = characters/Character.h; sourceTree = "<group>"; };
+		2C91258D15167D2D00BA3DF6 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Character.m; path = characters/Character.m; sourceTree = "<group>"; };
+		2C91258F15167D5C00BA3DF6 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		2C91259015167D5C00BA3DF6 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		2C912592151686C500BA3DF6 /* zombie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie.png; sourceTree = "<group>"; };
 		CE7A4A8114F9E06E0039101B /* JoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoyStick.h; sourceTree = "<group>"; };
 		CE7A4A8214F9E06E0039101B /* JoyStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoyStick.m; sourceTree = "<group>"; };
 		CE7A794314ECB05E00B8FA24 /* iPhoneGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,8 +92,6 @@
 		CEE52F911502D18300DDF174 /* BloodParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BloodParticle.m; sourceTree = "<group>"; };
 		CEE52F941502D18F00DDF174 /* Particles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particles.h; sourceTree = "<group>"; };
 		CEE52F951502D18F00DDF174 /* Particles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particles.m; sourceTree = "<group>"; };
-		CEECC22E14FC99C3008D2D13 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
-		CEECC22F14FC99C3008D2D13 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Character.m; sourceTree = "<group>"; };
 		CEF52FFA1500914300C0029F /* BulletParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletParticle.h; sourceTree = "<group>"; };
 		CEF52FFB1500914300C0029F /* BulletParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BulletParticle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +113,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C91258015167C7C00BA3DF6 /* Characters */ = {
+			isa = PBXGroup;
+			children = (
+				2C91258C15167D2D00BA3DF6 /* Character.h */,
+				2C91258D15167D2D00BA3DF6 /* Character.m */,
+				2C91258F15167D5C00BA3DF6 /* Player.h */,
+				2C91259015167D5C00BA3DF6 /* Player.m */,
+				2C91258215167CB200BA3DF6 /* Zombie.h */,
+				2C91258315167CB200BA3DF6 /* Zombie.m */,
+			);
+			name = Characters;
+			sourceTree = "<group>";
+		};
 		CE7A793814ECB05E00B8FA24 = {
 			isa = PBXGroup;
 			children = (
@@ -150,10 +171,9 @@
 				CE7A797714EDED5E00B8FA24 /* GameModel.m */,
 				CEB48AA914F3190F00E5AD9E /* Environment.h */,
 				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
-				CEECC22E14FC99C3008D2D13 /* Character.h */,
-				CEECC22F14FC99C3008D2D13 /* Character.m */,
 				CEC12C6A14FC70F700EF1392 /* Tracker.h */,
 				CEC12C6B14FC70F700EF1392 /* Tracker.m */,
+				2C91258015167C7C00BA3DF6 /* Characters */,
 				CEC5BCE115030367003724F5 /* Particles */,
 				CEC5BCE315030373003724F5 /* Controls */,
 				CEC570B514F4B00F003F345A /* Shaders */,
@@ -215,6 +235,7 @@
 		CEC5BCE415030A64003724F5 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				2C912592151686C500BA3DF6 /* zombie.png */,
 				2C13BB5B150C72E40002FA77 /* character.png */,
 				CEAEABA9150330CB000F7448 /* circleRed.png */,
 				CEC5BCE515030A64003724F5 /* circle.png */,
@@ -281,6 +302,7 @@
 				CEC5BCE615030A64003724F5 /* circle.png in Resources */,
 				CEAEABAA150330CB000F7448 /* circleRed.png in Resources */,
 				2C13BB5C150C72E40002FA77 /* character.png in Resources */,
+				2C912593151686C500BA3DF6 /* zombie.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,11 +323,13 @@
 				CE7ADDAD14F9752400FBD2EC /* Controls.m in Sources */,
 				CE7A4A8314F9E06E0039101B /* JoyStick.m in Sources */,
 				CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */,
-				CEECC23014FC99C3008D2D13 /* Character.m in Sources */,
 				CEF52FFC1500914300C0029F /* BulletParticle.m in Sources */,
 				CEE52F921502D18300DDF174 /* BloodParticle.m in Sources */,
 				CEE52F961502D18F00DDF174 /* Particles.m in Sources */,
 				CEAEABA715032D74000F7448 /* ToggleJoyStick.m in Sources */,
+				2C91258415167CB200BA3DF6 /* Zombie.m in Sources */,
+				2C91258E15167D2D00BA3DF6 /* Character.m in Sources */,
+				2C91259115167D5C00BA3DF6 /* Player.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

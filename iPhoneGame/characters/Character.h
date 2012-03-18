@@ -16,6 +16,9 @@
 
 @interface Character : NSObject
 {
+@protected
+	GLKMatrix4 projection;
+	
 @public
 	GLKVector2 position;
 	GLKVector2 movement;
@@ -23,9 +26,8 @@
 	int health;
 }
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
-- (bool)update:(float) time projection:(GLKMatrix4) matrix;
-- (GLKMatrix4)update:(float) time;
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit texture:(GLKTextureInfo *) text;
+- (void)update:(float) time;
 - (BOOL)checkBullet:(GLKVector2) position;
 - (void)render;
 

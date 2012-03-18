@@ -54,7 +54,7 @@
 	bool start = YES;
 	int precision = 1000000, widthBound = (ENV_WIDTH - 1) * precision, heightBound = (ENV_HEIGHT - 1) * precision;
 	int intI, intJ, lastI, lastJ, i, j, stepX = precision, stepY = precision;
-	velocity.y += GRAVITY;
+	velocity.y += GRAVITY / 2;
 	int movement[2] = {(int) (velocity.x * time * precision), (int) (velocity.y * time * precision)};
 	
 	if(movement[0] != 0 || movement[1] != 0)
@@ -154,8 +154,8 @@
 					{
 						position[0] = ((float) (i - stepX)) / precision;
 						position[1] = ((float) (j - stepY)) / precision;
-                        intI = lastI;
-                        intJ = lastJ;
+						intI = lastI;
+						intJ = lastJ;
 					}
 					[env deleteRadius:destructionRadius x:intI y:intJ];
 					return NO;

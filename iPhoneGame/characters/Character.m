@@ -22,13 +22,12 @@ enum
 	CVLeft = 3
 };
 
-static GLKBaseEffect static *textureEffect = nil;
-static GLKBaseEffect static *healthEffect = nil;
-
 @interface Character()
 {
 	GameModel *game;
 	Environment *env;
+	
+	GLKTextureInfo *characterTexture;
 	
 	GLKVector2 velocity;
 	
@@ -48,32 +47,27 @@ static GLKBaseEffect static *healthEffect = nil;
 
 @implementation Character
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
+static GLKBaseEffect static *textureEffect = nil;
+static GLKBaseEffect static *healthEffect = nil;
+
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit texture:(GLKTextureInfo *) text
 {
 	self = [super init];
 	if(self)
 	{
 		game = model;
 		position = posit;
-		
 		env = game.env;
 		
 		velocity = GLKVector2Make(0, 0);
 		movement = GLKVector2Make(0, 0);
-		
+		characterTexture = text;
 		
 		if(textureEffect == nil)
 		{
 			textureEffect = [[GLKBaseEffect alloc] init];
-			NSError *error;
-			GLKTextureInfo *characterTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"character.png"].CGImage options:nil error:&error];
-			if(error)
-			{
-				NSLog(@"Error loading texture from image: %@", error);
-			}
 			textureEffect.texture2d0.envMode = GLKTextureEnvModeReplace;
 			textureEffect.texture2d0.target = GLKTextureTarget2D;
-			textureEffect.texture2d0.name = characterTexture.name;
 		}
 		if(healthEffect == nil)
 		{
@@ -94,14 +88,7 @@ static GLKBaseEffect static *healthEffect = nil;
 	return nil;
 }
 
-- (bool)update:(float) time projection:(GLKMatrix4) matrix
-{
-	[self update: time];
-	textureEffect.transform.projectionMatrix = matrix;
-	return health > 0;
-}
-
-- (GLKMatrix4)update:(float) time
+- (void)update:(float) time
 {
 	int x, y, lowX = INT_MIN, lowY = INT_MIN, highX = INT_MAX, highY = INT_MAX, stepX = 0, stepY = 0;
 	
@@ -114,8 +101,8 @@ static GLKBaseEffect static *healthEffect = nil;
 	y = (int) (position.y * (float) precision);
 	if(newPosition[0] == 0 && newPosition[1] == 0)
 	{
-		//nothing has moved so return our last projection
-		return textureEffect.transform.projectionMatrix;
+		//nothing has moved so don't do anything
+		return;
 	}
 	else if(newPosition[0] == 0)
 	{
@@ -169,9 +156,6 @@ static GLKBaseEffect static *healthEffect = nil;
 	
 	position.x = x / precision;
 	position.y = y / precision;
-	 
-	textureEffect.transform.projectionMatrix = [self centerView];
-	return textureEffect.transform.projectionMatrix;
 }
 
 -(BOOL) checkPhys:(int *) x y:(int *) y stepX:(int) stepX stepY:(int) stepY
@@ -241,16 +225,6 @@ static GLKBaseEffect static *healthEffect = nil;
 	return count;
 }
 
-- (GLKMatrix4)centerView
-{
-	float left, top, right, bottom;
-	left = position.x - (VIEW_WIDTH / 2);
-	top = position.y - (VIEW_HEIGHT / 2);
-	right = left + VIEW_WIDTH;
-	bottom = top + VIEW_HEIGHT;
-	return GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
-}
-
 - (BOOL)checkBullet:(GLKVector2) bulletPosition
 {
 	if(GLKVector2Length(GLKVector2Subtract(bulletPosition, position)) < 6)
@@ -277,7 +251,8 @@ static GLKBaseEffect static *healthEffect = nil;
 		0, 0
 	};
 	
-	//effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.5f);
+	textureEffect.texture2d0.name = characterTexture.name;
+	textureEffect.transform.projectionMatrix = projection;
 	textureEffect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - characterCenter[0], position.y - characterCenter[1], 0);
 	
 	

@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-#define BLOOD_CT_RED 0
-#define BLOOD_CT_GREEN 1
-#define BLOOD_CT_BLUE 2
+enum
+{
+	BloodColorRed = 0,
+	BloodColorGreen = 1,
+	BloodColorBlue = 2,
+	BloodColorWhite = 3,
+	BloodColorBlack = 4
+};
 
 @class Particles;
 

@@ -25,6 +25,7 @@
 
 - (void)addBulletWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius;
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power;
+- (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType count:(int) count;
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType;
 - (void)updateWithLastUpdate:(float) time;
 - (void)render;
