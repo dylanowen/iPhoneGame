@@ -87,7 +87,7 @@
 - (bool)touchesBegan:(GLKVector2) loci
 {
 	GLKVector2 temp = GLKVector2Subtract(loci, origin);
-	if(GLKVector2Length(temp) <= JOY_BOUNDS)
+	if(GLKVector2Length(temp) <= JOY_BOUNDS + 10)
 	{
 		position = lastTouch = loci;
 		velocity = [self calculateVelocity];

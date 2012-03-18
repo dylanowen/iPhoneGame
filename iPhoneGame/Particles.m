@@ -101,12 +101,17 @@ GLuint bloodModelViewUniform;
 
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power
 {
+	[self addBloodWithPosition:posit power:power colorType:0];
+}
+
+- (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType
+{
 	GLKVector2 temp = GLKVector2Make(((float) (arc4random() % 200)) / 100.0f - 1.0f, ((float) (arc4random() % 200)) / 100.0f - 1.0f);
-	[self.blood addObject: [[BloodParticle alloc] initWithParticles:self position:posit velocity:GLKVector2MultiplyScalar(temp, power)]];
+	[self.blood addObject: [[BloodParticle alloc] initWithParticles:self position:posit velocity:GLKVector2MultiplyScalar(temp, power) colorType:colorType]];
 	temp = GLKVector2Make(((float) (arc4random() % 200)) / 100.0f - 1.0f, ((float) (arc4random() % 200)) / 100.0f - 1.0f);
-	[self.blood addObject: [[BloodParticle alloc] initWithParticles:self position:posit velocity:GLKVector2MultiplyScalar(temp, power)]];
+	[self.blood addObject: [[BloodParticle alloc] initWithParticles:self position:posit velocity:GLKVector2MultiplyScalar(temp, power) colorType:colorType]];
 	temp = GLKVector2Make(((float) (arc4random() % 200)) / 100.0f - 1.0f, ((float) (arc4random() % 200)) / 100.0f - 1.0f);
-	[self.blood addObject: [[BloodParticle alloc] initWithParticles:self position:posit velocity:GLKVector2MultiplyScalar(temp, power)]];
+	[self.blood addObject: [[BloodParticle alloc] initWithParticles:self position:posit velocity:GLKVector2MultiplyScalar(temp, power) colorType:colorType]];
 }
 
 - (void)updateWithLastUpdate:(float) time

@@ -55,14 +55,14 @@
 		//
 		//;
 		
-		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 200)];
+		self.player = [[Character alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 40)];
 		
-		[self.env deleteRadius:20 x:(ENV_WIDTH / 2) y:200];
+		[self.env deleteRadius:20 x:(ENV_WIDTH / 2) y:40];
 		
-		self.enemies = [[NSMutableArray alloc] initWithCapacity:5];
-		self.enemyTrackers = [[NSMutableArray alloc] initWithCapacity:5];
+		self.enemies = [[NSMutableArray alloc] initWithCapacity:40];
+		self.enemyTrackers = [[NSMutableArray alloc] initWithCapacity:40];
 		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
-		for(unsigned i = 0; i < 5; i++)
+		for(unsigned i = 0; i < 20; i++)
 		{
 			int ranX = arc4random() % (ENV_WIDTH - 20) + 10;
 			int ranY = arc4random() % (ENV_HEIGHT - 20) + 10;
@@ -81,9 +81,14 @@
 	return nil;
 }
 
-- (void)updateWithLastUpdate:(float) time
+- (bool)updateWithLastUpdate:(float) time
 {
 	//do all the main stuff of the game
+	if(self.player->health <= 0 || [self.enemies count] == 0)
+	{
+		return NO;
+	}
+	
 	
 	self.player->movement.x = self.controls.move->velocity.x * 60;
 	self.player->movement.y = self.controls.move->velocity.y * 10;
@@ -97,9 +102,23 @@
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
 		Character *temp = [self.enemies objectAtIndex:i];
+		temp->movement = GLKVector2Subtract(self.player->position, temp->position);
+		if(arc4random() % 10 == 0)
+		{
+			GLKVector2 dig = GLKVector2Add(GLKVector2Add(temp->position, GLKVector2Normalize(temp->movement)), GLKVector2Make(0, -4));
+			//NSLog(@"(%f %f) + (%f, %f) -> (%f, %f)", temp->position.x, temp->position.y, temp->movement.x, temp->movement.y, dig.x, dig.y);
+			[self.env deleteRadius:4 x:dig.x y:dig.y];
+			dig = GLKVector2Add(dig, GLKVector2Make(0, 8));
+			[self.env deleteRadius:4 x:dig.x y:dig.y];
+		}
 		if(![temp update: time projection:self.projectionMatrix])
 		{
 			[indexes addIndex: i];
+		}
+		else if(GLKVector2Length(GLKVector2Subtract(self.player->position, temp->position)) < 4)
+		{
+			self.player->health--;
+			[self.particles addBloodWithPosition:self.player->position power:75 colorType:2];
 		}
 		[[self.enemyTrackers objectAtIndex:i] updateTrackee: temp->position center: self.player->position];
 	}
@@ -122,7 +141,7 @@
 	//NSLog(@"(%f, %f)", self.player->position.x, self.player->position.y);
 	
 	
-	
+	return YES;
 }
 
 - (bool)checkCharacterHit:(int) x y:(int) y

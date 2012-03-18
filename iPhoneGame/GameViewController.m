@@ -67,7 +67,11 @@
 
 - (void)glkViewControllerUpdate:(GLKViewController *)controller
 {
-	[self.mainGame updateWithLastUpdate: self.timeSinceLastUpdate];
+	if(![self.mainGame updateWithLastUpdate: self.timeSinceLastUpdate])
+	{
+		//self.paused = true;
+		[self performSegueWithIdentifier: @"gameOver" sender: self];
+	}
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect

@@ -27,7 +27,7 @@
 
 - (id)initWithView:(UIView *) view;
 
-- (void)updateWithLastUpdate:(float) time;
+- (bool)updateWithLastUpdate:(float) time;
 - (bool)checkCharacterHit:(int) x y:(int) y;
 - (void)render;
 

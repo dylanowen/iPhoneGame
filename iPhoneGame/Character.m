@@ -22,13 +22,13 @@ enum
 	CVLeft = 3
 };
 
+static GLKBaseEffect static *textureEffect = nil;
+static GLKBaseEffect static *healthEffect = nil;
+
 @interface Character()
 {
 	GameModel *game;
 	Environment *env;
-	
-	GLKBaseEffect *effect;
-	GLKTextureInfo *characterTexture;
 	
 	GLKVector2 velocity;
 	
@@ -60,9 +60,27 @@ enum
 		
 		velocity = GLKVector2Make(0, 0);
 		movement = GLKVector2Make(0, 0);
-		effect = [[GLKBaseEffect alloc] init];
-		effect.transform.projectionMatrix = [self centerView];
-		effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - characterCenter[0], position.y - characterCenter[1], 0);
+		
+		
+		if(textureEffect == nil)
+		{
+			textureEffect = [[GLKBaseEffect alloc] init];
+			NSError *error;
+			GLKTextureInfo *characterTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"character.png"].CGImage options:nil error:&error];
+			if(error)
+			{
+				NSLog(@"Error loading texture from image: %@", error);
+			}
+			textureEffect.texture2d0.envMode = GLKTextureEnvModeReplace;
+			textureEffect.texture2d0.target = GLKTextureTarget2D;
+			textureEffect.texture2d0.name = characterTexture.name;
+		}
+		if(healthEffect == nil)
+		{
+			healthEffect = [[GLKBaseEffect alloc] init];
+			healthEffect.useConstantColor = YES;
+			healthEffect.constantColor = GLKVector4Make(0.0f, 0.8f, 0.0f, 0.3f);
+		}
 		
 		precision = 100;
 		characterCenter[0] = ((float) CHARACTER_WIDTH / 2);
@@ -70,13 +88,6 @@ enum
 		[self setupCollisionArrays];
 		
 		health = 100;
-		
-		NSError *error;
-		characterTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"character.png"].CGImage options:nil error:&error];
-		if(error)
-		{
-			NSLog(@"Error loading texture from image: %@", error);
-		}
 		
 		return self;
 	}
@@ -86,7 +97,7 @@ enum
 - (bool)update:(float) time projection:(GLKMatrix4) matrix
 {
 	[self update: time];
-	effect.transform.projectionMatrix = matrix;
+	textureEffect.transform.projectionMatrix = matrix;
 	return health > 0;
 }
 
@@ -104,7 +115,7 @@ enum
 	if(newPosition[0] == 0 && newPosition[1] == 0)
 	{
 		//nothing has moved so return our last projection
-		return effect.transform.projectionMatrix;
+		return textureEffect.transform.projectionMatrix;
 	}
 	else if(newPosition[0] == 0)
 	{
@@ -159,9 +170,8 @@ enum
 	position.x = x / precision;
 	position.y = y / precision;
 	 
-	effect.transform.projectionMatrix = [self centerView];
-	effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - characterCenter[0], position.y - characterCenter[1], 0);
-	return effect.transform.projectionMatrix;
+	textureEffect.transform.projectionMatrix = [self centerView];
+	return textureEffect.transform.projectionMatrix;
 }
 
 -(BOOL) checkPhys:(int *) x y:(int *) y stepX:(int) stepX stepY:(int) stepY
@@ -268,12 +278,10 @@ enum
 	};
 	
 	//effect.constantColor = GLKVector4Make(0.0f, 1.0f, 0.0f, 0.5f);
+	textureEffect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - characterCenter[0], position.y - characterCenter[1], 0);
 	
-	effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-	effect.texture2d0.target = GLKTextureTarget2D;
-	effect.texture2d0.name = characterTexture.name;
 	
-	[effect prepareToDraw];
+	[textureEffect prepareToDraw];
 	
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
 	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices);
@@ -286,6 +294,26 @@ enum
 	glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
 	
+	healthEffect.transform.modelviewMatrix = textureEffect.transform.modelviewMatrix;
+	healthEffect.transform.projectionMatrix = textureEffect.transform.projectionMatrix;
+	float vertices2[8] = {
+		0, -5,
+		0, -2,
+		CHARACTER_WIDTH * health / 100, -2,
+		CHARACTER_WIDTH * health / 100, -5,
+	};
+	
+	[healthEffect prepareToDraw];
+	
+	glEnableVertexAttribArray(GLKVertexAttribPosition);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices2);
+	
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	
+	glDisableVertexAttribArray(GLKVertexAttribPosition);
+
+	 
+	//collision vertices debug
 	/*
 	float vertices2[(COLLISION_HEIGHT * 2 + COLLISION_WIDTH * 2) * 3 * 2];
 	unsigned vert2Offset = 0;

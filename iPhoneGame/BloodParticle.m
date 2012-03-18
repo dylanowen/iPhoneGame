@@ -29,7 +29,7 @@
 
 @implementation BloodParticle
 
-- (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc
+- (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc colorType:(int) colorType
 {
 	self = [super init];
 	if(self)
@@ -40,10 +40,12 @@
 		
 		float temp = ((float) (arc4random() % 20)) / 100;
 		
-		color[0] = ((float) (arc4random() % 60)) / 100 + .3f;
+		color[0] = temp;
 		color[1] = temp;
 		color[2] = temp;
 		color[3] = 1.0f;
+		
+		color[colorType] = ((float) (arc4random() % 60)) / 100 + .3f;
 		
 		positionAttribute = model->bloodPositionAttribute;
 		colorAttribute = model->bloodColorAttribute;
@@ -52,6 +54,11 @@
 		return self;
 	}
 	return nil;
+}
+
+- (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc
+{
+	return [self initWithParticles:model position:posit velocity:veloc colorType:0];
 }
 
 - (bool)updateAndKeep:(float) time
