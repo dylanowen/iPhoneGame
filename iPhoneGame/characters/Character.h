@@ -19,6 +19,9 @@
 @protected
 	GLKMatrix4 projection;
 	
+	GLuint characterVertexBuffer;
+	GLuint characterTextureBuffer;
+	
 @public
 	GLKVector2 position;
 	GLKVector2 movement;
@@ -31,5 +34,7 @@
 - (void)update:(float) time;
 - (BOOL)checkBullet:(GLKVector2) position;
 - (void)render;
+- (void)renderCharacter;
+- (void)renderHealth;
 
 @end

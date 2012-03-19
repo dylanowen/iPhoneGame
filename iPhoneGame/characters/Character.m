@@ -31,8 +31,6 @@ enum
 	
 	GLKVector2 velocity;
 	
-	
-	
 	int precision;
 	float characterCenter[2];
 	
@@ -51,8 +49,8 @@ enum
 
 static GLKBaseEffect static *textureEffect = nil;
 static GLKBaseEffect static *healthEffect = nil;
-static GLuint characterVertexBuffer = 0;
-static GLuint characterTextureBuffer = 0;
+static GLuint staticCharacterVertexBuffer = 0;
+static GLuint staticCharacterTextureBuffer = 0;
 
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit texture:(GLKTextureInfo *) text
 {
@@ -75,7 +73,7 @@ static GLuint characterTextureBuffer = 0;
 			healthEffect.useConstantColor = YES;
 			healthEffect.constantColor = GLKVector4Make(0.0f, 0.8f, 0.0f, 0.3f);
 		}
-		if(characterVertexBuffer == 0)
+		if(staticCharacterVertexBuffer == 0)
 		{
 			float vertices[] = {
 				CHARACTER_WIDTH + 1, -1,
@@ -83,12 +81,12 @@ static GLuint characterTextureBuffer = 0;
 				-1, CHARACTER_HEIGHT + 1,
 				-1, -1
 			};
-			glGenBuffers(1, &characterVertexBuffer);
-			glBindBuffer(GL_ARRAY_BUFFER, characterVertexBuffer);
+			glGenBuffers(1, &staticCharacterVertexBuffer);
+			glBindBuffer(GL_ARRAY_BUFFER, staticCharacterVertexBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
-		if(characterTextureBuffer == 0)
+		if(staticCharacterTextureBuffer == 0)
 		{
 			float textureVertices[] = {
 				1, 0,
@@ -96,11 +94,13 @@ static GLuint characterTextureBuffer = 0;
 				0, 1,
 				0, 0
 			};
-			glGenBuffers(1, &characterTextureBuffer);
-			glBindBuffer(GL_ARRAY_BUFFER, characterTextureBuffer);
+			glGenBuffers(1, &staticCharacterTextureBuffer);
+			glBindBuffer(GL_ARRAY_BUFFER, staticCharacterTextureBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(textureVertices), textureVertices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
+		characterVertexBuffer = staticCharacterVertexBuffer; 
+		characterTextureBuffer = staticCharacterVertexBuffer;
 		
 		precision = 100;
 		characterCenter[0] = ((float) CHARACTER_WIDTH / 2);
@@ -271,48 +271,9 @@ static GLuint characterTextureBuffer = 0;
 
 - (void)render
 {
-	
-	
-	textureEffect.texture2d0.name = characterTexture.name;
-	textureEffect.transform.projectionMatrix = projection;
-	textureEffect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - characterCenter[0], position.y - characterCenter[1], 0);
-	
-	
-	[textureEffect prepareToDraw];
-	
-	glBindBuffer(GL_ARRAY_BUFFER, characterVertexBuffer);
-	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
-	
-	glBindBuffer(GL_ARRAY_BUFFER, characterTextureBuffer);
-	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
-	
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-	
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
-	glDisableVertexAttribArray(GLKVertexAttribPosition);
-	
-	healthEffect.transform.modelviewMatrix = textureEffect.transform.modelviewMatrix;
-	healthEffect.transform.projectionMatrix = textureEffect.transform.projectionMatrix;
-	float vertices2[8] = {
-		0, -5,
-		0, -2,
-		CHARACTER_WIDTH * health / 100, -2,
-		CHARACTER_WIDTH * health / 100, -5,
-	};
-	
-	[healthEffect prepareToDraw];
-	
-	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices2);
-	
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-	
-	glDisableVertexAttribArray(GLKVertexAttribPosition);
+	[self renderCharacter];
+	[self renderHealth];
 
-	 
 	//collision vertices debug
 	/*
 	float vertices2[(COLLISION_HEIGHT * 2 + COLLISION_WIDTH * 2) * 3 * 2];
@@ -367,6 +328,50 @@ static GLuint characterTextureBuffer = 0;
 	
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
 	 */
+}
+
+- (void)renderCharacter
+{
+	textureEffect.texture2d0.name = characterTexture.name;
+	textureEffect.transform.projectionMatrix = projection;
+	textureEffect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - characterCenter[0], position.y - characterCenter[1], 0);
+	
+	[textureEffect prepareToDraw];
+	
+	glBindBuffer(GL_ARRAY_BUFFER, characterVertexBuffer);
+	glEnableVertexAttribArray(GLKVertexAttribPosition);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, characterTextureBuffer);
+	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+	
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
+	glDisableVertexAttribArray(GLKVertexAttribPosition);
+}
+
+- (void)renderHealth
+{
+	healthEffect.transform.modelviewMatrix = textureEffect.transform.modelviewMatrix;
+	healthEffect.transform.projectionMatrix = textureEffect.transform.projectionMatrix;
+	float vertices2[8] = {
+		0, -5,
+		0, -2,
+		CHARACTER_WIDTH * health / 100, -2,
+		CHARACTER_WIDTH * health / 100, -5,
+	};
+	
+	[healthEffect prepareToDraw];
+	
+	glEnableVertexAttribArray(GLKVertexAttribPosition);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices2);
+	
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	
+	glDisableVertexAttribArray(GLKVertexAttribPosition);
 }
 
 - (void)setupCollisionArrays
