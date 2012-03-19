@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
+
+@class GameModel;
 
 @interface Text : NSObject
+
+@property (strong, nonatomic) NSString *str;
+
+- (id)initWithModel:(GameModel *) mod text:(NSString *)text position:(GLKVector2) posit;
+- (void)render;
 
 @end

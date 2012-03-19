@@ -16,6 +16,7 @@
 #import "Zombie.h"
 #import "Particles.h"
 #import "BloodParticle.h"
+#import "Text.h"
 
 #define NUMBER_OF_ENEMIES 10
 #define BULLET_TIME_INCREMENT 0.05f
@@ -34,6 +35,7 @@
 @property (strong, nonatomic) Player *player;
 @property (strong, nonatomic) NSMutableArray	 *enemies;
 @property (strong, nonatomic) NSMutableArray	 *zombieTracker;
+@property (strong, nonatomic) Text *killDisplay;
 
 @end
 
@@ -49,6 +51,7 @@
 @synthesize enemies = _enemies;
 @synthesize zombieTracker = _enemyTrackers;
 @synthesize controls = _controls;
+@synthesize killDisplay = _killDisplay;
 
 - (id)initWithView:(UIView *) view
 {
@@ -97,6 +100,8 @@
 		bulletTime = 0;
 		zombieKills = 0;
 		
+		self.killDisplay = [[Text alloc] initWithModel:self text:@"kills 0" position:GLKVector2Make(5, 5)];
+		
 		self.projectionMatrix = GLKMatrix4MakeOrtho(0, VIEW_WIDTH, VIEW_HEIGHT, 0, 1, -1);
 		
 		return self;
@@ -125,7 +130,7 @@
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
 		Character *temp = [self.enemies objectAtIndex:i];
-		temp->movement = GLKVector2MultiplyScalar(GLKVector2Normalize(GLKVector2Subtract(self.player->position, temp->position)), 20);
+		temp->movement = GLKVector2MultiplyScalar(GLKVector2Normalize(GLKVector2Subtract(self.player->position, temp->position)), 15);
 		if(arc4random() % 10 == 0)
 		{
 			GLKVector2 dig = GLKVector2Add(GLKVector2Add(temp->position, GLKVector2Normalize(temp->movement)), GLKVector2Make(0, -4));
@@ -146,7 +151,7 @@
 			
 			[temp respawn:newPosition];
 			zombieKills++;
-			NSLog(@"Kills: %d", zombieKills);
+			self.killDisplay.str = [[NSString alloc] initWithFormat:@"kills %d", zombieKills];
 			//[indexes addIndex: i];
 		}
 		else if(GLKVector2Length(GLKVector2Subtract(self.player->position, temp->position)) < 4)
@@ -199,8 +204,9 @@
 	[self.player render];
 	[self.enemies makeObjectsPerformSelector:@selector(render)];
 	[self.particles render];
-	[self.controls render];
 	[self.zombieTracker makeObjectsPerformSelector:@selector(render)];
+	[self.killDisplay render];
+	[self.controls render];
 	//[self.tempTracker render];
 	
 	//debug

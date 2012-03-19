@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-#define JOY_BOUNDS 50
-#define JOY_LENGTH 60
+#define JOY_BOUNDS 40
+#define JOY_LENGTH 50
 #define JOY_LENGTH_HALF JOY_LENGTH / 2
 
 @class GLKBaseEffect;

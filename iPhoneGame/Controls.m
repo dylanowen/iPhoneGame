@@ -34,8 +34,8 @@
 	if(self)
 	{
 		self.game = game;
-		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, self.game.view.bounds.size.height - 80) view:self.game.view];
-		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(self.game.view.bounds.size.width - 80, self.game.view.bounds.size.height - 80) view:self.game.view];
+		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(65, self.game.view.bounds.size.height - 65) view:self.game.view];
+		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(self.game.view.bounds.size.width - 65, self.game.view.bounds.size.height - 65) view:self.game.view];
 		
 		return self;
 	}

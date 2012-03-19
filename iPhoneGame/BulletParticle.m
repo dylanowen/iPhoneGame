@@ -158,6 +158,7 @@
 						intJ = lastJ;
 					}
 					[env deleteRadius:destructionRadius x:intI y:intJ];
+					//[model.particles addBulletWithPosition:GLKVector2Make(position[0], position[1]) velocity:GLKVector2Negate(velocity) destructionRadius:destructionRadius];
 					return NO;
 				}
 			}

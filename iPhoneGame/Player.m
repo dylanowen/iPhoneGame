@@ -67,9 +67,18 @@ static GLuint staticPlayerTextureBuffer2 = 0;
 {
 	[super update:time];
 	projection = [self centerView];
-	if(!switchTexture && health < 40)
+	if(health < 40)
 	{
 		switchTexture = true;
+	}
+	else
+	{
+		switchTexture = false;
+	}
+	//slight healing
+	if(arc4random() % 50 == 0 && health < 100)
+	{
+		health += 1;
 	}
 	return projection;
 }
