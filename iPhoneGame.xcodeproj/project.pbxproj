@@ -14,10 +14,12 @@
 		2C912593151686C500BA3DF6 /* zombie.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C912592151686C500BA3DF6 /* zombie.png */; };
 		2CD7800F1516B2F5009EE721 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7800E1516B2F5009EE721 /* font.png */; };
 		2CD780191516B3CE009EE721 /* Text.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD780171516B3CE009EE721 /* Text.m */; };
-		2CD7802015170431009EE721 /* character.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7801C15170431009EE721 /* character.xcf */; };
-		2CD7802115170431009EE721 /* CollisionVertex.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7801D15170431009EE721 /* CollisionVertex.xcf */; };
-		2CD7802215170431009EE721 /* font.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7801E15170431009EE721 /* font.xcf */; };
-		2CD7802315170431009EE721 /* zombie.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7801F15170431009EE721 /* zombie.xcf */; };
+		2CF9C57A15170D8200C21613 /* character.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C57315170D8200C21613 /* character.xcf */; };
+		2CF9C57B15170D8200C21613 /* CollisionVertex.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C57415170D8200C21613 /* CollisionVertex.xcf */; };
+		2CF9C57C15170D8200C21613 /* font.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C57515170D8200C21613 /* font.xcf */; };
+		2CF9C57D15170D8200C21613 /* jump_button.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C57615170D8200C21613 /* jump_button.xcf */; };
+		2CF9C57E15170D8200C21613 /* zombie.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C57715170D8200C21613 /* zombie.xcf */; };
+		2CF9C58215170F9500C21613 /* jump_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C58115170F9500C21613 /* jump_button.png */; };
 		CE7A4A8314F9E06E0039101B /* JoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A4A8214F9E06E0039101B /* JoyStick.m */; };
 		CE7A794814ECB05E00B8FA24 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794714ECB05E00B8FA24 /* UIKit.framework */; };
 		CE7A794A14ECB05E00B8FA24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794914ECB05E00B8FA24 /* Foundation.framework */; };
@@ -59,10 +61,12 @@
 		2CD7800E1516B2F5009EE721 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
 		2CD780161516B3CE009EE721 /* Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Text.h; path = iPhoneGame/font/Text.h; sourceTree = "<group>"; };
 		2CD780171516B3CE009EE721 /* Text.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Text.m; path = iPhoneGame/font/Text.m; sourceTree = "<group>"; };
-		2CD7801C15170431009EE721 /* character.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = character.xcf; sourceTree = "<group>"; };
-		2CD7801D15170431009EE721 /* CollisionVertex.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CollisionVertex.xcf; sourceTree = "<group>"; };
-		2CD7801E15170431009EE721 /* font.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = font.xcf; sourceTree = "<group>"; };
-		2CD7801F15170431009EE721 /* zombie.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = zombie.xcf; sourceTree = "<group>"; };
+		2CF9C57315170D8200C21613 /* character.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = character.xcf; sourceTree = "<group>"; };
+		2CF9C57415170D8200C21613 /* CollisionVertex.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CollisionVertex.xcf; sourceTree = "<group>"; };
+		2CF9C57515170D8200C21613 /* font.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = font.xcf; sourceTree = "<group>"; };
+		2CF9C57615170D8200C21613 /* jump_button.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jump_button.xcf; sourceTree = "<group>"; };
+		2CF9C57715170D8200C21613 /* zombie.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = zombie.xcf; sourceTree = "<group>"; };
+		2CF9C58115170F9500C21613 /* jump_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = jump_button.png; path = iPhoneGame/textures/jump_button.png; sourceTree = SOURCE_ROOT; };
 		CE7A4A8114F9E06E0039101B /* JoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoyStick.h; sourceTree = "<group>"; };
 		CE7A4A8214F9E06E0039101B /* JoyStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoyStick.m; sourceTree = "<group>"; };
 		CE7A794314ECB05E00B8FA24 /* iPhoneGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,13 +153,14 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		2CD7801B15170431009EE721 /* sources */ = {
+		2CF9C57215170D8200C21613 /* sources */ = {
 			isa = PBXGroup;
 			children = (
-				2CD7801C15170431009EE721 /* character.xcf */,
-				2CD7801D15170431009EE721 /* CollisionVertex.xcf */,
-				2CD7801E15170431009EE721 /* font.xcf */,
-				2CD7801F15170431009EE721 /* zombie.xcf */,
+				2CF9C57315170D8200C21613 /* character.xcf */,
+				2CF9C57415170D8200C21613 /* CollisionVertex.xcf */,
+				2CF9C57515170D8200C21613 /* font.xcf */,
+				2CF9C57615170D8200C21613 /* jump_button.xcf */,
+				2CF9C57715170D8200C21613 /* zombie.xcf */,
 			);
 			path = sources;
 			sourceTree = "<group>";
@@ -275,7 +280,8 @@
 				CEAEABA9150330CB000F7448 /* circleRed.png */,
 				CEC5BCE515030A64003724F5 /* circle.png */,
 				2CD7800E1516B2F5009EE721 /* font.png */,
-				2CD7801B15170431009EE721 /* sources */,
+				2CF9C58115170F9500C21613 /* jump_button.png */,
+				2CF9C57215170D8200C21613 /* sources */,
 			);
 			name = Textures;
 			path = textures;
@@ -341,10 +347,12 @@
 				2C13BB5C150C72E40002FA77 /* character.png in Resources */,
 				2C912593151686C500BA3DF6 /* zombie.png in Resources */,
 				2CD7800F1516B2F5009EE721 /* font.png in Resources */,
-				2CD7802015170431009EE721 /* character.xcf in Resources */,
-				2CD7802115170431009EE721 /* CollisionVertex.xcf in Resources */,
-				2CD7802215170431009EE721 /* font.xcf in Resources */,
-				2CD7802315170431009EE721 /* zombie.xcf in Resources */,
+				2CF9C57A15170D8200C21613 /* character.xcf in Resources */,
+				2CF9C57B15170D8200C21613 /* CollisionVertex.xcf in Resources */,
+				2CF9C57C15170D8200C21613 /* font.xcf in Resources */,
+				2CF9C57D15170D8200C21613 /* jump_button.xcf in Resources */,
+				2CF9C57E15170D8200C21613 /* zombie.xcf in Resources */,
+				2CF9C58215170F9500C21613 /* jump_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

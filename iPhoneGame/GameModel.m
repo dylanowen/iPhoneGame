@@ -137,7 +137,7 @@
 			//NSLog(@"(%f %f) + (%f, %f) -> (%f, %f)", temp->position.x, temp->position.y, temp->movement.x, temp->movement.y, dig.x, dig.y);
 			[self.env deleteRadius:5 x:dig.x y:dig.y];
 			dig = GLKVector2Add(dig, GLKVector2Make(0, 8));
-			[self.env deleteRadius:4 x:dig.x y:dig.y];
+			[self.env deleteRadius:5 x:dig.x y:dig.y];
 		}
 		if(![((Zombie *) temp) update: time projection:self.projectionMatrix])
 		{
