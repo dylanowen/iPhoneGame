@@ -14,6 +14,7 @@
 		2C912593151686C500BA3DF6 /* zombie.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C912592151686C500BA3DF6 /* zombie.png */; };
 		2CD7800F1516B2F5009EE721 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7800E1516B2F5009EE721 /* font.png */; };
 		2CD780191516B3CE009EE721 /* Text.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD780171516B3CE009EE721 /* Text.m */; };
+		2CDA49E615178CD8009D86A0 /* Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA49E515178CD8009D86A0 /* Button.m */; };
 		2CF9C57A15170D8200C21613 /* character.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C57315170D8200C21613 /* character.xcf */; };
 		2CF9C57B15170D8200C21613 /* CollisionVertex.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C57415170D8200C21613 /* CollisionVertex.xcf */; };
 		2CF9C57C15170D8200C21613 /* font.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C57515170D8200C21613 /* font.xcf */; };
@@ -61,6 +62,8 @@
 		2CD7800E1516B2F5009EE721 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
 		2CD780161516B3CE009EE721 /* Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Text.h; path = iPhoneGame/font/Text.h; sourceTree = "<group>"; };
 		2CD780171516B3CE009EE721 /* Text.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Text.m; path = iPhoneGame/font/Text.m; sourceTree = "<group>"; };
+		2CDA49E415178CD8009D86A0 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Button.h; path = controls/Button.h; sourceTree = "<group>"; };
+		2CDA49E515178CD8009D86A0 /* Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Button.m; path = controls/Button.m; sourceTree = "<group>"; };
 		2CF9C57315170D8200C21613 /* character.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = character.xcf; sourceTree = "<group>"; };
 		2CF9C57415170D8200C21613 /* CollisionVertex.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CollisionVertex.xcf; sourceTree = "<group>"; };
 		2CF9C57515170D8200C21613 /* font.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = font.xcf; sourceTree = "<group>"; };
@@ -264,6 +267,8 @@
 			children = (
 				CE7ADDAB14F9752400FBD2EC /* Controls.h */,
 				CE7ADDAC14F9752400FBD2EC /* Controls.m */,
+				2CDA49E415178CD8009D86A0 /* Button.h */,
+				2CDA49E515178CD8009D86A0 /* Button.m */,
 				CE7A4A8114F9E06E0039101B /* JoyStick.h */,
 				CE7A4A8214F9E06E0039101B /* JoyStick.m */,
 				CEAEABA515032D74000F7448 /* ToggleJoyStick.h */,
@@ -381,6 +386,7 @@
 				2C91258E15167D2D00BA3DF6 /* Character.m in Sources */,
 				2C91259115167D5C00BA3DF6 /* Player.m in Sources */,
 				2CD780191516B3CE009EE721 /* Text.m in Sources */,
+				2CDA49E615178CD8009D86A0 /* Button.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

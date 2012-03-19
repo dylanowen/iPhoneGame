@@ -57,6 +57,7 @@ static GLuint staticPlayerTextureBuffer2 = 0;
 		}
 		switchTexture = false;
 		health = 100;
+		jumpHeight = 65;
 		
 		return self;
 	}
@@ -76,7 +77,7 @@ static GLuint staticPlayerTextureBuffer2 = 0;
 		switchTexture = false;
 	}
 	//slight healing
-	if(arc4random() % 50 == 0 && health < 100)
+	if(arc4random() % 70 == 0 && health < 100)
 	{
 		health += 1;
 	}

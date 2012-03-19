@@ -11,6 +11,7 @@
 #import "Environment.h"
 #import "JoyStick.h"
 #import "ToggleJoyStick.h"
+#import "Button.h"
 #import "Tracker.h"
 #import "Player.h"
 #import "Zombie.h"
@@ -117,6 +118,10 @@
 		return NO;
 	}
 	
+	if(self.controls.jump->pressed)
+	{
+		[self.player jump];
+	}
 	
 	self.player->movement.x = self.controls.move->velocity.x * 60;
 	self.player->movement.y = self.controls.move->velocity.y * 10;
@@ -131,6 +136,10 @@
 	{
 		Character *temp = [self.enemies objectAtIndex:i];
 		temp->movement = GLKVector2MultiplyScalar(GLKVector2Normalize(GLKVector2Subtract(self.player->position, temp->position)), 15);
+		if(temp->movement.y < -10)
+		{
+			[temp jump];
+		}
 		if(arc4random() % 10 == 0)
 		{
 			GLKVector2 dig = GLKVector2Add(GLKVector2Add(temp->position, GLKVector2Normalize(temp->movement)), GLKVector2Make(0, -4));

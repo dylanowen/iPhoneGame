@@ -269,6 +269,16 @@ static GLuint staticCharacterTextureBuffer = 0;
 	return NO;
 }
 
+- (void)jump
+{
+	int intX = (int) position.x;
+	int intY = ((int) position.y);
+	if([self checkCollision:CVBottom x:intX y:intY] || [self checkCollision:CVBottom x:intX y:intY + 1] || [self checkCollision:CVBottom x:intX y:intY + 2] )
+	{
+		velocity.y = -jumpHeight;
+	}
+}
+
 - (void)render
 {
 	[self renderCharacter];

@@ -19,9 +19,9 @@
 
 @implementation ToggleJoyStick
 
-- (id)initWithCenter:(GLKVector2) posit view:(UIView *) view
+- (id)initWithCenter:(GLKVector2) posit effect:(GLKBaseEffect *)effe
 {
-	self = [super initWithCenter: posit view: view];
+	self = [super initWithCenter: posit effect:effe];
 	if(self)
 	{
 		toggle = NO;
@@ -111,12 +111,10 @@
 {
 	if(toggle)
 	{
-		self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-		self.effect.texture2d0.target = GLKTextureTarget2D;
-		self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(origin.x, origin.y, 0);
-		self.effect.texture2d0.name = redCircleTexture.name;
+		effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(origin.x, origin.y, 0);
+		effect.texture2d0.name = redCircleTexture.name;
 		
-		[self.effect prepareToDraw];
+		[effect prepareToDraw];
 		
 		glBindBuffer(GL_ARRAY_BUFFER, boundingVertexBuffer);
 		glEnableVertexAttribArray(GLKVertexAttribPosition);

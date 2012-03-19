@@ -16,6 +16,6 @@
 	bool toggle;
 }
 
-- (id)initWithCenter:(GLKVector2) posit view:(UIView *) view;
+- (id)initWithCenter:(GLKVector2) posit effect:(GLKBaseEffect *)effe;
 
 @end

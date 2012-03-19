@@ -52,6 +52,7 @@ static GLuint staticZombieTextureBuffer2 = 0;
 		}
 		
 		switchTexture = 40;
+		jumpHeight = 45;
 		
 		return self;
 	}

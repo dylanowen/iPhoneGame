@@ -1,40 +1,35 @@
 //
-//  JoyStick.h
+//  Button.h
 //  iPhoneGame
 //
-//  Created by Lion User on 25/02/2012.
+//  Created by Dylan Owen on 3/19/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-#define JOY_BOUNDS 40
-#define JOY_LENGTH 50
-#define JOY_LENGTH_HALF JOY_LENGTH / 2
+#define BUTTON_LENGTH 40
+#define BUTTON_LENGTH_HALF BUTTON_LENGTH / 2
 
-@class GLKBaseEffect;
-
-@interface JoyStick : NSObject
+@interface Button : NSObject
 {
 @public
-	GLKVector2 velocity;
+	bool pressed;
 @protected
 	GLKBaseEffect *effect;
 	
 	GLKVector2 position;
 	
 	GLKVector2 lastTouch;
-	GLKVector2 origin;
-	
-	CGRect region;
 	
 	float radius;
 	
-	GLKTextureInfo *circleTexture;
+	GLKTextureInfo *buttonTexture;
 	
 	GLuint vertexBuffer;
 	GLuint textureVertexBuffer;
+	GLuint texturePressedVertexBuffer;
 }
 
 - (id)initWithCenter:(GLKVector2) posit effect:(GLKBaseEffect *) effe;
@@ -45,7 +40,5 @@
 - (void)touchesCancelled;
 
 - (void)render;
-
-- (GLKVector2) calculateVelocity;
 
 @end

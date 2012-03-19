@@ -22,6 +22,8 @@
 	GLuint characterVertexBuffer;
 	GLuint characterTextureBuffer;
 	
+	float jumpHeight;
+	
 @public
 	GLKVector2 position;
 	GLKVector2 movement;
@@ -33,6 +35,7 @@
 - (void)respawn:(GLKVector2) posit;
 - (void)update:(float) time;
 - (BOOL)checkBullet:(GLKVector2) position;
+- (void)jump;
 - (void)render;
 - (void)renderCharacter;
 - (void)renderHealth;

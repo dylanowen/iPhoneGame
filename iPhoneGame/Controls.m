@@ -14,28 +14,36 @@
 #import "GameModel.h"
 #import "JoyStick.h"
 #import "ToggleJoyStick.h"
+#import "Button.h"
 
 @interface Controls()
-
-@property (strong, nonatomic) GameModel *game;
-
+{
+	GameModel *model;
+	GLKBaseEffect *effect;
+}
 @end
 
 @implementation Controls
 
-@synthesize game = _game;
-
 @synthesize move = _move;
 @synthesize look = _look;
+@synthesize jump = _jump;
 
 - (id)initWithModel: (GameModel *) game
 {
 	self = [super init];
 	if(self)
 	{
-		self.game = game;
-		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(65, self.game.view.bounds.size.height - 65) view:self.game.view];
-		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(self.game.view.bounds.size.width - 65, self.game.view.bounds.size.height - 65) view:self.game.view];
+		model = game;
+		
+		effect = [[GLKBaseEffect alloc] init];
+		effect.texture2d0.envMode = GLKTextureEnvModeReplace;
+		effect.texture2d0.target = GLKTextureTarget2D;
+		effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, model.view.bounds.size.width, model.view.bounds.size.height, 0, 1, -1);
+		
+		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(65, model.view.bounds.size.height - 65) effect:effect];
+		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(model.view.bounds.size.width - 65, model.view.bounds.size.height - 65) effect:effect];
+		self.jump = [[Button alloc] initWithCenter: GLKVector2Make(model.view.bounds.size.width - 30, model.view.bounds.size.height - 145) effect:effect];
 		
 		return self;
 	}
@@ -56,11 +64,11 @@
 		{
 		
 		}
-		else
+		else if([self.jump touchesBegan: vLoci])
 		{
-			
-			//NSLog(@"Not grabbed (%f, %f)", vLoci.x, vLoci.y);
+	
 		}
+		//NSLog(@"Not grabbed (%f, %f)", vLoci.x, vLoci.y);
 	}
 	//self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(100.0f, 0.0f, 0.0f);
 }
@@ -83,11 +91,11 @@
 		{
 		
 		}
-		else
+		else if([self.jump touchesMoved: vLoci lastTouch: vLast])
 		{
 			
-			//NSLog(@"Not grabbed (%f, %f)", last.x, last.y);
 		}
+		//NSLog(@"Not grabbed (%f, %f)", last.x, last.y);
 	}
 }
 - (void)touchesEnded:(NSSet *)touches
@@ -109,23 +117,25 @@
 		{
 		
 		}
-		else
+		else if([self.jump touchesEnded: vLoci lastTouch: vLast])
 		{
 			
-			//NSLog(@"Not grabbed (%f, %f)", last.x, last.y);
 		}
+		//NSLog(@"Not grabbed (%f, %f)", last.x, last.y);
 	}
 }
 - (void)touchesCancelled:(NSSet *)touches
 {
 	[self.move touchesCancelled];
 	[self.look touchesCancelled];
+	[self.jump touchesCancelled];
 }
 
 - (void)render
 {
 	[self.move render];
 	[self.look render];
+	[self.jump render];
 }
 
 @end

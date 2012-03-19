@@ -12,18 +12,13 @@
 
 @implementation JoyStick
 
-@synthesize view = _view;
-@synthesize effect = _effect;
-
-- (id)initWithCenter:(GLKVector2) posit view:(UIView *) view
+- (id)initWithCenter:(GLKVector2) posit effect:(GLKBaseEffect *) effe
 {
 	self = [super init];
 	if(self)
 	{
 		position = origin = posit;
-		self.view = view;
-		
-		self.effect = [[GLKBaseEffect alloc] init];
+		effect = effe;
 		
 		lastTouch = GLKVector2Make(-1, -1);
 		velocity = GLKVector2Make(0, 0);
@@ -63,8 +58,6 @@
 		
 		free(joystickVertices);
 		free(textureVertices);		
-		
-		self.effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, self.view.bounds.size.width, self.view.bounds.size.height, 0, 1, -1);
 		
 		NSError *error;
 		circleTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"circle.png"].CGImage options:nil error:&error];
@@ -145,13 +138,10 @@
 - (void)render
 {
 	/*interleave joystick data*/
-	self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - JOY_LENGTH_HALF, position.y - JOY_LENGTH_HALF, 0);
-	//NSLog(@"%f, %f", origin.x - JOY_LENGTH_HALF, origin.y - JOY_LENGTH_HALF);
-	self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-	self.effect.texture2d0.target = GLKTextureTarget2D;
-	self.effect.texture2d0.name = circleTexture.name;
+	effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - JOY_LENGTH_HALF, position.y - JOY_LENGTH_HALF, 0);
+	effect.texture2d0.name = circleTexture.name;
 	
-	[self.effect prepareToDraw];
+	[effect prepareToDraw];
 	
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
