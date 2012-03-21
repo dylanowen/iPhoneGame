@@ -31,6 +31,7 @@
 #import "Text.h"
 
 #import "Settings.h"
+#import "HighScore.h"
 
 #define NUMBER_OF_ENEMIES 10
 #define BULLET_TIME_INCREMENT 0.05f
@@ -84,9 +85,9 @@
 		self.particles = [[Particles alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
 		
-		self.player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 40)];
+		self.player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 100)];
 		
-		[self.env deleteRadius:20 x:(ENV_WIDTH / 2) y:40];
+		[self.env deleteRadius:20 x:(ENV_WIDTH / 2) y:100];
 		
 		self.enemies = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ENEMIES];
 		self.zombieTracker = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ENEMIES];
@@ -142,6 +143,8 @@
 	//do all the main stuff of the game
 	if(self.player->health <= 0 || [self.enemies count] == 0)
 	{
+		HighScore *temp = [HighScore sharedManager];
+		temp.score = zombieKills;
 		return NO;
 	}
 	

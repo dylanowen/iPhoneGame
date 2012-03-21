@@ -36,7 +36,7 @@
 	{
 		temp = [[GLKBaseEffect alloc] init];
 		[effects setObject:temp forKey:name];
-		NSLog(@"Generated effect: %@", name);
+		//NSLog(@"Generated effect: %@", name);
 	}
 	return temp;
 }

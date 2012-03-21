@@ -29,6 +29,8 @@
 		2C91258415167CB200BA3DF6 /* Zombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258315167CB200BA3DF6 /* Zombie.m */; };
 		2C91258E15167D2D00BA3DF6 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258D15167D2D00BA3DF6 /* Character.m */; };
 		2C912593151686C500BA3DF6 /* zombie.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C912592151686C500BA3DF6 /* zombie.png */; };
+		2C92F049151A4F020049C0F1 /* HighScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C92F048151A4F020049C0F1 /* HighScoreController.m */; };
+		2C92F04D151A4F430049C0F1 /* HighScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C92F04C151A4F430049C0F1 /* HighScore.m */; };
 		2CD3863D1519B7AB00694CB9 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */; };
 		2CD386411519B7B500694CB9 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD386401519B7B500694CB9 /* Settings.m */; };
 		2CD386441519B7BE00694CB9 /* WeaponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD386431519B7BD00694CB9 /* WeaponViewController.m */; };
@@ -108,6 +110,10 @@
 		2C91258C15167D2D00BA3DF6 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Character.h; path = characters/Character.h; sourceTree = "<group>"; };
 		2C91258D15167D2D00BA3DF6 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Character.m; path = characters/Character.m; sourceTree = "<group>"; };
 		2C912592151686C500BA3DF6 /* zombie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie.png; sourceTree = "<group>"; };
+		2C92F047151A4F020049C0F1 /* HighScoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoreController.h; sourceTree = "<group>"; };
+		2C92F048151A4F020049C0F1 /* HighScoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreController.m; sourceTree = "<group>"; };
+		2C92F04B151A4F430049C0F1 /* HighScore.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HighScore.h; sourceTree = "<group>"; };
+		2C92F04C151A4F430049C0F1 /* HighScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScore.m; sourceTree = "<group>"; };
 		2CD3863B1519B7AB00694CB9 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		2CD3863F1519B7B500694CB9 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
@@ -281,6 +287,10 @@
 			isa = PBXGroup;
 			children = (
 				CE7A795914ECB05E00B8FA24 /* MainStoryboard.storyboard */,
+				2C92F047151A4F020049C0F1 /* HighScoreController.h */,
+				2C92F048151A4F020049C0F1 /* HighScoreController.m */,
+				2C92F04B151A4F430049C0F1 /* HighScore.h */,
+				2C92F04C151A4F430049C0F1 /* HighScore.m */,
 				CEBEF6B914FAD553008913F4 /* GameConstants.h */,
 				CE7A795614ECB05E00B8FA24 /* AppDelegate.h */,
 				CE7A795714ECB05E00B8FA24 /* AppDelegate.m */,
@@ -493,6 +503,8 @@
 				2CD386441519B7BE00694CB9 /* WeaponViewController.m in Sources */,
 				2C805AFC1519BA3600C2702A /* BouncyMachineGun.m in Sources */,
 				2C805AFF1519BBE100C2702A /* BouncyShotGun.m in Sources */,
+				2C92F049151A4F020049C0F1 /* HighScoreController.m in Sources */,
+				2C92F04D151A4F430049C0F1 /* HighScore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

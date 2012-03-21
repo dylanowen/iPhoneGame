@@ -17,4 +17,6 @@
 
 #define GRAVITY 3.0f
 
+#define FILE_PREFIX @"com.arc"
+
 #endif
