@@ -28,6 +28,8 @@
 #import "BloodParticle.h"
 #import "Text.h"
 
+#import "Settings.h"
+
 #define NUMBER_OF_ENEMIES 10
 #define BULLET_TIME_INCREMENT 0.05f
 
@@ -102,7 +104,27 @@
 		
 		zombieKills = 0;
 		
-		currentGun = [[MachineGun alloc] initWithParticles:self.particles];
+		Settings *settings = [Settings sharedManager];
+		switch ([settings weapon]) {
+			case 1:
+            currentGun = [[Sniper alloc] initWithParticles:self.particles];
+            break;
+			case 2:
+            currentGun = [[MachineGun alloc] initWithParticles:self.particles];
+            break;
+			case 3:
+            currentGun = [[ShotGun alloc] initWithParticles:self.particles];
+            break;
+			case 4:
+            //weaponLabel.text = @"Bullets With Gravity";
+            break;
+			default:
+            //weaponLabel.text = @"Regular Bullets";
+            break;
+		}
+		
+		
+		
 		
 		self.killDisplay = [[Text alloc] initWithModel:self text:@"kills 0" position:GLKVector2Make(5, 5)];
 		

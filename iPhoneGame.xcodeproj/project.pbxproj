@@ -27,6 +27,9 @@
 		2C91258415167CB200BA3DF6 /* Zombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258315167CB200BA3DF6 /* Zombie.m */; };
 		2C91258E15167D2D00BA3DF6 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258D15167D2D00BA3DF6 /* Character.m */; };
 		2C912593151686C500BA3DF6 /* zombie.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C912592151686C500BA3DF6 /* zombie.png */; };
+		2CD3863D1519B7AB00694CB9 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */; };
+		2CD386411519B7B500694CB9 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD386401519B7B500694CB9 /* Settings.m */; };
+		2CD386441519B7BE00694CB9 /* WeaponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD386431519B7BD00694CB9 /* WeaponViewController.m */; };
 		2CD7800F1516B2F5009EE721 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7800E1516B2F5009EE721 /* font.png */; };
 		2CD780191516B3CE009EE721 /* Text.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD780171516B3CE009EE721 /* Text.m */; };
 		2CDA49E615178CD8009D86A0 /* Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA49E515178CD8009D86A0 /* Button.m */; };
@@ -99,6 +102,12 @@
 		2C91258C15167D2D00BA3DF6 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Character.h; path = characters/Character.h; sourceTree = "<group>"; };
 		2C91258D15167D2D00BA3DF6 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Character.m; path = characters/Character.m; sourceTree = "<group>"; };
 		2C912592151686C500BA3DF6 /* zombie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie.png; sourceTree = "<group>"; };
+		2CD3863B1519B7AB00694CB9 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		2CD3863F1519B7B500694CB9 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		2CD386401519B7B500694CB9 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		2CD386421519B7BD00694CB9 /* WeaponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeaponViewController.h; sourceTree = "<group>"; };
+		2CD386431519B7BD00694CB9 /* WeaponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeaponViewController.m; sourceTree = "<group>"; };
 		2CD7800E1516B2F5009EE721 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
 		2CD780161516B3CE009EE721 /* Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Text.h; path = iPhoneGame/font/Text.h; sourceTree = "<group>"; };
 		2CD780171516B3CE009EE721 /* Text.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Text.m; path = iPhoneGame/font/Text.m; sourceTree = "<group>"; };
@@ -265,10 +274,16 @@
 				CEBEF6B914FAD553008913F4 /* GameConstants.h */,
 				CE7A795614ECB05E00B8FA24 /* AppDelegate.h */,
 				CE7A795714ECB05E00B8FA24 /* AppDelegate.m */,
+				2CD386421519B7BD00694CB9 /* WeaponViewController.h */,
+				2CD386431519B7BD00694CB9 /* WeaponViewController.m */,
+				2CD3863B1519B7AB00694CB9 /* MainMenuViewController.h */,
+				2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */,
 				CE7A795C14ECB05E00B8FA24 /* ViewController.h */,
 				CE7A795D14ECB05E00B8FA24 /* ViewController.m */,
 				CE7A796C14EDEC1200B8FA24 /* GameViewController.h */,
 				CE7A796D14EDEC1200B8FA24 /* GameViewController.m */,
+				2CD3863F1519B7B500694CB9 /* Settings.h */,
+				2CD386401519B7B500694CB9 /* Settings.m */,
 				CE7A797614EDED5E00B8FA24 /* GameModel.h */,
 				CE7A797714EDED5E00B8FA24 /* GameModel.m */,
 				CEB48AA914F3190F00E5AD9E /* Environment.h */,
@@ -463,6 +478,9 @@
 				2C8915851519863F00F91087 /* BulletParticleGrav.m in Sources */,
 				2C89158815198B8E00F91087 /* BulletParticleBouncy.m in Sources */,
 				2C8D61BC1519AC6800379943 /* Player.m in Sources */,
+				2CD3863D1519B7AB00694CB9 /* MainMenuViewController.m in Sources */,
+				2CD386411519B7B500694CB9 /* Settings.m in Sources */,
+				2CD386441519B7BE00694CB9 /* WeaponViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
