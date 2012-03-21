@@ -13,7 +13,7 @@
 
 @interface Zombie()
 {
-	int switchTexture;
+	
 }
 @end
 

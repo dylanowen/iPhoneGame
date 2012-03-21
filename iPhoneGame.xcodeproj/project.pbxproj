@@ -12,6 +12,17 @@
 		2C891555151945C900F91087 /* TextureDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C891554151945C900F91087 /* TextureDescription.m */; };
 		2C89155815194A9000F91087 /* EffectLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89155715194A9000F91087 /* EffectLoader.m */; };
 		2C89155B15194F9700F91087 /* BufferLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89155A15194F9700F91087 /* BufferLoader.m */; };
+		2C8915601519544200F91087 /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89155D1519544200F91087 /* Controls.m */; };
+		2C8915611519544200F91087 /* JoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89155F1519544200F91087 /* JoyStick.m */; };
+		2C8915681519545D00F91087 /* BloodParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915631519545D00F91087 /* BloodParticle.m */; };
+		2C8915691519545D00F91087 /* BulletParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915651519545D00F91087 /* BulletParticle.m */; };
+		2C89156A1519545D00F91087 /* Particles.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915671519545D00F91087 /* Particles.m */; };
+		2C89156D1519766300F91087 /* Weapon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89156C1519766200F91087 /* Weapon.m */; };
+		2C8915711519786200F91087 /* MachineGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915701519786200F91087 /* MachineGun.m */; };
+		2C89157715197A7D00F91087 /* ShotGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89157615197A7D00F91087 /* ShotGun.m */; };
+		2C89157F151984FE00F91087 /* Sniper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89157E151984FD00F91087 /* Sniper.m */; };
+		2C8915851519863F00F91087 /* BulletParticleGrav.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915841519863F00F91087 /* BulletParticleGrav.m */; };
+		2C89158815198B8E00F91087 /* BulletParticleBouncy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89158715198B8D00F91087 /* BulletParticleBouncy.m */; };
 		2C91258415167CB200BA3DF6 /* Zombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258315167CB200BA3DF6 /* Zombie.m */; };
 		2C91258E15167D2D00BA3DF6 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258D15167D2D00BA3DF6 /* Character.m */; };
 		2C91259115167D5C00BA3DF6 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91259015167D5C00BA3DF6 /* Player.m */; };
@@ -25,7 +36,6 @@
 		2CF9C57D15170D8200C21613 /* jump_button.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C57615170D8200C21613 /* jump_button.xcf */; };
 		2CF9C57E15170D8200C21613 /* zombie.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C57715170D8200C21613 /* zombie.xcf */; };
 		2CF9C58215170F9500C21613 /* jump_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C58115170F9500C21613 /* jump_button.png */; };
-		CE7A4A8314F9E06E0039101B /* JoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A4A8214F9E06E0039101B /* JoyStick.m */; };
 		CE7A794814ECB05E00B8FA24 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794714ECB05E00B8FA24 /* UIKit.framework */; };
 		CE7A794A14ECB05E00B8FA24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794914ECB05E00B8FA24 /* Foundation.framework */; };
 		CE7A794C14ECB05E00B8FA24 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794B14ECB05E00B8FA24 /* CoreGraphics.framework */; };
@@ -39,7 +49,6 @@
 		CE7A797314EDECC800B8FA24 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797214EDECC800B8FA24 /* OpenGLES.framework */; };
 		CE7A797514EDECCE00B8FA24 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797414EDECCE00B8FA24 /* GLKit.framework */; };
 		CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A797714EDED5E00B8FA24 /* GameModel.m */; };
-		CE7ADDAD14F9752400FBD2EC /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7ADDAC14F9752400FBD2EC /* Controls.m */; };
 		CE884EE214F73981001B26DA /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = CE884EE114F73981001B26DA /* GLProgram.m */; };
 		CEAEABA715032D74000F7448 /* ToggleJoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAEABA615032D74000F7448 /* ToggleJoyStick.m */; };
 		CEAEABAA150330CB000F7448 /* circleRed.png in Resources */ = {isa = PBXBuildFile; fileRef = CEAEABA9150330CB000F7448 /* circleRed.png */; };
@@ -49,9 +58,6 @@
 		CEE52F891502BE1D00DDF174 /* particleShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CEE52F821502BE0200DDF174 /* particleShader.fsh */; };
 		CEE52F8A1502BE1D00DDF174 /* particleShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CEE52F831502BE0200DDF174 /* particleShader.vsh */; };
 		CEE52F8B1502BE1D00DDF174 /* particleShaderConstantColor.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CEE52F841502BE0200DDF174 /* particleShaderConstantColor.vsh */; };
-		CEE52F921502D18300DDF174 /* BloodParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE52F911502D18300DDF174 /* BloodParticle.m */; };
-		CEE52F961502D18F00DDF174 /* Particles.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE52F951502D18F00DDF174 /* Particles.m */; };
-		CEF52FFC1500914300C0029F /* BulletParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF52FFB1500914300C0029F /* BulletParticle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +70,28 @@
 		2C89155715194A9000F91087 /* EffectLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EffectLoader.m; path = loaders/EffectLoader.m; sourceTree = "<group>"; };
 		2C89155915194F9700F91087 /* BufferLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BufferLoader.h; path = loaders/BufferLoader.h; sourceTree = "<group>"; };
 		2C89155A15194F9700F91087 /* BufferLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BufferLoader.m; path = loaders/BufferLoader.m; sourceTree = "<group>"; };
+		2C89155C1519544200F91087 /* Controls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controls.h; path = controls/Controls.h; sourceTree = "<group>"; };
+		2C89155D1519544200F91087 /* Controls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Controls.m; path = controls/Controls.m; sourceTree = "<group>"; };
+		2C89155E1519544200F91087 /* JoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JoyStick.h; path = controls/JoyStick.h; sourceTree = "<group>"; };
+		2C89155F1519544200F91087 /* JoyStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JoyStick.m; path = controls/JoyStick.m; sourceTree = "<group>"; };
+		2C8915621519545D00F91087 /* BloodParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BloodParticle.h; path = particles/BloodParticle.h; sourceTree = "<group>"; };
+		2C8915631519545D00F91087 /* BloodParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BloodParticle.m; path = particles/BloodParticle.m; sourceTree = "<group>"; };
+		2C8915641519545D00F91087 /* BulletParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletParticle.h; path = particles/BulletParticle.h; sourceTree = "<group>"; };
+		2C8915651519545D00F91087 /* BulletParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BulletParticle.m; path = particles/BulletParticle.m; sourceTree = "<group>"; };
+		2C8915661519545D00F91087 /* Particles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Particles.h; path = particles/Particles.h; sourceTree = "<group>"; };
+		2C8915671519545D00F91087 /* Particles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Particles.m; path = particles/Particles.m; sourceTree = "<group>"; };
+		2C89156B1519766100F91087 /* Weapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Weapon.h; path = weapons/Weapon.h; sourceTree = "<group>"; };
+		2C89156C1519766200F91087 /* Weapon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Weapon.m; path = weapons/Weapon.m; sourceTree = "<group>"; };
+		2C89156F1519786200F91087 /* MachineGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MachineGun.h; path = weapons/MachineGun.h; sourceTree = "<group>"; };
+		2C8915701519786200F91087 /* MachineGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MachineGun.m; path = weapons/MachineGun.m; sourceTree = "<group>"; };
+		2C89157515197A7D00F91087 /* ShotGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShotGun.h; path = weapons/ShotGun.h; sourceTree = "<group>"; };
+		2C89157615197A7D00F91087 /* ShotGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShotGun.m; path = weapons/ShotGun.m; sourceTree = "<group>"; };
+		2C89157D151984FD00F91087 /* Sniper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sniper.h; path = weapons/Sniper.h; sourceTree = "<group>"; };
+		2C89157E151984FD00F91087 /* Sniper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sniper.m; path = weapons/Sniper.m; sourceTree = "<group>"; };
+		2C8915831519863F00F91087 /* BulletParticleGrav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletParticleGrav.h; path = particles/BulletParticleGrav.h; sourceTree = "<group>"; };
+		2C8915841519863F00F91087 /* BulletParticleGrav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BulletParticleGrav.m; path = particles/BulletParticleGrav.m; sourceTree = "<group>"; };
+		2C89158615198B8D00F91087 /* BulletParticleBouncy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletParticleBouncy.h; path = particles/BulletParticleBouncy.h; sourceTree = "<group>"; };
+		2C89158715198B8D00F91087 /* BulletParticleBouncy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BulletParticleBouncy.m; path = particles/BulletParticleBouncy.m; sourceTree = "<group>"; };
 		2C91258215167CB200BA3DF6 /* Zombie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Zombie.h; path = characters/Zombie.h; sourceTree = "<group>"; };
 		2C91258315167CB200BA3DF6 /* Zombie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Zombie.m; path = characters/Zombie.m; sourceTree = "<group>"; };
 		2C91258C15167D2D00BA3DF6 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Character.h; path = characters/Character.h; sourceTree = "<group>"; };
@@ -82,8 +110,6 @@
 		2CF9C57615170D8200C21613 /* jump_button.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jump_button.xcf; sourceTree = "<group>"; };
 		2CF9C57715170D8200C21613 /* zombie.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = zombie.xcf; sourceTree = "<group>"; };
 		2CF9C58115170F9500C21613 /* jump_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = jump_button.png; path = iPhoneGame/textures/jump_button.png; sourceTree = SOURCE_ROOT; };
-		CE7A4A8114F9E06E0039101B /* JoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoyStick.h; sourceTree = "<group>"; };
-		CE7A4A8214F9E06E0039101B /* JoyStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoyStick.m; sourceTree = "<group>"; };
 		CE7A794314ECB05E00B8FA24 /* iPhoneGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7A794714ECB05E00B8FA24 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE7A794914ECB05E00B8FA24 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -104,8 +130,6 @@
 		CE7A797414EDECCE00B8FA24 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		CE7A797614EDED5E00B8FA24 /* GameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModel.h; sourceTree = "<group>"; };
 		CE7A797714EDED5E00B8FA24 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModel.m; sourceTree = "<group>"; };
-		CE7ADDAB14F9752400FBD2EC /* Controls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controls.h; sourceTree = "<group>"; };
-		CE7ADDAC14F9752400FBD2EC /* Controls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controls.m; sourceTree = "<group>"; };
 		CE884EE014F73981001B26DA /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
 		CE884EE114F73981001B26DA /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
 		CEAEABA515032D74000F7448 /* ToggleJoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToggleJoyStick.h; path = controls/ToggleJoyStick.h; sourceTree = "<group>"; };
@@ -120,12 +144,6 @@
 		CEE52F821502BE0200DDF174 /* particleShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = particleShader.fsh; path = shaders/particleShader.fsh; sourceTree = "<group>"; };
 		CEE52F831502BE0200DDF174 /* particleShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = particleShader.vsh; path = shaders/particleShader.vsh; sourceTree = "<group>"; };
 		CEE52F841502BE0200DDF174 /* particleShaderConstantColor.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = particleShaderConstantColor.vsh; path = shaders/particleShaderConstantColor.vsh; sourceTree = "<group>"; };
-		CEE52F901502D18300DDF174 /* BloodParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BloodParticle.h; sourceTree = "<group>"; };
-		CEE52F911502D18300DDF174 /* BloodParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BloodParticle.m; sourceTree = "<group>"; };
-		CEE52F941502D18F00DDF174 /* Particles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particles.h; sourceTree = "<group>"; };
-		CEE52F951502D18F00DDF174 /* Particles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particles.m; sourceTree = "<group>"; };
-		CEF52FFA1500914300C0029F /* BulletParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletParticle.h; sourceTree = "<group>"; };
-		CEF52FFB1500914300C0029F /* BulletParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BulletParticle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +176,21 @@
 				2C89155A15194F9700F91087 /* BufferLoader.m */,
 			);
 			name = Loaders;
+			sourceTree = "<group>";
+		};
+		2C89156E1519766600F91087 /* Weapons */ = {
+			isa = PBXGroup;
+			children = (
+				2C89156B1519766100F91087 /* Weapon.h */,
+				2C89156C1519766200F91087 /* Weapon.m */,
+				2C89157515197A7D00F91087 /* ShotGun.h */,
+				2C89157615197A7D00F91087 /* ShotGun.m */,
+				2C89156F1519786200F91087 /* MachineGun.h */,
+				2C8915701519786200F91087 /* MachineGun.m */,
+				2C89157D151984FD00F91087 /* Sniper.h */,
+				2C89157E151984FD00F91087 /* Sniper.m */,
+			);
+			name = Weapons;
 			sourceTree = "<group>";
 		};
 		2C91258015167C7C00BA3DF6 /* Characters */ = {
@@ -242,6 +275,7 @@
 				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
 				CEC12C6A14FC70F700EF1392 /* Tracker.h */,
 				CEC12C6B14FC70F700EF1392 /* Tracker.m */,
+				2C89156E1519766600F91087 /* Weapons */,
 				2C89154F151944ED00F91087 /* Loaders */,
 				2C91258015167C7C00BA3DF6 /* Characters */,
 				CEC5BCE115030367003724F5 /* Particles */,
@@ -280,12 +314,16 @@
 		CEC5BCE115030367003724F5 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
-				CEE52F941502D18F00DDF174 /* Particles.h */,
-				CEE52F951502D18F00DDF174 /* Particles.m */,
-				CEF52FFA1500914300C0029F /* BulletParticle.h */,
-				CEF52FFB1500914300C0029F /* BulletParticle.m */,
-				CEE52F901502D18300DDF174 /* BloodParticle.h */,
-				CEE52F911502D18300DDF174 /* BloodParticle.m */,
+				2C8915661519545D00F91087 /* Particles.h */,
+				2C8915671519545D00F91087 /* Particles.m */,
+				2C8915621519545D00F91087 /* BloodParticle.h */,
+				2C8915631519545D00F91087 /* BloodParticle.m */,
+				2C8915641519545D00F91087 /* BulletParticle.h */,
+				2C8915651519545D00F91087 /* BulletParticle.m */,
+				2C8915831519863F00F91087 /* BulletParticleGrav.h */,
+				2C8915841519863F00F91087 /* BulletParticleGrav.m */,
+				2C89158615198B8D00F91087 /* BulletParticleBouncy.h */,
+				2C89158715198B8D00F91087 /* BulletParticleBouncy.m */,
 			);
 			name = Particles;
 			sourceTree = "<group>";
@@ -293,14 +331,14 @@
 		CEC5BCE315030373003724F5 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				CE7ADDAB14F9752400FBD2EC /* Controls.h */,
-				CE7ADDAC14F9752400FBD2EC /* Controls.m */,
-				2CDA49E415178CD8009D86A0 /* Button.h */,
-				2CDA49E515178CD8009D86A0 /* Button.m */,
-				CE7A4A8114F9E06E0039101B /* JoyStick.h */,
-				CE7A4A8214F9E06E0039101B /* JoyStick.m */,
+				2C89155C1519544200F91087 /* Controls.h */,
+				2C89155D1519544200F91087 /* Controls.m */,
+				2C89155E1519544200F91087 /* JoyStick.h */,
+				2C89155F1519544200F91087 /* JoyStick.m */,
 				CEAEABA515032D74000F7448 /* ToggleJoyStick.h */,
 				CEAEABA615032D74000F7448 /* ToggleJoyStick.m */,
+				2CDA49E415178CD8009D86A0 /* Button.h */,
+				2CDA49E515178CD8009D86A0 /* Button.m */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -403,12 +441,7 @@
 				CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */,
 				CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */,
 				CE884EE214F73981001B26DA /* GLProgram.m in Sources */,
-				CE7ADDAD14F9752400FBD2EC /* Controls.m in Sources */,
-				CE7A4A8314F9E06E0039101B /* JoyStick.m in Sources */,
 				CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */,
-				CEF52FFC1500914300C0029F /* BulletParticle.m in Sources */,
-				CEE52F921502D18300DDF174 /* BloodParticle.m in Sources */,
-				CEE52F961502D18F00DDF174 /* Particles.m in Sources */,
 				CEAEABA715032D74000F7448 /* ToggleJoyStick.m in Sources */,
 				2C91258415167CB200BA3DF6 /* Zombie.m in Sources */,
 				2C91258E15167D2D00BA3DF6 /* Character.m in Sources */,
@@ -419,6 +452,17 @@
 				2C891555151945C900F91087 /* TextureDescription.m in Sources */,
 				2C89155815194A9000F91087 /* EffectLoader.m in Sources */,
 				2C89155B15194F9700F91087 /* BufferLoader.m in Sources */,
+				2C8915601519544200F91087 /* Controls.m in Sources */,
+				2C8915611519544200F91087 /* JoyStick.m in Sources */,
+				2C8915681519545D00F91087 /* BloodParticle.m in Sources */,
+				2C8915691519545D00F91087 /* BulletParticle.m in Sources */,
+				2C89156A1519545D00F91087 /* Particles.m in Sources */,
+				2C89156D1519766300F91087 /* Weapon.m in Sources */,
+				2C8915711519786200F91087 /* MachineGun.m in Sources */,
+				2C89157715197A7D00F91087 /* ShotGun.m in Sources */,
+				2C89157F151984FE00F91087 /* Sniper.m in Sources */,
+				2C8915851519863F00F91087 /* BulletParticleGrav.m in Sources */,
+				2C89158815198B8E00F91087 /* BulletParticleBouncy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

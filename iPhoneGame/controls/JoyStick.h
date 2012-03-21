@@ -13,7 +13,8 @@
 #define JOY_LENGTH 50
 #define JOY_LENGTH_HALF JOY_LENGTH / 2
 
-@class GLKBaseEffect;
+@class GameModel;
+@class TextureDescription;
 
 @interface JoyStick : NSObject
 {
@@ -31,13 +32,12 @@
 	
 	float radius;
 	
-	GLKTextureInfo *circleTexture;
+	TextureDescription *texture;
 	
 	GLuint vertexBuffer;
-	GLuint textureVertexBuffer;
 }
 
-- (id)initWithCenter:(GLKVector2) posit effect:(GLKBaseEffect *) effe;
+- (id)initWithCenter:(GLKVector2) posit model:(GameModel *) model;
 
 - (bool)touchesBegan:(GLKVector2) loci;
 - (bool)touchesMoved:(GLKVector2) loci lastTouch:(GLKVector2) last;

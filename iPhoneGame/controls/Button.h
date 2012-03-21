@@ -12,6 +12,9 @@
 #define BUTTON_LENGTH 40
 #define BUTTON_LENGTH_HALF BUTTON_LENGTH / 2
 
+@class GameModel;
+@class TextureDescription;
+
 @interface Button : NSObject
 {
 @public
@@ -25,14 +28,12 @@
 	
 	float radius;
 	
-	GLKTextureInfo *buttonTexture;
+	TextureDescription *buttonTexture;
 	
 	GLuint vertexBuffer;
-	GLuint textureVertexBuffer;
-	GLuint texturePressedVertexBuffer;
 }
 
-- (id)initWithCenter:(GLKVector2) posit effect:(GLKBaseEffect *) effe;
+- (id)initWithCenter:(GLKVector2) posit model:(GameModel *) model;
 
 - (bool)touchesBegan:(GLKVector2) loci;
 - (bool)touchesMoved:(GLKVector2) loci lastTouch:(GLKVector2) last;

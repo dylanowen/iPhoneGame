@@ -13,6 +13,7 @@
 #define CHARACTER_HEIGHT 13
 
 @class GameModel;
+@class BulletParticle;
 @class TextureDescription;
 
 @interface Character : NSObject
@@ -29,6 +30,8 @@
 	
 	float jumpHeight;
 	
+	float animateTimer;
+	
 @public
 	GLKVector2 position;
 	GLKVector2 movement;
@@ -39,7 +42,7 @@
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
 - (void)respawn:(GLKVector2) posit;
 - (void)update:(float) time;
-- (BOOL)checkBullet:(GLKVector2) position;
+- (BOOL)checkBullet:(BulletParticle *) bullet;
 - (void)jump;
 - (void)render;
 - (void)renderCharacter;

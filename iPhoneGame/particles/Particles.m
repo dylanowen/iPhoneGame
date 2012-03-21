@@ -18,6 +18,8 @@ faster
 #import "GameModel.h"
 #import "GLProgram.h"
 #import "BulletParticle.h"
+#import "BulletParticleGrav.h"
+#import "BulletParticleBouncy.h"
 #import "BloodParticle.h"
 
 @interface Particles()
@@ -94,9 +96,19 @@ GLuint bloodModelViewUniform;
 	return nil;
 }
 
-- (void)addBulletWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius
+- (void)addBulletWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg
 {
-	[self.bullets addObject: [[BulletParticle alloc] initWithParticles:self position:posit velocity:veloc destructionRadius:radius]];
+	[self.bullets addObject: [[BulletParticle alloc] initWithParticles:self position:posit velocity:veloc destructionRadius:radius damage:dmg]];
+}
+
+- (void)addBulletGravWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg
+{
+	[self.bullets addObject: [[BulletParticleGrav alloc] initWithParticles:self position:posit velocity:veloc destructionRadius:radius damage:dmg]];
+}
+
+- (void)addBulletBouncyWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg
+{
+	[self.bullets addObject: [[BulletParticleBouncy alloc] initWithParticles:self position:posit velocity:veloc destructionRadius:radius damage:dmg]];
 }
 
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power

@@ -9,62 +9,42 @@
 #import "JoyStick.h"
 
 #import "GameConstants.h"
+#import "GameModel.h"
+#import "TextureLoader.h"
+#import "BufferLoader.h"
+#import "EffectLoader.h"
+
 
 @implementation JoyStick
 
-- (id)initWithCenter:(GLKVector2) posit effect:(GLKBaseEffect *) effe
+- (id)initWithCenter:(GLKVector2) posit model:(GameModel *) game
 {
 	self = [super init];
 	if(self)
 	{
 		position = origin = posit;
-		effect = effe;
+		//assume that the control effect has already been generated
+		effect = [game.effectLoader getEffectForName:@"ControlEffect"];
 		
 		lastTouch = GLKVector2Make(-1, -1);
 		velocity = GLKVector2Make(0, 0);
 		
-		unsigned size = 8 * 2 * sizeof(float);
-		float *joystickVertices = malloc(size);
-		float *textureVertices = malloc(size);
-
-		joystickVertices[0] = JOY_LENGTH;
-		joystickVertices[1] = 0;
-		joystickVertices[2] = JOY_LENGTH;
-		joystickVertices[3] = JOY_LENGTH;
-		joystickVertices[4] = 0;
-		joystickVertices[5] = JOY_LENGTH;
-		joystickVertices[6] = 0;
-		joystickVertices[7] = 0;
-		
-		textureVertices[0] = 1;
-		textureVertices[1] = 0;
-		textureVertices[2] = 1;
-		textureVertices[3] = 1;
-		textureVertices[4] = 0;
-		textureVertices[5] = 1;
-		textureVertices[6] = 0;
-		textureVertices[7] = 0;
-		
-		
-		glGenBuffers(1, &vertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-		glBufferData(GL_ARRAY_BUFFER, size, joystickVertices, GL_STATIC_DRAW);
-		
-		glGenBuffers(1, &textureVertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, textureVertexBuffer);
-		glBufferData(GL_ARRAY_BUFFER, size, textureVertices, GL_STATIC_DRAW);
-		
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		
-		free(joystickVertices);
-		free(textureVertices);		
-		
-		NSError *error;
-		circleTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"circle.png"].CGImage options:nil error:&error];
-		if(error)
+		vertexBuffer = [game.bufferLoader getBufferForName:@"JoyStick"];
+		if(vertexBuffer == 0)
 		{
-			NSLog(@"Error loading texture from image: %@", error);
+			float vertices[] = {
+				JOY_LENGTH, 0,
+				JOY_LENGTH, JOY_LENGTH,
+				0, JOY_LENGTH,
+				0, 0
+			};
+			vertexBuffer = [game.bufferLoader addBufferForName:@"JoyStick"];
+			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
+
+		texture = [game.textureLoader getTextureDescription:@"circle.png"];
 		
 		return self;
 	}
@@ -74,7 +54,6 @@
 - (void)dealloc
 {
 	glDeleteBuffers(1, &vertexBuffer);
-	glDeleteBuffers(1, &textureVertexBuffer);
 }
 
 - (bool)touchesBegan:(GLKVector2) loci
@@ -139,7 +118,7 @@
 {
 	/*interleave joystick data*/
 	effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - JOY_LENGTH_HALF, position.y - JOY_LENGTH_HALF, 0);
-	effect.texture2d0.name = circleTexture.name;
+	effect.texture2d0.name = [texture getName];
 	
 	[effect prepareToDraw];
 	
@@ -147,7 +126,7 @@
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
 	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
-	glBindBuffer(GL_ARRAY_BUFFER, textureVertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, [texture getFrameBuffer:0]);
 	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
 	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	

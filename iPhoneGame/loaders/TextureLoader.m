@@ -33,21 +33,33 @@
 		textures = [[NSMutableDictionary alloc] init];
 		vertexBuffers = [[NSMutableDictionary alloc] init];
 		
-		[self addTexture:@"zombie.png" frames:2];
+		[self addTexture:@"zombie.png" frames:8];
 		[self addTexture:@"character.png" frames:2];
 		[self addTexture:@"circleRed.png" frames:1];
 		[self addTexture:@"circle.png" frames:1];
 		[self addTexture:@"font.png" frames:40];
-		[self addTexture:@"jump_button.png" frames:1];
+		[self addTexture:@"jump_button.png" frames:2];
 		
 		return self;
 	}
 	return nil;
 }
 
+- (void)dealloc
+{
+	for(NSMutableArray *buffers in vertexBuffers)
+	{
+		for(NSNumber *number in buffers)
+		{
+			GLuint temp = [number unsignedIntValue];
+			glDeleteBuffers(1, &temp);
+		}
+	}
+}
+
 - (void)addTexture:(NSString *) textureFile frames:(int) frames
 {
-	if([self getTextureDescription:textureFile] == nil)
+	if([textures objectForKey:textureFile] == nil)
 	{
 		NSError *error;
 		GLKTextureInfo *texture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:textureFile].CGImage options:nil error:&error];
@@ -57,7 +69,7 @@
 			return;
 		}
 		[textures setObject:[[TextureDescription alloc] initWithTexture:texture frameBuffers:[self getTextureFrameBuffers:frames]] forKey:textureFile];
-		NSLog(@"Loaded texture %@", textureFile);
+		//NSLog(@"Loaded texture %@", textureFile);
 	}
 }
 

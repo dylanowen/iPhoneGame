@@ -18,7 +18,13 @@
 #import "Tracker.h"
 #import "Player.h"
 #import "Zombie.h"
+
+#import "MachineGun.h"
+#import "ShotGun.h"
+#import "Sniper.h"
+
 #import "Particles.h"
+#import "BulletParticle.h"
 #import "BloodParticle.h"
 #import "Text.h"
 
@@ -30,11 +36,10 @@
 	float viewWidth;
 	float viewHeight;
 	
-	float bulletTime;
 	int zombieKills;
+	
+	Weapon *currentGun;
 }
-
-@property (strong, nonatomic) Tracker *tempTracker;
 
 @property (strong, nonatomic) Player *player;
 @property (strong, nonatomic) NSMutableArray	 *enemies;
@@ -53,7 +58,6 @@
 @synthesize bufferLoader = _bufferLoader;
 
 @synthesize env = _env;
-@synthesize tempTracker = _tempTracker;
 @synthesize particles = _particles;
 @synthesize player = _player;
 @synthesize enemies = _enemies;
@@ -92,12 +96,13 @@
 				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, self.player->position)) < 80);
 			[self.enemies addObject:[[Zombie alloc] initWithModel:self position:newPosition]];
-			[self.zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.8f green: 0.1f blue: 0.1f]];
+			[self.zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.35f blue: 0.0f model:self]];
 			[self.env deleteRadius:20 x:newPosition.x y:newPosition.y];
 		}
 		
-		bulletTime = 0;
 		zombieKills = 0;
+		
+		currentGun = [[MachineGun alloc] initWithParticles:self.particles];
 		
 		self.killDisplay = [[Text alloc] initWithModel:self text:@"kills 0" position:GLKVector2Make(5, 5)];
 		
@@ -163,38 +168,33 @@
 		}
 		else if(GLKVector2Length(GLKVector2Subtract(self.player->position, temp->position)) < 4)
 		{
-			self.player->health--;
+			self.player->health -= 2;
 			[self.particles addBloodWithPosition:self.player->position power:75 colorType:BloodColorRed];
 		}
 		[[self.zombieTracker objectAtIndex:i] updateTrackee: temp->position center: self.player->position];
 	}
 	//[self.enemies removeObjectsAtIndexes: indexes];
 	//[self.zombieTracker removeObjectsAtIndexes: indexes];
-    
+	
+	[currentGun update:time];
+	
 	//generate a new bullet
-	if(self.controls.look->toggle && bulletTime > BULLET_TIME_INCREMENT)
+	if(self.controls.look->toggle)
 	{
-		[self.particles 
-			addBulletWithPosition:GLKVector2Add(self.player->position, GLKVector2MultiplyScalar(self.controls.look->velocity, 7)) 
-			velocity:GLKVector2MultiplyScalar(self.controls.look->velocity, 150) destructionRadius:10];
-		bulletTime = 0;
+		[currentGun shootAtPosition:self.player->position direction:self.controls.look->velocity];
 	}
-	bulletTime += time;
 	
 	
 	return YES;
 }
 
-- (bool)checkCharacterHit:(int) x y:(int) y
+- (bool)checkCharacterHit:(BulletParticle *) bullet
 {
-	GLKVector2 position = GLKVector2Make(x, y);
-	
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
 		//make the blood appear 1/2 of the time
-		if([[self.enemies objectAtIndex:i] checkBullet:position])
+		if([[self.enemies objectAtIndex:i] checkBullet:bullet])
 		{
-			[self.particles addBloodWithPosition:position power:75 colorType:BloodColorGreen];
 			return YES;
 		}
 	}

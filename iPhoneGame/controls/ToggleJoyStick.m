@@ -7,10 +7,14 @@
 //
 
 #import "ToggleJoyStick.h"
+#import "GameModel.h"
+#import "TextureLoader.h"
+#import "BufferLoader.h"
+#import "EffectLoader.h"
 
 @interface ToggleJoyStick()
 {
-	GLKTextureInfo *redCircleTexture;
+	TextureDescription *redCircleTexture;
 	
 	GLuint boundingVertexBuffer;
 }
@@ -19,41 +23,29 @@
 
 @implementation ToggleJoyStick
 
-- (id)initWithCenter:(GLKVector2) posit effect:(GLKBaseEffect *)effe
+- (id)initWithCenter:(GLKVector2) posit model:(GameModel *) game
 {
-	self = [super initWithCenter: posit effect:effe];
+	self = [super initWithCenter: posit model:game];
 	if(self)
 	{
 		toggle = NO;
 		
-		
-		
-		unsigned size = 8 * 2 * sizeof(float);
-		float *boundingVertices = malloc(size);
-
-		boundingVertices[0] = JOY_BOUNDS + 20;
-		boundingVertices[1] = -JOY_BOUNDS - 20;
-		boundingVertices[2] = JOY_BOUNDS + 20;
-		boundingVertices[3] = JOY_BOUNDS + 20;
-		boundingVertices[4] = -JOY_BOUNDS - 20;
-		boundingVertices[5] = JOY_BOUNDS + 20;
-		boundingVertices[6] = -JOY_BOUNDS - 20;
-		boundingVertices[7] = -JOY_BOUNDS - 20;
-		
-		glGenBuffers(1, &boundingVertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, boundingVertexBuffer);
-		glBufferData(GL_ARRAY_BUFFER, size, boundingVertices, GL_STATIC_DRAW);
-		
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		
-		free(boundingVertices);
-		
-		NSError *error;
-		redCircleTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"circleRed.png"].CGImage options:nil error:&error];
-		if(error)
+		boundingVertexBuffer = [game.bufferLoader getBufferForName:@"ToggleJoyStick"];
+		if(boundingVertexBuffer == 0)
 		{
-			NSLog(@"Error loading texture from image: %@", error);
+			float vertices[] = {
+				JOY_BOUNDS + 20, -JOY_BOUNDS - 20,
+				JOY_BOUNDS + 20, JOY_BOUNDS + 20,
+				-JOY_BOUNDS - 20, JOY_BOUNDS + 20,
+				-JOY_BOUNDS - 20, -JOY_BOUNDS - 20
+			};
+			boundingVertexBuffer = [game.bufferLoader addBufferForName:@"ToggleJoyStick"];
+			glBindBuffer(GL_ARRAY_BUFFER, boundingVertexBuffer);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
+		
+		redCircleTexture = [game.textureLoader getTextureDescription:@"circleRed.png"];
 		
 		return self;
 	}
@@ -112,7 +104,7 @@
 	if(toggle)
 	{
 		effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(origin.x, origin.y, 0);
-		effect.texture2d0.name = redCircleTexture.name;
+		effect.texture2d0.name = [redCircleTexture getName];
 		
 		[effect prepareToDraw];
 		
@@ -120,7 +112,7 @@
 		glEnableVertexAttribArray(GLKVertexAttribPosition);
 		glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
-		glBindBuffer(GL_ARRAY_BUFFER, textureVertexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, [redCircleTexture getFrameBuffer:0]);
 		glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
 		glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	

@@ -32,7 +32,6 @@
 		texture = [model.textureLoader getTextureDescription:@"character.png"];
 
 		switchTexture = false;
-		health = 100;
 		jumpHeight = 65;
 		
 		return self;

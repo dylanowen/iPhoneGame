@@ -18,6 +18,7 @@
 @class Environment;
 @class Particles;
 @class Controls;
+@class BulletParticle;
 
 @interface GameModel : NSObject
 
@@ -35,7 +36,8 @@
 - (id)initWithView:(UIView *) view;
 
 - (bool)updateWithLastUpdate:(float) time;
-- (bool)checkCharacterHit:(int) x y:(int) y;
+- (bool)checkCharacterHit:(BulletParticle *) bullet;
+
 - (void)render;
 
 @end

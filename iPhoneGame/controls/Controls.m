@@ -12,6 +12,7 @@
 
 #import "GameConstants.h"
 #import "GameModel.h"
+#import "EffectLoader.h"
 #import "JoyStick.h"
 #import "ToggleJoyStick.h"
 #import "Button.h"
@@ -19,7 +20,6 @@
 @interface Controls()
 {
 	GameModel *model;
-	GLKBaseEffect *effect;
 }
 @end
 
@@ -36,14 +36,18 @@
 	{
 		model = game;
 		
-		effect = [[GLKBaseEffect alloc] init];
-		effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-		effect.texture2d0.target = GLKTextureTarget2D;
-		effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, model.view.bounds.size.width, model.view.bounds.size.height, 0, 1, -1);
+		GLKBaseEffect *effect = [game.effectLoader getEffectForName:@"ControlEffect"];
+		if(effect == nil)
+		{
+			effect = [game.effectLoader addEffectForName:@"ControlEffect"];
+			effect.texture2d0.envMode = GLKTextureEnvModeReplace;
+			effect.texture2d0.target = GLKTextureTarget2D;
+			effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, model.view.bounds.size.width, model.view.bounds.size.height, 0, 1, -1);
+		}
 		
-		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(65, model.view.bounds.size.height - 65) effect:effect];
-		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(model.view.bounds.size.width - 65, model.view.bounds.size.height - 65) effect:effect];
-		self.jump = [[Button alloc] initWithCenter: GLKVector2Make(model.view.bounds.size.width - 30, model.view.bounds.size.height - 145) effect:effect];
+		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(65, model.view.bounds.size.height - 65) model:model];
+		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(model.view.bounds.size.width - 65, model.view.bounds.size.height - 65) model:model];
+		self.jump = [[Button alloc] initWithCenter: GLKVector2Make(model.view.bounds.size.width - 30, model.view.bounds.size.height - 145) model:model];
 		
 		return self;
 	}

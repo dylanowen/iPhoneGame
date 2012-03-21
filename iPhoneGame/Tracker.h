@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
+@class GameModel;
+
 @interface Tracker : NSObject
 
-- (id)initWithScale:(GLKVector2) scle width:(int) w height:(int) h red:(float) red green:(float) green blue:(float) blue;
+- (id)initWithScale:(GLKVector2) scle width:(int) w height:(int) h red:(float) red green:(float) green blue:(float) blue model:(GameModel *)game;
 
 - (void)updateTrackee:(GLKVector2) trackee center:(GLKVector2) center;
 - (void)render;

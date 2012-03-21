@@ -23,7 +23,9 @@
 
 - (id)initWithModel:(GameModel *) game;
 
-- (void)addBulletWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius;
+- (void)addBulletWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg;
+- (void)addBulletGravWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg;
+- (void)addBulletBouncyWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg;
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power;
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType count:(int) count;
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType;

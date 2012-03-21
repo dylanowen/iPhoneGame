@@ -16,6 +16,6 @@
 	bool toggle;
 }
 
-- (id)initWithCenter:(GLKVector2) posit effect:(GLKBaseEffect *)effe;
+- (id)initWithCenter:(GLKVector2) posit model:(GameModel *) model;
 
 @end

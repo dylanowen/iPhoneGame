@@ -29,6 +29,15 @@
 	return nil;
 }
 
+- (void)dealloc
+{
+	for(NSNumber *number in buffers)
+	{
+		GLuint temp = [number unsignedIntValue];
+		glDeleteBuffers(1, &temp);
+	}
+}
+
 - (GLuint)addBufferForName:(NSString *) name
 {
 	NSNumber *temp = [buffers objectForKey:name];
@@ -38,7 +47,7 @@
 		glGenBuffers(1, &number);
 		temp = [NSNumber numberWithUnsignedInt:number];
 		[buffers setObject:temp forKey:name];
-		NSLog(@"Generated buffer: %@", name);
+		//NSLog(@"Generated buffer: %@", name);
 	}
 	return [temp unsignedIntValue];
 }

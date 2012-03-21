@@ -14,6 +14,10 @@
 #import "BufferLoader.h"
 #import "Environment.h"
 
+#import "Particles.h"
+#import "BulletParticle.h"
+#import "BloodParticle.h"
+
 #define COLLISION_HEIGHT 9
 #define COLLISION_WIDTH 3
 
@@ -56,10 +60,10 @@ enum
 		game = model;
 		env = game.env;
 		
-		textureEffect = [game.effectLoader getEffectForName:@"CharTexture"];
+		textureEffect = [game.effectLoader getEffectForName:@"TextureEffect"];
 		if(textureEffect == nil)
 		{
-			textureEffect = [game.effectLoader addEffectForName:@"CharTexture"];
+			textureEffect = [game.effectLoader addEffectForName:@"TextureEffect"];
 			textureEffect.texture2d0.envMode = GLKTextureEnvModeReplace;
 			textureEffect.texture2d0.target = GLKTextureTarget2D;
 		}
@@ -91,6 +95,8 @@ enum
 		characterCenter[1] = ((float) CHARACTER_HEIGHT / 2);
 		[self setupCollisionArrays];
 		
+		animateTimer = 0;
+		
 		[self respawn:posit];
 		
 		return self;
@@ -101,7 +107,7 @@ enum
 - (void)respawn:(GLKVector2) posit
 {
 	position = posit;
-	health = 100;
+	health = 1000;
 	velocity = GLKVector2Make(0, 0);
 	movement = GLKVector2Make(0, 0);
 }
@@ -110,6 +116,7 @@ enum
 {
 	int x, y, lowX = INT_MIN, lowY = INT_MIN, highX = INT_MAX, highY = INT_MAX, stepX = 0, stepY = 0;
 	
+	animateTimer += time;
 	velocity.y += GRAVITY;
 	//NSLog(@"Velocity (%f, %f)", velocity.x, velocity.y);
 	int newPosition[2] = {(int) ((velocity.x + movement.x) * time * precision), (int) ((velocity.y + movement.y) * time * precision)};
@@ -243,11 +250,12 @@ enum
 	return count;
 }
 
-- (BOOL)checkBullet:(GLKVector2) bulletPosition
+- (BOOL)checkBullet:(BulletParticle *) bullet
 {
-	if(GLKVector2Length(GLKVector2Subtract(bulletPosition, position)) < 6)
+	if(GLKVector2Length(GLKVector2Subtract(bullet->position, position)) < 6)
 	{
-		health -= 5;
+		health -= bullet->damage;
+		[self->game.particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorGreen];
 		return YES;
 	}
 	return NO;
@@ -354,8 +362,8 @@ enum
 	float vertices2[8] = {
 		0, -5,
 		0, -2,
-		CHARACTER_WIDTH * health / 100, -2,
-		CHARACTER_WIDTH * health / 100, -5,
+		CHARACTER_WIDTH * health / 1000, -2,
+		CHARACTER_WIDTH * health / 1000, -5,
 	};
 	
 	[healthEffect prepareToDraw];

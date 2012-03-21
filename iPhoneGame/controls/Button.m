@@ -8,6 +8,12 @@
 
 #import "Button.h"
 
+#import "GameConstants.h"
+#import "GameModel.h"
+#import "TextureLoader.h"
+#import "BufferLoader.h"
+#import "EffectLoader.h"
+
 @interface Button()
 {
 	GLKMatrix4 modelview;
@@ -16,55 +22,33 @@
 
 @implementation Button
 
-- (id)initWithCenter:(GLKVector2) posit effect:(GLKBaseEffect *) effe
+- (id)initWithCenter:(GLKVector2) posit model:(GameModel *)game
 {
 	self = [super init];
 	if(self)
 	{
 		position = posit;
-		effect = effe;
+		//assume that the control effect has already been generated
+		effect = [game.effectLoader getEffectForName:@"ControlEffect"];
 		
 		lastTouch = GLKVector2Make(-1, -1);
 		
-		float joystickVertices[] = {
-			BUTTON_LENGTH, 0,
-			BUTTON_LENGTH, BUTTON_LENGTH,
-			0, BUTTON_LENGTH,
-			0, 0
-		};
-		float textureVertices[] = {
-			.5, 0,
-			.5, 1,
-			0, 1,
-			0, 0
-		};
-		float textureVerticesPressed[] = {
-			1, 0,
-			1, 1,
-			.5, 1,
-			.5, 0
-		};		
-		
-		glGenBuffers(1, &vertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(joystickVertices), joystickVertices, GL_STATIC_DRAW);
-		
-		glGenBuffers(1, &textureVertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, textureVertexBuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(textureVertices), textureVertices, GL_STATIC_DRAW);
-		
-		glGenBuffers(1, &texturePressedVertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, texturePressedVertexBuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(textureVerticesPressed), textureVerticesPressed, GL_STATIC_DRAW);
-		
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		
-		NSError *error;
-		buttonTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"jump_button.png"].CGImage options:nil error:&error];
-		if(error)
+		vertexBuffer = [game.bufferLoader getBufferForName:@"Button"];
+		if(vertexBuffer == 0)
 		{
-			NSLog(@"Error loading texture from image: %@", error);
+			float vertices[] = {
+				BUTTON_LENGTH, 0,
+				BUTTON_LENGTH, BUTTON_LENGTH,
+				0, BUTTON_LENGTH,
+				0, 0
+			};
+			vertexBuffer = [game.bufferLoader addBufferForName:@"Button"];
+			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
+		
+		buttonTexture = [game.textureLoader getTextureDescription:@"jump_button.png"];
 		
 		pressed = NO;
 		modelview = GLKMatrix4MakeTranslation(position.x - BUTTON_LENGTH_HALF, position.y - BUTTON_LENGTH_HALF, 0);
@@ -117,7 +101,7 @@
 {
 	/*interleave joystick data*/
 	effect.transform.modelviewMatrix = modelview;
-	effect.texture2d0.name = buttonTexture.name;
+	effect.texture2d0.name = [buttonTexture getName];
 	
 	[effect prepareToDraw];
 	
@@ -127,11 +111,11 @@
 	
 	if(pressed)
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, texturePressedVertexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, [buttonTexture getFrameBuffer:1]);
 	}
 	else
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, textureVertexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, [buttonTexture getFrameBuffer:0]);
 	}
 	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
 	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
