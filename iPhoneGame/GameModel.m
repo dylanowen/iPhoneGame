@@ -19,8 +19,10 @@
 #import "Player.h"
 #import "Zombie.h"
 
+#import "BouncyMachineGun.h"
 #import "MachineGun.h"
 #import "ShotGun.h"
+#import "BouncyShotGun.h"
 #import "Sniper.h"
 
 #import "Particles.h"
@@ -116,10 +118,10 @@
             currentGun = [[ShotGun alloc] initWithParticles:self.particles];
             break;
 			case 4:
-            //weaponLabel.text = @"Bullets With Gravity";
+            currentGun = [[BouncyShotGun alloc] initWithParticles:self.particles];
             break;
 			default:
-            //weaponLabel.text = @"Regular Bullets";
+            currentGun = [[BouncyMachineGun alloc] initWithParticles:self.particles];
             break;
 		}
 		

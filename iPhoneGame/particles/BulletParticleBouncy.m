@@ -36,7 +36,6 @@
 
 - (bool)updateAndKeep:(float) time
 {
-	bool start = YES;
 	int intI, intJ, lastI, lastJ, i, j;
 	
 	if(bounceCount <= 0)
@@ -65,72 +64,15 @@
 			{
 				return NO;
 			}
-			else if(i < precision && j < precision)
+			else if(i < precision || j < precision || i >= widthBound || j >= heightBound || env->dirt[intI][intJ])
 			{
-				position.x = 1.0f;
-				position.y = 1.0f;
-				[env deleteRadius:destructionRadius x:1 y:1];
+				position.x = ((float) (i - stepX * destructionRadius)) / precision;
+				position.y = ((float) (j - stepY * destructionRadius)) / precision;
+				[env deleteRadius:destructionRadius x:lastI y:lastJ];
 				velocity = GLKVector2Negate(velocity);
-				bounceCount--;
-				return YES;
-			}
-			else if(i < precision)
-			{
-				position.x = 1.0f;
-				position.y = ((float) j) / precision;
-				[env deleteRadius:destructionRadius x:1 y:intJ];
-				velocity = GLKVector2Negate(velocity);
-				bounceCount--;
-				return YES;
-			}
-			else if(j < precision)
-			{
-				position.x = ((float) i) / precision;
-				position.y = 1.0f;
-				[env deleteRadius:destructionRadius x:intI y:1];
-				velocity = GLKVector2Negate(velocity);
-				bounceCount--;
-				return YES;
-			}
-			else if(i >= widthBound && j >= heightBound)
-			{
-				position.x = (float) (ENV_WIDTH - 1);
-				position.y = (float) (ENV_HEIGHT - 1);
-				[env deleteRadius:destructionRadius x:(ENV_WIDTH - 1) y:(ENV_HEIGHT - 1)];
-				velocity = GLKVector2Negate(velocity);
-				bounceCount--;
-				return YES;
-			}
-			else if(i >= widthBound)
-			{
-				position.x = (float) (ENV_WIDTH - 1);
-				position.y = ((float) j) / precision;
-				[env deleteRadius:destructionRadius x:(ENV_WIDTH - 1) y:intJ];
-				velocity = GLKVector2Negate(velocity);
-				bounceCount--;
-				return YES;
-			}
-			else if(j >= heightBound)
-			{
-				position.x = ((float) i) / precision;
-				position.y = (float) (ENV_HEIGHT - 1);
-				[env deleteRadius:destructionRadius x:intI y:(ENV_HEIGHT - 1)];
-				velocity = GLKVector2Negate(velocity);
-				bounceCount--;
-				return YES;
-			}
-			
-			if(env->dirt[intI][intJ])
-			{
-				if(!start)
-				{
-					position.x = ((float) (i - stepX)) / precision;
-					position.y = ((float) (j - stepY)) / precision;
-					intI = lastI;
-					intJ = lastJ;
-				}
-				[env deleteRadius:destructionRadius x:intI y:intJ];
-				velocity = GLKVector2Negate(velocity);
+				movement[0] = velocity.x * precision;
+				movement[1] = velocity.y * precision;
+				[self calculateStep:movement];
 				bounceCount--;
 				return YES;
 			}
@@ -139,10 +81,6 @@
 		lastJ = intJ;
 		i += stepX;
 		j += stepY;
-		if(start)
-		{
-			start = NO;
-		}
 	}
 	
 	position.x += ((float) movement[0]) / precision;

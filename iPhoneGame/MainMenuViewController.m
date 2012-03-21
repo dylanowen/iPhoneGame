@@ -58,10 +58,10 @@
             weaponLabel.text = @"Shot Gun";
             break;
         case 4:
-            weaponLabel.text = @"Bullets With Gravity";
+            weaponLabel.text = @"Bouncy ShotGun";
             break;
         default:
-            weaponLabel.text = @"Regular Bullets";
+            weaponLabel.text = @"Bouncy Machine Gun";
             break;
     }
 }
