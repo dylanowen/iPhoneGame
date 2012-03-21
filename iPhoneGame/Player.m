@@ -9,6 +9,8 @@
 #import "Player.h"
 
 #import "GameConstants.h"
+#import "GameModel.h"
+#import "TextureLoader.h"
 
 @interface Player()
 {
@@ -21,40 +23,14 @@
 
 @implementation Player
 
-static GLuint staticPlayerTextureBuffer1 = 0;
-static GLuint staticPlayerTextureBuffer2 = 0;
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit texture:(GLKTextureInfo *) text
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
 {
-	self = [super initWithModel:model position:posit texture:text];
+	self = [super initWithModel:model position:posit];
 	if(self)
 	{
-		if(staticPlayerTextureBuffer1 == 0)
-		{
-			float vertices[] = {
-				.5, 0,
-				.5, 1,
-				0, 1,
-				0, 0
-			};
-			glGenBuffers(1, &staticPlayerTextureBuffer1);
-			glBindBuffer(GL_ARRAY_BUFFER, staticPlayerTextureBuffer1);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-		}
-		if(staticPlayerTextureBuffer2 == 0)
-		{
-			float vertices[] = {
-				1, 0,
-				1, 1,
-				.5, 1,
-				.5, 0
-			};
-			glGenBuffers(1, &staticPlayerTextureBuffer2);
-			glBindBuffer(GL_ARRAY_BUFFER, staticPlayerTextureBuffer2);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-		}
+		texture = [model.textureLoader getTextureDescription:@"character.png"];
+
 		switchTexture = false;
 		health = 100;
 		jumpHeight = 65;
@@ -98,11 +74,11 @@ static GLuint staticPlayerTextureBuffer2 = 0;
 {
 	if(switchTexture)
 	{
-		characterTextureBuffer = staticPlayerTextureBuffer2;
+		characterTextureBuffer = [texture getFrameBuffer:1];
 	}
 	else
 	{
-		characterTextureBuffer = staticPlayerTextureBuffer1;
+		characterTextureBuffer = [texture getFrameBuffer:0];
 	}
 	[super renderCharacter];
 }

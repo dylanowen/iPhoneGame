@@ -10,7 +10,7 @@
 
 @interface Player : Character
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit texture:(GLKTextureInfo *) text;
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
 - (GLKMatrix4)update:(float) time;
 
 @end

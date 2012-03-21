@@ -9,6 +9,9 @@
 #import "Character.h"
 
 #import "GameModel.h"
+#import "EffectLoader.h"
+#import "TextureLoader.h"
+#import "BufferLoader.h"
 #import "Environment.h"
 
 #define COLLISION_HEIGHT 9
@@ -26,8 +29,6 @@ enum
 {
 	GameModel *game;
 	Environment *env;
-	
-	GLKTextureInfo *characterTexture;
 	
 	GLKVector2 velocity;
 	
@@ -47,33 +48,31 @@ enum
 
 @implementation Character
 
-static GLKBaseEffect static *textureEffect = nil;
-static GLKBaseEffect static *healthEffect = nil;
-static GLuint staticCharacterVertexBuffer = 0;
-static GLuint staticCharacterTextureBuffer = 0;
-
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit texture:(GLKTextureInfo *) text
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
 {
 	self = [super init];
 	if(self)
 	{
 		game = model;
 		env = game.env;
-		characterTexture = text;
 		
+		textureEffect = [game.effectLoader getEffectForName:@"CharTexture"];
 		if(textureEffect == nil)
 		{
-			textureEffect = [[GLKBaseEffect alloc] init];
+			textureEffect = [game.effectLoader addEffectForName:@"CharTexture"];
 			textureEffect.texture2d0.envMode = GLKTextureEnvModeReplace;
 			textureEffect.texture2d0.target = GLKTextureTarget2D;
 		}
+		healthEffect = [game.effectLoader getEffectForName:@"CharHealth"];
 		if(healthEffect == nil)
 		{
-			healthEffect = [[GLKBaseEffect alloc] init];
+			healthEffect = [game.effectLoader addEffectForName:@"CharHealth"];
 			healthEffect.useConstantColor = YES;
 			healthEffect.constantColor = GLKVector4Make(0.0f, 0.8f, 0.0f, 0.3f);
 		}
-		if(staticCharacterVertexBuffer == 0)
+		
+		characterVertexBuffer = [game.bufferLoader getBufferForName:@"Character"];
+		if(characterVertexBuffer == 0)
 		{
 			float vertices[] = {
 				CHARACTER_WIDTH + 1, -1,
@@ -81,26 +80,11 @@ static GLuint staticCharacterTextureBuffer = 0;
 				-1, CHARACTER_HEIGHT + 1,
 				-1, -1
 			};
-			glGenBuffers(1, &staticCharacterVertexBuffer);
-			glBindBuffer(GL_ARRAY_BUFFER, staticCharacterVertexBuffer);
+			characterVertexBuffer = [game.bufferLoader addBufferForName:@"Character"];
+			glBindBuffer(GL_ARRAY_BUFFER, characterVertexBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
-		if(staticCharacterTextureBuffer == 0)
-		{
-			float textureVertices[] = {
-				1, 0,
-				1, 1,
-				0, 1,
-				0, 0
-			};
-			glGenBuffers(1, &staticCharacterTextureBuffer);
-			glBindBuffer(GL_ARRAY_BUFFER, staticCharacterTextureBuffer);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(textureVertices), textureVertices, GL_STATIC_DRAW);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-		}
-		characterVertexBuffer = staticCharacterVertexBuffer; 
-		characterTextureBuffer = staticCharacterVertexBuffer;
 		
 		precision = 100;
 		characterCenter[0] = ((float) CHARACTER_WIDTH / 2);
@@ -227,7 +211,7 @@ static GLuint staticCharacterTextureBuffer = 0;
 		*x = *x - stepX;
 		//intX = *x / precision;
 		
-		velocity.x = -velocity.x / 5;
+		velocity.x = -velocity.x / 6;
 		cX = YES;
 	}
 	
@@ -236,7 +220,7 @@ static GLuint staticCharacterTextureBuffer = 0;
 		*y = *y - stepY;
 		//intX = *y / precision;
 		
-		velocity.y = -velocity.y / 5;
+		velocity.y = -velocity.y / 6;
 		cY = YES;
 	}
 
@@ -342,7 +326,7 @@ static GLuint staticCharacterTextureBuffer = 0;
 
 - (void)renderCharacter
 {
-	textureEffect.texture2d0.name = characterTexture.name;
+	textureEffect.texture2d0.name = [texture getName];
 	textureEffect.transform.projectionMatrix = projection;
 	textureEffect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - characterCenter[0], position.y - characterCenter[1], 0);
 	

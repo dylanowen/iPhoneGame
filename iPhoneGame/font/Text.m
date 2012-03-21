@@ -9,11 +9,15 @@
 #import "Text.h"
 
 #import "GameModel.h"
+#import "TextureLoader.h"
+#import "EffectLoader.h"
+#import "BufferLoader.h"
 
 @interface Text()
 {
 	GLuint vertexBuffer;
-	GLuint textureBuffers[40];
+	
+	TextureDescription *texture;
 	
 	GLKBaseEffect *effect;
 	
@@ -37,43 +41,30 @@
 		model = mod;
 		position = posit;
 		
-		float vertices[] = {
-			12, 0,
-			12, 18,
-			0, 18,
-			0, 0
-		};
-		glGenBuffers(1, &vertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-		
-		//generate the texture buffers
-		for(unsigned i = 0; i < 40; i++)
+		vertexBuffer = [model.bufferLoader getBufferForName:@"Font"];
+		if(vertexBuffer == 0)
 		{
 			float vertices[] = {
-				0.025f * (i + 1), 0.0f,
-				0.025f * (i + 1), 1.0f,
-				0.025f * i, 1.0f,
-				0.025f * i, 0.0f
+				12, 0,
+				12, 18,
+				0, 18,
+				0, 0
 			};
-			glGenBuffers(1, &(textureBuffers[i]));
-			glBindBuffer(GL_ARRAY_BUFFER, textureBuffers[i]);
+			vertexBuffer = [model.bufferLoader addBufferForName:@"Font"];
+			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 		}
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		
-		effect = [[GLKBaseEffect alloc] init];
-		
-		NSError *error;
-		GLKTextureInfo *fontTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"font.png"].CGImage options:nil error:&error];
-		if(error)
+		texture = [model.textureLoader getTextureDescription:@"font.png"];
+		effect = [model.effectLoader getEffectForName:@"Font"];
+		if(effect == nil)
 		{
-			NSLog(@"Error loading texture from image: %@", error);
+			effect = [model.effectLoader addEffectForName:@"Font"];
+			effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, model.view.bounds.size.width, model.view.bounds.size.height, 0, 1, -1);
+			effect.texture2d0.name = [texture getName];
+			effect.texture2d0.envMode = GLKTextureEnvModeReplace;
+			effect.texture2d0.target = GLKTextureTarget2D;
 		}
-		effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, model.view.bounds.size.width, model.view.bounds.size.height, 0, 1, -1);
-		effect.texture2d0.name = fontTexture.name;
-		effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-		effect.texture2d0.target = GLKTextureTarget2D;
 		
 		return self;
 	}
@@ -103,11 +94,11 @@
 		
 		if(cStr[i] >= '0' && cStr[i] <= '9')
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, textureBuffers[cStr[i] - '0' + 26]);
+			glBindBuffer(GL_ARRAY_BUFFER, [texture getFrameBuffer:(cStr[i] - '0' + 26)]);
 		}
 		else
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, textureBuffers[cStr[i] - 'a']);
+			glBindBuffer(GL_ARRAY_BUFFER, [texture getFrameBuffer:(cStr[i] - 'a')]);
 		}
 		glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
 		glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);

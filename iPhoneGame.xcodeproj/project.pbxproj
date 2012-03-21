@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2C13BB5C150C72E40002FA77 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C13BB5B150C72E40002FA77 /* character.png */; };
+		2C8915521519451700F91087 /* TextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915511519451700F91087 /* TextureLoader.m */; };
+		2C891555151945C900F91087 /* TextureDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C891554151945C900F91087 /* TextureDescription.m */; };
+		2C89155815194A9000F91087 /* EffectLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89155715194A9000F91087 /* EffectLoader.m */; };
+		2C89155B15194F9700F91087 /* BufferLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89155A15194F9700F91087 /* BufferLoader.m */; };
 		2C91258415167CB200BA3DF6 /* Zombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258315167CB200BA3DF6 /* Zombie.m */; };
 		2C91258E15167D2D00BA3DF6 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258D15167D2D00BA3DF6 /* Character.m */; };
 		2C91259115167D5C00BA3DF6 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91259015167D5C00BA3DF6 /* Player.m */; };
@@ -52,6 +56,14 @@
 
 /* Begin PBXFileReference section */
 		2C13BB5B150C72E40002FA77 /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = character.png; sourceTree = "<group>"; };
+		2C8915501519451700F91087 /* TextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureLoader.h; path = loaders/TextureLoader.h; sourceTree = "<group>"; };
+		2C8915511519451700F91087 /* TextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextureLoader.m; path = loaders/TextureLoader.m; sourceTree = "<group>"; };
+		2C891553151945C900F91087 /* TextureDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureDescription.h; path = loaders/TextureDescription.h; sourceTree = "<group>"; };
+		2C891554151945C900F91087 /* TextureDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextureDescription.m; path = loaders/TextureDescription.m; sourceTree = "<group>"; };
+		2C89155615194A9000F91087 /* EffectLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectLoader.h; path = loaders/EffectLoader.h; sourceTree = "<group>"; };
+		2C89155715194A9000F91087 /* EffectLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EffectLoader.m; path = loaders/EffectLoader.m; sourceTree = "<group>"; };
+		2C89155915194F9700F91087 /* BufferLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BufferLoader.h; path = loaders/BufferLoader.h; sourceTree = "<group>"; };
+		2C89155A15194F9700F91087 /* BufferLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BufferLoader.m; path = loaders/BufferLoader.m; sourceTree = "<group>"; };
 		2C91258215167CB200BA3DF6 /* Zombie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Zombie.h; path = characters/Zombie.h; sourceTree = "<group>"; };
 		2C91258315167CB200BA3DF6 /* Zombie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Zombie.m; path = characters/Zombie.m; sourceTree = "<group>"; };
 		2C91258C15167D2D00BA3DF6 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Character.h; path = characters/Character.h; sourceTree = "<group>"; };
@@ -133,6 +145,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C89154F151944ED00F91087 /* Loaders */ = {
+			isa = PBXGroup;
+			children = (
+				2C89155615194A9000F91087 /* EffectLoader.h */,
+				2C89155715194A9000F91087 /* EffectLoader.m */,
+				2C8915501519451700F91087 /* TextureLoader.h */,
+				2C8915511519451700F91087 /* TextureLoader.m */,
+				2C891553151945C900F91087 /* TextureDescription.h */,
+				2C891554151945C900F91087 /* TextureDescription.m */,
+				2C89155915194F9700F91087 /* BufferLoader.h */,
+				2C89155A15194F9700F91087 /* BufferLoader.m */,
+			);
+			name = Loaders;
+			sourceTree = "<group>";
+		};
 		2C91258015167C7C00BA3DF6 /* Characters */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +242,7 @@
 				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
 				CEC12C6A14FC70F700EF1392 /* Tracker.h */,
 				CEC12C6B14FC70F700EF1392 /* Tracker.m */,
+				2C89154F151944ED00F91087 /* Loaders */,
 				2C91258015167C7C00BA3DF6 /* Characters */,
 				CEC5BCE115030367003724F5 /* Particles */,
 				2CD7801A1516B3FA009EE721 /* Font */,
@@ -387,6 +415,10 @@
 				2C91259115167D5C00BA3DF6 /* Player.m in Sources */,
 				2CD780191516B3CE009EE721 /* Text.m in Sources */,
 				2CDA49E615178CD8009D86A0 /* Button.m in Sources */,
+				2C8915521519451700F91087 /* TextureLoader.m in Sources */,
+				2C891555151945C900F91087 /* TextureDescription.m in Sources */,
+				2C89155815194A9000F91087 /* EffectLoader.m in Sources */,
+				2C89155B15194F9700F91087 /* BufferLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

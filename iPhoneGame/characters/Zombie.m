@@ -8,6 +8,9 @@
 
 #import "Zombie.h"
 
+#import "GameModel.h"
+#import "TextureLoader.h"
+
 @interface Zombie()
 {
 	int switchTexture;
@@ -16,40 +19,12 @@
 
 @implementation Zombie
 
-static GLuint staticZombieTextureBuffer1 = 0;
-static GLuint staticZombieTextureBuffer2 = 0;
-
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit texture:(GLKTextureInfo *) text
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
 {
-	self = [super initWithModel:model position:posit texture:text];
+	self = [super initWithModel:model position:posit];
 	if(self)
 	{
-		if(staticZombieTextureBuffer1 == 0)
-		{
-			float vertices[] = {
-				.5, 0,
-				.5, 1,
-				0, 1,
-				0, 0
-			};
-			glGenBuffers(1, &staticZombieTextureBuffer1);
-			glBindBuffer(GL_ARRAY_BUFFER, staticZombieTextureBuffer1);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-		}
-		if(staticZombieTextureBuffer2 == 0)
-		{
-			float vertices[] = {
-				1, 0,
-				1, 1,
-				.5, 1,
-				.5, 0
-			};
-			glGenBuffers(1, &staticZombieTextureBuffer2);
-			glBindBuffer(GL_ARRAY_BUFFER, staticZombieTextureBuffer2);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-		}
+		texture = [model.textureLoader getTextureDescription:@"zombie.png"];
 		
 		switchTexture = 40;
 		jumpHeight = 45;
@@ -75,11 +50,11 @@ static GLuint staticZombieTextureBuffer2 = 0;
 {
 	if(switchTexture <= 20)
 	{
-		characterTextureBuffer = staticZombieTextureBuffer1;
+		characterTextureBuffer = [texture getFrameBuffer:0];
 	}
 	else
 	{
-		characterTextureBuffer = staticZombieTextureBuffer2;
+		characterTextureBuffer = [texture getFrameBuffer:1];
 	}
 	[super renderCharacter];
 }

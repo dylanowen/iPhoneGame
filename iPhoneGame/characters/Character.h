@@ -13,11 +13,16 @@
 #define CHARACTER_HEIGHT 13
 
 @class GameModel;
+@class TextureDescription;
 
 @interface Character : NSObject
 {
 @protected
 	GLKMatrix4 projection;
+	
+	GLKBaseEffect *textureEffect;
+	GLKBaseEffect *healthEffect;
+	TextureDescription *texture;
 	
 	GLuint characterVertexBuffer;
 	GLuint characterTextureBuffer;
@@ -31,7 +36,7 @@
 	int health;
 }
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit texture:(GLKTextureInfo *) text;
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
 - (void)respawn:(GLKVector2) posit;
 - (void)update:(float) time;
 - (BOOL)checkBullet:(GLKVector2) position;

@@ -12,6 +12,9 @@
 #import "GameConstants.h"
 #import "Controls.h"
 
+@class TextureLoader;
+@class EffectLoader;
+@class BufferLoader;
 @class Environment;
 @class Particles;
 @class Controls;
@@ -20,6 +23,10 @@
 
 @property (strong, nonatomic) UIView *view;
 @property (nonatomic) GLKMatrix4 projectionMatrix;
+
+@property (strong, nonatomic) TextureLoader *textureLoader;
+@property (strong, nonatomic) EffectLoader *effectLoader;
+@property (strong, nonatomic) BufferLoader *bufferLoader;
 
 @property (strong, nonatomic) Environment *env;
 @property (strong, nonatomic) Particles *particles;

@@ -8,6 +8,9 @@
 
 #import "GameModel.h"
 
+#import "TextureLoader.h"
+#import "EffectLoader.h"
+#import "BufferLoader.h"
 #import "Environment.h"
 #import "JoyStick.h"
 #import "ToggleJoyStick.h"
@@ -45,6 +48,10 @@
 @synthesize view = _view;
 @synthesize projectionMatrix = _projectionMatrix;
 
+@synthesize textureLoader = _textureLoader;
+@synthesize effectLoader = _effectLoader;
+@synthesize bufferLoader = _bufferLoader;
+
 @synthesize env = _env;
 @synthesize tempTracker = _tempTracker;
 @synthesize particles = _particles;
@@ -61,24 +68,15 @@
 	{
 		self.view = view;
 		
+		self.textureLoader = [[TextureLoader alloc] init];
+		self.effectLoader = [[EffectLoader alloc] init];
+		self.bufferLoader = [[BufferLoader alloc] init];
+		
 		self.env = [[Environment alloc] initWithModel: self];
 		self.particles = [[Particles alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
-
-		//load character textures
-		NSError *error;
-		GLKTextureInfo *playerTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"character.png"].CGImage options:nil error:&error];
-		if(error)
-		{
-			NSLog(@"Error loading texture from image: %@", error);
-		}
-		GLKTextureInfo *zombieTexture = [GLKTextureLoader textureWithCGImage:[UIImage imageNamed:@"zombie.png"].CGImage options:nil error:&error];
-		if(error)
-		{
-			NSLog(@"Error loading texture from image: %@", error);
-		}
 		
-		self.player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 40) texture:playerTexture];
+		self.player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 40)];
 		
 		[self.env deleteRadius:20 x:(ENV_WIDTH / 2) y:40];
 		
@@ -93,7 +91,7 @@
 			{
 				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, self.player->position)) < 80);
-			[self.enemies addObject:[[Zombie alloc] initWithModel:self position:newPosition texture:zombieTexture]];
+			[self.enemies addObject:[[Zombie alloc] initWithModel:self position:newPosition]];
 			[self.zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.8f green: 0.1f blue: 0.1f]];
 			[self.env deleteRadius:20 x:newPosition.x y:newPosition.y];
 		}
