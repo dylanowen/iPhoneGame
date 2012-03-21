@@ -12,6 +12,9 @@
 #import "HighScore.h"
 
 @interface HighScoreController ()
+{
+	bool updated;
+}
 
 - (void)saveFilePaths;
 - (NSString *)dataFilePath:(NSString *) fileName;
@@ -63,6 +66,8 @@
 		[self saveFilePaths];
 	}
 	
+	updated = false;
+	
 	[self setScores];
 }
 
@@ -75,10 +80,10 @@
 	{
 		if(newScore.score > [[self.highScores objectAtIndex:i] unsignedIntValue])
 		{
-			[self.highScores removeObjectAtIndex:i];
-			[self.highScores removeObjectAtIndex:i];
 			[self.highScores insertObject:newName atIndex:i];
 			[self.highScores insertObject:[NSNumber numberWithUnsignedInt:newScore.score] atIndex:i];
+			[self.highScores removeObjectAtIndex:[self.highScores count] - 1];
+			[self.highScores removeObjectAtIndex:[self.highScores count] - 1];
 			[self setScores];
 			[self saveFilePaths];
 			return;
@@ -130,6 +135,9 @@
 
 - (IBAction)updateScores:(id)sender
 {
+	if(!updated)
+	{
+		updated = true;
 	bool test = NO;
 	HighScore *newScore = [HighScore sharedManager];
 	for(unsigned i = 0; i < [self.highScores count]; i += 2)
@@ -146,6 +154,7 @@
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"HighScore!" message:@"Please enter your name." delegate:self cancelButtonTitle:@"Go!" otherButtonTitles: nil];
 		alert.alertViewStyle = UIAlertViewStylePlainTextInput;
 		[alert show];
+	}
 	}
 }
 @end
