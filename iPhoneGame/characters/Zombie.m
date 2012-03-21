@@ -25,8 +25,7 @@
 	if(self)
 	{
 		texture = [model.textureLoader getTextureDescription:@"zombie.png"];
-		
-		switchTexture = 40;
+		characterTextureBuffer = [texture getFrameBuffer:currentFrame];
 		jumpHeight = 45;
 		
 		return self;
@@ -38,25 +37,24 @@
 {
 	[self update: time];
 	projection = matrix;
-	if(switchTexture <= 0)
+	if(animateTimer >= .25f)
 	{
-		switchTexture = arc4random() % 40 + 20;
+		currentFrame++;
+		if(currentFrame > 3)
+		{
+			currentFrame = 0;
+		}
+		if(health < 500)
+		{
+			characterTextureBuffer = [texture getFrameBuffer:currentFrame + 4];
+		}
+		else
+		{
+			characterTextureBuffer = [texture getFrameBuffer:currentFrame];
+		}
+		animateTimer = 0;
 	}
-	switchTexture--;
 	return health > 0;
-}
-
-- (void)renderCharacter
-{
-	if(switchTexture <= 20)
-	{
-		characterTextureBuffer = [texture getFrameBuffer:0];
-	}
-	else
-	{
-		characterTextureBuffer = [texture getFrameBuffer:1];
-	}
-	[super renderCharacter];
 }
 
 @end

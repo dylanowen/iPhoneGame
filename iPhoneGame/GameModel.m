@@ -138,7 +138,7 @@
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
 		Character *temp = [self.enemies objectAtIndex:i];
-		temp->movement = GLKVector2MultiplyScalar(GLKVector2Normalize(GLKVector2Subtract(self.player->position, temp->position)), 15);
+		temp->movement = GLKVector2MultiplyScalar(GLKVector2Normalize(GLKVector2Subtract(self.player->position, temp->position)), 10);
 		if(temp->movement.y < -10)
 		{
 			[temp jump];
@@ -153,7 +153,7 @@
 		}
 		if(![((Zombie *) temp) update: time projection:self.projectionMatrix])
 		{
-			[self.particles addBloodWithPosition:temp->position power:150 colorType:BloodColorBlack count:4];
+			[self.particles addBloodWithPosition:temp->position power:150 colorType:BloodColorRed count:8];
 			GLKVector2 newPosition;
 			//keep the enemies a certain distance from the player
 			do

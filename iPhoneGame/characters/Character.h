@@ -31,6 +31,7 @@
 	float jumpHeight;
 	
 	float animateTimer;
+	int currentFrame;
 	
 @public
 	GLKVector2 position;

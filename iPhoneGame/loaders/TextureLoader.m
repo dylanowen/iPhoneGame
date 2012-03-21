@@ -34,7 +34,7 @@
 		vertexBuffers = [[NSMutableDictionary alloc] init];
 		
 		[self addTexture:@"zombie.png" frames:8];
-		[self addTexture:@"character.png" frames:2];
+		[self addTexture:@"character.png" frames:8];
 		[self addTexture:@"circleRed.png" frames:1];
 		[self addTexture:@"circle.png" frames:1];
 		[self addTexture:@"font.png" frames:40];

@@ -96,6 +96,8 @@ enum
 		[self setupCollisionArrays];
 		
 		animateTimer = 0;
+		//make sure all the frames aren't synced
+		currentFrame = arc4random() % 4;
 		
 		[self respawn:posit];
 		
@@ -255,7 +257,7 @@ enum
 	if(GLKVector2Length(GLKVector2Subtract(bullet->position, position)) < 6)
 	{
 		health -= bullet->damage;
-		[self->game.particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorGreen];
+		[self->game.particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed];
 		return YES;
 	}
 	return NO;

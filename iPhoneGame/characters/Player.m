@@ -32,6 +32,7 @@
 		texture = [model.textureLoader getTextureDescription:@"character.png"];
 
 		switchTexture = false;
+		characterTextureBuffer = [texture getFrameBuffer:currentFrame];
 		jumpHeight = 65;
 		
 		return self;
@@ -43,18 +44,27 @@
 {
 	[super update:time];
 	projection = [self centerView];
-	if(health < 40)
+	if(animateTimer >= .25f)
 	{
-		switchTexture = true;
-	}
-	else
-	{
-		switchTexture = false;
+		currentFrame++;
+		if(currentFrame > 3)
+		{
+			currentFrame = 0;
+		}
+		if(health < 500)
+		{
+			characterTextureBuffer = [texture getFrameBuffer:currentFrame + 4];
+		}
+		else
+		{
+			characterTextureBuffer = [texture getFrameBuffer:currentFrame];
+		}
+		animateTimer = 0;
 	}
 	//slight healing
 	if(arc4random() % 70 == 0 && health < 100)
 	{
-		health += 1;
+		health += 5;
 	}
 	return projection;
 }
@@ -67,19 +77,6 @@
 	right = left + VIEW_WIDTH;
 	bottom = top + VIEW_HEIGHT;
 	return GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
-}
-
-- (void)renderCharacter
-{
-	if(switchTexture)
-	{
-		characterTextureBuffer = [texture getFrameBuffer:1];
-	}
-	else
-	{
-		characterTextureBuffer = [texture getFrameBuffer:0];
-	}
-	[super renderCharacter];
 }
 
 @end
