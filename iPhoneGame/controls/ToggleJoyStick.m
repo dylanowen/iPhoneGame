@@ -23,9 +23,9 @@
 
 @implementation ToggleJoyStick
 
-- (id)initWithCenter:(GLKVector2) posit model:(GameModel *) game
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR model:(GameModel *) game
 {
-	self = [super initWithCenter: posit model:game];
+	self = [super initWithCenter: posit region:regionR grabRegion:regionR model:game];
 	if(self)
 	{
 		toggle = NO;
@@ -34,10 +34,10 @@
 		if(boundingVertexBuffer == 0)
 		{
 			float vertices[] = {
-				JOY_BOUNDS + 20, -JOY_BOUNDS - 20,
-				JOY_BOUNDS + 20, JOY_BOUNDS + 20,
-				-JOY_BOUNDS - 20, JOY_BOUNDS + 20,
-				-JOY_BOUNDS - 20, -JOY_BOUNDS - 20
+				regionRadius + 20, -regionRadius - 20,
+				regionRadius + 20, regionRadius + 20,
+				-regionRadius - 20, regionRadius + 20,
+				-regionRadius - 20, -regionRadius - 20
 			};
 			boundingVertexBuffer = [game.bufferLoader addBufferForName:@"ToggleJoyStick"];
 			glBindBuffer(GL_ARRAY_BUFFER, boundingVertexBuffer);

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-#define JOY_BOUNDS 40
 #define JOY_LENGTH 50
 #define JOY_LENGTH_HALF JOY_LENGTH / 2
 
@@ -34,10 +33,13 @@
 	
 	TextureDescription *texture;
 	
+	unsigned regionRadius;
+	unsigned grabRadius;
+	
 	GLuint vertexBuffer;
 }
 
-- (id)initWithCenter:(GLKVector2) posit model:(GameModel *) model;
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion model:(GameModel *) game;
 
 - (bool)touchesBegan:(GLKVector2) loci;
 - (bool)touchesMoved:(GLKVector2) loci lastTouch:(GLKVector2) last;

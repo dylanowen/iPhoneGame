@@ -17,7 +17,7 @@
 
 @implementation JoyStick
 
-- (id)initWithCenter:(GLKVector2) posit model:(GameModel *) game
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion model:(GameModel *) game
 {
 	self = [super init];
 	if(self)
@@ -46,6 +46,9 @@
 
 		texture = [game.textureLoader getTextureDescription:@"circle.png"];
 		
+		regionRadius = regionR;
+		grabRadius = grabRegion;
+		
 		return self;
 	}
 	return nil;
@@ -59,9 +62,17 @@
 - (bool)touchesBegan:(GLKVector2) loci
 {
 	GLKVector2 temp = GLKVector2Subtract(loci, origin);
-	if(GLKVector2Length(temp) <= JOY_BOUNDS + 10)
+	if(GLKVector2Length(temp) <= grabRadius)
 	{
-		position = lastTouch = loci;
+		if(GLKVector2Length(temp) > regionRadius)
+		{
+			position = GLKVector2Add(origin, GLKVector2MultiplyScalar(GLKVector2Normalize(temp), regionRadius));
+		}
+		else
+		{
+			position = loci;
+		}
+		lastTouch = loci;
 		velocity = [self calculateVelocity];
 		return YES;
 	}
@@ -74,9 +85,9 @@
 	if(GLKVector2AllEqualToVector2(lastTouch, last))
 	{
 		GLKVector2 temp = GLKVector2Subtract(loci, origin);
-		if(GLKVector2Length(temp) > JOY_BOUNDS)
+		if(GLKVector2Length(temp) > regionRadius)
 		{
-			position = GLKVector2Add(origin, GLKVector2MultiplyScalar(GLKVector2Normalize(temp), JOY_BOUNDS));
+			position = GLKVector2Add(origin, GLKVector2MultiplyScalar(GLKVector2Normalize(temp), regionRadius));
 		}
 		else
 		{
@@ -110,7 +121,7 @@
 {
 	//based on position and origin so make sure to update position before calling this
 	GLKVector2 temp = GLKVector2Subtract(position, origin);
-	float normLength = powf((GLKVector2Length(temp) / (float) JOY_BOUNDS), 2);
+	float normLength = powf((GLKVector2Length(temp) / (float) regionRadius), 2);
 	return GLKVector2MultiplyScalar(GLKVector2Normalize(temp), normLength);
 }
 

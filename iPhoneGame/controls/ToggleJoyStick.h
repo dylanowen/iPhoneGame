@@ -16,6 +16,6 @@
 	bool toggle;
 }
 
-- (id)initWithCenter:(GLKVector2) posit model:(GameModel *) model;
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR model:(GameModel *) model;
 
 @end
