@@ -107,7 +107,7 @@
 	[self setScore3:nil];
 	[self setScore4:nil];
 	[self setScore5:nil];
-    [super viewDidUnload];
+	[super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
