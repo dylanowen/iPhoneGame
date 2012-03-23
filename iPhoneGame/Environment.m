@@ -136,7 +136,7 @@
 		glEnableVertexAttribArray(colorAttribute);
 		glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 		
-		glUniformMatrix4fv(modelViewUniform, 1, 0, self.game.projectionMatrix.m);
+		
 		
 		glBindVertexArrayOES(0);
 		
@@ -300,7 +300,7 @@
 	
 	glBindVertexArrayOES(vao);
 	
-	
+	glUniformMatrix4fv(modelViewUniform, 1, 0, self.game.projectionMatrix.m);
 	
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
 	
