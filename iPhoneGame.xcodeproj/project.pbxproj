@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C13BB5C150C72E40002FA77 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C13BB5B150C72E40002FA77 /* character.png */; };
+		2C6EF570151D2EB000CFDCA3 /* VAOLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */; };
 		2C805AFC1519BA3600C2702A /* BouncyMachineGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C805AFB1519BA3600C2702A /* BouncyMachineGun.m */; };
 		2C805AFF1519BBE100C2702A /* BouncyShotGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C805AFE1519BBE100C2702A /* BouncyShotGun.m */; };
 		2C8915521519451700F91087 /* TextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915511519451700F91087 /* TextureLoader.m */; };
@@ -69,6 +70,8 @@
 
 /* Begin PBXFileReference section */
 		2C13BB5B150C72E40002FA77 /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = character.png; sourceTree = "<group>"; };
+		2C6EF56E151D2EB000CFDCA3 /* VAOLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VAOLoader.h; path = loaders/VAOLoader.h; sourceTree = "<group>"; };
+		2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VAOLoader.m; path = loaders/VAOLoader.m; sourceTree = "<group>"; };
 		2C805AFA1519BA3600C2702A /* BouncyMachineGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BouncyMachineGun.h; path = weapons/BouncyMachineGun.h; sourceTree = "<group>"; };
 		2C805AFB1519BA3600C2702A /* BouncyMachineGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BouncyMachineGun.m; path = weapons/BouncyMachineGun.m; sourceTree = "<group>"; };
 		2C805AFD1519BBE100C2702A /* BouncyShotGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BouncyShotGun.h; path = weapons/BouncyShotGun.h; sourceTree = "<group>"; };
@@ -112,7 +115,7 @@
 		2C912592151686C500BA3DF6 /* zombie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie.png; sourceTree = "<group>"; };
 		2C92F047151A4F020049C0F1 /* HighScoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoreController.h; sourceTree = "<group>"; };
 		2C92F048151A4F020049C0F1 /* HighScoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreController.m; sourceTree = "<group>"; };
-		2C92F04B151A4F430049C0F1 /* HighScore.h */ = {isa = PBXFileReference; fileEncoding = 4; path = HighScore.h; sourceTree = "<group>"; };
+		2C92F04B151A4F430049C0F1 /* HighScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScore.h; sourceTree = "<group>"; };
 		2C92F04C151A4F430049C0F1 /* HighScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScore.m; sourceTree = "<group>"; };
 		2CD3863B1519B7AB00694CB9 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 				2C891554151945C900F91087 /* TextureDescription.m */,
 				2C89155915194F9700F91087 /* BufferLoader.h */,
 				2C89155A15194F9700F91087 /* BufferLoader.m */,
+				2C6EF56E151D2EB000CFDCA3 /* VAOLoader.h */,
+				2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */,
 			);
 			name = Loaders;
 			sourceTree = "<group>";
@@ -505,6 +510,7 @@
 				2C805AFF1519BBE100C2702A /* BouncyShotGun.m in Sources */,
 				2C92F049151A4F020049C0F1 /* HighScoreController.m in Sources */,
 				2C92F04D151A4F430049C0F1 /* HighScore.m in Sources */,
+				2C6EF570151D2EB000CFDCA3 /* VAOLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +570,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

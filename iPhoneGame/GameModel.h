@@ -15,6 +15,7 @@
 @class TextureLoader;
 @class EffectLoader;
 @class BufferLoader;
+@class VAOLoader;
 @class Environment;
 @class Particles;
 @class Controls;
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) TextureLoader *textureLoader;
 @property (strong, nonatomic) EffectLoader *effectLoader;
 @property (strong, nonatomic) BufferLoader *bufferLoader;
+@property (strong, nonatomic) VAOLoader *vaoLoader;
 
 @property (strong, nonatomic) Environment *env;
 @property (strong, nonatomic) Particles *particles;

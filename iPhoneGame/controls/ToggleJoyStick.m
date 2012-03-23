@@ -52,11 +52,6 @@
 	return nil;
 }
 
-- (void)dealloc
-{
-	glDeleteBuffers(1, &boundingVertexBuffer);
-}
-
 - (bool)touchesBegan:(GLKVector2) loci
 {
 	bool result = [super touchesBegan: loci];

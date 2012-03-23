@@ -11,6 +11,8 @@
 #import "TextureLoader.h"
 #import "EffectLoader.h"
 #import "BufferLoader.h"
+#import "VAOLoader.h"
+
 #import "Environment.h"
 #import "JoyStick.h"
 #import "ToggleJoyStick.h"
@@ -61,6 +63,7 @@
 @synthesize textureLoader = _textureLoader;
 @synthesize effectLoader = _effectLoader;
 @synthesize bufferLoader = _bufferLoader;
+@synthesize vaoLoader = _vaoLoader;
 
 @synthesize env = _env;
 @synthesize particles = _particles;
@@ -80,6 +83,7 @@
 		self.textureLoader = [[TextureLoader alloc] init];
 		self.effectLoader = [[EffectLoader alloc] init];
 		self.bufferLoader = [[BufferLoader alloc] init];
+		self.vaoLoader = [[VAOLoader alloc] init];
 		
 		self.env = [[Environment alloc] initWithModel: self];
 		self.particles = [[Particles alloc] initWithModel: self];
@@ -157,6 +161,7 @@
 	self.player->movement.y = self.controls.move->velocity.y * 10;
 	//setup the projectionMatrix for everything (it has to happen first)
 	self.projectionMatrix = [self.player update: time];
+
 	
 	[self.particles updateWithLastUpdate: time];
 	
@@ -219,7 +224,6 @@
 {
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
-		//make the blood appear 1/2 of the time
 		if([[self.enemies objectAtIndex:i] checkBullet:bullet])
 		{
 			return YES;
@@ -231,18 +235,19 @@
 
 - (void)render
 {
-	glClearColor(0.2, 0.2, 0.2, 1.0);
+	glClearColor(0.3, 0.3, 0.3, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	[self.env render];
+	
 	[self.player render];
+	
 	[self.enemies makeObjectsPerformSelector:@selector(render)];
 	[self.particles render];
 	[self.zombieTracker makeObjectsPerformSelector:@selector(render)];
 	[self.killDisplay render];
-	[self.controls render];
-	//[self.tempTracker render];
 	
+	 [self.controls render];
 	//debug
 	switch(glGetError())
 	{

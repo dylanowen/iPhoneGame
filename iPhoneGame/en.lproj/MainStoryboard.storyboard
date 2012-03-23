@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="39u-Uj-Gay">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -284,6 +284,38 @@
             <point key="canvasLocation" x="1140" y="736"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="GameViewController" superclassName="GLKViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GameViewController.h"/>
+        </class>
+        <class className="HighScoreController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HighScoreController.h"/>
+            <relationships>
+                <relationship kind="action" name="updateScores:"/>
+                <relationship kind="outlet" name="score1" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="score2" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="score3" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="score4" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="score5" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="MainMenuViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainMenuViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="weaponLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="WeaponViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WeaponViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="bulletsWithGravity:"/>
+                <relationship kind="action" name="machineGun:"/>
+                <relationship kind="action" name="regularBullet:"/>
+                <relationship kind="action" name="shotgun:"/>
+                <relationship kind="action" name="sniper:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <nil key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

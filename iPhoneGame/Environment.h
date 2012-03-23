@@ -26,6 +26,7 @@
 - (id)initWithModel:(GameModel *) game;
 
 - (void)deleteRadius:(int) radius x:(int) x y:(int) y;
+- (void)restoreRadius:(int) radius x:(int) x y:(int) y;
 
 - (void)changeColor:(float[4]) newColor x:(int) x y:(int) y;
 

@@ -16,6 +16,7 @@
 @interface Environment()
 {	
 	float clearer[MAX_DELETE_RADIUS * 2][4];
+	float restorer[MAX_DELETE_RADIUS * 2][4];
 	
 	GLuint positionAttribute;
 	GLuint colorAttribute;
@@ -31,6 +32,8 @@
 
 @property (nonatomic, strong) GameModel *game;
 @property (nonatomic, strong) GLProgram *program;
+
+- (void)editRadius:(int) radius x:(int) x y:(int) y delete:(bool) del;
 
 @end
 
@@ -60,6 +63,12 @@
 		//setup the clearing array
 		for(unsigned i = 0; i < MAX_DELETE_RADIUS; i++)
 		{
+			int randomBrown = (arc4random() % 5);
+			restorer[i][0] = browns[randomBrown][0] - 0.3f;
+			restorer[i][1] = browns[randomBrown][1] - 0.1f;
+			restorer[i][2] = browns[randomBrown][2];
+			restorer[i][3] = 1.0f;
+			
 			for(unsigned j = 0; j < 4; j++)
 			{
 				clearer[i][j] = 0.0f;
@@ -159,9 +168,32 @@
 
 - (void)deleteRadius:(int) radius x:(int) x y:(int) y
 {
+	[self editRadius:radius x:x y:y delete:YES];
+}
+
+- (void)restoreRadius:(int) radius x:(int) x y:(int) y
+{
+	[self editRadius:radius x:x y:y delete:NO];
+}
+
+- (void)editRadius:(int) radius x:(int) x y:(int) y delete:(bool) del
+{
 	radius = (radius > MAX_DELETE_RADIUS)?MAX_DELETE_RADIUS:radius; //keep the radius in bounds
 	int tempY, i = -radius, iEnd = radius, j, jEnd;
 	unsigned offset;
+	float **oWA;
+	bool collisionState;
+	
+	if(del)
+	{
+		oWA = (float **) clearer;
+		collisionState = NO;
+	}
+	else
+	{
+		oWA = (float **) restorer;
+		collisionState = YES;
+	}
     
 	//keep inside bounds
 	if((i + x) < 1)
@@ -202,13 +234,13 @@
 			tempY = jEnd * 4 * sizeof(float);
 		
 			//clear out the buffer
-			glBufferSubData(GL_ARRAY_BUFFER, offset, tempY, clearer);
+			glBufferSubData(GL_ARRAY_BUFFER, offset, tempY, oWA);
 		
 			//clear our own local array
 			jEnd += j;
 			while(j < jEnd)
 			{
-				dirt[i + x][j] = NO;
+				dirt[i + x][j] = collisionState;
 				j++;
 			}
 		}

@@ -36,7 +36,7 @@
 	unsigned regionRadius;
 	unsigned grabRadius;
 	
-	GLuint vertexBuffer;
+	GLuint vao;
 }
 
 - (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion model:(GameModel *) game;
