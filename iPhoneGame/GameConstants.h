@@ -9,6 +9,7 @@
 #ifndef iPhoneGame_GameConstants_h
 #define iPhoneGame_GameConstants_h
 
+//bump the size up to a lot to completely remove float calculations
 #define VIEW_WIDTH 240//640//
 #define VIEW_HEIGHT 160//960//
 

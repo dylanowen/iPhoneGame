@@ -32,7 +32,6 @@ enum
 @interface Character()
 {
 	GameModel *game;
-	Environment *env;
 	
 	GLKVector2 velocity;
 	
@@ -120,7 +119,7 @@ enum
 	
 	animateTimer += time;
 	velocity.y += GRAVITY;
-	//NSLog(@"Velocity (%f, %f)", velocity.x, velocity.y);
+	NSLog(@"Movement (%f, %f)", movement.x, movement.y);
 	int newPosition[2] = {(int) ((velocity.x + movement.x) * time * precision), (int) ((velocity.y + movement.y) * time * precision)};
 	//NSLog(@"Movement (%d, %d)", newPosition[0], newPosition[1]);
 	
@@ -215,22 +214,38 @@ enum
 	
 	//NSLog(@"t=%d r=%d b=%d l=%d", rating[CVTop], rating[CVRight], rating[CVBottom], rating[CVLeft]);
 	
+	
 	if((stepX > 0 && rating[CVRight] > 1) || (stepX < 0 && rating[CVLeft] > 1))
 	{
 		*x = *x - stepX;
-		//intX = *x / precision;
 		
-		velocity.x = -velocity.x / 6;
+		velocity.x = -velocity.x / 10;
 		cX = YES;
 	}
+	else if(((stepX > 0 && rating[CVRight] == 1) || (stepX < 0 && rating[CVLeft] == 1)) && rating[CVBottom] > 0)
+	{
+		*y = *y - precision;
+		int intY = *y / precision;
+		
+		rating[CVBottom] = [self checkCollision:CVBottom x:intX y:intY];
+	}
 	
-	if((stepY > 0 && rating[CVBottom] > 0) || (stepY < 0 && rating[CVTop] > 0))
+	if((stepY > 0 && rating[CVBottom] > 1) || (stepY < 0 && rating[CVTop] > 1))
 	{
 		*y = *y - stepY;
-		//intX = *y / precision;
 		
 		velocity.y = -velocity.y / 6;
 		cY = YES;
+	}
+	else if((stepY > 0 && rating[CVBottom] == 1) || (stepY < 0 && rating[CVTop] == 1))
+	{
+		if(rating[CVLeft] < CVCount[CVLeft] && rating[CVRight] < CVCount[CVRight])
+		{
+			*y = *y - stepY;
+			
+			velocity.y = -velocity.y / 6;
+			cY = YES;
+		}
 	}
 
 	if((stepX == 0 && cY) || (stepY == 0 && cX) || (cX && cY))
@@ -254,6 +269,7 @@ enum
 
 - (BOOL)checkBullet:(BulletParticle *) bullet
 {
+	//use squared length
 	if(GLKVector2Length(GLKVector2Subtract(bullet->position, position)) < 6)
 	{
 		health -= bullet->damage;
@@ -267,7 +283,7 @@ enum
 {
 	int intX = (int) position.x;
 	int intY = ((int) position.y);
-	if([self checkCollision:CVBottom x:intX y:intY] || [self checkCollision:CVBottom x:intX y:intY + 1] || [self checkCollision:CVBottom x:intX y:intY + 2] )
+	if([self checkCollision:CVBottom x:intX y:intY + 1])
 	{
 		velocity.y = -jumpHeight;
 	}
@@ -315,15 +331,23 @@ enum
 	
 	for(unsigned k = 0; k < vert2Offset; k += 6)
 	{
-		NSLog(@"%f %f  %f %f  %f %f", vertices2[k], vertices2[k + 1], vertices2[k + 2], vertices2[k + 3], vertices2[k + 4], vertices2[k + 5]);
+		//NSLog(@"%.1f %.1f  %.1f %.1f  %.1f %.1f", vertices2[k], vertices2[k + 1], vertices2[k + 2], vertices2[k + 3], vertices2[k + 4], vertices2[k + 5]);
 	}
-	GLKBaseEffect *temp = [[GLKBaseEffect alloc] init];
-	temp.useConstantColor = YES;
-	temp.constantColor = GLKVector4Make(1.0f, 0.0f, 0.0f, 0.3f);
-	temp.transform.projectionMatrix = effect.transform.projectionMatrix;
-	temp.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x, position.y, 0);
 	
-	[temp prepareToDraw];
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	GLKBaseEffect *tempEffect = [game.effectLoader getEffectForName:@"dubugTempEffect"];
+	if(tempEffect == nil)
+	{
+		tempEffect = [game.effectLoader addEffectForName:@"dubugTempEffect"];
+		tempEffect.useConstantColor = YES;
+		tempEffect.constantColor = GLKVector4Make(1.0f, 0.0f, 0.0f, 0.3f);
+	}
+	
+	tempEffect.transform.projectionMatrix = projection;
+	tempEffect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x, position.y, 0);
+	
+	[tempEffect prepareToDraw];
 	
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
 	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices2);
@@ -331,7 +355,7 @@ enum
 	glDrawArrays(GL_TRIANGLES, 0, vert2Offset / 2);
 	
 	glDisableVertexAttribArray(GLKVertexAttribPosition);
-	 */
+	*/
 }
 
 - (void)renderCharacter

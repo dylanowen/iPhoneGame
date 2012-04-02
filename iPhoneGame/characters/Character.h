@@ -13,12 +13,15 @@
 #define CHARACTER_HEIGHT 13
 
 @class GameModel;
+@class Environment;
 @class BulletParticle;
 @class TextureDescription;
 
 @interface Character : NSObject
 {
 @protected
+	Environment *env;
+	
 	GLKMatrix4 projection;
 	
 	GLKBaseEffect *textureEffect;

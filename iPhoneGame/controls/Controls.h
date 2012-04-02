@@ -17,7 +17,7 @@
 
 @property (strong, nonatomic) JoyStick *move;
 @property (strong, nonatomic) ToggleJoyStick *look;
-@property (strong, nonatomic) Button *jump;
+//@property (strong, nonatomic) Button *jump;
 
 - (id)initWithModel: (GameModel *) game;
 - (void)render;

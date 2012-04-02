@@ -20,6 +20,7 @@
 @class Particles;
 @class Controls;
 @class BulletParticle;
+@class Player;
 
 @interface GameModel : NSObject
 
@@ -31,6 +32,7 @@
 @property (strong, nonatomic) BufferLoader *bufferLoader;
 @property (strong, nonatomic) VAOLoader *vaoLoader;
 
+@property (strong, nonatomic) Player *player;
 @property (strong, nonatomic) Environment *env;
 @property (strong, nonatomic) Particles *particles;
 @property (strong, nonatomic) Controls *controls;

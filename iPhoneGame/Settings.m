@@ -13,20 +13,27 @@ static Settings* gameSettings = nil;
 @implementation Settings
 @synthesize weapon;
 
-+ (id) sharedManager {
-    @synchronized(self) {
-        if (gameSettings == nil) {
-            gameSettings = [[self alloc] init];
-        }
-    }
-    return gameSettings;
++ (id)sharedManager
+{
+	@synchronized(self)
+	{
+		if(gameSettings == nil)
+		{
+			gameSettings = [[self alloc] init];
+		}
+	}
+	return gameSettings;
 }
 
-- (id) init {
-    if (self = [super init]) {
-        gameSettings.weapon = 0;
-    }
-    return self;
+- (id)init
+{
+	self = [super init];
+	if(self)
+	{
+		self.weapon = 2;
+		return self;
+	}
+	return nil;
 }
 
 

@@ -145,11 +145,9 @@
 		glEnableVertexAttribArray(colorAttribute);
 		glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 		
-		
-		
 		glBindVertexArrayOES(0);
 		
-		NSLog(@"%fMBs of vertex data %fMBs of color data", (float) (sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2) / 1000 / 1000, (float) (sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 4) / 1000 / 1000);
+		NSLog(@"%.3fMBs of vertex data %.3fMBs of color data", (float) (sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2) / 1000 / 1000, (float) (sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 4) / 1000 / 1000);
 		
 		//remove vertexBufferData we don't need its data anymore because it's in a buffer
 		free(colors);

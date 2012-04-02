@@ -34,6 +34,7 @@
 		widthBound = (ENV_WIDTH - 1) * precision;
 		heightBound = (ENV_HEIGHT - 1) * precision;
 		
+		//something is wrong here?
 		int movement[2] = {(int) (velocity.x * precision), (int) (velocity.y * precision)};
 		[self calculateStep:movement];
 		
@@ -44,6 +45,7 @@
 
 - (void)calculateStep:(int[2]) movement
 {
+	//cut this out for higher speed (it messes up your branch predictor)
 	if(movement[0] != 0 || movement[1] != 0)
 	{
 		if(movement[0] == 0)
@@ -85,7 +87,6 @@
 	bool start = YES;
 	int intI, intJ, lastI, lastJ, i, j;
 	int movement[2] = {(int) (velocity.x * time * precision), (int) (velocity.y * time * precision)};
-	
 		
 	i = (int) (position.x * precision);
 	j = (int) (position.y * precision);

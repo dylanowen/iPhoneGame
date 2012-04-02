@@ -8,7 +8,7 @@
 
 #import "JoyStick.h"
 
-#define TOGGLE_BOUNDS 15
+#define TOGGLE_BOUNDS 25
 
 @interface ToggleJoyStick : JoyStick
 {

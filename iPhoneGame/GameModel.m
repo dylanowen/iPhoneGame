@@ -35,7 +35,7 @@
 #import "Settings.h"
 #import "HighScore.h"
 
-#define NUMBER_OF_ENEMIES 10
+#define NUMBER_OF_ENEMIES 1
 #define BULLET_TIME_INCREMENT 0.05f
 
 @interface GameModel()
@@ -48,7 +48,6 @@
 	Weapon *currentGun;
 }
 
-@property (strong, nonatomic) Player *player;
 @property (strong, nonatomic) NSMutableArray	 *enemies;
 @property (strong, nonatomic) NSMutableArray	 *zombieTracker;
 @property (strong, nonatomic) Text *killDisplay;
@@ -130,9 +129,6 @@
             break;
 		}
 		
-		
-		
-		
 		self.killDisplay = [[Text alloc] initWithModel:self text:@"kills 0" position:GLKVector2Make(5, 5)];
 		
 		self.projectionMatrix = GLKMatrix4MakeOrtho(0, VIEW_WIDTH, VIEW_HEIGHT, 0, 1, -1);
@@ -152,37 +148,34 @@
 		return NO;
 	}
 	
-	if(self.controls.jump->pressed)
+	//it's negative because up is negative...
+	if(self.controls.move->velocity.y < -0.5f)
 	{
 		[self.player jump];
 	}
 	
 	self.player->movement.x = self.controls.move->velocity.x * 60;
-	self.player->movement.y = self.controls.move->velocity.y * 10;
+	//self.player->movement.y = self.controls.move->velocity.y * 5;
+	
+	self.player->look = self.controls.look->velocity;
+	
 	//setup the projectionMatrix for everything (it has to happen first)
 	self.projectionMatrix = [self.player update: time];
+	
+	//generate a new bullet
+	self.player->shoot = self.controls.look->toggle;
+	if(self.controls.look->toggle)
+	{
+		[currentGun shootAtPosition:self.player->position direction: self.controls.look->velocity];
+	}
 
 	
 	[self.particles updateWithLastUpdate: time];
 	
 	
-	//NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
 		Character *temp = [self.enemies objectAtIndex:i];
-		temp->movement = GLKVector2MultiplyScalar(GLKVector2Normalize(GLKVector2Subtract(self.player->position, temp->position)), 10);
-		if(temp->movement.y < -10)
-		{
-			[temp jump];
-		}
-		if(arc4random() % 10 == 0)
-		{
-			GLKVector2 dig = GLKVector2Add(GLKVector2Add(temp->position, GLKVector2Normalize(temp->movement)), GLKVector2Make(0, -4));
-			//NSLog(@"(%f %f) + (%f, %f) -> (%f, %f)", temp->position.x, temp->position.y, temp->movement.x, temp->movement.y, dig.x, dig.y);
-			[self.env deleteRadius:5 x:dig.x y:dig.y];
-			dig = GLKVector2Add(dig, GLKVector2Make(0, 8));
-			[self.env deleteRadius:5 x:dig.x y:dig.y];
-		}
 		if(![((Zombie *) temp) update: time projection:self.projectionMatrix])
 		{
 			[self.particles addBloodWithPosition:temp->position power:150 colorType:BloodColorRed count:8];
@@ -192,29 +185,19 @@
 			{
 				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, self.player->position)) < 140);
-			
+	 
 			[temp respawn:newPosition];
 			zombieKills++;
 			self.killDisplay.str = [[NSString alloc] initWithFormat:@"kills %d", zombieKills];
 			//[indexes addIndex: i];
 		}
-		else if(GLKVector2Length(GLKVector2Subtract(self.player->position, temp->position)) < 4)
-		{
-			self.player->health -= 2;
-			[self.particles addBloodWithPosition:self.player->position power:75 colorType:BloodColorRed];
-		}
 		[[self.zombieTracker objectAtIndex:i] updateTrackee: temp->position center: self.player->position];
 	}
-	//[self.enemies removeObjectsAtIndexes: indexes];
-	//[self.zombieTracker removeObjectsAtIndexes: indexes];
+	
 	
 	[currentGun update:time];
 	
-	//generate a new bullet
-	if(self.controls.look->toggle)
-	{
-		[currentGun shootAtPosition:self.player->position direction:self.controls.look->velocity];
-	}
+	
 	
 	
 	return YES;

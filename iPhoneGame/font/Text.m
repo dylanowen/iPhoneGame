@@ -53,6 +53,7 @@
 			vertexBuffer = [model.bufferLoader addBufferForName:@"Font"];
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		
 		texture = [model.textureLoader getTextureDescription:@"font.png"];

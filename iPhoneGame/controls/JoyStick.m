@@ -15,7 +15,6 @@
 #import "VAOLoader.h"
 #import "EffectLoader.h"
 
-
 @implementation JoyStick
 
 - (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion model:(GameModel *) game
@@ -90,7 +89,6 @@
 		velocity = [self calculateVelocity];
 		return YES;
 	}
-
 	return NO;
 }
 

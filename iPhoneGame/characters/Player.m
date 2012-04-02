@@ -10,11 +10,24 @@
 
 #import "GameConstants.h"
 #import "GameModel.h"
+#import "Particles.h"
 #import "TextureLoader.h"
+#import "EffectLoader.h"
+#import "BufferLoader.h"
 
 @interface Player()
 {
 	bool switchTexture;
+	
+	Particles *particles;
+	
+	GLKBaseEffect *laserEffect;
+	GLuint laserVertexBuffer;
+	GLuint laserColorOnBuffer;
+	GLuint laserColorOffBuffer;
+	
+	GLKMatrix4 laserCenter;
+	
 }
 
 - (GLKMatrix4)centerView;
@@ -30,6 +43,62 @@
 	if(self)
 	{
 		texture = [model.textureLoader getTextureDescription:@"character.png"];
+		particles = model.particles;
+		
+		laserEffect = [model.effectLoader getEffectForName:@"CharLaserSight"];
+		if(laserEffect == nil)
+		{
+			laserEffect = [model.effectLoader addEffectForName:@"CharLaserSight"];
+			laserEffect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, model.view.bounds.size.width, model.view.bounds.size.height, 0, 1, -1);
+		}
+		
+		laserVertexBuffer = [model.bufferLoader getBufferForName:@"CharLaserSight"];
+		if(laserVertexBuffer == 0)
+		{
+			
+			float vertices[] = {
+				model.view.bounds.size.width * 3 / 4, 0,
+				0, 1,
+				0, -1
+			};
+			laserVertexBuffer = [model.bufferLoader addBufferForName:@"CharLaserSight"];
+			glBindBuffer(GL_ARRAY_BUFFER, laserVertexBuffer);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+		
+		laserColorOnBuffer = [model.bufferLoader getBufferForName:@"CharLaserOnSight"];
+		if(laserColorOnBuffer == 0)
+		{
+			
+			float color[] = {
+				1.0, 0.0, 0.0, 0.01,
+				1.0, 0.0, 0.0, 0.6,
+				1.0, 0.0, 0.0, 0.6,
+			};
+			laserColorOnBuffer = [model.bufferLoader addBufferForName:@"CharLaserOnSight"];
+			glBindBuffer(GL_ARRAY_BUFFER, laserColorOnBuffer);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+		
+		laserColorOffBuffer = [model.bufferLoader getBufferForName:@"CharLaserOffSight"];
+		if(laserColorOffBuffer == 0)
+		{
+			
+			float color[] = {
+				0.8, 0.1, 0.1, 0.01,
+				0.8, 0.1, 0.1, 0.4,
+				0.8, 0.1, 0.1, 0.4,
+			};
+			laserColorOffBuffer = [model.bufferLoader addBufferForName:@"CharLaserOffSight"];
+			glBindBuffer(GL_ARRAY_BUFFER, laserColorOffBuffer);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+		
+		shoot = false;
+		laserCenter = GLKMatrix4MakeTranslation(model.view.bounds.size.width / 2, model.view.bounds.size.height / 2, 0);
 
 		switchTexture = false;
 		characterTextureBuffer = [texture getFrameBuffer:currentFrame];
@@ -44,6 +113,9 @@
 {
 	[super update:time];
 	projection = [self centerView];
+	
+	laserEffect.transform.modelviewMatrix = GLKMatrix4RotateZ(laserCenter, atan2f(look.y, look.x));
+	
 	if(animateTimer >= .25f)
 	{
 		currentFrame++;
@@ -53,6 +125,11 @@
 		}
 		if(health < 500)
 		{
+			//randomly bleed
+			if(arc4random() % 5 == 0)
+			{
+				[particles addBloodWithPosition:position power:25];
+			}
 			characterTextureBuffer = [texture getFrameBuffer:currentFrame + 4];
 		}
 		else
@@ -77,6 +154,36 @@
 	right = left + VIEW_WIDTH;
 	bottom = top + VIEW_HEIGHT;
 	return GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
+}
+
+- (void)render
+{
+	if(!GLKVector2AllEqualToVector2(look, GLKVector2Make(0.0f, 0.0f)))
+	{
+		[laserEffect prepareToDraw];
+	
+		glBindBuffer(GL_ARRAY_BUFFER, laserVertexBuffer);
+		glEnableVertexAttribArray(GLKVertexAttribPosition);
+		glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+	
+		if(shoot)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, laserColorOnBuffer);
+		}
+		else
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, laserColorOffBuffer);
+		}
+		glEnableVertexAttribArray(GLKVertexAttribColor);
+		glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+		
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		
+		glDisableVertexAttribArray(GLKVertexAttribPosition);
+		glDisableVertexAttribArray(GLKVertexAttribColor);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+	[super render];
 }
 
 @end

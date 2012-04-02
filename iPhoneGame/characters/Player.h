@@ -9,6 +9,11 @@
 #import "Character.h"
 
 @interface Player : Character
+{
+@public
+	GLKVector2 look;
+	bool shoot;
+}
 
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
 - (GLKMatrix4)update:(float) time;

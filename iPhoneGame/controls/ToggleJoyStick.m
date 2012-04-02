@@ -34,11 +34,13 @@
 		if(boundingVertexBuffer == 0)
 		{
 			float vertices[] = {
-				regionRadius + 20, -regionRadius - 20,
-				regionRadius + 20, regionRadius + 20,
-				-regionRadius - 20, regionRadius + 20,
-				-regionRadius - 20, -regionRadius - 20
+				TOGGLE_BOUNDS, -TOGGLE_BOUNDS,
+				TOGGLE_BOUNDS, TOGGLE_BOUNDS,
+				-TOGGLE_BOUNDS, TOGGLE_BOUNDS,
+				-TOGGLE_BOUNDS, -TOGGLE_BOUNDS
 			};
+			
+			
 			boundingVertexBuffer = [game.bufferLoader addBufferForName:@"ToggleJoyStick"];
 			glBindBuffer(GL_ARRAY_BUFFER, boundingVertexBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -72,16 +74,6 @@
 	return result;
 }
 
-- (bool)touchesEnded:(GLKVector2) loci lastTouch:(GLKVector2) last
-{
-	bool result = [super touchesEnded: loci lastTouch: last];
-	if(result)
-	{
-		toggle = GLKVector2Length(GLKVector2Subtract(position, origin)) > TOGGLE_BOUNDS;
-	}
-	return result;
-}
-
 - (void)touchesCancelled
 {
 	[super touchesCancelled];
@@ -98,25 +90,30 @@
 {
 	if(toggle)
 	{
-		effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(origin.x, origin.y, 0);
 		effect.texture2d0.name = [redCircleTexture getName];
-		
-		[effect prepareToDraw];
-		
-		glBindBuffer(GL_ARRAY_BUFFER, boundingVertexBuffer);
-		glEnableVertexAttribArray(GLKVertexAttribPosition);
-		glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
-	
-		glBindBuffer(GL_ARRAY_BUFFER, [redCircleTexture getFrameBuffer:0]);
-		glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-		glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
-	
-		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-	
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glDisableVertexAttribArray(GLKVertexAttribTexCoord0);	
-		glDisableVertexAttribArray(GLKVertexAttribPosition);
 	}
+	else
+	{
+		effect.texture2d0.name = [texture getName];
+	}
+	
+	effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(origin.x, origin.y, 0);
+
+	[effect prepareToDraw];
+	
+	glBindBuffer(GL_ARRAY_BUFFER, boundingVertexBuffer);
+	glEnableVertexAttribArray(GLKVertexAttribPosition);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, [redCircleTexture getFrameBuffer:0]);
+	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+	
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDisableVertexAttribArray(GLKVertexAttribTexCoord0);	
+	glDisableVertexAttribArray(GLKVertexAttribPosition);
 	
 	[super render];
 }
