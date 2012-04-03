@@ -14,12 +14,12 @@
 #import "BloodParticle.h"
 #import "TextureLoader.h"
 
-#define MOVEMENT_SPEED 4
-
 @interface Zombie()
 {
 	Character *player;
 	Particles *particles;
+	
+	int movementSpeed;
 }
 @end
 
@@ -36,6 +36,8 @@
 		characterTextureBuffer = [texture getFrameBuffer:currentFrame];
 		jumpHeight = 45;
 		
+		movementSpeed = (arc4random() % 4) + 4;
+		
 		return self;
 	}
 	return nil;
@@ -44,7 +46,7 @@
 - (bool)update:(float) time projection:(GLKMatrix4) matrix
 {
 	GLKVector2 normMovement = GLKVector2Normalize(GLKVector2Subtract(player->position, position));
-	movement = GLKVector2MultiplyScalar(normMovement, MOVEMENT_SPEED);
+	movement = GLKVector2MultiplyScalar(normMovement, movementSpeed);
 	//NSLog(@"(%.2f %.2f)", movement.x, movement.y);
 	if(normMovement.y < -0.85f)
 	{
@@ -52,7 +54,7 @@
 	}
 	if(arc4random() % 10 == 0)
 	{
-		GLKVector2 dig = GLKVector2Add(GLKVector2Add(position, movement), GLKVector2Make(-2, -6));
+		GLKVector2 dig = GLKVector2Add(GLKVector2Add(position, normMovement), GLKVector2Make(-2, -6));
 		//NSLog(@"(%f %f) + (%f, %f) -> (%f, %f)", position.x, position.y, movement.x, movement.y, dig.x, dig.y);
 		[env editRect:YES leftX:dig.x topY:dig.y width:7 height:10];
 	}
