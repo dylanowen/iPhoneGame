@@ -14,7 +14,7 @@
 #import "BloodParticle.h"
 #import "TextureLoader.h"
 
-#define MOVEMENT_SPEED 1
+#define MOVEMENT_SPEED 4
 
 @interface Zombie()
 {
@@ -52,11 +52,9 @@
 	}
 	if(arc4random() % 10 == 0)
 	{
-		GLKVector2 dig = GLKVector2Add(GLKVector2Add(position, normMovement), GLKVector2Make(0, -4));
+		GLKVector2 dig = GLKVector2Add(GLKVector2Add(position, movement), GLKVector2Make(-2, -6));
 		//NSLog(@"(%f %f) + (%f, %f) -> (%f, %f)", position.x, position.y, movement.x, movement.y, dig.x, dig.y);
-		[env deleteRadius:5 x:dig.x y:dig.y];
-		dig = GLKVector2Add(dig, GLKVector2Make(0, 8));
-		[env deleteRadius:5 x:dig.x y:dig.y];
+		[env editRect:YES leftX:dig.x topY:dig.y width:7 height:10];
 	}
 	
 	[self update: time];
@@ -93,10 +91,9 @@
 {
 	[super render];
 
-	NSLog(@"%f %f", movement.x, movement.y);
 	float vertices2[6] = {
 		0, 0,
-		0, 1,
+		0, 4,
 		movement.x, movement.y
 	};
 

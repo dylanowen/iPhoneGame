@@ -247,6 +247,56 @@
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+- (void)editRect:(bool) del leftX:(int) x topY:(int) y width:(int) width height:(int) height
+{
+	float **oWA;
+	bool collisionState;
+	
+	height = (height > MAX_DELETE_RADIUS * 2)?MAX_DELETE_RADIUS * 2:height; //keep the height in bounds
+	if(x < 1)
+	{
+		x = 1;
+	}
+	if(y < 1)
+	{
+		y = 1;
+	}
+	if(x + width > (ENV_WIDTH - 1))
+	{
+		width = ENV_WIDTH - 1 - x;
+	}
+	if(y + height > (ENV_HEIGHT - 1))
+	{
+		height = ENV_HEIGHT - 1 - y;
+	}
+	
+	if(del)
+	{
+		oWA = (float **) clearer;
+		collisionState = NO;
+	}
+	else
+	{
+		oWA = (float **) restorer;
+		collisionState = YES;
+	}
+	
+	int endX = x + width;
+	int endY = y + height;
+	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+	for(int i = x; i < endX; i++)
+	{
+		//clear out the buffer
+		glBufferSubData(GL_ARRAY_BUFFER, (i * ENV_HEIGHT + y) * 4 * sizeof(float), height * 4 * sizeof(float), oWA);
+		
+		//clear our own local array
+		for(int j = y; j < endY; j++)
+		{
+			dirt[i][j] = collisionState;
+		}
+	}
+}
+
 - (void)changeColor:(float[4]) newColor x:(int) x y:(int) y
 {
 	unsigned offset;

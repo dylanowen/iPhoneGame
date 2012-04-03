@@ -35,7 +35,7 @@
 #import "Settings.h"
 #import "HighScore.h"
 
-#define NUMBER_OF_ENEMIES 15
+#define NUMBER_OF_ENEMIES 10
 
 @interface GameModel()
 {
@@ -104,7 +104,7 @@
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, self.player->position)) < 80);
 			[self.enemies addObject:[[Zombie alloc] initWithModel:self position:newPosition]];
 			[self.zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.35f blue: 0.0f model:self]];
-			[self.env deleteRadius:20 x:newPosition.x y:newPosition.y];
+			//[self.env deleteRadius:20 x:newPosition.x y:newPosition.y];
 		}
 		
 		zombieKills = 0;

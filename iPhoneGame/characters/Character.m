@@ -125,6 +125,7 @@ enum
 	
 	x = (int) (position.x * (float) precision);
 	y = (int) (position.y * (float) precision);
+	
 	if(newPosition[0] == 0 && newPosition[1] == 0)
 	{
 		//nothing has moved so don't do anything
@@ -170,7 +171,7 @@ enum
 	
 	//NSLog(@"Step (%d, %d)", stepX, stepY);
 	
-	while(x < highX && x > lowX && y < highY && y > lowY)
+	while(x <= highX && x >= lowX && y <= highY && y >= lowY)
 	{
 		x += stepX;
 		y += stepY;
@@ -180,8 +181,8 @@ enum
 		}
 	}
 	
-	position.x = x / precision;
-	position.y = y / precision;
+	position.x = (float) x / precision;
+	position.y = (float) y / precision;
 }
 
 -(BOOL) checkPhys:(int *) x y:(int *) y stepX:(int) stepX stepY:(int) stepY

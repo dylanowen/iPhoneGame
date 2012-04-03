@@ -96,69 +96,69 @@
 	int lowY = j - abs(movement[1]);
 	int highY = j + abs(movement[1]);
 		
-		while(i <= highX && i >= lowX && j <= highY && j >= lowY)
-		{			
-			intI = i / precision;
-			intJ = j / precision;
-			if(intI != lastI || intJ != lastJ)
+	while(i <= highX && i >= lowX && j <= highY && j >= lowY)
+	{		
+		intI = i / precision;
+		intJ = j / precision;
+		if(intI != lastI || intJ != lastJ)
+		{
+			if([model checkCharacterHit:self])
 			{
-				if([model checkCharacterHit:self])
-				{
-					return NO;
-				}
-				else if(i < precision && j < precision)
-				{
-					[env deleteRadius:destructionRadius x:1 y:1];
-					return NO;
-				}
-				else if(i < precision)
-				{
-					[env deleteRadius:destructionRadius x:1 y:intJ];
-					return NO;
-				}
-				else if(j < precision)
-				{
-					[env deleteRadius:destructionRadius x:intI y:1];
-					return NO;
-				}
-				else if(i >= widthBound && j >= heightBound)
-				{
-					[env deleteRadius:destructionRadius x:(ENV_WIDTH - 1) y:(ENV_HEIGHT - 1)];
-					return NO;
-				}
-				else if(i >= widthBound)
-				{
-					[env deleteRadius:destructionRadius x:(ENV_WIDTH - 1) y:intJ];
-					return NO;
-				}
-				else if(j >= heightBound)
-				{
-					[env deleteRadius:destructionRadius x:intI y:(ENV_HEIGHT - 1)];
-					return NO;
-				}
-			
-				if(env->dirt[intI][intJ])
-				{
-					if(!start)
-					{
-						intI = lastI;
-						intJ = lastJ;
-					}
-					[env deleteRadius:destructionRadius x:intI y:intJ];
-					//[model.particles addBulletWithPosition:GLKVector2Make(position.x, position.y) velocity:GLKVector2Negate(velocity) destructionRadius:destructionRadius];
-					return NO;
-				}
+				return NO;
 			}
-			lastI = intI;
-			lastJ = intJ;
-			i += stepX;
-			j += stepY;
-			if(start)
+			else if(i < precision && j < precision)
 			{
-				start = NO;
+				[env deleteRadius:destructionRadius x:1 y:1];
+				return NO;
+			}
+			else if(i < precision)
+			{
+				[env deleteRadius:destructionRadius x:1 y:intJ];
+				return NO;
+			}
+			else if(j < precision)
+			{
+				[env deleteRadius:destructionRadius x:intI y:1];
+				return NO;
+			}
+			else if(i >= widthBound && j >= heightBound)
+			{
+				[env deleteRadius:destructionRadius x:(ENV_WIDTH - 1) y:(ENV_HEIGHT - 1)];
+				return NO;
+			}
+			else if(i >= widthBound)
+			{
+				[env deleteRadius:destructionRadius x:(ENV_WIDTH - 1) y:intJ];
+				return NO;
+			}
+			else if(j >= heightBound)
+			{
+				[env deleteRadius:destructionRadius x:intI y:(ENV_HEIGHT - 1)];
+				return NO;
+			}
+		
+			if(env->dirt[intI][intJ])
+			{
+				if(!start)
+				{
+					intI = lastI;
+					intJ = lastJ;
+				}
+				[env deleteRadius:destructionRadius x:intI y:intJ];
+				//[model.particles addBulletWithPosition:GLKVector2Make(position.x, position.y) velocity:GLKVector2Negate(velocity) destructionRadius:destructionRadius];
+				return NO;
 			}
 		}
-	
+		lastI = intI;
+		lastJ = intJ;
+		i += stepX;
+		j += stepY;
+		if(start)
+		{
+			start = NO;
+		}
+	}
+
 	position.x += ((float) movement[0]) / precision;
 	position.y += ((float) movement[1]) / precision;
 	return YES;

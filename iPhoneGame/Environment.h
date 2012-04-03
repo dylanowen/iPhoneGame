@@ -28,6 +28,8 @@
 - (void)deleteRadius:(int) radius x:(int) x y:(int) y;
 - (void)restoreRadius:(int) radius x:(int) x y:(int) y;
 
+- (void)editRect:(bool) del leftX:(int) x topY:(int) y width:(int) width height:(int) height;
+
 - (void)changeColor:(float[4]) newColor x:(int) x y:(int) y;
 
 - (void)render;
