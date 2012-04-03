@@ -35,8 +35,7 @@
 #import "Settings.h"
 #import "HighScore.h"
 
-#define NUMBER_OF_ENEMIES 1
-#define BULLET_TIME_INCREMENT 0.05f
+#define NUMBER_OF_ENEMIES 15
 
 @interface GameModel()
 {
@@ -194,11 +193,7 @@
 		[[self.zombieTracker objectAtIndex:i] updateTrackee: temp->position center: self.player->position];
 	}
 	
-	
 	[currentGun update:time];
-	
-	
-	
 	
 	return YES;
 }
@@ -218,9 +213,8 @@
 
 - (void)render
 {
-	glClearColor(0.3, 0.3, 0.3, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
-	
+
 	[self.env render];
 	
 	[self.player render];
@@ -230,8 +224,9 @@
 	[self.zombieTracker makeObjectsPerformSelector:@selector(render)];
 	[self.killDisplay render];
 	
-	 [self.controls render];
+	[self.controls render];
 	//debug
+	/*
 	switch(glGetError())
 	{
 		case GL_NO_ERROR:
@@ -257,6 +252,7 @@
 		default:
 			NSLog(@"dunnno");
 	}
+	*/
 }
 
 @end

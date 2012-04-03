@@ -17,6 +17,11 @@
 	GLuint bulletPositionAttribute;
 	GLuint bloodPositionAttribute;
 	GLuint bloodColorAttribute;
+	
+	GLuint bloodGPUInitialPosition;
+	GLuint bloodGPUInitialVelocity;
+	GLuint bloodGPUColor;
+	GLuint bloodGPUTime;
 }
 
 @property (nonatomic, strong) GameModel *game;

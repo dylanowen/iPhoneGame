@@ -51,6 +51,8 @@
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_STENCIL_TEST);
 	
+	glClearColor(0.3, 0.3, 0.3, 1.0);
+	
 	self.mainGame = [[GameModel alloc] initWithView:self.view];
 }
 

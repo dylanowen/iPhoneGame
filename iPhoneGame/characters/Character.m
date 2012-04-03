@@ -119,7 +119,7 @@ enum
 	
 	animateTimer += time;
 	velocity.y += GRAVITY;
-	NSLog(@"Movement (%f, %f)", movement.x, movement.y);
+	//NSLog(@"Movement (%f, %f)", movement.x, movement.y);
 	int newPosition[2] = {(int) ((velocity.x + movement.x) * time * precision), (int) ((velocity.y + movement.y) * time * precision)};
 	//NSLog(@"Movement (%d, %d)", newPosition[0], newPosition[1]);
 	

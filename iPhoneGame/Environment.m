@@ -293,39 +293,8 @@
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-- (void)checkError
-{
-	switch(glGetError())
-	{
-		case GL_NO_ERROR:
-			NSLog(@"GL_NO_ERROR");
-			break;
-		case GL_INVALID_ENUM:
-			NSLog(@"GL_INVALID_ENUM");
-			break;
-		case GL_INVALID_VALUE:
-			NSLog(@"GL_INVALID_VALUE");
-			break;
-		case GL_INVALID_OPERATION:
-			NSLog(@"GL_INVALID_OPERATION");
-			break;
-		case GL_STACK_OVERFLOW:
-			NSLog(@"GL_STACK_OVERFLOW");
-			break;
-		case GL_STACK_UNDERFLOW:
-			NSLog(@"GL_STACK_UNDERFLOW");
-			break;
-		case GL_OUT_OF_MEMORY:
-			NSLog(@"GL_OUT_OF_MEMORY");
-			break;
-		default:
-			NSLog(@"dunnno");	
-	}
-}
-
 - (void)render
 {
-	//use VAO's
 	[self.program use];
 	
 	glBindVertexArrayOES(vao);
