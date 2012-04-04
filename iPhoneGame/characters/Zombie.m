@@ -54,9 +54,25 @@
 	}
 	if(arc4random() % 10 == 0)
 	{
-		GLKVector2 dig = GLKVector2Add(GLKVector2Add(position, normMovement), GLKVector2Make(-2, -6));
-		//NSLog(@"(%f %f) + (%f, %f) -> (%f, %f)", position.x, position.y, movement.x, movement.y, dig.x, dig.y);
-		[env editRect:YES leftX:dig.x topY:dig.y width:7 height:10];
+		GLKVector2 dig = GLKVector2Add(position, GLKVector2Make(-2.0f, -5.0f));
+		if(normMovement.x < -0.6f)
+		{
+			dig.x -= 1.0f;
+		}
+		else if(normMovement.x > 0.6f)
+		{
+			dig.x += 1.0f;
+		}
+		if(normMovement.y < -0.6f)
+		{
+			dig.y -= 1.0f;
+		}
+		else if(normMovement.y > 0.6f)
+		{
+			dig.y += 2.0f;
+		}
+		
+		[env editRect:YES leftX:dig.x topY:dig.y width:5 height:10];
 	}
 	
 	[self update: time];
@@ -81,7 +97,7 @@
 	
 	if(GLKVector2Length(GLKVector2Subtract(player->position, position)) < 4)
 	{
-		player.health -= 2;
+		player.health -= 20;
 		[particles addBloodWithPosition:player->position power:75 colorType:BloodColorRed];
 	}
 	return self.health > 0;
