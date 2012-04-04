@@ -349,7 +349,7 @@
 	
 	glBindVertexArrayOES(vao);
 	
-	glUniformMatrix4fv(modelViewUniform, 1, 0, self.game.projectionMatrix.m);
+	glUniformMatrix4fv(modelViewUniform, 1, 0, self.game->dynamicProjection.m);
 	
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
 	

@@ -27,10 +27,12 @@
 {
 @public
 	Pickups *pickups;
+	
+	GLKMatrix4 staticProjection;
+	GLKMatrix4 dynamicProjection;
 }
 
 @property (strong, nonatomic) UIView *view;
-@property (nonatomic) GLKMatrix4 projectionMatrix;
 
 @property (strong, nonatomic) TextureLoader *textureLoader;
 @property (strong, nonatomic) EffectLoader *effectLoader;
@@ -46,7 +48,7 @@
 
 - (id)initWithView:(UIView *) view;
 
-- (bool)updateWithLastUpdate:(float) time;
+- (bool)update:(float) time;
 - (bool)checkCharacterHit:(BulletParticle *) bullet;
 
 - (void)render;

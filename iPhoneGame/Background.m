@@ -52,10 +52,10 @@
 		if(vertexBuffer == 0)
 		{
 			float vertices[] = {
-				ENV_WIDTH + VIEW_WIDTH / 2, -VIEW_HEIGHT / 2, -1,
-				ENV_WIDTH + VIEW_WIDTH / 2, ENV_HEIGHT + VIEW_HEIGHT / 2, -1,
-				-VIEW_WIDTH / 2, ENV_HEIGHT + VIEW_HEIGHT / 2, -1,
-				-VIEW_WIDTH / 2, -VIEW_HEIGHT / 2, -1
+				ENV_WIDTH + DYNAMIC_VIEW_WIDTH / 2, -DYNAMIC_VIEW_HEIGHT / 2, -1,
+				ENV_WIDTH + DYNAMIC_VIEW_WIDTH / 2, ENV_HEIGHT + DYNAMIC_VIEW_HEIGHT / 2, -1,
+				-DYNAMIC_VIEW_WIDTH / 2, ENV_HEIGHT + DYNAMIC_VIEW_HEIGHT / 2, -1,
+				-DYNAMIC_VIEW_WIDTH / 2, -DYNAMIC_VIEW_HEIGHT / 2, -1
 			};
 			vertexBuffer = [game.bufferLoader addBufferForName:@"Background"];
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -86,7 +86,7 @@
 - (void)render
 {
 	textureEffect.texture2d0.name = [texture getName];
-	textureEffect.transform.projectionMatrix = game.projectionMatrix;
+	textureEffect.transform.projectionMatrix = game->dynamicProjection;
 	textureEffect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(0, 0, 0);
 	
 	[textureEffect prepareToDraw];

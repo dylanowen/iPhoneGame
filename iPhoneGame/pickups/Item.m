@@ -165,7 +165,7 @@
 - (void)render
 {
 	textureEffect.texture2d0.name = [texture getName];
-	textureEffect.transform.projectionMatrix = game.projectionMatrix;
+	textureEffect.transform.projectionMatrix = game->dynamicProjection;
 	textureEffect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x, position.y, 0);
 	
 	[textureEffect prepareToDraw];

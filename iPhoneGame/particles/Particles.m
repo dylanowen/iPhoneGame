@@ -267,7 +267,7 @@ typedef struct
 	if([self.bullets count] > 0)
 	{
 		[self.bulletProgram use];
-		glUniformMatrix4fv(bulletModelViewUniform, 1, 0, self.game.projectionMatrix.m);
+		glUniformMatrix4fv(bulletModelViewUniform, 1, 0, self.game->dynamicProjection.m);
 		glUniform4f(bulletColorUniform, 0.6, 0.6, 0.6, 1.0);
 		[self.bullets makeObjectsPerformSelector:@selector(render)];
 	}
@@ -275,25 +275,25 @@ typedef struct
 	if([self.blood count] > 0)
 	{
 		[self.bloodProgram use];
-		glUniformMatrix4fv(bloodModelViewUniform, 1, 0, self.game.projectionMatrix.m);
+		glUniformMatrix4fv(bloodModelViewUniform, 1, 0, self.game->dynamicProjection.m);
 		[self.blood makeObjectsPerformSelector:@selector(render)];
 	}
 
 	if([self.bloodGPU count] > 0)
 	{
 		[self.bloodGPUPhysProgram use];
-		glUniformMatrix4fv(bloodGPUModelViewUniform, 1, 0, self.game.projectionMatrix.m);
+		glUniformMatrix4fv(bloodGPUModelViewUniform, 1, 0, self.game->dynamicProjection.m);
 		[self.bloodGPU makeObjectsPerformSelector:@selector(render)];
 	}
 	
 	if([self.healingEffect count] > 0)
 	{
 		[healthProgram use];
-		glUniformMatrix4fv(bloodGPUModelViewUniform, 1, 0, self.game.projectionMatrix.m);
+		glUniformMatrix4fv(bloodGPUModelViewUniform, 1, 0, self.game->dynamicProjection.m);
 		[self.healingEffect makeObjectsPerformSelector:@selector(render)];
 	}
 	
-	//NSLog(@"Particles: %d", [self.bullets count] + [self.blood count] + [self.bloodGPU count]);
+	//NSLog(@"Particles: %d", [self.bullets count] + [self.blood count] + [self.bloodGPU count] + [self.healingEffect count]);
 }
 
 @end

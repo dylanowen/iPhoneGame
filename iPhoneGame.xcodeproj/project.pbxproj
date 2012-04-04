@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2C13BB5C150C72E40002FA77 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C13BB5B150C72E40002FA77 /* character.png */; };
+		2C1CF16A152D07B1004A8FA6 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1CF169152D07B1004A8FA6 /* GameModel.m */; };
+		2C1CF170152D086D004A8FA6 /* ZombieSwarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1CF16F152D086D004A8FA6 /* ZombieSwarm.m */; };
 		2C2A0759152C05DD0066E88D /* zombie_skull.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2A0758152C05DD0066E88D /* zombie_skull.png */; };
 		2C2A0761152C18310066E88D /* HealingParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2A0760152C18300066E88D /* HealingParticle.m */; };
 		2C2A0764152C18E20066E88D /* healthParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C2A0762152C18D10066E88D /* healthParticle.vsh */; };
@@ -62,7 +64,6 @@
 		CE7A797114EDECBE00B8FA24 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797014EDECBE00B8FA24 /* QuartzCore.framework */; };
 		CE7A797314EDECC800B8FA24 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797214EDECC800B8FA24 /* OpenGLES.framework */; };
 		CE7A797514EDECCE00B8FA24 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797414EDECCE00B8FA24 /* GLKit.framework */; };
-		CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A797714EDED5E00B8FA24 /* GameModel.m */; };
 		CE884EE214F73981001B26DA /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = CE884EE114F73981001B26DA /* GLProgram.m */; };
 		CEAEABA715032D74000F7448 /* ToggleJoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAEABA615032D74000F7448 /* ToggleJoyStick.m */; };
 		CEAEABAA150330CB000F7448 /* circleRed.png in Resources */ = {isa = PBXBuildFile; fileRef = CEAEABA9150330CB000F7448 /* circleRed.png */; };
@@ -76,6 +77,10 @@
 
 /* Begin PBXFileReference section */
 		2C13BB5B150C72E40002FA77 /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = character.png; sourceTree = "<group>"; };
+		2C1CF168152D07B1004A8FA6 /* GameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameModel.h; path = gameTypes/GameModel.h; sourceTree = "<group>"; };
+		2C1CF169152D07B1004A8FA6 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameModel.m; path = gameTypes/GameModel.m; sourceTree = "<group>"; };
+		2C1CF16E152D086D004A8FA6 /* ZombieSwarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZombieSwarm.h; path = gameTypes/ZombieSwarm.h; sourceTree = "<group>"; };
+		2C1CF16F152D086D004A8FA6 /* ZombieSwarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZombieSwarm.m; path = gameTypes/ZombieSwarm.m; sourceTree = "<group>"; };
 		2C2A0758152C05DD0066E88D /* zombie_skull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie_skull.png; sourceTree = "<group>"; };
 		2C2A075E152C17510066E88D /* Particle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Particle.h; path = particles/Particle.h; sourceTree = "<group>"; };
 		2C2A075F152C18300066E88D /* HealingParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HealingParticle.h; path = particles/HealingParticle.h; sourceTree = "<group>"; };
@@ -121,7 +126,7 @@
 		2C89158615198B8D00F91087 /* BulletParticleBouncy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletParticleBouncy.h; path = particles/BulletParticleBouncy.h; sourceTree = "<group>"; };
 		2C89158715198B8D00F91087 /* BulletParticleBouncy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BulletParticleBouncy.m; path = particles/BulletParticleBouncy.m; sourceTree = "<group>"; };
 		2C8D61BA1519AC6800379943 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = characters/Player.h; sourceTree = "<group>"; };
-		2C8D61BB1519AC6800379943 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Player.m; path = characters/Player.m; sourceTree = "<group>"; };
+		2C8D61BB1519AC6800379943 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Player.m; path = characters/Player.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2C8E0872152BAB2B00D4BAC3 /* Pickups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pickups.h; path = iPhoneGame/pickups/Pickups.h; sourceTree = "<group>"; };
 		2C8E0873152BAB2B00D4BAC3 /* Pickups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pickups.m; path = iPhoneGame/pickups/Pickups.m; sourceTree = "<group>"; };
 		2C8E0876152BAD3600D4BAC3 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = iPhoneGame/pickups/Item.h; sourceTree = "<group>"; };
@@ -139,7 +144,7 @@
 		2C930AA9152C033800349E9A /* ZombieSkull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZombieSkull.h; path = iPhoneGame/pickups/ZombieSkull.h; sourceTree = "<group>"; };
 		2C930AAA152C033800349E9A /* ZombieSkull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZombieSkull.m; path = iPhoneGame/pickups/ZombieSkull.m; sourceTree = "<group>"; };
 		2C94CC19152CE7FF002C998A /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
-		2C94CC1A152CE7FF002C998A /* Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Background.m; sourceTree = "<group>"; };
+		2C94CC1A152CE7FF002C998A /* Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Background.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2C94CC1D152CE9CE002C998A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		2CD3863B1519B7AB00694CB9 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
@@ -176,8 +181,6 @@
 		CE7A797014EDECBE00B8FA24 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE7A797214EDECC800B8FA24 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		CE7A797414EDECCE00B8FA24 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		CE7A797614EDED5E00B8FA24 /* GameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModel.h; sourceTree = "<group>"; };
-		CE7A797714EDED5E00B8FA24 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModel.m; sourceTree = "<group>"; };
 		CE884EE014F73981001B26DA /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
 		CE884EE114F73981001B26DA /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
 		CEAEABA515032D74000F7448 /* ToggleJoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToggleJoyStick.h; path = controls/ToggleJoyStick.h; sourceTree = "<group>"; };
@@ -185,7 +188,7 @@
 		CEAEABA9150330CB000F7448 /* circleRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleRed.png; sourceTree = "<group>"; };
 		CEB48AA914F3190F00E5AD9E /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
 		CEB48AAA14F3190F00E5AD9E /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
-		CEBEF6B914FAD553008913F4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
+		CEBEF6B914FAD553008913F4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GameConstants.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CEC12C6A14FC70F700EF1392 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; };
 		CEC12C6B14FC70F700EF1392 /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tracker.m; sourceTree = "<group>"; };
 		CEC5BCE515030A64003724F5 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
@@ -211,6 +214,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C1CF167152D0792004A8FA6 /* Game Types */ = {
+			isa = PBXGroup;
+			children = (
+				2C1CF168152D07B1004A8FA6 /* GameModel.h */,
+				2C1CF169152D07B1004A8FA6 /* GameModel.m */,
+				2C1CF16E152D086D004A8FA6 /* ZombieSwarm.h */,
+				2C1CF16F152D086D004A8FA6 /* ZombieSwarm.m */,
+			);
+			name = "Game Types";
+			sourceTree = "<group>";
+		};
 		2C89154F151944ED00F91087 /* Loaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,14 +361,13 @@
 				CE7A796D14EDEC1200B8FA24 /* GameViewController.m */,
 				2CD3863F1519B7B500694CB9 /* Settings.h */,
 				2CD386401519B7B500694CB9 /* Settings.m */,
-				CE7A797614EDED5E00B8FA24 /* GameModel.h */,
-				CE7A797714EDED5E00B8FA24 /* GameModel.m */,
 				2C94CC19152CE7FF002C998A /* Background.h */,
 				2C94CC1A152CE7FF002C998A /* Background.m */,
 				CEB48AA914F3190F00E5AD9E /* Environment.h */,
 				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
 				CEC12C6A14FC70F700EF1392 /* Tracker.h */,
 				CEC12C6B14FC70F700EF1392 /* Tracker.m */,
+				2C1CF167152D0792004A8FA6 /* Game Types */,
 				2C8E0875152BAB3000D4BAC3 /* Pickups */,
 				2C89156E1519766600F91087 /* Weapons */,
 				2C89154F151944ED00F91087 /* Loaders */,
@@ -529,7 +542,6 @@
 				CE7A795814ECB05E00B8FA24 /* AppDelegate.m in Sources */,
 				CE7A795E14ECB05E00B8FA24 /* ViewController.m in Sources */,
 				CE7A796E14EDEC1200B8FA24 /* GameViewController.m in Sources */,
-				CE7A797814EDED5E00B8FA24 /* GameModel.m in Sources */,
 				CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */,
 				CE884EE214F73981001B26DA /* GLProgram.m in Sources */,
 				CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */,
@@ -568,6 +580,8 @@
 				2C930AAB152C033800349E9A /* ZombieSkull.m in Sources */,
 				2C2A0761152C18310066E88D /* HealingParticle.m in Sources */,
 				2C94CC1B152CE7FF002C998A /* Background.m in Sources */,
+				2C1CF16A152D07B1004A8FA6 /* GameModel.m in Sources */,
+				2C1CF170152D086D004A8FA6 /* ZombieSwarm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -59,7 +59,6 @@
 @implementation GameModel
 
 @synthesize view = _view;
-@synthesize projectionMatrix = _projectionMatrix;
 
 @synthesize textureLoader = _textureLoader;
 @synthesize effectLoader = _effectLoader;
@@ -83,6 +82,9 @@
 	{
 		self.view = view;
 		
+		staticProjection = GLKMatrix4MakeOrtho(0, STATIC_VIEW_WIDTH, STATIC_VIEW_HEIGHT, 0, 1, -1);
+		dynamicProjection = GLKMatrix4MakeOrtho(0, DYNAMIC_VIEW_WIDTH, DYNAMIC_VIEW_HEIGHT, 0, 1, -1);;
+		
 		self.textureLoader = [[TextureLoader alloc] init];
 		self.effectLoader = [[EffectLoader alloc] init];
 		self.bufferLoader = [[BufferLoader alloc] init];
@@ -101,7 +103,7 @@
 		
 		self.enemies = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ENEMIES];
 		self.zombieTracker = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ENEMIES];
-		GLKVector2 trackScale = GLKVector2Make(VIEW_WIDTH / self.view.bounds.size.width, VIEW_HEIGHT / self.view.bounds.size.height);
+		GLKVector2 trackScale = GLKVector2Make(DYNAMIC_VIEW_WIDTH / self.view.bounds.size.width, DYNAMIC_VIEW_HEIGHT / self.view.bounds.size.height);
 		for(unsigned i = 0; i < NUMBER_OF_ENEMIES; i++)
 		{
 			GLKVector2 newPosition;
@@ -111,7 +113,7 @@
 				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, self.player->position)) < 80);
 			[self.enemies addObject:[[Zombie alloc] initWithModel:self position:newPosition]];
-			[self.zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: VIEW_WIDTH height: VIEW_HEIGHT red: 0.0f green: 0.35f blue: 0.0f model:self]];
+			[self.zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: DYNAMIC_VIEW_WIDTH height: DYNAMIC_VIEW_HEIGHT red: 0.0f green: 0.35f blue: 0.0f model:self]];
 			[self.env deleteRadius:20 x:newPosition.x y:newPosition.y];
 		}
 		
@@ -138,14 +140,12 @@
 		
 		self.killDisplay = [[Text alloc] initWithModel:self text:@"kills 0" position:GLKVector2Make(5, 5)];
 		
-		self.projectionMatrix = GLKMatrix4MakeOrtho(0, VIEW_WIDTH, VIEW_HEIGHT, 0, 1, -1);
-		
 		return self;
 	}
 	return nil;
 }
 
-- (bool)updateWithLastUpdate:(float) time
+- (bool)update:(float) time
 {
 	//do all the main stuff of the game
 	if(self.player.health <= 0 || [self.enemies count] == 0)
@@ -167,7 +167,7 @@
 	self.player->look = self.controls.look->velocity;
 	
 	//setup the projectionMatrix for everything (it has to happen first)
-	self.projectionMatrix = [self.player update: time];
+	dynamicProjection = [self.player update: time];
 	
 	//generate a new bullet
 	self.player->shoot = self.controls.look->toggle;
@@ -183,7 +183,7 @@
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
 		Character *temp = [self.enemies objectAtIndex:i];
-		if(![((Zombie *) temp) update: time projection:self.projectionMatrix])
+		if(![((Zombie *) temp) update: time projection:dynamicProjection])
 		{
 			[self.particles addBloodWithPosition:temp->position power:150 colorType:BloodColorRed count:8];
 			[pickups addZombieSkullWithPosition:temp->position];

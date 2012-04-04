@@ -8,7 +8,7 @@
 
 #import "GameViewController.h"
 
-#import "GameModel.h"
+#import "ZombieSwarm.h"
 
 @interface GameViewController()
 {
@@ -53,7 +53,7 @@
 	
 	//glClearColor(0.5, 0.5, 0.5, 1.0);
 	
-	self.mainGame = [[GameModel alloc] initWithView:self.view];
+	self.mainGame = [[ZombieSwarm alloc] initWithView:self.view];
 }
 
 - (void)viewDidUnload
@@ -72,7 +72,7 @@
 
 - (void)glkViewControllerUpdate:(GLKViewController *)controller
 {
-	if(![self.mainGame updateWithLastUpdate: self.timeSinceLastUpdate])
+	if(![self.mainGame update: self.timeSinceLastUpdate])
 	{
 		//self.paused = true;
 		[self performSegueWithIdentifier: @"gameOver" sender: self];
@@ -119,8 +119,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-	 //NSLog(@"%d %d", interfaceOrientation, interfaceOrientation == UIInterfaceOrientationLandscapeRight);
-    return (interfaceOrientation == UIInterfaceOrientationLandscapeRight || interfaceOrientation == UIInterfaceOrientationLandscapeLeft);	
+    return (UIInterfaceOrientationIsLandscape(interfaceOrientation));
 }
 
 @end

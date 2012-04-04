@@ -181,10 +181,10 @@
 - (GLKMatrix4)centerView
 {
 	float left, top, right, bottom;
-	left = position.x - (VIEW_WIDTH / 2);
-	top = position.y - (VIEW_HEIGHT / 2);
-	right = left + VIEW_WIDTH;
-	bottom = top + VIEW_HEIGHT;
+	left = position.x - (DYNAMIC_VIEW_WIDTH / 2);
+	top = position.y - (DYNAMIC_VIEW_HEIGHT / 2);
+	right = left + DYNAMIC_VIEW_WIDTH;
+	bottom = top + DYNAMIC_VIEW_HEIGHT;
 	return GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
 }
 
