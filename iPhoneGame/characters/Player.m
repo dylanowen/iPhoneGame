@@ -139,10 +139,12 @@
 		animateTimer = 0;
 	}
 	//slight healing
+	/*
 	if(arc4random() % 70 == 0 && self.health < 100)
 	{
 		self.health += 5;
 	}
+	*/
 	return projection;
 }
 

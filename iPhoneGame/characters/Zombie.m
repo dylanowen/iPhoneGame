@@ -97,7 +97,7 @@
 	
 	if(GLKVector2Length(GLKVector2Subtract(player->position, position)) < 4)
 	{
-		player.health -= 20;
+		player.health -= 8;
 		[particles addBloodWithPosition:player->position power:75 colorType:BloodColorRed];
 	}
 	return self.health > 0;

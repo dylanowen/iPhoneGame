@@ -9,8 +9,6 @@
 #import "BloodGPUParticle.h"
 
 #import "BloodParticle.h"
-#import "GameConstants.h"
-#import "GameModel.h"
 #import "Particles.h"
 
 @interface BloodGPUParticle()
@@ -29,7 +27,7 @@
 
 @implementation BloodGPUParticle
 
-- (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc colorType:(int) colorType
+- (id)initWithParticles:(Particles *) particles position:(GLKVector2) posit velocity:(GLKVector2) veloc colorType:(int) colorType
 {
 	self = [super init];
 	if(self)
@@ -57,10 +55,10 @@
 			color[2] += .7f;
 		}
 		
-		positionAttribute = model->bloodGPUInitialPosition;
-		velocityAttribute = model->bloodGPUInitialVelocity;
-		colorAttribute = model->bloodGPUColor;
-		timeAttribute = model->bloodGPUTime;
+		positionAttribute = particles->bloodGPUInitialPosition;
+		velocityAttribute = particles->bloodGPUInitialVelocity;
+		colorAttribute = particles->bloodGPUColor;
+		timeAttribute = particles->bloodGPUTime;
 		
 		return self;
 	}

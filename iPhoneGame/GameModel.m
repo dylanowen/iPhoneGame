@@ -170,11 +170,11 @@
 	if(self.controls.look->toggle)
 	{
 		[currentGun shootAtPosition:self.player->position direction: self.controls.look->velocity];
+		//[self.particles addHealingEffect:self.player->position];
 	}
 
 	
 	[self.particles updateWithLastUpdate: time];
-	
 	
 	for(unsigned i = 0; i < [self.enemies count]; i++)
 	{
@@ -207,6 +207,11 @@
 - (void)setZombieKills:(int)zombieKills
 {
 	_zombieKills = zombieKills;
+	if(_zombieKills % 5 == 0)
+	{
+		self.player.health += 150;
+		[self.particles addHealingEffect:self.player->position];
+	}
 	self.killDisplay.str = [[NSString alloc] initWithFormat:@"kills %d", zombieKills];
 }
 

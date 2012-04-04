@@ -22,6 +22,9 @@
 	GLuint bloodGPUInitialVelocity;
 	GLuint bloodGPUColor;
 	GLuint bloodGPUTime;
+	
+	GLuint healthParticleInitialPosition;
+	GLuint healthParticleTime;
 }
 
 @property (nonatomic, strong) GameModel *game;
@@ -34,6 +37,7 @@
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power;
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType count:(int) count;
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType;
+- (void)addHealingEffect:(GLKVector2) posit;
 - (void)updateWithLastUpdate:(float) time;
 - (void)render;
 

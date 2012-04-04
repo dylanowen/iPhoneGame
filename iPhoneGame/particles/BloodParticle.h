@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
+#import "Particle.h"
 
 enum
 {
@@ -20,12 +21,9 @@ enum
 
 @class Particles;
 
-@interface BloodParticle : NSObject
+@interface BloodParticle : NSObject <Particle>
 
 - (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc colorType:(int) colorType;
 - (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc;
-
-- (bool)updateAndKeep:(float) time;
-- (void)render;
 
 @end

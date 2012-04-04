@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2C13BB5C150C72E40002FA77 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C13BB5B150C72E40002FA77 /* character.png */; };
 		2C2A0759152C05DD0066E88D /* zombie_skull.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2A0758152C05DD0066E88D /* zombie_skull.png */; };
+		2C2A0761152C18310066E88D /* HealingParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2A0760152C18300066E88D /* HealingParticle.m */; };
+		2C2A0764152C18E20066E88D /* healthParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C2A0762152C18D10066E88D /* healthParticle.vsh */; };
 		2C6EF570151D2EB000CFDCA3 /* VAOLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */; };
 		2C7317FE152A692900FEAF5D /* BloodGPUParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7317FD152A692900FEAF5D /* BloodGPUParticle.m */; };
 		2C7317FF152A7A1D00FEAF5D /* ParticleShaderGPUPhysics.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C7317F8152A5EA500FEAF5D /* ParticleShaderGPUPhysics.vsh */; };
@@ -73,6 +75,10 @@
 /* Begin PBXFileReference section */
 		2C13BB5B150C72E40002FA77 /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = character.png; sourceTree = "<group>"; };
 		2C2A0758152C05DD0066E88D /* zombie_skull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie_skull.png; sourceTree = "<group>"; };
+		2C2A075E152C17510066E88D /* Particle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Particle.h; path = particles/Particle.h; sourceTree = "<group>"; };
+		2C2A075F152C18300066E88D /* HealingParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HealingParticle.h; path = particles/HealingParticle.h; sourceTree = "<group>"; };
+		2C2A0760152C18300066E88D /* HealingParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HealingParticle.m; path = particles/HealingParticle.m; sourceTree = "<group>"; };
+		2C2A0762152C18D10066E88D /* healthParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = healthParticle.vsh; path = shaders/healthParticle.vsh; sourceTree = "<group>"; };
 		2C6EF56E151D2EB000CFDCA3 /* VAOLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VAOLoader.h; path = loaders/VAOLoader.h; sourceTree = "<group>"; };
 		2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VAOLoader.m; path = loaders/VAOLoader.m; sourceTree = "<group>"; };
 		2C7317F8152A5EA500FEAF5D /* ParticleShaderGPUPhysics.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = ParticleShaderGPUPhysics.vsh; path = shaders/ParticleShaderGPUPhysics.vsh; sourceTree = "<group>"; };
@@ -372,6 +378,7 @@
 			children = (
 				CE884EE014F73981001B26DA /* GLProgram.h */,
 				CE884EE114F73981001B26DA /* GLProgram.m */,
+				2C2A0762152C18D10066E88D /* healthParticle.vsh */,
 				CEE52F821502BE0200DDF174 /* particleShader.fsh */,
 				CEE52F831502BE0200DDF174 /* particleShader.vsh */,
 				2C7317F8152A5EA500FEAF5D /* ParticleShaderGPUPhysics.vsh */,
@@ -385,6 +392,9 @@
 			children = (
 				2C8915661519545D00F91087 /* Particles.h */,
 				2C8915671519545D00F91087 /* Particles.m */,
+				2C2A075E152C17510066E88D /* Particle.h */,
+				2C2A075F152C18300066E88D /* HealingParticle.h */,
+				2C2A0760152C18300066E88D /* HealingParticle.m */,
 				2C7317FC152A692900FEAF5D /* BloodGPUParticle.h */,
 				2C7317FD152A692900FEAF5D /* BloodGPUParticle.m */,
 				2C8915621519545D00F91087 /* BloodParticle.h */,
@@ -481,6 +491,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C2A0764152C18E20066E88D /* healthParticle.vsh in Resources */,
 				2C7317FF152A7A1D00FEAF5D /* ParticleShaderGPUPhysics.vsh in Resources */,
 				CEE52F891502BE1D00DDF174 /* particleShader.fsh in Resources */,
 				CEE52F8A1502BE1D00DDF174 /* particleShader.vsh in Resources */,
@@ -546,6 +557,7 @@
 				2C8E0874152BAB2B00D4BAC3 /* Pickups.m in Sources */,
 				2C8E0878152BAD3600D4BAC3 /* Item.m in Sources */,
 				2C930AAB152C033800349E9A /* ZombieSkull.m in Sources */,
+				2C2A0761152C18310066E88D /* HealingParticle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

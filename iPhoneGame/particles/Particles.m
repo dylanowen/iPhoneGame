@@ -22,6 +22,7 @@ faster
 #import "BulletParticleBouncy.h"
 #import "BloodParticle.h"
 #import "BloodGPUParticle.h"
+#import "HealingParticle.h"
 
 typedef struct
 {
@@ -35,9 +36,11 @@ typedef struct
 	GLuint bulletModelViewUniform;
 	GLuint bulletColorUniform;
 	GLuint bloodModelViewUniform;
-	
 	GLuint bloodGPUModelViewUniform;
-	GLuint bloodGPUGravity;
+	
+	GLuint healthParticleModelViewUniform;
+	
+	GLProgram *healthProgram;
 }
 
 @property (nonatomic, strong) GLProgram *bulletProgram;
@@ -47,6 +50,7 @@ typedef struct
 @property (strong, nonatomic) NSMutableArray *bullets;
 @property (strong, nonatomic) NSMutableArray *blood;
 @property (strong, nonatomic) NSMutableArray *bloodGPU;
+@property (strong, nonatomic) NSMutableArray *healingEffect;
 
 @end
 
@@ -59,6 +63,7 @@ typedef struct
 @synthesize bullets = _bullets;
 @synthesize blood = _blood;
 @synthesize bloodGPU = _bloodGPU;
+@synthesize healingEffect = _healingEffect;
 
 - (id)initWithModel:(GameModel *) game
 {
@@ -70,6 +75,7 @@ typedef struct
 		self.bullets = [[NSMutableArray arrayWithCapacity: 0] init];
 		self.blood = [[NSMutableArray arrayWithCapacity: 0] init];
 		self.bloodGPU = [[NSMutableArray arrayWithCapacity:0] init];
+		self.healingEffect = [[NSMutableArray arrayWithCapacity:0] init];
 		
 		//load and setup the bullet shaders
 		self.bulletProgram = [[GLProgram alloc] initWithVertexShaderFilename: @"particleShaderConstantColor" fragmentShaderFilename: @"particleShader"];
@@ -126,7 +132,23 @@ typedef struct
 			NSLog(@"Blood GPU physics shaders loaded.");
 		}
 		bloodGPUModelViewUniform = [self.bloodGPUPhysProgram uniformIndex:@"modelViewProjectionMatrix"];
-		bloodGPUGravity = [self.bloodGPUPhysProgram uniformIndex:@"gravity"];
+		
+		healthProgram = [[GLProgram alloc] initWithVertexShaderFilename: @"healthParticle" fragmentShaderFilename: @"particleShader"];
+		healthParticleInitialPosition = [healthProgram addAttribute: @"initialPosition"];
+		healthParticleTime = [healthProgram addAttribute: @"time"];
+		if(![healthProgram link])
+		{
+			NSLog(@"Link failed");
+			NSLog(@"Program Log: %@", [healthProgram programLog]);
+			NSLog(@"Frag Log: %@", [healthProgram fragmentShaderLog]);
+			NSLog(@"Vert Log: %@", [healthProgram vertexShaderLog]);
+			healthProgram = nil;
+		}
+		else
+		{
+			NSLog(@"Health particle shaders loaded.");
+		}
+		healthParticleModelViewUniform = [healthProgram uniformIndex:@"modelViewProjectionMatrix"];
 		
 		return self;
 	}
@@ -179,6 +201,17 @@ typedef struct
 	];
 }
 
+- (void)addHealingEffect:(GLKVector2) posit
+{
+	posit = GLKVector2Add(posit, GLKVector2Make(-3, 6));
+	
+	for(unsigned i = 0; i < 6; i++)
+	{
+		[self.healingEffect addObject:[[HealingParticle alloc] initWithParticles:self position:GLKVector2Add(posit, GLKVector2Make(i, 0))]];
+		[self.healingEffect addObject:[[HealingParticle alloc] initWithParticles:self position:GLKVector2Add(posit, GLKVector2Make(i, -1))]];
+	}
+}
+
 - (void)updateWithLastUpdate:(float) time
 {
 	//remove bullets that say they're done
@@ -216,6 +249,16 @@ typedef struct
 	}
 	[self.bloodGPU removeObjectsAtIndexes: indexes];
 	
+	
+	indexes = [NSMutableIndexSet indexSet];
+	for(unsigned i = 0; i < [self.healingEffect count]; i++)
+	{
+		if(![[self.healingEffect objectAtIndex: i] updateAndKeep: time])
+		{
+			[indexes addIndex: i];
+		}
+	}
+	[self.healingEffect removeObjectsAtIndexes: indexes];
 	//NSLog(@"%d bullets %d blood", [self.bullets count], [self.blood count]);
 }
 
@@ -240,8 +283,14 @@ typedef struct
 	{
 		[self.bloodGPUPhysProgram use];
 		glUniformMatrix4fv(bloodGPUModelViewUniform, 1, 0, self.game.projectionMatrix.m);
-		glUniform1f(bloodGPUGravity, -GRAVITY * 40);
 		[self.bloodGPU makeObjectsPerformSelector:@selector(render)];
+	}
+	
+	if([self.healingEffect count] > 0)
+	{
+		[healthProgram use];
+		glUniformMatrix4fv(bloodGPUModelViewUniform, 1, 0, self.game.projectionMatrix.m);
+		[self.healingEffect makeObjectsPerformSelector:@selector(render)];
 	}
 	
 	//NSLog(@"Particles: %d", [self.bullets count] + [self.blood count] + [self.bloodGPU count]);
