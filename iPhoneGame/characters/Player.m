@@ -123,7 +123,7 @@
 		{
 			currentFrame = 0;
 		}
-		if(health < 500)
+		if(self.health < 500)
 		{
 			//randomly bleed
 			if(arc4random() % 5 == 0)
@@ -139,9 +139,9 @@
 		animateTimer = 0;
 	}
 	//slight healing
-	if(arc4random() % 70 == 0 && health < 100)
+	if(arc4random() % 70 == 0 && self.health < 100)
 	{
-		health += 5;
+		self.health += 5;
 	}
 	return projection;
 }

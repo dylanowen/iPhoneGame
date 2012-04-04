@@ -21,8 +21,13 @@
 @class Controls;
 @class BulletParticle;
 @class Player;
+@class Pickups;
 
 @interface GameModel : NSObject
+{
+@public
+	Pickups *pickups;
+}
 
 @property (strong, nonatomic) UIView *view;
 @property (nonatomic) GLKMatrix4 projectionMatrix;
@@ -36,6 +41,8 @@
 @property (strong, nonatomic) Environment *env;
 @property (strong, nonatomic) Particles *particles;
 @property (strong, nonatomic) Controls *controls;
+
+@property (nonatomic) int zombieKills;
 
 - (id)initWithView:(UIView *) view;
 

@@ -96,9 +96,6 @@
 
 		modelViewUniform = [self.program uniformIndex:@"modelViewProjectionMatrix"];
 		
-		
-		//glBindVertexArrayOES(gVAO);
-		
 		//the size is the width * height * components of vertices
 		unsigned vertexBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2;
 		unsigned colorBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 4;
@@ -127,9 +124,6 @@
 			}
 		}
 		
-		glGenVertexArraysOES(1, &vao);
-		glBindVertexArrayOES(vao);
-		
 		glGenBuffers(1, &vertexBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 		glBufferData(GL_ARRAY_BUFFER, vertexBufferSize, vertices, GL_STATIC_DRAW);
@@ -138,12 +132,17 @@
 		glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
 		glBufferData(GL_ARRAY_BUFFER, colorBufferSize, colors, GL_DYNAMIC_DRAW);
 		
+		glGenVertexArraysOES(1, &vao);
+		glBindVertexArrayOES(vao);
+		
 		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 		glEnableVertexAttribArray(positionAttribute);
 		glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 		glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
 		glEnableVertexAttribArray(colorAttribute);
 		glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+		
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		
 		glBindVertexArrayOES(0);
 		
@@ -295,6 +294,7 @@
 			dirt[i][j] = collisionState;
 		}
 	}
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 - (void)changeColor:(float[4]) newColor x:(int) x y:(int) y

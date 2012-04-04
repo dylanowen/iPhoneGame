@@ -51,6 +51,8 @@ enum
 
 @implementation Character
 
+@synthesize health = _health;
+
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
 {
 	self = [super init];
@@ -108,7 +110,7 @@ enum
 - (void)respawn:(GLKVector2) posit
 {
 	position = posit;
-	health = 1000;
+	_health = 1000;
 	velocity = GLKVector2Make(0, 0);
 	movement = GLKVector2Make(0, 0);
 }
@@ -273,7 +275,7 @@ enum
 	//use squared length
 	if(GLKVector2Length(GLKVector2Subtract(bullet->position, position)) < 6)
 	{
-		health -= bullet->damage;
+		_health -= bullet->damage;
 		[self->game.particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed];
 		return YES;
 	}
@@ -287,6 +289,15 @@ enum
 	if([self checkCollision:CVBottom x:intX y:intY + 1])
 	{
 		velocity.y = -jumpHeight;
+	}
+}
+
+- (void)setHealth:(int)health
+{
+	_health = health;
+	if(_health > 1000)
+	{
+		_health = 1000;
 	}
 }
 
@@ -389,8 +400,8 @@ enum
 	float vertices2[8] = {
 		0, -5,
 		0, -2,
-		CHARACTER_WIDTH * health / 1000, -2,
-		CHARACTER_WIDTH * health / 1000, -5,
+		CHARACTER_WIDTH * _health / 1000, -2,
+		CHARACTER_WIDTH * _health / 1000, -5,
 	};
 	
 	[healthEffect prepareToDraw];

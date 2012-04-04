@@ -39,9 +39,9 @@
 @public
 	GLKVector2 position;
 	GLKVector2 movement;
-	
-	int health;
 }
+
+@property (nonatomic) int health;
 
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
 - (void)respawn:(GLKVector2) posit;

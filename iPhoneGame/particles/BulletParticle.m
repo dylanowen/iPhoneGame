@@ -45,7 +45,6 @@
 
 - (void)calculateStep:(int[2]) movement
 {
-	//cut this out for higher speed (it messes up your branch predictor)
 	if(movement[0] != 0 || movement[1] != 0)
 	{
 		if(movement[0] == 0)

@@ -240,7 +240,7 @@ typedef struct
 	{
 		[self.bloodGPUPhysProgram use];
 		glUniformMatrix4fv(bloodGPUModelViewUniform, 1, 0, self.game.projectionMatrix.m);
-		glUniform1f(bloodGPUGravity, -GRAVITY * 30);
+		glUniform1f(bloodGPUGravity, -GRAVITY * 40);
 		[self.bloodGPU makeObjectsPerformSelector:@selector(render)];
 	}
 	

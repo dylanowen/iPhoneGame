@@ -32,17 +32,17 @@
 #import "BloodParticle.h"
 #import "Text.h"
 
+#import "Pickups.h"
+
 #import "Settings.h"
 #import "HighScore.h"
 
-#define NUMBER_OF_ENEMIES 10
+#define NUMBER_OF_ENEMIES 15
 
 @interface GameModel()
 {
 	float viewWidth;
 	float viewHeight;
-	
-	int zombieKills;
 	
 	Weapon *currentGun;
 }
@@ -71,6 +71,8 @@
 @synthesize controls = _controls;
 @synthesize killDisplay = _killDisplay;
 
+@synthesize zombieKills = _zombieKills;
+
 - (id)initWithView:(UIView *) view
 {
 	self = [super init];
@@ -86,6 +88,8 @@
 		self.env = [[Environment alloc] initWithModel: self];
 		self.particles = [[Particles alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
+		
+		pickups = [[Pickups alloc] initWithModel:self];
 		
 		self.player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 100)];
 		
@@ -107,7 +111,7 @@
 			[self.env deleteRadius:20 x:newPosition.x y:newPosition.y];
 		}
 		
-		zombieKills = 0;
+		_zombieKills = 0;
 		
 		Settings *settings = [Settings sharedManager];
 		switch ([settings weapon]) {
@@ -140,10 +144,10 @@
 - (bool)updateWithLastUpdate:(float) time
 {
 	//do all the main stuff of the game
-	if(self.player->health <= 0 || [self.enemies count] == 0)
+	if(self.player.health <= 0 || [self.enemies count] == 0)
 	{
 		HighScore *temp = [HighScore sharedManager];
-		temp.score = zombieKills;
+		temp.score = self.zombieKills;
 		return NO;
 	}
 	
@@ -178,6 +182,8 @@
 		if(![((Zombie *) temp) update: time projection:self.projectionMatrix])
 		{
 			[self.particles addBloodWithPosition:temp->position power:150 colorType:BloodColorRed count:8];
+			[pickups addZombieSkullWithPosition:temp->position];
+
 			GLKVector2 newPosition;
 			//keep the enemies a certain distance from the player
 			do
@@ -186,16 +192,22 @@
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, self.player->position)) < 140);
 	 
 			[temp respawn:newPosition];
-			zombieKills++;
-			self.killDisplay.str = [[NSString alloc] initWithFormat:@"kills %d", zombieKills];
 			//[indexes addIndex: i];
 		}
 		[[self.zombieTracker objectAtIndex:i] updateTrackee: temp->position center: self.player->position];
 	}
 	
+	[pickups update:time];
+	
 	[currentGun update:time];
 	
 	return YES;
+}
+
+- (void)setZombieKills:(int)zombieKills
+{
+	_zombieKills = zombieKills;
+	self.killDisplay.str = [[NSString alloc] initWithFormat:@"kills %d", zombieKills];
 }
 
 - (bool)checkCharacterHit:(BulletParticle *) bullet
@@ -220,6 +232,7 @@
 	[self.player render];
 	
 	[self.enemies makeObjectsPerformSelector:@selector(render)];
+	[pickups render];
 	[self.particles render];
 	[self.zombieTracker makeObjectsPerformSelector:@selector(render)];
 	[self.killDisplay render];

@@ -68,7 +68,7 @@
 		{
 			currentFrame = 0;
 		}
-		if(health < 500)
+		if(self.health < 500)
 		{
 			characterTextureBuffer = [texture getFrameBuffer:currentFrame + 4];
 		}
@@ -81,10 +81,10 @@
 	
 	if(GLKVector2Length(GLKVector2Subtract(player->position, position)) < 4)
 	{
-		player->health -= 2;
+		player.health -= 2;
 		[particles addBloodWithPosition:player->position power:75 colorType:BloodColorRed];
 	}
-	return health > 0;
+	return self.health > 0;
 }
 
 //debug movement vector
