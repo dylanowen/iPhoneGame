@@ -23,6 +23,7 @@
 	
 	GLKBaseEffect *laserEffect;
 	GLuint laserVertexBuffer;
+	GLuint laserIndicesBuffer;
 	GLuint laserColorOnBuffer;
 	GLuint laserColorOffBuffer;
 	
@@ -55,11 +56,19 @@
 		laserVertexBuffer = [model.bufferLoader getBufferForName:@"CharLaserSight"];
 		if(laserVertexBuffer == 0)
 		{
-			
 			float vertices[] = {
-				model.view.bounds.size.width * 3 / 4, 0,
-				0, 1,
-				0, -1
+				20, -1,
+				20, 1,
+				25, -1,
+				25, 1,
+				30, -1,
+				30, 1,
+				35, -1,
+				35, 1,
+				40, -1,
+				40, 1,
+				45, -1,
+				45, 1,
 			};
 			laserVertexBuffer = [model.bufferLoader addBufferForName:@"CharLaserSight"];
 			glBindBuffer(GL_ARRAY_BUFFER, laserVertexBuffer);
@@ -67,15 +76,34 @@
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		
+		laserIndicesBuffer = [model.bufferLoader getBufferForName:@"CharLaserIndicesSight"];
+		if(laserIndicesBuffer == 0)
+		{
+			GLuint indices[] = {
+				0, 1, 2,
+				2, 3, 1,
+				4, 5, 6,
+				6, 7, 5,
+				8, 9, 10,
+				10, 11, 9,
+			};
+			laserIndicesBuffer = [model.bufferLoader addBufferForName:@"CharLaserIndicesSight"];
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, laserIndicesBuffer);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		}
+	
 		laserColorOnBuffer = [model.bufferLoader getBufferForName:@"CharLaserOnSight"];
 		if(laserColorOnBuffer == 0)
 		{
-			
-			float color[] = {
-				1.0, 0.0, 0.0, 0.01,
-				1.0, 0.0, 0.0, 0.6,
-				1.0, 0.0, 0.0, 0.6,
-			};
+			float color[48];
+			for(unsigned i = 0; i < 48; i += 4)
+			{
+				color[i + 0] = 0.8;
+				color[i + 1] = 0.8;
+				color[i + 2] = 0.8;
+				color[i + 3] = 0.6;
+			}
 			laserColorOnBuffer = [model.bufferLoader addBufferForName:@"CharLaserOnSight"];
 			glBindBuffer(GL_ARRAY_BUFFER, laserColorOnBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
@@ -85,12 +113,14 @@
 		laserColorOffBuffer = [model.bufferLoader getBufferForName:@"CharLaserOffSight"];
 		if(laserColorOffBuffer == 0)
 		{
-			
-			float color[] = {
-				0.8, 0.1, 0.1, 0.01,
-				0.8, 0.1, 0.1, 0.4,
-				0.8, 0.1, 0.1, 0.4,
-			};
+			float color[48];
+			for(unsigned i = 0; i < 48; i += 4)
+			{
+				color[i + 0] = 0.8;
+				color[i + 1] = 0.1;
+				color[i + 2] = 0.1;
+				color[i + 3] = 0.4;
+			}
 			laserColorOffBuffer = [model.bufferLoader addBufferForName:@"CharLaserOffSight"];
 			glBindBuffer(GL_ARRAY_BUFFER, laserColorOffBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
@@ -179,7 +209,11 @@
 		glEnableVertexAttribArray(GLKVertexAttribColor);
 		glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 		
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, laserIndicesBuffer);
+		
+		glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);
+		
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		
 		glDisableVertexAttribArray(GLKVertexAttribPosition);
 		glDisableVertexAttribArray(GLKVertexAttribColor);

@@ -41,6 +41,8 @@
 		2C92F049151A4F020049C0F1 /* HighScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C92F048151A4F020049C0F1 /* HighScoreController.m */; };
 		2C92F04D151A4F430049C0F1 /* HighScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C92F04C151A4F430049C0F1 /* HighScore.m */; };
 		2C930AAB152C033800349E9A /* ZombieSkull.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C930AAA152C033800349E9A /* ZombieSkull.m */; };
+		2C94CC1B152CE7FF002C998A /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C94CC1A152CE7FF002C998A /* Background.m */; };
+		2C94CC1E152CE9CE002C998A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C94CC1D152CE9CE002C998A /* background.png */; };
 		2CD3863D1519B7AB00694CB9 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */; };
 		2CD386411519B7B500694CB9 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD386401519B7B500694CB9 /* Settings.m */; };
 		2CD386441519B7BE00694CB9 /* WeaponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD386431519B7BD00694CB9 /* WeaponViewController.m */; };
@@ -136,6 +138,9 @@
 		2C92F04C151A4F430049C0F1 /* HighScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScore.m; sourceTree = "<group>"; };
 		2C930AA9152C033800349E9A /* ZombieSkull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZombieSkull.h; path = iPhoneGame/pickups/ZombieSkull.h; sourceTree = "<group>"; };
 		2C930AAA152C033800349E9A /* ZombieSkull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZombieSkull.m; path = iPhoneGame/pickups/ZombieSkull.m; sourceTree = "<group>"; };
+		2C94CC19152CE7FF002C998A /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
+		2C94CC1A152CE7FF002C998A /* Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Background.m; sourceTree = "<group>"; };
+		2C94CC1D152CE9CE002C998A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		2CD3863B1519B7AB00694CB9 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
 		2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		2CD3863F1519B7B500694CB9 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
@@ -344,6 +349,8 @@
 				2CD386401519B7B500694CB9 /* Settings.m */,
 				CE7A797614EDED5E00B8FA24 /* GameModel.h */,
 				CE7A797714EDED5E00B8FA24 /* GameModel.m */,
+				2C94CC19152CE7FF002C998A /* Background.h */,
+				2C94CC1A152CE7FF002C998A /* Background.m */,
 				CEB48AA914F3190F00E5AD9E /* Environment.h */,
 				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
 				CEC12C6A14FC70F700EF1392 /* Tracker.h */,
@@ -427,6 +434,7 @@
 		CEC5BCE415030A64003724F5 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				2C94CC1D152CE9CE002C998A /* background.png */,
 				2C8E0879152BB26200D4BAC3 /* health.png */,
 				2C2A0758152C05DD0066E88D /* zombie_skull.png */,
 				2C912592151686C500BA3DF6 /* zombie.png */,
@@ -506,6 +514,7 @@
 				2CF9C58215170F9500C21613 /* jump_button.png in Resources */,
 				2C8E087A152BB26200D4BAC3 /* health.png in Resources */,
 				2C2A0759152C05DD0066E88D /* zombie_skull.png in Resources */,
+				2C94CC1E152CE9CE002C998A /* background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +567,7 @@
 				2C8E0878152BAD3600D4BAC3 /* Item.m in Sources */,
 				2C930AAB152C033800349E9A /* ZombieSkull.m in Sources */,
 				2C2A0761152C18310066E88D /* HealingParticle.m in Sources */,
+				2C94CC1B152CE7FF002C998A /* Background.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

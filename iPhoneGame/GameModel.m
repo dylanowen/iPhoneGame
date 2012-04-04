@@ -13,6 +13,7 @@
 #import "BufferLoader.h"
 #import "VAOLoader.h"
 
+#import "Background.h"
 #import "Environment.h"
 #import "JoyStick.h"
 #import "ToggleJoyStick.h"
@@ -45,6 +46,8 @@
 	float viewHeight;
 	
 	Weapon *currentGun;
+	
+	Background *background;
 }
 
 @property (strong, nonatomic) NSMutableArray	 *enemies;
@@ -85,6 +88,7 @@
 		self.bufferLoader = [[BufferLoader alloc] init];
 		self.vaoLoader = [[VAOLoader alloc] init];
 		
+		background = [[Background alloc] initWithModel:self];
 		self.env = [[Environment alloc] initWithModel: self];
 		self.particles = [[Particles alloc] initWithModel: self];
 		self.controls = [[Controls alloc] initWithModel: self];
@@ -231,6 +235,8 @@
 - (void)render
 {
 	glClear(GL_COLOR_BUFFER_BIT);
+	
+	[background render];
 
 	[self.env render];
 	
