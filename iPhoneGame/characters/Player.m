@@ -185,7 +185,7 @@
 	top = position.y - (DYNAMIC_VIEW_HEIGHT / 2);
 	right = left + DYNAMIC_VIEW_WIDTH;
 	bottom = top + DYNAMIC_VIEW_HEIGHT;
-	return GLKMatrix4MakeOrtho(left, right, bottom, top, 1, -1);
+	return GLKMatrix4MakeOrtho(left, right, bottom, top, 0, 10);
 }
 
 - (void)render

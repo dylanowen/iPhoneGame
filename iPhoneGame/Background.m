@@ -51,11 +51,12 @@
 		vertexBuffer = [game.bufferLoader getBufferForName:@"Background"];
 		if(vertexBuffer == 0)
 		{
+			float z = -10.0f;
 			float vertices[] = {
-				ENV_WIDTH + DYNAMIC_VIEW_WIDTH / 2, -DYNAMIC_VIEW_HEIGHT / 2, -1,
-				ENV_WIDTH + DYNAMIC_VIEW_WIDTH / 2, ENV_HEIGHT + DYNAMIC_VIEW_HEIGHT / 2, -1,
-				-DYNAMIC_VIEW_WIDTH / 2, ENV_HEIGHT + DYNAMIC_VIEW_HEIGHT / 2, -1,
-				-DYNAMIC_VIEW_WIDTH / 2, -DYNAMIC_VIEW_HEIGHT / 2, -1
+				ENV_WIDTH + DYNAMIC_VIEW_WIDTH / 2, -DYNAMIC_VIEW_HEIGHT / 2, z,
+				ENV_WIDTH + DYNAMIC_VIEW_WIDTH / 2, ENV_HEIGHT + DYNAMIC_VIEW_HEIGHT / 2, z,
+				-DYNAMIC_VIEW_WIDTH / 2, ENV_HEIGHT + DYNAMIC_VIEW_HEIGHT / 2, z,
+				-DYNAMIC_VIEW_WIDTH / 2, -DYNAMIC_VIEW_HEIGHT / 2, z
 			};
 			vertexBuffer = [game.bufferLoader addBufferForName:@"Background"];
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);

@@ -48,7 +48,9 @@
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	
-	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_TRUE);
+	
 	glDisable(GL_STENCIL_TEST);
 	
 	//glClearColor(0.5, 0.5, 0.5, 1.0);

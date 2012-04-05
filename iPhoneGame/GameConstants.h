@@ -16,6 +16,8 @@
 #define STATIC_VIEW_WIDTH 480
 #define STATIC_VIEW_HEIGHT 320
 
+#define VIEW_DISTANCE 10.1f
+
 #define ENV_WIDTH 400
 #define ENV_HEIGHT 400
 

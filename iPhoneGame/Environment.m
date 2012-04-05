@@ -97,7 +97,7 @@
 		modelViewUniform = [self.program uniformIndex:@"modelViewProjectionMatrix"];
 		
 		//the size is the width * height * components of vertices
-		unsigned vertexBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2;
+		unsigned vertexBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 3;
 		unsigned colorBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 4;
 		
 		float *vertices = malloc(vertexBufferSize);
@@ -108,11 +108,12 @@
 			for(unsigned j = 0; j < ENV_HEIGHT; j++)
 			{
 				unsigned off = i * ENV_HEIGHT + j;
-				unsigned offVertices = off * 2;
+				unsigned offVertices = off * 3;
 				unsigned offColor = off * 4;
 				
 				vertices[offVertices + 0] = (float) i;
 				vertices[offVertices + 1] = (float) j;
+				vertices[offVertices + 2] = -9.0f;
 				
 				int randomBrown = (arc4random() % 5);
 				colors[offColor + 0] = browns[randomBrown][0];
@@ -137,7 +138,7 @@
 		
 		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 		glEnableVertexAttribArray(positionAttribute);
-		glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+		glVertexAttribPointer(positionAttribute, 3, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 		glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
 		glEnableVertexAttribArray(colorAttribute);
 		glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);

@@ -8,6 +8,8 @@
 
 #import "GameModel.h"
 
+#import "MatrixFunctions.h"
+
 #import "TextureLoader.h"
 #import "EffectLoader.h"
 #import "BufferLoader.h"
@@ -82,9 +84,9 @@
 	{
 		self.view = view;
 		
-		staticProjection = GLKMatrix4MakeOrtho(0, STATIC_VIEW_WIDTH, STATIC_VIEW_HEIGHT, 0, 1, -1);
-		dynamicProjection = GLKMatrix4MakeOrtho(0, DYNAMIC_VIEW_WIDTH, DYNAMIC_VIEW_HEIGHT, 0, 1, -1);;
-		
+		staticProjection = GLKMatrix4MakeOrtho(0, STATIC_VIEW_WIDTH, STATIC_VIEW_HEIGHT, 0, 0, 10);
+		dynamicProjection = CenterOrtho(0, 0);
+
 		self.textureLoader = [[TextureLoader alloc] init];
 		self.effectLoader = [[EffectLoader alloc] init];
 		self.bufferLoader = [[BufferLoader alloc] init];
@@ -167,7 +169,8 @@
 	self.player->look = self.controls.look->velocity;
 	
 	//setup the projectionMatrix for everything (it has to happen first)
-	dynamicProjection = [self.player update: time];
+	[self.player update: time];
+	MoveOrthoVector(&dynamicProjection, self.player->position);
 	
 	//generate a new bullet
 	self.player->shoot = self.controls.look->toggle;
@@ -234,7 +237,7 @@
 
 - (void)render
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	[background render];
 

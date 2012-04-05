@@ -132,6 +132,7 @@
 		2C8E0876152BAD3600D4BAC3 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = iPhoneGame/pickups/Item.h; sourceTree = "<group>"; };
 		2C8E0877152BAD3600D4BAC3 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = iPhoneGame/pickups/Item.m; sourceTree = "<group>"; };
 		2C8E0879152BB26200D4BAC3 /* health.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = health.png; sourceTree = "<group>"; };
+		2C90FC2A152D607E00B5BB44 /* MatrixFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatrixFunctions.h; sourceTree = "<group>"; };
 		2C91258215167CB200BA3DF6 /* Zombie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Zombie.h; path = characters/Zombie.h; sourceTree = "<group>"; };
 		2C91258315167CB200BA3DF6 /* Zombie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Zombie.m; path = characters/Zombie.m; sourceTree = "<group>"; };
 		2C91258C15167D2D00BA3DF6 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Character.h; path = characters/Character.h; sourceTree = "<group>"; };
@@ -349,6 +350,7 @@
 				2C92F04B151A4F430049C0F1 /* HighScore.h */,
 				2C92F04C151A4F430049C0F1 /* HighScore.m */,
 				CEBEF6B914FAD553008913F4 /* GameConstants.h */,
+				2C90FC2A152D607E00B5BB44 /* MatrixFunctions.h */,
 				CE7A795614ECB05E00B8FA24 /* AppDelegate.h */,
 				CE7A795714ECB05E00B8FA24 /* AppDelegate.m */,
 				2CD386421519B7BD00694CB9 /* WeaponViewController.h */,
