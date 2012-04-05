@@ -20,9 +20,8 @@
 @interface Character : NSObject
 {
 @protected
+	GameModel *game;
 	Environment *env;
-	
-	GLKMatrix4 projection;
 	
 	GLKBaseEffect *textureEffect;
 	GLKBaseEffect *healthEffect;

@@ -44,7 +44,7 @@
 	
 	NSMutableArray	*zombieTracker;
 	
-	Weapon *currentGun;
+	//Weapon *currentGun;
 	
 	Text *killDisplay;
 }
@@ -76,6 +76,7 @@
 			[environment deleteRadius:20 x:newPosition.x y:newPosition.y];
 		}
 		
+		/*
 		Settings *settings = [Settings sharedManager];
 		switch ([settings weapon]) {
 			case 1:
@@ -94,6 +95,7 @@
             currentGun = [[BouncyMachineGun alloc] initWithParticles:particles];
             break;
 		}
+		 */
 		
 		_zombieKills = 0;
 		killDisplay = [[Text alloc] initWithModel:self text:@"kills 0" position:GLKVector2Make(5, 5)];
@@ -115,20 +117,12 @@
 	
 	[super update:time];
 	
-	//generate a new bullet
-	player->shoot = controls.look->toggle;
-	if(controls.look->toggle)
-	{
-		[currentGun shootAtPosition:player->position direction: controls.look->velocity];
-		//[self.particles addHealingEffect:self.player->position];
-	}
-	
 	[particles updateWithLastUpdate: time];
 	
 	for(unsigned i = 0; i < [enemies count]; i++)
 	{
 		Character *temp = [enemies objectAtIndex:i];
-		if(![((Zombie *) temp) update: time projection:dynamicProjection])
+		if(![((Zombie *) temp) update: time])
 		{
 			[particles addBloodWithPosition:temp->position power:150 colorType:BloodColorRed count:8];
 			[pickups addZombieSkullWithPosition:temp->position];
@@ -147,8 +141,7 @@
 	}
 	
 	[pickups update:time];
-	
-	[currentGun update:time];
+
 	
 	return YES;
 }

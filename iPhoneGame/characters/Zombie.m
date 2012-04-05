@@ -43,7 +43,7 @@
 	return nil;
 }
 
-- (bool)update:(float) time projection:(GLKMatrix4) matrix
+- (bool)update:(float) time
 {
 	GLKVector2 normMovement = GLKVector2Normalize(GLKVector2Subtract(player->position, position));
 	movement = GLKVector2MultiplyScalar(normMovement, movementSpeed);
@@ -75,8 +75,7 @@
 		[env editRect:YES leftX:dig.x topY:dig.y width:5 height:10];
 	}
 	
-	[self update: time];
-	projection = matrix;
+	[super update: time];
 	if(animateTimer >= .25f)
 	{
 		currentFrame++;

@@ -51,12 +51,11 @@
 		vertexBuffer = [game.bufferLoader getBufferForName:@"Background"];
 		if(vertexBuffer == 0)
 		{
-			float z = -10.0f;
 			float vertices[] = {
-				ENV_WIDTH + DYNAMIC_VIEW_WIDTH / 2, -DYNAMIC_VIEW_HEIGHT / 2, z,
-				ENV_WIDTH + DYNAMIC_VIEW_WIDTH / 2, ENV_HEIGHT + DYNAMIC_VIEW_HEIGHT / 2, z,
-				-DYNAMIC_VIEW_WIDTH / 2, ENV_HEIGHT + DYNAMIC_VIEW_HEIGHT / 2, z,
-				-DYNAMIC_VIEW_WIDTH / 2, -DYNAMIC_VIEW_HEIGHT / 2, z
+				ENV_WIDTH + DYNAMIC_VIEW_WIDTH / 2, -DYNAMIC_VIEW_HEIGHT / 2,
+				ENV_WIDTH + DYNAMIC_VIEW_WIDTH / 2, ENV_HEIGHT + DYNAMIC_VIEW_HEIGHT / 2,
+				-DYNAMIC_VIEW_WIDTH / 2, ENV_HEIGHT + DYNAMIC_VIEW_HEIGHT / 2,
+				-DYNAMIC_VIEW_WIDTH / 2, -DYNAMIC_VIEW_HEIGHT / 2
 			};
 			vertexBuffer = [game.bufferLoader addBufferForName:@"Background"];
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -69,7 +68,7 @@
 		
 		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 		glEnableVertexAttribArray(GLKVertexAttribPosition);
-		glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+		glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 		
 		glBindBuffer(GL_ARRAY_BUFFER, textureBuffer);
 		glEnableVertexAttribArray(GLKVertexAttribTexCoord0);

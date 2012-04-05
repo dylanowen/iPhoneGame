@@ -9,11 +9,14 @@
 #import "Player.h"
 
 #import "GameConstants.h"
+#import "MatrixFunctions.h"
 #import "GameModel.h"
 #import "Particles.h"
 #import "TextureLoader.h"
 #import "EffectLoader.h"
 #import "BufferLoader.h"
+
+#import "MachineGun.h"
 
 @interface Player()
 {
@@ -29,9 +32,9 @@
 	
 	GLKMatrix4 laserCenter;
 	
+	Weapon *currentGun;
+	
 }
-
-- (GLKMatrix4)centerView;
 
 @end
 
@@ -50,7 +53,7 @@
 		if(laserEffect == nil)
 		{
 			laserEffect = [model.effectLoader addEffectForName:@"CharLaserSight"];
-			laserEffect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, model.view.bounds.size.width, model.view.bounds.size.height, 0, 1, -1);
+			laserEffect.transform.projectionMatrix = model->staticProjection;
 		}
 		
 		laserVertexBuffer = [model.bufferLoader getBufferForName:@"CharLaserSight"];
@@ -127,6 +130,7 @@
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		
+		currentGun = [[MachineGun alloc] initWithParticles:particles];
 		shoot = false;
 		laserCenter = GLKMatrix4MakeTranslation(model.view.bounds.size.width / 2, model.view.bounds.size.height / 2, 0);
 
@@ -139,12 +143,17 @@
 	return nil;
 }
 
-- (GLKMatrix4)update:(float) time
+- (void)update:(float) time
 {
 	[super update:time];
-	projection = [self centerView];
 	
 	laserEffect.transform.modelviewMatrix = GLKMatrix4RotateZ(laserCenter, atan2f(look.y, look.x));
+	
+	if(shoot)
+	{
+		[currentGun shootAtPosition:position direction: look];
+		//[self.particles addHealingEffect:self.player->position];
+	}
 	
 	if(animateTimer >= .25f)
 	{
@@ -168,24 +177,10 @@
 		}
 		animateTimer = 0;
 	}
-	//slight healing
-	/*
-	if(arc4random() % 70 == 0 && self.health < 100)
-	{
-		self.health += 5;
-	}
-	*/
-	return projection;
-}
-
-- (GLKMatrix4)centerView
-{
-	float left, top, right, bottom;
-	left = position.x - (DYNAMIC_VIEW_WIDTH / 2);
-	top = position.y - (DYNAMIC_VIEW_HEIGHT / 2);
-	right = left + DYNAMIC_VIEW_WIDTH;
-	bottom = top + DYNAMIC_VIEW_HEIGHT;
-	return GLKMatrix4MakeOrtho(left, right, bottom, top, 0, 10);
+	
+	[currentGun update:time];
+	
+	MoveOrthoVector(&(game->dynamicProjection), position);
 }
 
 - (void)render

@@ -31,8 +31,6 @@ enum
 
 @interface Character()
 {
-	GameModel *game;
-	
 	GLKVector2 velocity;
 	
 	int precision;
@@ -373,7 +371,7 @@ enum
 - (void)renderCharacter
 {
 	textureEffect.texture2d0.name = [texture getName];
-	textureEffect.transform.projectionMatrix = projection;
+	textureEffect.transform.projectionMatrix = game->dynamicProjection;
 	textureEffect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - characterCenter[0], position.y - characterCenter[1], 0);
 	
 	[textureEffect prepareToDraw];

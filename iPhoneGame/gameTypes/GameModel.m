@@ -90,10 +90,10 @@
 	//self.player->movement.y = self.controls.move->velocity.y * 5;
 	
 	player->look = controls.look->velocity;
+	player->shoot = controls.look->toggle;
 	
-	//setup the projectionMatrix for everything (it has to happen first)
+	//the player updates the projection matrix
 	[player update: time];
-	MoveOrthoVector(&dynamicProjection, player->position);
 	
 	return YES;
 }
