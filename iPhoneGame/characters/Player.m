@@ -44,7 +44,7 @@
 	if(self)
 	{
 		texture = [model.textureLoader getTextureDescription:@"character.png"];
-		particles = model.particles;
+		particles = model->particles;
 		
 		laserEffect = [model.effectLoader getEffectForName:@"CharLaserSight"];
 		if(laserEffect == nil)

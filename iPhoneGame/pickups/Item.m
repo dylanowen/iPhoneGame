@@ -32,8 +32,8 @@
 		velocity = GLKVector2Make(0.0f, 0.0f);
 		
 		game = model;
-		env = game.env;
-		player = game.player;
+		env = game->environment;
+		player = game->player;
 		
 		textureEffect = [game.effectLoader getEffectForName:@"TextureEffect"];
 		if(textureEffect == nil)
@@ -159,7 +159,7 @@
 
 - (void)pickedUp
 {
-	NSLog(@"You picked up the whatever!!");
+	[game itemPickedUp:self];
 }
 
 - (void)render

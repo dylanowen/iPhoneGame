@@ -59,7 +59,7 @@ enum
 	if(self)
 	{
 		game = model;
-		env = game.env;
+		env = game->environment;
 		
 		textureEffect = [game.effectLoader getEffectForName:@"TextureEffect"];
 		if(textureEffect == nil)
@@ -276,7 +276,7 @@ enum
 	if(GLKVector2Length(GLKVector2Subtract(bullet->position, position)) < 6)
 	{
 		_health -= bullet->damage;
-		[self->game.particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed];
+		[self->game->particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed];
 		return YES;
 	}
 	return NO;

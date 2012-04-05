@@ -8,7 +8,7 @@
 
 #import "Zombie.h"
 
-#import "GameModel.h"
+#import "ZombieSwarm.h"
 #import "Environment.h"
 #import "Particles.h"
 #import "BloodParticle.h"
@@ -25,13 +25,13 @@
 
 @implementation Zombie
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
+- (id)initWithModel:(ZombieSwarm *) model position:(GLKVector2) posit
 {
 	self = [super initWithModel:model position:posit];
 	if(self)
 	{
-		player = (Character *) model.player;
-		particles = model.particles;
+		player = (Character *) model->player;
+		particles = model->particles;
 		texture = [model.textureLoader getTextureDescription:@"zombie.png"];
 		characterTextureBuffer = [texture getFrameBuffer:currentFrame];
 		jumpHeight = 45;

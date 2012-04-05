@@ -88,19 +88,19 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[self.mainGame.controls touchesBegan: touches];
+	[self.mainGame->controls touchesBegan: touches];
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[self.mainGame.controls touchesMoved: touches];
+	[self.mainGame->controls touchesMoved: touches];
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[self.mainGame.controls touchesEnded: touches];
+	[self.mainGame->controls touchesEnded: touches];
 }
 - (void)touchesCancelled:(NSSet *)touches
 {
-	[self.mainGame.controls touchesCancelled: touches];
+	[self.mainGame->controls touchesCancelled: touches];
 }
 
 - (void)didReceiveMemoryWarning

@@ -8,7 +8,11 @@
 
 #import "Character.h"
 
+@class ZombieSwarm;
+
 @interface Zombie : Character
+
+- (id)initWithModel:(ZombieSwarm *) model position:(GLKVector2) posit;
 
 - (bool)update:(float) time projection:(GLKMatrix4) matrix;
 

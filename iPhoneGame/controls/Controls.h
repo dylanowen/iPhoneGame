@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "JoyStick.h"
+#import "ToggleJoyStick.h"
+#import "Button.h"
+
 @class GameModel;
-@class JoyStick;
-@class ToggleJoyStick;
-@class Button;
 
 @interface Controls : NSObject
 

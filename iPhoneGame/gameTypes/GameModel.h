@@ -22,11 +22,17 @@
 @class BulletParticle;
 @class Player;
 @class Pickups;
+@class Item;
 
 @interface GameModel : NSObject
 {
 @public
+	Environment *environment;
+	Particles *particles;
 	Pickups *pickups;
+	Controls *controls;
+	
+	Player *player;
 	
 	GLKMatrix4 staticProjection;
 	GLKMatrix4 dynamicProjection;
@@ -39,17 +45,12 @@
 @property (strong, nonatomic) BufferLoader *bufferLoader;
 @property (strong, nonatomic) VAOLoader *vaoLoader;
 
-@property (strong, nonatomic) Player *player;
-@property (strong, nonatomic) Environment *env;
-@property (strong, nonatomic) Particles *particles;
-@property (strong, nonatomic) Controls *controls;
-
-@property (nonatomic) int zombieKills;
-
 - (id)initWithView:(UIView *) view;
 
 - (bool)update:(float) time;
-- (bool)checkCharacterHit:(BulletParticle *) bullet;
+- (bool)checkBulletHit:(BulletParticle *) bullet;
+
+- (void)itemPickedUp:(Item *) item;
 
 - (void)render;
 

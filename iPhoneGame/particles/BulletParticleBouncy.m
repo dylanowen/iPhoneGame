@@ -60,7 +60,7 @@
 		intJ = j / precision;
 		if(intI != lastI || intJ != lastJ)
 		{
-			if([model checkCharacterHit:self])
+			if([model checkBulletHit:self])
 			{
 				return NO;
 			}

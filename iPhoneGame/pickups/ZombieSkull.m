@@ -45,9 +45,4 @@
 	return nil;
 }
 
-- (void)pickedUp
-{
-	game.zombieKills++;
-}
-
 @end

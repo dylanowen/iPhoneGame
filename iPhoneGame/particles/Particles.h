@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
+#import "BloodParticle.h"
+
 @class GameModel;
 
 @interface Particles : NSObject

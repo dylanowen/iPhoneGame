@@ -8,8 +8,12 @@
 
 #import "GameModel.h"
 
+@class Player;
+
 @interface ZombieSwarm : GameModel
 
-- (id)initWithView:(UIView *) view;
+@property (nonatomic) int zombieKills;
+
+- (void)itemPickedUp:(Item *) item;
 
 @end

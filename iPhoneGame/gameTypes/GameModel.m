@@ -21,14 +21,8 @@
 #import "ToggleJoyStick.h"
 #import "Button.h"
 #import "Tracker.h"
-#import "Player.h"
-#import "Zombie.h"
 
-#import "BouncyMachineGun.h"
-#import "MachineGun.h"
-#import "ShotGun.h"
-#import "BouncyShotGun.h"
-#import "Sniper.h"
+#import "Player.h"
 
 #import "Particles.h"
 #import "BulletParticle.h"
@@ -38,23 +32,11 @@
 #import "Pickups.h"
 
 #import "Settings.h"
-#import "HighScore.h"
-
-#define NUMBER_OF_ENEMIES 15
 
 @interface GameModel()
 {
-	float viewWidth;
-	float viewHeight;
-	
-	Weapon *currentGun;
-	
 	Background *background;
 }
-
-@property (strong, nonatomic) NSMutableArray	 *enemies;
-@property (strong, nonatomic) NSMutableArray	 *zombieTracker;
-@property (strong, nonatomic) Text *killDisplay;
 
 @end
 
@@ -66,16 +48,6 @@
 @synthesize effectLoader = _effectLoader;
 @synthesize bufferLoader = _bufferLoader;
 @synthesize vaoLoader = _vaoLoader;
-
-@synthesize env = _env;
-@synthesize particles = _particles;
-@synthesize player = _player;
-@synthesize enemies = _enemies;
-@synthesize zombieTracker = _enemyTrackers;
-@synthesize controls = _controls;
-@synthesize killDisplay = _killDisplay;
-
-@synthesize zombieKills = _zombieKills;
 
 - (id)initWithView:(UIView *) view
 {
@@ -93,54 +65,13 @@
 		self.vaoLoader = [[VAOLoader alloc] init];
 		
 		background = [[Background alloc] initWithModel:self];
-		self.env = [[Environment alloc] initWithModel: self];
-		self.particles = [[Particles alloc] initWithModel: self];
-		self.controls = [[Controls alloc] initWithModel: self];
-		
+		environment = [[Environment alloc] initWithModel: self];
+		particles = [[Particles alloc] initWithModel: self];
 		pickups = [[Pickups alloc] initWithModel:self];
+		controls = [[Controls alloc] initWithModel: self];
 		
-		self.player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 100)];
-		
-		[self.env deleteRadius:20 x:(ENV_WIDTH / 2) y:100];
-		
-		self.enemies = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ENEMIES];
-		self.zombieTracker = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ENEMIES];
-		GLKVector2 trackScale = GLKVector2Make(DYNAMIC_VIEW_WIDTH / self.view.bounds.size.width, DYNAMIC_VIEW_HEIGHT / self.view.bounds.size.height);
-		for(unsigned i = 0; i < NUMBER_OF_ENEMIES; i++)
-		{
-			GLKVector2 newPosition;
-			//keep the enemies a certain distance from the player
-			do
-			{
-				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
-			}while(GLKVector2Length(GLKVector2Subtract(newPosition, self.player->position)) < 80);
-			[self.enemies addObject:[[Zombie alloc] initWithModel:self position:newPosition]];
-			[self.zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: DYNAMIC_VIEW_WIDTH height: DYNAMIC_VIEW_HEIGHT red: 0.0f green: 0.35f blue: 0.0f model:self]];
-			[self.env deleteRadius:20 x:newPosition.x y:newPosition.y];
-		}
-		
-		_zombieKills = 0;
-		
-		Settings *settings = [Settings sharedManager];
-		switch ([settings weapon]) {
-			case 1:
-            currentGun = [[Sniper alloc] initWithParticles:self.particles];
-            break;
-			case 2:
-            currentGun = [[MachineGun alloc] initWithParticles:self.particles];
-            break;
-			case 3:
-            currentGun = [[ShotGun alloc] initWithParticles:self.particles];
-            break;
-			case 4:
-            currentGun = [[BouncyShotGun alloc] initWithParticles:self.particles];
-            break;
-			default:
-            currentGun = [[BouncyMachineGun alloc] initWithParticles:self.particles];
-            break;
-		}
-		
-		self.killDisplay = [[Text alloc] initWithModel:self text:@"kills 0" position:GLKVector2Make(5, 5)];
+		player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 100)];
+		[environment deleteRadius:20 x:(ENV_WIDTH / 2) y:100];
 		
 		return self;
 	}
@@ -149,90 +80,32 @@
 
 - (bool)update:(float) time
 {
-	//do all the main stuff of the game
-	if(self.player.health <= 0 || [self.enemies count] == 0)
-	{
-		HighScore *temp = [HighScore sharedManager];
-		temp.score = self.zombieKills;
-		return NO;
-	}
-	
 	//it's negative because up is negative...
-	if(self.controls.move->velocity.y < -0.5f)
+	if(controls.move->velocity.y < -0.5f)
 	{
-		[self.player jump];
+		[player jump];
 	}
 	
-	self.player->movement.x = self.controls.move->velocity.x * 60;
+	player->movement.x = controls.move->velocity.x * 60;
 	//self.player->movement.y = self.controls.move->velocity.y * 5;
 	
-	self.player->look = self.controls.look->velocity;
+	player->look = controls.look->velocity;
 	
 	//setup the projectionMatrix for everything (it has to happen first)
-	[self.player update: time];
-	MoveOrthoVector(&dynamicProjection, self.player->position);
-	
-	//generate a new bullet
-	self.player->shoot = self.controls.look->toggle;
-	if(self.controls.look->toggle)
-	{
-		[currentGun shootAtPosition:self.player->position direction: self.controls.look->velocity];
-		//[self.particles addHealingEffect:self.player->position];
-	}
-
-	
-	[self.particles updateWithLastUpdate: time];
-	
-	for(unsigned i = 0; i < [self.enemies count]; i++)
-	{
-		Character *temp = [self.enemies objectAtIndex:i];
-		if(![((Zombie *) temp) update: time projection:dynamicProjection])
-		{
-			[self.particles addBloodWithPosition:temp->position power:150 colorType:BloodColorRed count:8];
-			[pickups addZombieSkullWithPosition:temp->position];
-
-			GLKVector2 newPosition;
-			//keep the enemies a certain distance from the player
-			do
-			{
-				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
-			}while(GLKVector2Length(GLKVector2Subtract(newPosition, self.player->position)) < 140);
-	 
-			[temp respawn:newPosition];
-			//[indexes addIndex: i];
-		}
-		[[self.zombieTracker objectAtIndex:i] updateTrackee: temp->position center: self.player->position];
-	}
-	
-	[pickups update:time];
-	
-	[currentGun update:time];
+	[player update: time];
+	MoveOrthoVector(&dynamicProjection, player->position);
 	
 	return YES;
 }
 
-- (void)setZombieKills:(int)zombieKills
+- (bool)checkBulletHit:(BulletParticle *) bullet
 {
-	_zombieKills = zombieKills;
-	if(_zombieKills % 5 == 0)
-	{
-		self.player.health += 150;
-		[self.particles addHealingEffect:self.player->position];
-	}
-	self.killDisplay.str = [[NSString alloc] initWithFormat:@"kills %d", zombieKills];
+	return NO;
 }
 
-- (bool)checkCharacterHit:(BulletParticle *) bullet
+- (void)itemPickedUp:(Item *) item
 {
-	for(unsigned i = 0; i < [self.enemies count]; i++)
-	{
-		if([[self.enemies objectAtIndex:i] checkBullet:bullet])
-		{
-			return YES;
-		}
-	}
 	
-	return NO;
 }
 
 - (void)render
@@ -240,18 +113,11 @@
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	[background render];
-
-	[self.env render];
-	
-	[self.player render];
-	
-	[self.enemies makeObjectsPerformSelector:@selector(render)];
+	[environment render];
+	[particles render];
 	[pickups render];
-	[self.particles render];
-	[self.zombieTracker makeObjectsPerformSelector:@selector(render)];
-	[self.killDisplay render];
+	[controls render];
 	
-	[self.controls render];
 	//debug
 	/*
 	switch(glGetError())
