@@ -35,7 +35,7 @@
 
 @interface GameModel()
 {
-	Background *background;
+	
 }
 
 @end

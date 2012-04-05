@@ -16,6 +16,7 @@
 @class EffectLoader;
 @class BufferLoader;
 @class VAOLoader;
+@class Background;
 @class Environment;
 @class Particles;
 @class Controls;
@@ -36,6 +37,8 @@
 	
 	GLKMatrix4 staticProjection;
 	GLKMatrix4 dynamicProjection;
+@protected
+	Background *background;
 }
 
 @property (strong, nonatomic) UIView *view;

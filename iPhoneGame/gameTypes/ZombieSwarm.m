@@ -17,6 +17,7 @@
 
 #import "Controls.h"
 
+#import "Background.h"
 #import "Environment.h"
 #import "Particles.h"
 #import "Pickups.h"
@@ -172,13 +173,18 @@
 
 - (void)render
 {
-	[super render];
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
+	[background render];
+	[environment render];
+	[particles render];
 	[player render];
 	[enemies makeObjectsPerformSelector:@selector(render)];
+	[pickups render];
 	
 	[zombieTracker makeObjectsPerformSelector:@selector(render)];
 	[killDisplay render];
+	[controls render];
 }
 
 - (void)setZombieKills:(int)zombieKills
