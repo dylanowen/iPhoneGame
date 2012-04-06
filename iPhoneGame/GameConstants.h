@@ -23,6 +23,8 @@
 
 #define GRAVITY 3.0f
 
+#define FRICTION -0.1f
+
 #define FILE_PREFIX @"com.arc"
 
 #endif

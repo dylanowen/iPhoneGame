@@ -90,7 +90,8 @@
 	//self.player->movement.y = self.controls.move->velocity.y * 5;
 	
 	player->look = controls.look->velocity;
-	player->shoot = controls.look->toggle;
+	player->shootGun = controls.look->toggle;
+	player->shootNinjaRope = controls.look->toggle;
 	
 	//the player updates the projection matrix
 	[player update: time];

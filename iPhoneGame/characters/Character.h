@@ -38,6 +38,7 @@
 @public
 	GLKVector2 position;
 	GLKVector2 movement;
+	GLKVector2 velocity;
 }
 
 @property (nonatomic) int health;

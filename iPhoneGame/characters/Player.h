@@ -12,7 +12,8 @@
 {
 @public
 	GLKVector2 look;
-	bool shoot;
+	bool shootGun;
+	bool shootNinjaRope;
 }
 
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;

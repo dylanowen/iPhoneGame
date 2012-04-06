@@ -18,6 +18,7 @@
 		2C7317FF152A7A1D00FEAF5D /* ParticleShaderGPUPhysics.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C7317F8152A5EA500FEAF5D /* ParticleShaderGPUPhysics.vsh */; };
 		2C805AFC1519BA3600C2702A /* BouncyMachineGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C805AFB1519BA3600C2702A /* BouncyMachineGun.m */; };
 		2C805AFF1519BBE100C2702A /* BouncyShotGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C805AFE1519BBE100C2702A /* BouncyShotGun.m */; };
+		2C861305152E67A000679829 /* NinjaRope.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C861304152E67A000679829 /* NinjaRope.m */; };
 		2C8915521519451700F91087 /* TextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915511519451700F91087 /* TextureLoader.m */; };
 		2C891555151945C900F91087 /* TextureDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C891554151945C900F91087 /* TextureDescription.m */; };
 		2C89155815194A9000F91087 /* EffectLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89155715194A9000F91087 /* EffectLoader.m */; };
@@ -95,6 +96,8 @@
 		2C805AFB1519BA3600C2702A /* BouncyMachineGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BouncyMachineGun.m; path = weapons/BouncyMachineGun.m; sourceTree = "<group>"; };
 		2C805AFD1519BBE100C2702A /* BouncyShotGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BouncyShotGun.h; path = weapons/BouncyShotGun.h; sourceTree = "<group>"; };
 		2C805AFE1519BBE100C2702A /* BouncyShotGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BouncyShotGun.m; path = weapons/BouncyShotGun.m; sourceTree = "<group>"; };
+		2C861303152E67A000679829 /* NinjaRope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NinjaRope.h; path = characters/NinjaRope.h; sourceTree = "<group>"; };
+		2C861304152E67A000679829 /* NinjaRope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NinjaRope.m; path = characters/NinjaRope.m; sourceTree = "<group>"; };
 		2C8915501519451700F91087 /* TextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureLoader.h; path = loaders/TextureLoader.h; sourceTree = "<group>"; };
 		2C8915511519451700F91087 /* TextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextureLoader.m; path = loaders/TextureLoader.m; sourceTree = "<group>"; };
 		2C891553151945C900F91087 /* TextureDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureDescription.h; path = loaders/TextureDescription.h; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 			children = (
 				2C91258C15167D2D00BA3DF6 /* Character.h */,
 				2C91258D15167D2D00BA3DF6 /* Character.m */,
+				2C861303152E67A000679829 /* NinjaRope.h */,
+				2C861304152E67A000679829 /* NinjaRope.m */,
 				2C8D61BA1519AC6800379943 /* Player.h */,
 				2C8D61BB1519AC6800379943 /* Player.m */,
 				2C91258215167CB200BA3DF6 /* Zombie.h */,
@@ -584,6 +589,7 @@
 				2C94CC1B152CE7FF002C998A /* Background.m in Sources */,
 				2C1CF16A152D07B1004A8FA6 /* GameModel.m in Sources */,
 				2C1CF170152D086D004A8FA6 /* ZombieSwarm.m in Sources */,
+				2C861305152E67A000679829 /* NinjaRope.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

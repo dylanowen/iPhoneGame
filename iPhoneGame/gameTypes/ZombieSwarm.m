@@ -40,7 +40,7 @@
 
 @interface ZombieSwarm()
 {
-	NSMutableArray *enemies;
+	NSMutableArray *zombies;
 	
 	NSMutableArray	*zombieTracker;
 	
@@ -60,7 +60,7 @@
 	self = [super initWithView:view];
 	if(self)
 	{
-		enemies = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];
+		zombies = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];
 		zombieTracker = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];
 		GLKVector2 trackScale = GLKVector2Make(DYNAMIC_VIEW_WIDTH / self.view.bounds.size.width, DYNAMIC_VIEW_HEIGHT / self.view.bounds.size.height);
 		for(unsigned i = 0; i < NUMBER_OF_ZOMBIES; i++)
@@ -71,7 +71,7 @@
 			{
 				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, player->position)) < 80);
-			[enemies addObject:[[Zombie alloc] initWithModel:self position:newPosition]];
+			[zombies addObject:[[Zombie alloc] initWithModel:self position:newPosition]];
 			[zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: DYNAMIC_VIEW_WIDTH height: DYNAMIC_VIEW_HEIGHT red: 0.0f green: 0.35f blue: 0.0f model:self]];
 			[environment deleteRadius:20 x:newPosition.x y:newPosition.y];
 		}
@@ -108,7 +108,7 @@
 - (bool)update:(float) time
 {
 	//do all the main stuff of the game
-	if(player.health <= 0 || [enemies count] == 0)
+	if(player.health <= 0)
 	{
 		HighScore *temp = [HighScore sharedManager];
 		temp.score = self.zombieKills;
@@ -119,9 +119,9 @@
 	
 	[particles updateWithLastUpdate: time];
 	
-	for(unsigned i = 0; i < [enemies count]; i++)
+	for(unsigned i = 0; i < [zombies count]; i++)
 	{
-		Character *temp = [enemies objectAtIndex:i];
+		Character *temp = [zombies objectAtIndex:i];
 		if(![((Zombie *) temp) update: time])
 		{
 			[particles addBloodWithPosition:temp->position power:150 colorType:BloodColorRed count:8];
@@ -148,9 +148,9 @@
 
 - (bool)checkBulletHit:(BulletParticle *) bullet
 {
-	for(unsigned i = 0; i < [enemies count]; i++)
+	for(unsigned i = 0; i < [zombies count]; i++)
 	{
-		if([[enemies objectAtIndex:i] checkBullet:bullet])
+		if([[zombies objectAtIndex:i] checkBullet:bullet])
 		{
 			return YES;
 		}
@@ -166,13 +166,13 @@
 
 - (void)render
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);
 	
 	[background render];
 	[environment render];
 	[particles render];
 	[player render];
-	[enemies makeObjectsPerformSelector:@selector(render)];
+	[zombies makeObjectsPerformSelector:@selector(render)];
 	[pickups render];
 	
 	[zombieTracker makeObjectsPerformSelector:@selector(render)];

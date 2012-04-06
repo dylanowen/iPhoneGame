@@ -48,8 +48,8 @@
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	
-	glEnable(GL_DEPTH_TEST);
-	glDepthMask(GL_TRUE);
+	glDisable(GL_DEPTH_TEST);
+	glDepthMask(GL_FALSE);
 	
 	glDisable(GL_STENCIL_TEST);
 	

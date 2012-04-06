@@ -31,8 +31,6 @@ enum
 
 @interface Character()
 {
-	GLKVector2 velocity;
-	
 	int precision;
 	float characterCenter[2];
 	
@@ -119,9 +117,10 @@ enum
 	
 	animateTimer += time;
 	velocity.y += GRAVITY;
-	//NSLog(@"Movement (%f, %f)", movement.x, movement.y);
+	//apply friction
+	velocity = GLKVector2Add(velocity, GLKVector2MultiplyScalar(GLKVector2Normalize(velocity), FRICTION));
 	int newPosition[2] = {(int) ((velocity.x + movement.x) * time * precision), (int) ((velocity.y + movement.y) * time * precision)};
-	//NSLog(@"Movement (%d, %d)", newPosition[0], newPosition[1]);
+	movement = GLKVector2Make(0.0f, 0.0f);
 	
 	x = (int) (position.x * (float) precision);
 	y = (int) (position.y * (float) precision);

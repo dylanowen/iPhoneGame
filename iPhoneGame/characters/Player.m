@@ -16,6 +16,7 @@
 #import "EffectLoader.h"
 #import "BufferLoader.h"
 
+#import "NinjaRope.h"
 #import "MachineGun.h"
 
 @interface Player()
@@ -33,6 +34,7 @@
 	GLKMatrix4 laserCenter;
 	
 	Weapon *currentGun;
+	NinjaRope *ninjaRope;
 	
 }
 
@@ -131,7 +133,10 @@
 		}
 		
 		currentGun = [[MachineGun alloc] initWithParticles:particles];
-		shoot = false;
+		shootGun = false;
+		ninjaRope = [[NinjaRope alloc] initWithModel:game player:self];
+		shootNinjaRope = false;
+		
 		laserCenter = GLKMatrix4MakeTranslation(model.view.bounds.size.width / 2, model.view.bounds.size.height / 2, 0);
 
 		switchTexture = false;
@@ -149,10 +154,15 @@
 	
 	laserEffect.transform.modelviewMatrix = GLKMatrix4RotateZ(laserCenter, atan2f(look.y, look.x));
 	
-	if(shoot)
+	if(shootGun)
 	{
 		[currentGun shootAtPosition:position direction: look];
 		//[self.particles addHealingEffect:self.player->position];
+	}
+	
+	if(shootNinjaRope)
+	{
+		[ninjaRope shoot:look];
 	}
 	
 	if(animateTimer >= .25f)
@@ -179,6 +189,7 @@
 	}
 	
 	[currentGun update:time];
+	[ninjaRope update:time];
 	
 	MoveOrthoVector(&(game->dynamicProjection), position);
 }
@@ -193,7 +204,7 @@
 		glEnableVertexAttribArray(GLKVertexAttribPosition);
 		glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
-		if(shoot)
+		if(shootGun)
 		{
 			glBindBuffer(GL_ARRAY_BUFFER, laserColorOnBuffer);
 		}
@@ -215,6 +226,8 @@
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 	[super render];
+	
+	[ninjaRope render];
 }
 
 @end
