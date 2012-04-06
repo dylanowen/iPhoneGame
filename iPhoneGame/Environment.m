@@ -343,7 +343,7 @@
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-- (void)render
+- (void)render:(float) x
 {
 	[self.program use];
 	
@@ -351,7 +351,16 @@
 	
 	glUniformMatrix4fv(modelViewUniform, 1, 0, self.game->dynamicProjection.m);
 	
-	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
+	int start = floor(self.game->screenCenter.x) - DYNAMIC_VIEW_WIDTH / 2, end = DYNAMIC_VIEW_WIDTH + 1;
+	if(start < 0)
+	{
+		start = 0;
+	}
+	else if(end + start > ENV_WIDTH)
+	{
+		end = ENV_WIDTH - start;
+	}
+	glDrawArrays(GL_POINTS, start * ENV_HEIGHT, end * ENV_HEIGHT);
 	
 	glBindVertexArrayOES(0);
 	

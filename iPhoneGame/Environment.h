@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
 
 #import "GameConstants.h"
 
@@ -32,6 +33,6 @@
 
 - (void)changeColor:(float[4]) newColor x:(int) x y:(int) y;
 
-- (void)render;
+- (void)render:(float) x;
 
 @end

@@ -95,6 +95,8 @@
 	
 	//the player updates the projection matrix
 	[player update: time];
+	screenCenter = player->position;
+	MoveOrthoVector(&dynamicProjection, screenCenter);
 	
 	return YES;
 }
@@ -114,7 +116,7 @@
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
 	[background render];
-	[environment render];
+	//[environment render];
 	[particles render];
 	[pickups render];
 	[controls render];

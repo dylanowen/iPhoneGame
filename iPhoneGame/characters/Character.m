@@ -300,8 +300,11 @@ enum
 
 - (void)render
 {
-	[self renderCharacter];
-	[self renderHealth];
+	if(abs(game->screenCenter.x - position.x) < (DYNAMIC_VIEW_WIDTH + CHARACTER_WIDTH) / 2 && abs(game->screenCenter.y - position.y) < (DYNAMIC_VIEW_HEIGHT + CHARACTER_HEIGHT))
+	{
+		[self renderCharacter];
+		[self renderHealth];
+	}
 
 	//collision vertices debug
 	/*

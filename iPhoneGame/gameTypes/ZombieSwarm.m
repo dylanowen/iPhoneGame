@@ -169,7 +169,7 @@
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	[background render];
-	[environment render];
+	[environment render: player->position.x];
 	[particles render];
 	[player render];
 	[zombies makeObjectsPerformSelector:@selector(render)];

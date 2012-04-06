@@ -34,6 +34,7 @@
 	Controls *controls;
 	
 	Player *player;
+	GLKVector2 screenCenter;
 	
 	GLKMatrix4 staticProjection;
 	GLKMatrix4 dynamicProjection;

@@ -16,7 +16,7 @@
 #define STATIC_VIEW_WIDTH 480
 #define STATIC_VIEW_HEIGHT 320
 
-#define ENV_WIDTH 400
+#define ENV_WIDTH 10000
 #define ENV_HEIGHT 400
 
 #define GRAVITY 3.0f

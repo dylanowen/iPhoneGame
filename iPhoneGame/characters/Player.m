@@ -189,8 +189,6 @@
 	
 	[currentGun update:time];
 	[ninjaRope update:time];
-	
-	MoveOrthoVector(&(game->dynamicProjection), position);
 }
 
 - (void)jump
