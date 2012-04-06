@@ -52,7 +52,6 @@
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
 			}
 			
-		
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 			glEnableVertexAttribArray(GLKVertexAttribPosition);
 			glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
@@ -77,9 +76,10 @@
 - (bool)touchesBegan:(GLKVector2) loci
 {
 	GLKVector2 temp = GLKVector2Subtract(loci, origin);
-	if(GLKVector2Length(temp) <= grabRadius)
+	float length = GLKVector2Length(temp);
+	if(length <= grabRadius)
 	{
-		if(GLKVector2Length(temp) > regionRadius)
+		if(length > regionRadius)
 		{
 			position = GLKVector2Add(origin, GLKVector2MultiplyScalar(GLKVector2Normalize(temp), regionRadius));
 		}

@@ -16,12 +16,12 @@
 #define STATIC_VIEW_WIDTH 480
 #define STATIC_VIEW_HEIGHT 320
 
-#define ENV_WIDTH 10000
+#define ENV_WIDTH 800
 #define ENV_HEIGHT 400
 
 #define GRAVITY 3.0f
 
-#define FRICTION -0.1f
+#define FRICTION -0.01f
 
 #define FILE_PREFIX @"com.arc"
 

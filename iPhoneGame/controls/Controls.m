@@ -35,11 +35,11 @@
 			effect = [model.effectLoader addEffectForName:@"ControlEffect"];
 			effect.texture2d0.envMode = GLKTextureEnvModeReplace;
 			effect.texture2d0.target = GLKTextureTarget2D;
-			effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, model.view.bounds.size.width, model.view.bounds.size.height, 0, 1, -1);
+			effect.transform.projectionMatrix = model->staticProjection;
 		}
 		
-		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, model.view.bounds.size.height - 80) region:50 grabRegion:150 model:model];
-		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(model.view.bounds.size.width - 65, model.view.bounds.size.height - 65) region:40 model:model];
+		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, STATIC_VIEW_HEIGHT - 80) region:50 grabRegion:150 model:model];
+		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH - 65, STATIC_VIEW_HEIGHT - 65) region:40 model:model];
 		//self.jump = [[Button alloc] initWithCenter: GLKVector2Make(30, model.view.bounds.size.height - 145) model:model];
 		
 		return self;

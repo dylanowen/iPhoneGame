@@ -118,7 +118,7 @@ enum
 	animateTimer += time;
 	velocity.y += GRAVITY;
 	//apply friction
-	velocity = GLKVector2Add(velocity, GLKVector2MultiplyScalar(GLKVector2Normalize(velocity), FRICTION));
+	velocity = GLKVector2Add(velocity, GLKVector2MultiplyScalar(velocity, FRICTION));
 	int newPosition[2] = {(int) ((velocity.x + movement.x) * time * precision), (int) ((velocity.y + movement.y) * time * precision)};
 	movement = GLKVector2Make(0.0f, 0.0f);
 	

@@ -166,13 +166,15 @@
 - (void)render
 {
 	//assume bullet shaders have already been called
+	//if(abs(model->screenCenter.x - position.x) < (DYNAMIC_VIEW_WIDTH + 1) / 2 && abs(model->screenCenter.y - position.y) < (DYNAMIC_VIEW_HEIGHT + 1))
+	//{
+		glEnableVertexAttribArray(positionAttribute);
+		glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, position.v);
 	
-	glEnableVertexAttribArray(positionAttribute);
-	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, position.v);
+		glDrawArrays(GL_POINTS, 0, 1);
 	
-	glDrawArrays(GL_POINTS, 0, 1);
-	
-	glDisableVertexAttribArray(positionAttribute);
+		glDisableVertexAttribArray(positionAttribute);
+	//}
 }
 
 @end

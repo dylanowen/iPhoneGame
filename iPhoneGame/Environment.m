@@ -14,7 +14,10 @@
 #import "GLProgram.h"
 
 @interface Environment()
-{	
+{
+	GameModel *game;
+	GLProgram *program;
+	
 	float clearer[MAX_DELETE_RADIUS * 2][4];
 	float restorer[MAX_DELETE_RADIUS * 2][4];
 	
@@ -29,28 +32,21 @@
 	//GLuint gVAO;
 }
 
-
-@property (nonatomic, strong) GameModel *game;
-@property (nonatomic, strong) GLProgram *program;
-
 - (void)editRadius:(int) radius x:(int) x y:(int) y delete:(bool) del;
 
 @end
 
 @implementation Environment
 
-@synthesize game = _game;
-@synthesize program = _program;
-
 @synthesize width = _width;
 @synthesize height = _height;
 
-- (id)initWithModel:(GameModel *) game
+- (id)initWithModel:(GameModel *) model
 {
 	self = [super init];
 	if(self)
 	{
-		self.game = game;
+		game = model;
 		
 		float browns[5][3] = {
 			{183/256.0f, 123/256.0f, 63/256.0f},
@@ -76,25 +72,25 @@
 		}
 		
 		//load and setup the shaders
-		self.program = [[GLProgram alloc] initWithVertexShaderFilename: @"particleShader" fragmentShaderFilename: @"particleShader"];
+		program = [[GLProgram alloc] initWithVertexShaderFilename: @"particleShader" fragmentShaderFilename: @"particleShader"];
 
-		positionAttribute = [self.program addAttribute: @"position"];
-		colorAttribute = [self.program addAttribute: @"color"];
+		positionAttribute = [program addAttribute: @"position"];
+		colorAttribute = [program addAttribute: @"color"];
 		
-		if(![self.program link])
+		if(![program link])
 		{
 			NSLog(@"Link failed");
-			NSLog(@"Program Log: %@", [self.program programLog]); 
-			NSLog(@"Frag Log: %@", [self.program fragmentShaderLog]);
-			NSLog(@"Vert Log: %@", [self.program vertexShaderLog]);
-			self.program = nil;
+			NSLog(@"Program Log: %@", [program programLog]); 
+			NSLog(@"Frag Log: %@", [program fragmentShaderLog]);
+			NSLog(@"Vert Log: %@", [program vertexShaderLog]);
+			program = nil;
 		}
 		else
 		{
 			NSLog(@"Environment shaders loaded.");
 		}
 
-		modelViewUniform = [self.program uniformIndex:@"modelViewProjectionMatrix"];
+		modelViewUniform = [program uniformIndex:@"modelViewProjectionMatrix"];
 		
 		//the size is the width * height * components of vertices
 		unsigned vertexBufferSize = sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2;
@@ -345,13 +341,13 @@
 
 - (void)render:(float) x
 {
-	[self.program use];
+	[program use];
 	
 	glBindVertexArrayOES(vao);
 	
-	glUniformMatrix4fv(modelViewUniform, 1, 0, self.game->dynamicProjection.m);
+	glUniformMatrix4fv(modelViewUniform, 1, 0, game->dynamicProjection.m);
 	
-	int start = floor(self.game->screenCenter.x) - DYNAMIC_VIEW_WIDTH / 2, end = DYNAMIC_VIEW_WIDTH + 1;
+	int start = floor(game->screenCenter.x) - DYNAMIC_VIEW_WIDTH / 2, end = DYNAMIC_VIEW_WIDTH + 1;
 	if(start < 0)
 	{
 		start = 0;
