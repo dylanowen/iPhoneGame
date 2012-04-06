@@ -75,8 +75,6 @@ enum
 	return nil;
 }
 
-
-
 - (void)shoot:(GLKVector2) direction
 {
 	state = shooting;
@@ -117,6 +115,11 @@ enum
 		stepX = precision;
 		stepY = 0;
 	}
+}
+
+- (void)cancel
+{
+	state = nothing;
 }
 
 - (void)update:(float) time
@@ -179,22 +182,22 @@ enum
 {
 	if(state != nothing)
 	{
-	effect.transform.projectionMatrix = game->dynamicProjection;
+		effect.transform.projectionMatrix = game->dynamicProjection;
 	
-	[effect prepareToDraw];
+		[effect prepareToDraw];
 	
-	float vertices2[] = {
-		player->position.x, player->position.y,
-		position.x, position.y,
-		position.x + 1, position.y + 1,
-	};
+		float vertices2[] = {
+			player->position.x, player->position.y,
+			position.x, position.y,
+			position.x + 1, position.y + 1,
+		};
 	
-	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices2);
+		glEnableVertexAttribArray(GLKVertexAttribPosition);
+		glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, vertices2);
 	
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 	
-	glDisableVertexAttribArray(GLKVertexAttribPosition);
+		glDisableVertexAttribArray(GLKVertexAttribPosition);
 	}
 }
 

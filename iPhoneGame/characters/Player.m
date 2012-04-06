@@ -42,7 +42,6 @@
 
 @implementation Player
 
-
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
 {
 	self = [super initWithModel:model position:posit];
@@ -192,6 +191,11 @@
 	[ninjaRope update:time];
 	
 	MoveOrthoVector(&(game->dynamicProjection), position);
+}
+
+- (void)jump
+{
+	[super jump];
 }
 
 - (void)render

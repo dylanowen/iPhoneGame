@@ -17,6 +17,7 @@
 - (id)initWithModel:(GameModel *) game player:(Player *) self;
 
 - (void)shoot:(GLKVector2) direction;
+- (void)cancel;
 - (void)update:(float) time;
 - (void)render;
 

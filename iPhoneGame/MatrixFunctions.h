@@ -18,7 +18,7 @@ static __inline__ GLKMatrix4 CenterOrtho(float x, float y)
 	GLKMatrix4 m = {
 		2.0f / DYNAMIC_VIEW_WIDTH, 0.0f, 0.0f, 0.0f,
 		0.0f, -2.0f / DYNAMIC_VIEW_HEIGHT, 0.0f, 0.0f,
-		0.0f, 0.0f, -2.0f / VIEW_DISTANCE, 0.0f,
+		0.0f, 0.0f, -2.0f, 0.0f,
 		x * -2.0f / DYNAMIC_VIEW_WIDTH, y * 2.0f / DYNAMIC_VIEW_HEIGHT, -1.0f, 1.0f
 	};
 	
