@@ -111,14 +111,19 @@ enum
 	movement = GLKVector2Make(0, 0);
 }
 
+- (void)updateVelocity:(float)time
+{
+	velocity.y += GRAVITY;
+	//apply friction
+	velocity = GLKVector2Add(velocity, GLKVector2MultiplyScalar(velocity, DRAG));
+}
+
 - (void)update:(float) time
 {
 	int x, y, lowX = INT_MIN, lowY = INT_MIN, highX = INT_MAX, highY = INT_MAX, stepX = 0, stepY = 0;
 	
 	animateTimer += time;
-	velocity.y += GRAVITY;
-	//apply friction
-	velocity = GLKVector2Add(velocity, GLKVector2MultiplyScalar(velocity, FRICTION));
+	[self updateVelocity:time];
 	int newPosition[2] = {(int) ((velocity.x + movement.x) * time * precision), (int) ((velocity.y + movement.y) * time * precision)};
 	movement = GLKVector2Make(0.0f, 0.0f);
 	
@@ -182,6 +187,7 @@ enum
 	
 	position.x = (float) x / precision;
 	position.y = (float) y / precision;
+	//NSLog(@"%d %d -> (%f, %f)", x, y, position.x, position.y);
 }
 
 -(BOOL) checkPhys:(int *) x y:(int *) y stepX:(int) stepX stepY:(int) stepY
@@ -233,8 +239,8 @@ enum
 	if((stepY > 0 && rating[CVBottom] > 1) || (stepY < 0 && rating[CVTop] > 1))
 	{
 		*y = *y - stepY;
-		
-		velocity.y = -velocity.y / 6;
+		velocity.x = 0;
+		velocity.y = -velocity.y / 4;
 		cY = YES;
 	}
 	else if((stepY > 0 && rating[CVBottom] == 1) || (stepY < 0 && rating[CVTop] == 1))

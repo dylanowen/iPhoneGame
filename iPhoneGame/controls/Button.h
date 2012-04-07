@@ -19,6 +19,7 @@
 {
 @public
 	bool pressed;
+	bool down;
 @protected
 	GLKBaseEffect *effect;
 	

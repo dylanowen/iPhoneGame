@@ -34,7 +34,7 @@
 		particles = model->particles;
 		texture = [model.textureLoader getTextureDescription:@"zombie.png"];
 		characterTextureBuffer = [texture getFrameBuffer:currentFrame];
-		jumpHeight = 45;
+		jumpHeight = 55;
 		
 		movementSpeed = (arc4random() % 4) + 4;
 		

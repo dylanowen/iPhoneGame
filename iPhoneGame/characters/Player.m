@@ -30,12 +30,11 @@
 	GLuint laserIndicesBuffer;
 	GLuint laserColorOnBuffer;
 	GLuint laserColorOffBuffer;
+	GLuint laserNinjaColorBuffer;
 	
 	GLKMatrix4 laserCenter;
 	
 	Weapon *currentGun;
-	NinjaRope *ninjaRope;
-	
 }
 
 @end
@@ -103,10 +102,10 @@
 			float color[48];
 			for(unsigned i = 0; i < 48; i += 4)
 			{
-				color[i + 0] = 0.8;
-				color[i + 1] = 0.8;
-				color[i + 2] = 0.8;
-				color[i + 3] = 0.6;
+				color[i + 0] = 1.0;
+				color[i + 1] = 0.1;
+				color[i + 2] = 0.1;
+				color[i + 3] = 1.0;
 			}
 			laserColorOnBuffer = [model.bufferLoader addBufferForName:@"CharLaserOnSight"];
 			glBindBuffer(GL_ARRAY_BUFFER, laserColorOnBuffer);
@@ -120,10 +119,10 @@
 			float color[48];
 			for(unsigned i = 0; i < 48; i += 4)
 			{
-				color[i + 0] = 0.8;
+				color[i + 0] = 1.0;
 				color[i + 1] = 0.1;
 				color[i + 2] = 0.1;
-				color[i + 3] = 0.4;
+				color[i + 3] = 0.7;
 			}
 			laserColorOffBuffer = [model.bufferLoader addBufferForName:@"CharLaserOffSight"];
 			glBindBuffer(GL_ARRAY_BUFFER, laserColorOffBuffer);
@@ -131,37 +130,56 @@
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		
+		laserNinjaColorBuffer = [model.bufferLoader getBufferForName:@"CharNinjaSight"];
+		if(laserNinjaColorBuffer == 0)
+		{
+			float color[48];
+			for(unsigned i = 0; i < 48; i += 4)
+			{
+				color[i + 0] = 0.1;
+				color[i + 1] = 1.1;
+				color[i + 2] = 0.1;
+				color[i + 3] = 1.0;
+			}
+			laserNinjaColorBuffer = [model.bufferLoader addBufferForName:@"CharNinjaSight"];
+			glBindBuffer(GL_ARRAY_BUFFER, laserNinjaColorBuffer);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		}
+		
 		currentGun = [[MachineGun alloc] initWithParticles:particles];
 		shootGun = false;
 		ninjaRope = [[NinjaRope alloc] initWithModel:game player:self];
-		shootNinjaRope = false;
 		
 		laserCenter = GLKMatrix4MakeTranslation(model.view.bounds.size.width / 2, model.view.bounds.size.height / 2, 0);
 
 		switchTexture = false;
 		characterTextureBuffer = [texture getFrameBuffer:currentFrame];
-		jumpHeight = 65;
+		jumpHeight = 85;
 		
 		return self;
 	}
 	return nil;
 }
 
+- (void)updateVelocity:(float)time
+{
+	[ninjaRope update:time];
+	velocity.x += ninjaRope->playerMovement.x;
+	velocity.y += ninjaRope->playerMovement.y + GRAVITY;
+	//apply friction
+	velocity = GLKVector2Add(velocity, GLKVector2MultiplyScalar(velocity, DRAG));
+	//NSLog(@"(%.5f, %.5f) -> (%.5f, %.5f) -> (%.5f, %.5f)", temp2.x, temp2.y, temp.x, temp.y, velocity.x, velocity.y);
+}
+
 - (void)update:(float) time
 {
 	[super update:time];
 	
-	laserEffect.transform.modelviewMatrix = GLKMatrix4RotateZ(laserCenter, atan2f(look.y, look.x));
-	
 	if(shootGun)
 	{
-		[currentGun shootAtPosition:position direction: look];
+		[currentGun shootAtPosition:position direction: lookGun];
 		//[self.particles addHealingEffect:self.player->position];
-	}
-	
-	if(shootNinjaRope)
-	{
-		[ninjaRope shoot:look];
 	}
 	
 	if(animateTimer >= .25f)
@@ -188,7 +206,6 @@
 	}
 	
 	[currentGun update:time];
-	[ninjaRope update:time];
 }
 
 - (void)jump
@@ -198,35 +215,47 @@
 
 - (void)render
 {
-	if(!GLKVector2AllEqualToVector2(look, GLKVector2Make(0.0f, 0.0f)))
+	laserEffect.transform.modelviewMatrix = GLKMatrix4RotateZ(laserCenter, atan2f(lookGun.y, lookGun.x));
+	
+	[laserEffect prepareToDraw];
+	
+	glBindBuffer(GL_ARRAY_BUFFER, laserVertexBuffer);
+	glEnableVertexAttribArray(GLKVertexAttribPosition);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+	
+	if(shootGun)
 	{
+		glBindBuffer(GL_ARRAY_BUFFER, laserColorOnBuffer);
+	}
+	else
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, laserColorOffBuffer);
+	}
+	glEnableVertexAttribArray(GLKVertexAttribColor);
+	glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+		
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, laserIndicesBuffer);
+		
+	glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);
+	
+	if(!GLKVector2AllEqualToVector2(lookRope, GLKVector2Make(0.0f, 0.0f)))
+	{
+		laserEffect.transform.modelviewMatrix = GLKMatrix4RotateZ(laserCenter, atan2f(lookRope.y, lookRope.x));
+		
 		[laserEffect prepareToDraw];
-	
-		glBindBuffer(GL_ARRAY_BUFFER, laserVertexBuffer);
-		glEnableVertexAttribArray(GLKVertexAttribPosition);
-		glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
-	
-		if(shootGun)
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, laserColorOnBuffer);
-		}
-		else
-		{
-			glBindBuffer(GL_ARRAY_BUFFER, laserColorOffBuffer);
-		}
+		
+		glBindBuffer(GL_ARRAY_BUFFER, laserNinjaColorBuffer);
 		glEnableVertexAttribArray(GLKVertexAttribColor);
 		glVertexAttribPointer(GLKVertexAttribColor, 4, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 		
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, laserIndicesBuffer);
-		
 		glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);
-		
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		
-		glDisableVertexAttribArray(GLKVertexAttribPosition);
-		glDisableVertexAttribArray(GLKVertexAttribColor);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
+	
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		
+	glDisableVertexAttribArray(GLKVertexAttribPosition);
+	glDisableVertexAttribArray(GLKVertexAttribColor);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	[super render];
 	
 	[ninjaRope render];

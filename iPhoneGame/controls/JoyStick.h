@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-#define JOY_LENGTH 50
-#define JOY_LENGTH_HALF JOY_LENGTH / 2
-
 @class GameModel;
 @class TextureDescription;
 
@@ -19,6 +16,7 @@
 {
 @public
 	GLKVector2 velocity;
+	GLKVector2 lastVelocity;
 @protected
 	GLKBaseEffect *effect;
 	
@@ -35,11 +33,12 @@
 	
 	unsigned regionRadius;
 	unsigned grabRadius;
+	float joyLength;
 	
 	GLuint vao;
 }
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion model:(GameModel *) game;
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen model:(GameModel *) game;
 
 - (bool)touchesBegan:(GLKVector2) loci;
 - (bool)touchesMoved:(GLKVector2) loci lastTouch:(GLKVector2) last;

@@ -8,14 +8,24 @@
 
 #import "JoyStick.h"
 
-#define TOGGLE_BOUNDS 25
+enum
+{
+	nothing,
+	up,
+	upToggle
+};
 
 @interface ToggleJoyStick : JoyStick
 {
 @public
 	bool toggle;
+	int state;
+@protected
+	float toggleBounds;
+	
+	
 }
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR model:(GameModel *) model;
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR toggleBounds:(float) toggleB model:(GameModel *) game;
 
 @end

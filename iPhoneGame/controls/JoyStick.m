@@ -17,12 +17,16 @@
 
 @implementation JoyStick
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion model:(GameModel *) game
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen model:(GameModel *) game
 {
 	self = [super init];
 	if(self)
 	{
 		position = origin = posit;
+		regionRadius = regionR;
+		grabRadius = grabRegion;
+		joyLength = joyLen;
+		
 		//assume that the control effect has already been generated
 		effect = [game.effectLoader getEffectForName:@"ControlEffect"];
 		
@@ -31,26 +35,28 @@
 		
 		texture = [game.textureLoader getTextureDescription:@"circle.png"];
 		
-		vao = [game.vaoLoader getVAOForName:@"JoyStick"];
+		NSString *name = [[NSString alloc] initWithFormat:@"JoyStick%f", joyLength];
+		vao = [game.vaoLoader getVAOForName:name];
 		if(vao == 0)
 		{
-			vao = [game.vaoLoader addVAOForName:@"JoyStick"];
-			glBindVertexArrayOES(vao);
+			vao = [game.vaoLoader addVAOForName:name];
 			
-			GLuint vertexBuffer = [game.bufferLoader getBufferForName:@"JoyStick"];
+			GLuint vertexBuffer = [game.bufferLoader getBufferForName:name];
 			if(vertexBuffer == 0)
 			{
 				float vertices[] = {
-					JOY_LENGTH, 0,
-					JOY_LENGTH, JOY_LENGTH,
-					0, JOY_LENGTH,
-					0, 0
+					joyLength, -joyLength,
+					joyLength, joyLength,
+					-joyLength, joyLength,
+					-joyLength, -joyLength
 				};
-				vertexBuffer = [game.bufferLoader addBufferForName:@"JoyStick"];
+				vertexBuffer = [game.bufferLoader addBufferForName:name];
 				glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 				glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 				glBindBuffer(GL_ARRAY_BUFFER, 0);
 			}
+			
+			glBindVertexArrayOES(vao);
 			
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 			glEnableVertexAttribArray(GLKVertexAttribPosition);
@@ -65,8 +71,7 @@
 			glBindVertexArrayOES(0);
 		}		
 		
-		regionRadius = regionR;
-		grabRadius = grabRegion;
+		
 		
 		return self;
 	}
@@ -88,7 +93,7 @@
 			position = loci;
 		}
 		lastTouch = loci;
-		velocity = [self calculateVelocity];
+		lastVelocity = velocity = [self calculateVelocity];
 		return YES;
 	}
 	return NO;
@@ -108,7 +113,7 @@
 			position = loci;
 		}
 		lastTouch = loci;
-		velocity = [self calculateVelocity];
+		lastVelocity = velocity = [self calculateVelocity];
 		return YES;
 	}
 	return NO;
@@ -118,6 +123,8 @@
 {
 	if(GLKVector2AllEqualToVector2(lastTouch, loci) || GLKVector2AllEqualToVector2(lastTouch, last))
 	{
+		position = last;
+		lastVelocity = [self calculateVelocity];
 		[self touchesCancelled];
 		return YES;
 	}
@@ -142,7 +149,7 @@
 - (void)render
 {
 	/*interleave joystick data*/
-	effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x - JOY_LENGTH_HALF, position.y - JOY_LENGTH_HALF, 0);
+	effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(position.x, position.y, 0);
 	effect.texture2d0.name = [texture getName];
 	
 	[effect prepareToDraw];

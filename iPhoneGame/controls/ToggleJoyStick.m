@@ -23,30 +23,33 @@
 
 @implementation ToggleJoyStick
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR model:(GameModel *) game
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR toggleBounds:(float) toggleB model:(GameModel *) game
 {
-	self = [super initWithCenter: posit region:regionR grabRegion:regionR model:game];
+	self = [super initWithCenter: posit region:regionR grabRegion:regionR joyRadius:toggleB model:game];
 	if(self)
 	{
 		toggle = NO;
+		toggleBounds = toggleB;
 		
-		boundingVertexBuffer = [game.bufferLoader getBufferForName:@"ToggleJoyStick"];
+		NSString *name = [[NSString alloc] initWithFormat:@"ToggleJoyStick%f", toggleBounds];
+		boundingVertexBuffer = [game.bufferLoader getBufferForName:name];
 		if(boundingVertexBuffer == 0)
 		{
 			float vertices[] = {
-				TOGGLE_BOUNDS, -TOGGLE_BOUNDS,
-				TOGGLE_BOUNDS, TOGGLE_BOUNDS,
-				-TOGGLE_BOUNDS, TOGGLE_BOUNDS,
-				-TOGGLE_BOUNDS, -TOGGLE_BOUNDS
+				toggleBounds, -toggleBounds,
+				toggleBounds, toggleBounds,
+				-toggleBounds, toggleBounds,
+				-toggleBounds, -toggleBounds
 			};
 			
-			
-			boundingVertexBuffer = [game.bufferLoader addBufferForName:@"ToggleJoyStick"];
+			boundingVertexBuffer = [game.bufferLoader addBufferForName:name];
 			glBindBuffer(GL_ARRAY_BUFFER, boundingVertexBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		
+		state = nothing;		
+		lastVelocity = GLKVector2Make(1.0f, 0.0f);
 		redCircleTexture = [game.textureLoader getTextureDescription:@"circleRed.png"];
 		
 		return self;
@@ -59,7 +62,7 @@
 	bool result = [super touchesBegan: loci];
 	if(result)
 	{
-		toggle = GLKVector2Length(GLKVector2Subtract(position, origin)) > TOGGLE_BOUNDS;
+		toggle = GLKVector2Length(GLKVector2Subtract(position, origin)) > toggleBounds;
 	}
 	return result;
 }
@@ -69,7 +72,24 @@
 	bool result = [super touchesMoved: loci lastTouch: last];
 	if(result)
 	{
-		toggle = GLKVector2Length(GLKVector2Subtract(position, origin)) > TOGGLE_BOUNDS;
+		toggle = GLKVector2Length(GLKVector2Subtract(position, origin)) > toggleBounds;
+	}
+	return result;
+}
+
+- (bool)touchesEnded:(GLKVector2) loci lastTouch:(GLKVector2) last
+{
+	bool result = [super touchesEnded: loci lastTouch: last];
+	if(result)
+	{
+		if(GLKVector2Length(GLKVector2Subtract(last, origin)) > toggleBounds)
+		{
+			state = upToggle;
+		}
+		else
+		{
+			state = up;
+		}
 	}
 	return result;
 }

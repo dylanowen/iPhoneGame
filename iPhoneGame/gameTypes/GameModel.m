@@ -23,6 +23,7 @@
 #import "Tracker.h"
 
 #import "Player.h"
+#import "NinjaRope.h"
 
 #import "Particles.h"
 #import "BulletParticle.h"
@@ -89,9 +90,19 @@
 	player->movement.x = controls.move->velocity.x * 60;
 	//self.player->movement.y = self.controls.move->velocity.y * 5;
 	
-	player->look = controls.look->velocity;
+	player->lookGun = controls.look->lastVelocity;
 	player->shootGun = controls.look->toggle;
-	player->shootNinjaRope = controls.look->toggle;
+	player->lookRope = controls->shootRope->velocity;
+	if(controls->shootRope->state == upToggle)
+	{
+		[player->ninjaRope shoot:controls->shootRope->lastVelocity];
+		controls->shootRope->state = nothing;
+	}
+	else if(controls->shootRope->state == up)
+	{
+		[player->ninjaRope cancel];
+		controls->shootRope->state = nothing;
+	}
 	
 	//the player updates the projection matrix
 	[player update: time];

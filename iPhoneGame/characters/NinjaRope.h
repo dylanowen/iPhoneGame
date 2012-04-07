@@ -13,6 +13,10 @@
 @class Player;
 
 @interface NinjaRope : NSObject
+{
+@public
+	GLKVector2 playerMovement;
+}
 
 - (id)initWithModel:(GameModel *) game player:(Player *) self;
 

@@ -21,7 +21,6 @@
 
 @synthesize move = _move;
 @synthesize look = _look;
-//@synthesize jump = _jump;
 
 - (id)initWithModel: (GameModel *) model
 {
@@ -38,9 +37,9 @@
 			effect.transform.projectionMatrix = model->staticProjection;
 		}
 		
-		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, STATIC_VIEW_HEIGHT - 80) region:50 grabRegion:150 model:model];
-		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH - 65, STATIC_VIEW_HEIGHT - 65) region:40 model:model];
-		//self.jump = [[Button alloc] initWithCenter: GLKVector2Make(30, model.view.bounds.size.height - 145) model:model];
+		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, STATIC_VIEW_HEIGHT - 80) region:50 grabRegion:150 joyRadius:25 model:model];
+		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH - 65, STATIC_VIEW_HEIGHT - 65) region:40 toggleBounds:25 model:model];
+		shootRope = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH - 50, STATIC_VIEW_HEIGHT - 145) region:20 toggleBounds:15 model:model];
 		
 		return self;
 	}
@@ -53,7 +52,11 @@
 	{
 		CGPoint loci = [touch locationInView: touch.view];
 		GLKVector2 vLoci = GLKVector2Make(loci.x, loci.y);
-		if([self.move touchesBegan: vLoci])
+		if([shootRope touchesBegan: vLoci])
+		{
+			
+		}
+		else if([self.move touchesBegan: vLoci])
 		{
 		
 		}
@@ -76,7 +79,11 @@
 		
 		//NSLog(@"M %d:(%.1f, %.1f) L:(%.1f, %.1f) %d", index, loci.x, loci.y, last.x, last.y, touch.phase);
 		
-		if([self.move touchesMoved: vLoci lastTouch: vLast])
+		if([shootRope touchesMoved: vLoci lastTouch: vLast])
+		{
+			
+		}
+		else if([self.move touchesMoved: vLoci lastTouch: vLast])
 		{
 		
 		}
@@ -98,7 +105,11 @@
 		
 		//NSLog(@"M %d:(%.1f, %.1f) L:(%.1f, %.1f) %d", index, loci.x, loci.y, last.x, last.y, touch.phase);
 		
-		if([self.move touchesEnded: vLoci lastTouch: vLast])
+		if([shootRope touchesEnded: vLoci lastTouch: vLast])
+		{
+			
+		}
+		else if([self.move touchesEnded: vLoci lastTouch: vLast])
 		{
 		
 		}
@@ -111,12 +122,14 @@
 }
 - (void)touchesCancelled:(NSSet *)touches
 {
+	[shootRope touchesCancelled];
 	[self.move touchesCancelled];
 	[self.look touchesCancelled];
 }
 
 - (void)render
 {
+	[shootRope render];
 	[self.move render];
 	[self.look render];
 }

@@ -15,10 +15,13 @@
 @class GameModel;
 
 @interface Controls : NSObject
+{
+@public
+	ToggleJoyStick *shootRope;
+}
 
 @property (strong, nonatomic) JoyStick *move;
 @property (strong, nonatomic) ToggleJoyStick *look;
-//@property (strong, nonatomic) Button *jump;
 
 - (id)initWithModel: (GameModel *) game;
 - (void)render;

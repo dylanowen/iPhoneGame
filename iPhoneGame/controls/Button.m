@@ -64,6 +64,7 @@
 	if(GLKVector2Length(temp) <= BUTTON_LENGTH + 10)
 	{
 		pressed = YES;
+		down = YES;
 		lastTouch = loci;
 		return YES;
 	}
@@ -85,8 +86,8 @@
 {
 	if(GLKVector2AllEqualToVector2(lastTouch, loci) || GLKVector2AllEqualToVector2(lastTouch, last))
 	{
-		pressed = NO;
 		lastTouch = loci;
+		down = NO;
 		return YES;
 	}
 	return NO;

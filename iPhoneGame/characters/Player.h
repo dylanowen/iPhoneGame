@@ -8,12 +8,17 @@
 
 #import "Character.h"
 
+@class NinjaRope;
+
 @interface Player : Character
 {
 @public
-	GLKVector2 look;
 	bool shootGun;
-	bool shootNinjaRope;
+	GLKVector2 lookGun;
+	
+	GLKVector2 lookRope;
+	
+	NinjaRope *ninjaRope;
 }
 
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;

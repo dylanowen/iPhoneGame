@@ -17,7 +17,7 @@
 
 enum
 {
-	nothing,
+	waiting,
 	shooting,
 	stuck
 };
@@ -68,7 +68,8 @@ enum
 			effect = [game.effectLoader addEffectForName:@"NinjaRope"];
 		}
 		
-		state = nothing;
+		state = waiting;
+		playerMovement = GLKVector2Make(0.0f, 0.0f);
 		
 		return self;
 	}
@@ -80,6 +81,7 @@ enum
 	state = shooting;
 	velocity = GLKVector2MultiplyScalar(direction, 200);
 	position = player->position;
+	playerMovement = GLKVector2Make(0.0f, 0.0f);
 	int movement[2] = {(int) (direction.x * precision), (int) (direction.y * precision)};
 	if(movement[0] != 0 || movement[1] != 0)
 	{
@@ -119,7 +121,8 @@ enum
 
 - (void)cancel
 {
-	state = nothing;
+	state = waiting;
+	playerMovement = GLKVector2Make(0.0f, 0.0f);
 }
 
 - (void)update:(float) time
@@ -166,21 +169,22 @@ enum
 	}
 	else if(state == stuck)
 	{
-		GLKVector2 playerMovement = GLKVector2Subtract(position, player->position);
-		float force = GLKVector2Length(playerMovement) - 50.0f;
+		playerMovement = GLKVector2Subtract(position, player->position);
+		float force = GLKVector2Length(playerMovement) - 40.0f;
 		if(force > 0)
 		{
-			playerMovement = GLKVector2MultiplyScalar(GLKVector2Normalize(playerMovement), force);
-			
-			player->velocity = GLKVector2Add(player->velocity, GLKVector2MultiplyScalar(GLKVector2Normalize(playerMovement), force / 3.0f));
-			
+			playerMovement = GLKVector2MultiplyScalar(GLKVector2Normalize(playerMovement), force * ROPE_FORCE);
+		}
+		else
+		{
+			playerMovement = GLKVector2Make(0.0f, 0.0f);
 		}
 	}
 }
 
 - (void)render
 {
-	if(state != nothing)
+	if(state != waiting)
 	{
 		effect.transform.projectionMatrix = game->dynamicProjection;
 	
