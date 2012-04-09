@@ -10,6 +10,7 @@
 
 #import "JoyStick.h"
 #import "ToggleJoyStick.h"
+#import "NinjaRopeJoyStick.h"
 #import "Button.h"
 
 @class GameModel;
@@ -17,7 +18,7 @@
 @interface Controls : NSObject
 {
 @public
-	ToggleJoyStick *shootRope;
+	NinjaRopeJoyStick	*shootRope;
 }
 
 @property (strong, nonatomic) JoyStick *move;

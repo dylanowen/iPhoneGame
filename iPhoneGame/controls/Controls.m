@@ -13,9 +13,6 @@
 #import "GameConstants.h"
 #import "GameModel.h"
 #import "EffectLoader.h"
-#import "JoyStick.h"
-#import "ToggleJoyStick.h"
-#import "Button.h"
 
 @implementation Controls
 
@@ -39,7 +36,7 @@
 		
 		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, STATIC_VIEW_HEIGHT - 80) region:50 grabRegion:150 joyRadius:25 model:model];
 		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH - 65, STATIC_VIEW_HEIGHT - 65) region:40 toggleBounds:25 model:model];
-		shootRope = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH - 50, STATIC_VIEW_HEIGHT - 145) region:20 toggleBounds:15 model:model];
+		shootRope = [[NinjaRopeJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH / 2, STATIC_VIEW_HEIGHT / 2) region:30 toggleBounds:18 model:model];
 		
 		return self;
 	}
@@ -129,7 +126,7 @@
 
 - (void)render
 {
-	[shootRope render];
+	//[shootRope render];
 	[self.move render];
 	[self.look render];
 }

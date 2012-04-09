@@ -69,9 +69,9 @@
 		environment = [[Environment alloc] initWithModel: self];
 		particles = [[Particles alloc] initWithModel: self];
 		pickups = [[Pickups alloc] initWithModel:self];
-		controls = [[Controls alloc] initWithModel: self];
 		
 		player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 100)];
+		controls = [[Controls alloc] initWithModel: self];
 		[environment deleteRadius:20 x:(ENV_WIDTH / 2) y:100];
 		
 		return self;
@@ -93,16 +93,6 @@
 	player->lookGun = controls.look->lastVelocity;
 	player->shootGun = controls.look->toggle;
 	player->lookRope = controls->shootRope->velocity;
-	if(controls->shootRope->state == upToggle)
-	{
-		[player->ninjaRope shoot:controls->shootRope->lastVelocity];
-		controls->shootRope->state = nothing;
-	}
-	else if(controls->shootRope->state == up)
-	{
-		[player->ninjaRope cancel];
-		controls->shootRope->state = nothing;
-	}
 	
 	//the player updates the projection matrix
 	[player update: time];

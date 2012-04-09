@@ -47,8 +47,7 @@
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
-		
-		state = nothing;		
+			
 		lastVelocity = GLKVector2Make(1.0f, 0.0f);
 		redCircleTexture = [game.textureLoader getTextureDescription:@"circleRed.png"];
 		
@@ -82,14 +81,7 @@
 	bool result = [super touchesEnded: loci lastTouch: last];
 	if(result)
 	{
-		if(GLKVector2Length(GLKVector2Subtract(last, origin)) > toggleBounds)
-		{
-			state = upToggle;
-		}
-		else
-		{
-			state = up;
-		}
+		toggle = NO;
 	}
 	return result;
 }
