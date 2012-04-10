@@ -8,6 +8,8 @@
 
 #import "GLProgram.h"
 
+#include "GameConstants.h"
+
 #pragma mark Function Pointer Definitions
 typedef void (*GLInfoFunction)
 (
@@ -75,11 +77,27 @@ typedef void (*GLLogFunction)
 {
 	GLint status;
 	const GLchar *source;
-
-	source = 
-		(GLchar *)[[NSString stringWithContentsOfFile:file 
-		encoding:NSUTF8StringEncoding 
-		error:nil] UTF8String];
+	/*
+	NSString *constants = [[NSString alloc] initWithFormat:
+								  @"#define BROWN1 vec4(%s, 1.0)\n"
+								   "#define BROWN2 vec4(%s, 1.0)\n"
+									"#define BROWN3 vec4(%s, 1.0)\n"
+									"#define BROWN4 vec4(%s, 1.0)\n"
+									"#define BROWN5 vec4(%s, 1.0)\n"
+								   "#define RED6 vec4(%.2f, %.2f, %.2f, 1.0)\n"
+								   "#define RED7 vec4(%.2f, %.2f, %.2f, 1.0)\n"
+								   "#define RED8 vec4(%.2f, %.2f, %.2f, 1.0)\n"
+								   "#define RED9 vec4(%.2f, %.2f, %.2f, 1.0)\n"
+								   "#define RED10 vec4(%.2f, %.2f, %.2f, 1.0)\n",
+								  BROWN1, BROWN2, BROWN3, BROWN4, BROWN5, RED6_0, RED6_1, RED6_2, RED7_0, RED7_1, RED7_2, RED8_0, RED8_1, RED8_2, RED9_0, RED9_1, RED9_2, RED10_0, RED10_1, RED10_2];
+	*/
+	 
+	NSMutableString *fileSource = [NSMutableString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil];
+	//[fileSource replaceOccurrencesOfString:@"#include Constants\n" withString:constants options:NSLiteralSearch range:NSMakeRange(0, [fileSource length])];
+	
+	//NSLog(@"%@", fileSource);
+	
+	source = (GLchar *)[fileSource UTF8String];
 	if (!source)
 	{
 		NSLog(@"Failed to load vertex shader");

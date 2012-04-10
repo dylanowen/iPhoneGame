@@ -11,7 +11,7 @@
 
 #import "GameConstants.h"
 
-#define MAX_DELETE_RADIUS 200
+#define MAX_DELETE_RADIUS 50
 
 @class GameModel;
 

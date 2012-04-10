@@ -19,7 +19,7 @@
 	GLProgram *program;
 	
 	float clearer[MAX_DELETE_RADIUS * 2][4];
-	float restorer[MAX_DELETE_RADIUS * 2][4];
+	float restorer[MAX_DELETE_RADIUS * 2][MAX_DELETE_RADIUS * 2][4];
 	
 	GLuint positionAttribute;
 	GLuint colorAttribute;
@@ -57,13 +57,16 @@
 		};
 		
 		//setup the clearing array
-		for(unsigned i = 0; i < MAX_DELETE_RADIUS; i++)
+		for(unsigned i = 0; i < MAX_DELETE_RADIUS * 2; i++)
 		{
-			int randomBrown = (arc4random() % 5);
-			restorer[i][0] = browns[randomBrown][0] - 0.3f;
-			restorer[i][1] = browns[randomBrown][1] - 0.1f;
-			restorer[i][2] = browns[randomBrown][2];
-			restorer[i][3] = 1.0f;
+			for(unsigned j = 0; j < MAX_DELETE_RADIUS * 2; j++)
+			{
+				int randomBrown = (arc4random() % 5);
+				restorer[i][j][0] = browns[randomBrown][0] - 0.3f;
+				restorer[i][j][1] = browns[randomBrown][1] - 0.1f;
+				restorer[i][j][2] = browns[randomBrown][2];
+				restorer[i][j][3] = 1.0f;
+			}
 			
 			for(unsigned j = 0; j < 4; j++)
 			{
@@ -142,7 +145,7 @@
 		
 		glBindVertexArrayOES(0);
 		
-		NSLog(@"%.3fMBs of vertex data %.3fMBs of color data", (float) (sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 2) / 1000 / 1000, (float) (sizeof(float) * ENV_WIDTH * ENV_HEIGHT * 4) / 1000 / 1000);
+		NSLog(@"%.3fMBs of vertex data %.3fMBs of color data", (float) (vertexBufferSize) / 1000 / 1000, (float) (colorBufferSize) / 1000 / 1000);
 		
 		//remove vertexBufferData we don't need its data anymore because it's in a buffer
 		free(colors);
@@ -184,7 +187,7 @@
 	}
 	else
 	{
-		oWA = (float **) restorer;
+		oWA = (float **) restorer[0];
 		collisionState = YES;
 	}
     

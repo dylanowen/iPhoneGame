@@ -135,6 +135,13 @@
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, player->position)) < 140);
 			
 			[temp respawn:newPosition];
+			
+			do
+			{
+				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
+			}while(GLKVector2Length(GLKVector2Subtract(newPosition, player->position)) < 140);
+			
+			[environment restoreRadius:40 x:newPosition.x y:newPosition.y];
 			//[indexes addIndex: i];
 		}
 		[[zombieTracker objectAtIndex:i] updateTrackee: temp->position center: player->position];
