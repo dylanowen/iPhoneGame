@@ -8,6 +8,8 @@
 
 #import "NinjaRope.h"
 
+#import "Globals.h"
+
 #import "GameModel.h"
 #import "Environment.h"
 
@@ -125,13 +127,13 @@ enum
 	playerMovement = GLKVector2Make(0.0f, 0.0f);
 }
 
-- (void)update:(float) time
+- (void)update
 {
 	if(state == shooting)
 	{
 		bool start = YES;
 		int intI, intJ, lastI, lastJ, i, j;
-		int movement[2] = {(int) (velocity.x * time * precision), (int) (velocity.y * time * precision)};
+		int movement[2] = {(int) (velocity.x * timeSinceUpdate * precision), (int) (velocity.y * timeSinceUpdate * precision)};
 		
 		i = (int) (position.x * precision);
 		j = (int) (position.y * precision);

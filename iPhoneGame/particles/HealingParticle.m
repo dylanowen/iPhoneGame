@@ -8,6 +8,8 @@
 
 #import "HealingParticle.h"
 
+#import "Globals.h"
+
 #import "Particles.h"
 
 @interface HealingParticle()
@@ -43,9 +45,9 @@
 	return nil;
 }
 
-- (bool)updateAndKeep:(float) dTime
+- (bool)updateAndKeep
 {
-	time += dTime;
+	time += timeSinceUpdate;
 	if(time >= 1.5f)
 	{
 		return NO;

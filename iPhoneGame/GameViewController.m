@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 
+#import "Globals.h"
 #import "ZombieSwarm.h"
 
 @interface GameViewController()
@@ -74,7 +75,8 @@
 
 - (void)glkViewControllerUpdate:(GLKViewController *)controller
 {
-	if(![self.mainGame update: self.timeSinceLastUpdate])
+	timeSinceUpdate = self.timeSinceLastUpdate;
+	if(![self.mainGame update])
 	{
 		//self.paused = true;
 		[self performSegueWithIdentifier: @"gameOver" sender: self];

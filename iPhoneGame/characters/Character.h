@@ -45,8 +45,8 @@
 
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
 - (void)respawn:(GLKVector2) posit;
-- (void)update:(float) time;
-- (void)updateVelocity:(float) time;
+- (void)update;
+- (void)updateVelocity;
 - (BOOL)checkBullet:(BulletParticle *) bullet;
 - (void)jump;
 - (void)render;

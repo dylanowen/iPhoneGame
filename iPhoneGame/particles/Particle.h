@@ -10,7 +10,7 @@
 
 @protocol Particle <NSObject>
 
-- (bool)updateAndKeep:(float) time;
+- (bool)updateAndKeep;
 - (void)render;
 
 @end

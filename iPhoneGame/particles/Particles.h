@@ -35,7 +35,7 @@
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType count:(int) count;
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType;
 - (void)addHealingEffect:(GLKVector2) posit;
-- (void)updateWithLastUpdate:(float) time;
+- (void)update;
 - (void)render;
 
 @end

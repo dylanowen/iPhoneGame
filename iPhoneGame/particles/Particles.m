@@ -177,13 +177,13 @@ typedef struct
 	}
 }
 
-- (void)updateWithLastUpdate:(float) time
+- (void)update
 {
 	//remove bullets that say they're done
 	NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
 	for(unsigned i = 0; i < [self.bullets count]; i++)
 	{
-		if(![[self.bullets objectAtIndex: i] updateAndKeep: time])
+		if(![[self.bullets objectAtIndex: i] updateAndKeep])
 		{
 			[indexes addIndex: i];
 		}
@@ -196,7 +196,7 @@ typedef struct
 	indexes = [NSMutableIndexSet indexSet];
 	for(unsigned i = 0; i < [self.blood count]; i++)
 	{
-		if(![[self.blood objectAtIndex: i] updateAndKeep: time])
+		if(![[self.blood objectAtIndex: i] updateAndKeep])
 		{
 			[indexes addIndex: i];
 		}
@@ -206,7 +206,7 @@ typedef struct
 	indexes = [NSMutableIndexSet indexSet];
 	for(unsigned i = 0; i < [self.healingEffect count]; i++)
 	{
-		if(![[self.healingEffect objectAtIndex: i] updateAndKeep: time])
+		if(![[self.healingEffect objectAtIndex: i] updateAndKeep])
 		{
 			[indexes addIndex: i];
 		}

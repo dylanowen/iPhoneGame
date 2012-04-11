@@ -164,9 +164,9 @@
 	return nil;
 }
 
-- (void)updateVelocity:(float)time
+- (void)updateVelocity
 {
-	[ninjaRope update:time];
+	[ninjaRope update];
 	velocity.x += ninjaRope->playerMovement.x;
 	velocity.y += ninjaRope->playerMovement.y + GRAVITY;
 	//apply friction
@@ -174,9 +174,9 @@
 	//NSLog(@"(%.5f, %.5f) -> (%.5f, %.5f) -> (%.5f, %.5f)", temp2.x, temp2.y, temp.x, temp.y, velocity.x, velocity.y);
 }
 
-- (void)update:(float) time
+- (void)update
 {
-	[super update:time];
+	[super update];
 	
 	if(shootGun)
 	{
@@ -206,7 +206,7 @@
 		animateTimer = 0;
 	}
 	
-	[currentGun update:time];
+	[currentGun update];
 }
 
 - (BOOL)checkBullet:(BulletParticle *) bullet

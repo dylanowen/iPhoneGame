@@ -8,6 +8,8 @@
 
 #import "BulletParticleGrav.h"
 
+#import "Globals.h"
+
 #import "GameConstants.h"
 #import "GameModel.h"
 #import "Particles.h"
@@ -15,12 +17,12 @@
 
 @implementation BulletParticleGrav
 
-- (bool)updateAndKeep:(float) time
+- (bool)updateAndKeep
 {
 	bool start = YES;
 	int intI, intJ, lastI, lastJ, i, j;
 	velocity.y += GRAVITY / 2;
-	int movement[2] = {(int) (velocity.x * time * precision), (int) (velocity.y * time * precision)};
+	int movement[2] = {(int) (velocity.x * timeSinceUpdate * precision), (int) (velocity.y * timeSinceUpdate * precision)};
 	[self calculateStep:movement];
 	
 		

@@ -22,7 +22,7 @@
 
 - (id)initWithParticles:(Particles *) part;
 
-- (void)update:(float) time;
+- (void)update;
 - (void)shootAtPosition:(GLKVector2) position direction:(GLKVector2) dir;
 
 @end

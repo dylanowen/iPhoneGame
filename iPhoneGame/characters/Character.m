@@ -8,6 +8,8 @@
 
 #import "Character.h"
 
+#import "Globals.h"
+
 #import "GameModel.h"
 #import "EffectLoader.h"
 #import "TextureLoader.h"
@@ -111,20 +113,20 @@ enum
 	movement = GLKVector2Make(0, 0);
 }
 
-- (void)updateVelocity:(float)time
+- (void)updateVelocity
 {
 	velocity.y += GRAVITY;
 	//apply friction
 	velocity = GLKVector2Add(velocity, GLKVector2MultiplyScalar(velocity, DRAG));
 }
 
-- (void)update:(float) time
+- (void)update
 {
 	int x, y, lowX = INT_MIN, lowY = INT_MIN, highX = INT_MAX, highY = INT_MAX, stepX = 0, stepY = 0;
 	
-	animateTimer += time;
-	[self updateVelocity:time];
-	int newPosition[2] = {(int) ((velocity.x + movement.x) * time * precision), (int) ((velocity.y + movement.y) * time * precision)};
+	animateTimer += timeSinceUpdate;
+	[self updateVelocity];
+	int newPosition[2] = {(int) ((velocity.x + movement.x) * timeSinceUpdate * precision), (int) ((velocity.y + movement.y) * timeSinceUpdate * precision)};
 	movement = GLKVector2Make(0.0f, 0.0f);
 	
 	x = (int) (position.x * (float) precision);

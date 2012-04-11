@@ -8,6 +8,8 @@
 
 #import "Weapon.h"
 
+#import "Globals.h"
+
 #import "Particles.h"
 
 @implementation Weapon
@@ -24,9 +26,9 @@
 	return nil;
 }
 
-- (void)update:(float) time
+- (void)update
 {
-	timeSinceShot += time;
+	timeSinceShot += timeSinceUpdate;
 }
 
 - (void)shootAtPosition:(GLKVector2) playerPosition direction:(GLKVector2) dir

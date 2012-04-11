@@ -105,7 +105,7 @@
 	return nil;
 }
 
-- (bool)update:(float) time
+- (bool)update
 {
 	//do all the main stuff of the game
 	if(player.health <= 0)
@@ -115,14 +115,14 @@
 		return NO;
 	}
 	
-	[super update:time];
+	[super update];
 	
-	[particles updateWithLastUpdate: time];
+	[particles update];
 	
 	for(unsigned i = 0; i < [zombies count]; i++)
 	{
 		Character *temp = [zombies objectAtIndex:i];
-		if(![((Zombie *) temp) update: time])
+		if(![((Zombie *) temp) update])
 		{
 			[particles addBloodWithPosition:temp->position power:150 colorType:BloodColorRed count:8];
 			[pickups addZombieSkullWithPosition:temp->position];
@@ -146,7 +146,7 @@
 		[[zombieTracker objectAtIndex:i] updateTrackee: temp->position center: player->position];
 	}
 	
-	[pickups update:time];
+	[pickups update];
 
 	
 	return YES;

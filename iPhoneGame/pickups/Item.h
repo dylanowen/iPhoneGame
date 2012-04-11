@@ -42,7 +42,7 @@
 
 - (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
 
-- (bool)updateAndKeep:(float) time;
+- (bool)updateAndKeep;
 - (void)pickedUp;
 - (void)render;
 

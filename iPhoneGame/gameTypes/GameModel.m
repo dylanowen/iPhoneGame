@@ -79,7 +79,7 @@
 	return nil;
 }
 
-- (bool)update:(float) time
+- (bool)update
 {
 	//it's negative because up is negative...
 	if(controls.move->velocity.y < -0.5f)
@@ -95,7 +95,7 @@
 	player->lookRope = controls->shootRope->velocity;
 	
 	//the player updates the projection matrix
-	[player update: time];
+	[player update];
 	screenCenter = player->position;
 	MoveOrthoVector(&dynamicProjection, screenCenter);
 	

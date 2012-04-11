@@ -42,13 +42,13 @@
 	//[items addObject:[[Item alloc] initWithModel:game position:posit]];
 }
 
-- (void)update:(float) time
+- (void)update
 {
 	//remove bullets that say they're done
 	NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
 	for(unsigned i = 0; i < [items count]; i++)
 	{
-		if(![[items objectAtIndex: i] updateAndKeep: time])
+		if(![[items objectAtIndex: i] updateAndKeep])
 		{
 			[indexes addIndex: i];
 		}

@@ -45,7 +45,7 @@
 	return nil;
 }
 
-- (bool)update:(float) time
+- (bool)update
 {
 	GLKVector2 normMovement = GLKVector2Normalize(GLKVector2Subtract(player->position, position));
 	movement = GLKVector2MultiplyScalar(normMovement, movementSpeed);
@@ -77,7 +77,7 @@
 		[env editRect:YES leftX:dig.x topY:dig.y width:5 height:10];
 	}
 	
-	[super update: time];
+	[super update];
 	if(animateTimer >= .25f)
 	{
 		currentFrame++;
@@ -98,7 +98,7 @@
 	
 	if(GLKVector2Length(GLKVector2Subtract(player->position, position)) < 4)
 	{
-		//player.health -= 8;
+		player.health -= 8;
 		[particles addBloodWithPosition:player->position power:75 colorType:BloodColorRed];
 	}
 	

@@ -22,7 +22,7 @@
 
 - (void)shoot:(GLKVector2) direction;
 - (void)cancel;
-- (void)update:(float) time;
+- (void)update;
 - (void)render;
 
 @end

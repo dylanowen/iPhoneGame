@@ -8,6 +8,8 @@
 
 #import "BloodParticle.h"
 
+#import "Globals.h"
+
 #import "GameConstants.h"
 #import "GameModel.h"
 #import "Particles.h"
@@ -70,12 +72,12 @@
 	return [self initWithParticles:model position:posit velocity:veloc colorType:BloodColorRed];
 }
 
-- (bool)updateAndKeep:(float) time
+- (bool)updateAndKeep
 {
 	int precision = 100;
 	int intI, intJ, lastI, lastJ, i, j, stepX = 0, stepY = 0;
 	velocity.y += GRAVITY;
-	int movement[2] = {(int) (velocity.x * time * precision), (int) (velocity.y * time * precision)};
+	int movement[2] = {(int) (velocity.x * timeSinceUpdate * precision), (int) (velocity.y * timeSinceUpdate * precision)};
 	
 	if(movement[0] != 0 || movement[1] != 0)
 	{

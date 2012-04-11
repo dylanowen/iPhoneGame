@@ -14,6 +14,6 @@
 
 - (id)initWithModel:(ZombieSwarm *) model position:(GLKVector2) posit;
 
-- (bool)update:(float) time;
+- (bool)update;
 
 @end

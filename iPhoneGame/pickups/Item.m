@@ -8,6 +8,8 @@
 
 #import "Item.h"
 
+#import "Globals.h"
+
 #import "GameModel.h"
 #import "Environment.h"
 #import "Player.h"
@@ -53,7 +55,7 @@
 	return nil;
 }
 
-- (bool)updateAndKeep:(float) time
+- (bool)updateAndKeep
 {
 	int x, y, lowX = INT_MIN, lowY = INT_MIN, highX = INT_MAX, highY = INT_MAX, stepX = 0, stepY = 0, intX, intY;
 	bool collision;
@@ -64,14 +66,14 @@
 		return NO;
 	}
 	
-	timer += time;
+	timer += timeSinceUpdate;
 	if(timer > disappearTime)
 	{
 		return NO;
 	}
 	
 	velocity.y += GRAVITY / 5;
-	int newPosition[2] = {(int) (velocity.x * time * precision), (int) (velocity.y * time * precision)};
+	int newPosition[2] = {(int) (velocity.x * timeSinceUpdate * precision), (int) (velocity.y * timeSinceUpdate * precision)};
 	//NSLog(@"Movement (%d, %d)", newPosition[0], newPosition[1]);
 	
 	x = (int) (position.x * (float) precision);

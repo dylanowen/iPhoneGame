@@ -22,7 +22,7 @@
 - (void)addZombieSkullWithPosition:(GLKVector2) posit;
 - (void)addHealthWithPosition:(GLKVector2) posit;
 
-- (void)update:(float) time;
+- (void)update;
 - (void)render;
 
 @end

@@ -51,7 +51,7 @@
 
 - (id)initWithView:(UIView *) view;
 
-- (bool)update:(float) time;
+- (bool)update;
 - (bool)checkBulletHit:(BulletParticle *) bullet;
 
 - (void)itemPickedUp:(Item *) item;

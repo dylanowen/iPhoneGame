@@ -8,6 +8,8 @@
 
 #import "BulletParticleBouncy.h"
 
+#import "Globals.h"
+
 #import "GameConstants.h"
 #import "GameModel.h"
 #import "Particles.h"
@@ -34,7 +36,7 @@
 	return nil;
 }
 
-- (bool)updateAndKeep:(float) time
+- (bool)updateAndKeep
 {
 	int intI, intJ, lastI, lastJ, i, j;
 	
@@ -43,7 +45,7 @@
 		return NO;
 	}
 	
-	int movement[2] = {(int) (velocity.x * time * precision), (int) (velocity.y * time * precision)};
+	int movement[2] = {(int) (velocity.x * timeSinceUpdate * precision), (int) (velocity.y * timeSinceUpdate * precision)};
 	
 	
 	i = (int) (position.x * precision);
