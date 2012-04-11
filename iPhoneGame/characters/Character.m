@@ -279,7 +279,7 @@ enum
 	if(GLKVector2Length(GLKVector2Subtract(bullet->position, position)) < 6)
 	{
 		_health -= bullet->damage;
-		[self->game->particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed];
+		[self->game->particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed count:2];
 		return YES;
 	}
 	return NO;

@@ -19,6 +19,8 @@
 #import "NinjaRope.h"
 #import "MachineGun.h"
 
+#import "BulletParticle.h"
+
 @interface Player()
 {
 	bool switchTexture;
@@ -208,9 +210,16 @@
 	[currentGun update:time];
 }
 
-- (void)jump
+- (BOOL)checkBullet:(BulletParticle *) bullet
 {
-	[super jump];
+	//use squared length
+	if(GLKVector2Length(GLKVector2Subtract(bullet->position, position)) < 6)
+	{
+		self.health -= bullet->damage;
+		[self->game->particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed count:8];
+		return YES;
+	}
+	return NO;
 }
 
 - (void)render

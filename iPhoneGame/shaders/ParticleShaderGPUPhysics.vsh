@@ -14,7 +14,7 @@ void main()
 	position.y = initialPosition.y + initialVelocity.y * time + 60.0 * time * time;
 
 	gl_Position = modelViewProjectionMatrix * position;
-	gl_PointSize = 6.0 - time * 3.0;
+	gl_PointSize = 6.0 - time * 2.0;
 	fragmentColor = color;
 }
 

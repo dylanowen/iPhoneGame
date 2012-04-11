@@ -28,7 +28,7 @@
 	if(timeSinceShot > fireSpeed)
 	{
 		timeSinceShot = 0;
-		GLKVector2 awayFromPlayer = GLKVector2Add(playerPosition, GLKVector2MultiplyScalar(dir, 7));
+		GLKVector2 awayFromPlayer = GLKVector2Add(playerPosition, GLKVector2MultiplyScalar(dir, 10));
 		[particles addBulletWithPosition: awayFromPlayer velocity:GLKVector2MultiplyScalar(dir, 150) destructionRadius:10 damage:80];
 	}
 }

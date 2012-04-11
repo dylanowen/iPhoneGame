@@ -14,6 +14,8 @@
 #import "BloodParticle.h"
 #import "TextureLoader.h"
 
+#define DS_DESTRUCTION_RADIUS 5
+
 @interface Zombie()
 {
 	Character *player;
@@ -99,7 +101,19 @@
 		player.health -= 8;
 		[particles addBloodWithPosition:player->position power:75 colorType:BloodColorRed];
 	}
-	return self.health > 0;
+	
+	if(self.health < 0)
+	{
+		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(10.0f, 0.0f)) velocity:GLKVector2Make(75.0f, 0.0f) destructionRadius:8 damage:50];
+		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(5.0f, 8.6f)) velocity:GLKVector2Make(37.0f, 65.0f) destructionRadius:8 damage:50];
+		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(-5.0f, 8.6f)) velocity:GLKVector2Make(-37.0f, 65.0f) destructionRadius:8 damage:50];
+		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(7.0f, 0.0f)) velocity:GLKVector2Make(-75.0f, 0.0f) destructionRadius:8 damage:50];
+		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(-5.0f, -8.6f)) velocity:GLKVector2Make(-37.0f, -65.0f) destructionRadius:8 damage:50];
+		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(5.0f, -8.6f)) velocity:GLKVector2Make(37.0f, -65.0f) destructionRadius:8 damage:50];
+		return NO;
+	}
+	
+	return YES;
 }
 
 //debug movement vector

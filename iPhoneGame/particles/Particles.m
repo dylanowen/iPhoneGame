@@ -267,7 +267,7 @@ typedef struct
 	{
 		[self.bulletProgram use];
 		glUniformMatrix4fv(bulletModelViewUniform, 1, 0, self.game->dynamicProjection.m);
-		glUniform4f(bulletColorUniform, 0.6, 0.6, 0.6, 1.0);
+		glUniform4f(bulletColorUniform, 0.8, 0.8, 0.8, 1.0);
 		[self.bullets makeObjectsPerformSelector:@selector(render)];
 	}
 

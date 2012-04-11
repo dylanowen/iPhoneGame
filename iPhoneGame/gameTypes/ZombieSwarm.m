@@ -142,7 +142,6 @@
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, player->position)) < 140);
 			
 			[environment restoreRadius:40 x:newPosition.x y:newPosition.y];
-			//[indexes addIndex: i];
 		}
 		[[zombieTracker objectAtIndex:i] updateTrackee: temp->position center: player->position];
 	}
@@ -155,6 +154,11 @@
 
 - (bool)checkBulletHit:(BulletParticle *) bullet
 {
+	if([player checkBullet:bullet])
+	{
+		return YES;
+	}
+	
 	for(unsigned i = 0; i < [zombies count]; i++)
 	{
 		if([[zombies objectAtIndex:i] checkBullet:bullet])
