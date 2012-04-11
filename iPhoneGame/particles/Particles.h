@@ -20,11 +20,6 @@
 	GLuint bloodPositionAttribute;
 	GLuint bloodColorAttribute;
 	
-	GLuint bloodGPUInitialPosition;
-	GLuint bloodGPUInitialVelocity;
-	GLuint bloodGPUColor;
-	GLuint bloodGPUTime;
-	
 	GLuint healthParticleInitialPosition;
 	GLuint healthParticleTime;
 }

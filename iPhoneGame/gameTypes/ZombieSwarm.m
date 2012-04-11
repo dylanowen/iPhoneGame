@@ -119,7 +119,6 @@
 	
 	[particles updateWithLastUpdate: time];
 	
-	/*
 	for(unsigned i = 0; i < [zombies count]; i++)
 	{
 		Character *temp = [zombies objectAtIndex:i];
@@ -146,7 +145,6 @@
 		}
 		[[zombieTracker objectAtIndex:i] updateTrackee: temp->position center: player->position];
 	}
-	*/
 	
 	[pickups update:time];
 
@@ -183,8 +181,8 @@
 	
 	[background render];
 	[environment render: player->position.x];
-	[particles render];
 	[player render];
+	[particles render];
 	[zombies makeObjectsPerformSelector:@selector(render)];
 	[pickups render];
 	
