@@ -20,7 +20,6 @@ faster
 #import "BulletParticle.h"
 #import "BulletParticleGrav.h"
 #import "BulletParticleBouncy.h"
-#import "BloodGPUParticle.h"
 #import "HealingParticle.h"
 
 typedef struct
@@ -35,7 +34,6 @@ typedef struct
 	GLuint bulletModelViewUniform;
 	GLuint bulletColorUniform;
 	GLuint bloodModelViewUniform;
-	GLuint bloodGPUModelViewUniform;
 	
 	GLuint healthParticleModelViewUniform;
 	
@@ -44,11 +42,9 @@ typedef struct
 
 @property (nonatomic, strong) GLProgram *bulletProgram;
 @property (nonatomic, strong) GLProgram *bloodProgram;
-@property (nonatomic, strong) GLProgram *bloodGPUPhysProgram;
 
 @property (strong, nonatomic) NSMutableArray *bullets;
 @property (strong, nonatomic) NSMutableArray *blood;
-@property (strong, nonatomic) NSMutableArray *bloodGPU;
 @property (strong, nonatomic) NSMutableArray *healingEffect;
 
 @end
@@ -58,10 +54,8 @@ typedef struct
 @synthesize game = _game;
 @synthesize bulletProgram = _bulletProgram;
 @synthesize bloodProgram = _bloodProgram;
-@synthesize bloodGPUPhysProgram = _bloodGPUPhysProgram;
 @synthesize bullets = _bullets;
 @synthesize blood = _blood;
-@synthesize bloodGPU = _bloodGPU;
 @synthesize healingEffect = _healingEffect;
 
 - (id)initWithModel:(GameModel *) game
@@ -73,7 +67,6 @@ typedef struct
 
 		self.bullets = [[NSMutableArray arrayWithCapacity: 0] init];
 		self.blood = [[NSMutableArray arrayWithCapacity: 0] init];
-		self.bloodGPU = [[NSMutableArray arrayWithCapacity:0] init];
 		self.healingEffect = [[NSMutableArray arrayWithCapacity:0] init];
 		
 		//load and setup the bullet shaders
@@ -111,26 +104,6 @@ typedef struct
 			NSLog(@"Blood shaders loaded.");
 		}
 		bloodModelViewUniform = [self.bloodProgram uniformIndex:@"modelViewProjectionMatrix"];
-		
-		//load and setup the blood shaders with the GPU physics
-		self.bloodGPUPhysProgram = [[GLProgram alloc] initWithVertexShaderFilename: @"ParticleShaderGPUPhysics" fragmentShaderFilename: @"particleShader"];
-		bloodGPUInitialPosition = [self.bloodGPUPhysProgram addAttribute: @"initialPosition"];
-		bloodGPUInitialVelocity = [self.bloodGPUPhysProgram addAttribute: @"initialVelocity"];
-		bloodGPUColor = [self.bloodGPUPhysProgram addAttribute: @"color"];
-		bloodGPUTime = [self.bloodGPUPhysProgram addAttribute: @"time"];
-		if(![self.bloodGPUPhysProgram link])
-		{
-			NSLog(@"Link failed");
-			NSLog(@"Program Log: %@", [self.bloodGPUPhysProgram programLog]);
-			NSLog(@"Frag Log: %@", [self.bloodGPUPhysProgram fragmentShaderLog]);
-			NSLog(@"Vert Log: %@", [self.bloodGPUPhysProgram vertexShaderLog]);
-			self.bloodGPUPhysProgram = nil;
-		}
-		else
-		{
-			NSLog(@"Blood GPU physics shaders loaded.");
-		}
-		bloodGPUModelViewUniform = [self.bloodGPUPhysProgram uniformIndex:@"modelViewProjectionMatrix"];
 		
 		healthProgram = [[GLProgram alloc] initWithVertexShaderFilename: @"healthParticle" fragmentShaderFilename: @"particleShader"];
 		healthParticleInitialPosition = [healthProgram addAttribute: @"initialPosition"];
@@ -171,7 +144,7 @@ typedef struct
 
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power
 {
-	[self addBloodWithPosition:posit power:power colorType:0];
+	[self addBloodWithPosition:posit power:power colorType:BloodColorRed];
 }
 
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType count:(int) count
@@ -186,13 +159,6 @@ typedef struct
 - (void)addBloodWithPosition:(GLKVector2) posit power:(unsigned) power colorType:(int) colorType
 {
 	[self.blood addObject: [[BloodParticle alloc] 
-										initWithParticles:self 
-										position:posit 
-										velocity:GLKVector2MultiplyScalar(GLKVector2Make(((float) (arc4random() % 200)) / 100.0f - 1.0f, ((float) (arc4random() % 200)) / 100.0f - 1.0f), power) 
-										colorType:colorType]
-	];
-
-	[self.bloodGPU addObject: [[BloodGPUParticle alloc] 
 										initWithParticles:self 
 										position:posit 
 										velocity:GLKVector2MultiplyScalar(GLKVector2Make(((float) (arc4random() % 200)) / 100.0f - 1.0f, ((float) (arc4random() % 200)) / 100.0f - 1.0f), power) 
@@ -237,18 +203,6 @@ typedef struct
 	}
 	[self.blood removeObjectsAtIndexes: indexes];
 	
-	//update GPU blood with the new time and remove the ones that are out of range
-	indexes = [NSMutableIndexSet indexSet];
-	for(unsigned i = 0; i < [self.bloodGPU count]; i++)
-	{
-		if(![[self.bloodGPU objectAtIndex: i] updateAndKeep: time])
-		{
-			[indexes addIndex: i];
-		}
-	}
-	[self.bloodGPU removeObjectsAtIndexes: indexes];
-	
-	
 	indexes = [NSMutableIndexSet indexSet];
 	for(unsigned i = 0; i < [self.healingEffect count]; i++)
 	{
@@ -277,18 +231,11 @@ typedef struct
 		glUniformMatrix4fv(bloodModelViewUniform, 1, 0, self.game->dynamicProjection.m);
 		[self.blood makeObjectsPerformSelector:@selector(render)];
 	}
-
-	if([self.bloodGPU count] > 0)
-	{
-		[self.bloodGPUPhysProgram use];
-		glUniformMatrix4fv(bloodGPUModelViewUniform, 1, 0, self.game->dynamicProjection.m);
-		[self.bloodGPU makeObjectsPerformSelector:@selector(render)];
-	}
 	
 	if([self.healingEffect count] > 0)
 	{
 		[healthProgram use];
-		glUniformMatrix4fv(bloodGPUModelViewUniform, 1, 0, self.game->dynamicProjection.m);
+		glUniformMatrix4fv(healthParticleModelViewUniform, 1, 0, self.game->dynamicProjection.m);
 		[self.healingEffect makeObjectsPerformSelector:@selector(render)];
 	}
 	

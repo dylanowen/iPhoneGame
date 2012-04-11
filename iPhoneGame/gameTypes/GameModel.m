@@ -72,7 +72,7 @@
 		
 		player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 100)];
 		controls = [[Controls alloc] initWithModel: self];
-		[environment deleteRadius:20 x:(ENV_WIDTH / 2) y:100];
+		[environment deleteRadius:200 x:(ENV_WIDTH / 2) y:(ENV_HEIGHT / 2)];
 		
 		return self;
 	}

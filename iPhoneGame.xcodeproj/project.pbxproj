@@ -14,8 +14,6 @@
 		2C2A0761152C18310066E88D /* HealingParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2A0760152C18300066E88D /* HealingParticle.m */; };
 		2C2A0764152C18E20066E88D /* healthParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C2A0762152C18D10066E88D /* healthParticle.vsh */; };
 		2C6EF570151D2EB000CFDCA3 /* VAOLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */; };
-		2C7317FE152A692900FEAF5D /* BloodGPUParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7317FD152A692900FEAF5D /* BloodGPUParticle.m */; };
-		2C7317FF152A7A1D00FEAF5D /* ParticleShaderGPUPhysics.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C7317F8152A5EA500FEAF5D /* ParticleShaderGPUPhysics.vsh */; };
 		2C805AFC1519BA3600C2702A /* BouncyMachineGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C805AFB1519BA3600C2702A /* BouncyMachineGun.m */; };
 		2C805AFF1519BBE100C2702A /* BouncyShotGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C805AFE1519BBE100C2702A /* BouncyShotGun.m */; };
 		2C861305152E67A000679829 /* NinjaRope.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C861304152E67A000679829 /* NinjaRope.m */; };
@@ -91,9 +89,6 @@
 		2C2A0762152C18D10066E88D /* healthParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = healthParticle.vsh; path = shaders/healthParticle.vsh; sourceTree = "<group>"; };
 		2C6EF56E151D2EB000CFDCA3 /* VAOLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VAOLoader.h; path = loaders/VAOLoader.h; sourceTree = "<group>"; };
 		2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VAOLoader.m; path = loaders/VAOLoader.m; sourceTree = "<group>"; };
-		2C7317F8152A5EA500FEAF5D /* ParticleShaderGPUPhysics.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = ParticleShaderGPUPhysics.vsh; path = shaders/ParticleShaderGPUPhysics.vsh; sourceTree = "<group>"; };
-		2C7317FC152A692900FEAF5D /* BloodGPUParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BloodGPUParticle.h; path = particles/BloodGPUParticle.h; sourceTree = "<group>"; };
-		2C7317FD152A692900FEAF5D /* BloodGPUParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BloodGPUParticle.m; path = particles/BloodGPUParticle.m; sourceTree = "<group>"; };
 		2C805AFA1519BA3600C2702A /* BouncyMachineGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BouncyMachineGun.h; path = weapons/BouncyMachineGun.h; sourceTree = "<group>"; };
 		2C805AFB1519BA3600C2702A /* BouncyMachineGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BouncyMachineGun.m; path = weapons/BouncyMachineGun.m; sourceTree = "<group>"; };
 		2C805AFD1519BBE100C2702A /* BouncyShotGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BouncyShotGun.h; path = weapons/BouncyShotGun.h; sourceTree = "<group>"; };
@@ -413,7 +408,6 @@
 				2C2A0762152C18D10066E88D /* healthParticle.vsh */,
 				CEE52F821502BE0200DDF174 /* particleShader.fsh */,
 				CEE52F831502BE0200DDF174 /* particleShader.vsh */,
-				2C7317F8152A5EA500FEAF5D /* ParticleShaderGPUPhysics.vsh */,
 				CEE52F841502BE0200DDF174 /* particleShaderConstantColor.vsh */,
 			);
 			name = Shaders;
@@ -427,8 +421,6 @@
 				2C2A075E152C17510066E88D /* Particle.h */,
 				2C2A075F152C18300066E88D /* HealingParticle.h */,
 				2C2A0760152C18300066E88D /* HealingParticle.m */,
-				2C7317FC152A692900FEAF5D /* BloodGPUParticle.h */,
-				2C7317FD152A692900FEAF5D /* BloodGPUParticle.m */,
 				2C8915621519545D00F91087 /* BloodParticle.h */,
 				2C8915631519545D00F91087 /* BloodParticle.m */,
 				2C8915641519545D00F91087 /* BulletParticle.h */,
@@ -528,7 +520,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C2A0764152C18E20066E88D /* healthParticle.vsh in Resources */,
-				2C7317FF152A7A1D00FEAF5D /* ParticleShaderGPUPhysics.vsh in Resources */,
 				CEE52F891502BE1D00DDF174 /* particleShader.fsh in Resources */,
 				CEE52F8A1502BE1D00DDF174 /* particleShader.vsh in Resources */,
 				CEE52F8B1502BE1D00DDF174 /* particleShaderConstantColor.vsh in Resources */,
@@ -590,7 +581,6 @@
 				2C92F049151A4F020049C0F1 /* HighScoreController.m in Sources */,
 				2C92F04D151A4F430049C0F1 /* HighScore.m in Sources */,
 				2C6EF570151D2EB000CFDCA3 /* VAOLoader.m in Sources */,
-				2C7317FE152A692900FEAF5D /* BloodGPUParticle.m in Sources */,
 				2C8E0874152BAB2B00D4BAC3 /* Pickups.m in Sources */,
 				2C8E0878152BAD3600D4BAC3 /* Item.m in Sources */,
 				2C930AAB152C033800349E9A /* ZombieSkull.m in Sources */,

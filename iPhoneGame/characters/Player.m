@@ -181,7 +181,6 @@
 	if(shootGun)
 	{
 		[currentGun shootAtPosition:position direction: lookGun];
-		//[self.particles addHealingEffect:self.player->position];
 	}
 	
 	if(animateTimer >= .25f)
@@ -216,7 +215,7 @@
 	if(GLKVector2Length(GLKVector2Subtract(bullet->position, position)) < 6)
 	{
 		self.health -= bullet->damage;
-		[self->game->particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed count:8];
+		[self->game->particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed count:4];
 		return YES;
 	}
 	return NO;
