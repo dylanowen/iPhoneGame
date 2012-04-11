@@ -19,6 +19,7 @@
 {
 @public
 	NinjaRopeJoyStick	*shootRope;
+	Button *pauseButton;
 }
 
 @property (strong, nonatomic) JoyStick *move;

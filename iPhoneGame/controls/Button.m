@@ -22,7 +22,7 @@
 
 @implementation Button
 
-- (id)initWithCenter:(GLKVector2) posit model:(GameModel *)game
+- (id)initWithCenter:(GLKVector2) posit texture:(NSString *) textName radius:(unsigned) rad callback:(void(^)(bool result))back model:(GameModel *) game
 {
 	self = [super init];
 	if(self)
@@ -33,14 +33,18 @@
 		
 		lastTouch = GLKVector2Make(-1, -1);
 		
+		callback = [back copy];
+		
+		radius = (float) rad;
+		
 		vertexBuffer = [game.bufferLoader getBufferForName:@"Button"];
 		if(vertexBuffer == 0)
 		{
 			float vertices[] = {
-				BUTTON_LENGTH, 0,
-				BUTTON_LENGTH, BUTTON_LENGTH,
-				0, BUTTON_LENGTH,
-				0, 0
+				radius, -radius,
+				radius, radius,
+				-radius, radius,
+				-radius, -radius
 			};
 			vertexBuffer = [game.bufferLoader addBufferForName:@"Button"];
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -48,23 +52,30 @@
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		
-		buttonTexture = [game.textureLoader getTextureDescription:@"jump_button.png"];
+		radius += 5.0f;
+		down = NO;
 		
-		pressed = NO;
-		modelview = GLKMatrix4MakeTranslation(position.x - BUTTON_LENGTH_HALF, position.y - BUTTON_LENGTH_HALF, 0);
+		buttonTexture = [game.textureLoader getTextureDescription:textName];
+		
+		modelview = GLKMatrix4MakeTranslation(position.x, position.y, 0);
 		
 		return self;
 	}
 	return nil;
 }
 
+- (void)dealloc
+{
+	callback = nil;
+}
+
 - (bool)touchesBegan:(GLKVector2) loci
 {
 	GLKVector2 temp = GLKVector2Subtract(loci, position);
-	if(GLKVector2Length(temp) <= BUTTON_LENGTH + 10)
+	if(GLKVector2Length(temp) <= radius)
 	{
-		pressed = YES;
-		down = YES;
+		down = !down;
+		callback(down);
 		lastTouch = loci;
 		return YES;
 	}
@@ -77,6 +88,7 @@
 	if(GLKVector2AllEqualToVector2(lastTouch, last))
 	{
 		lastTouch = loci;
+		
 		return YES;
 	}
 	return NO;
@@ -86,8 +98,7 @@
 {
 	if(GLKVector2AllEqualToVector2(lastTouch, loci) || GLKVector2AllEqualToVector2(lastTouch, last))
 	{
-		lastTouch = loci;
-		down = NO;
+		[self touchesCancelled];
 		return YES;
 	}
 	return NO;
@@ -95,7 +106,7 @@
 
 - (void)touchesCancelled
 {
-	pressed = NO;
+	lastTouch = GLKVector2Make(-1, -1);
 }
 
 - (void)render
@@ -110,7 +121,7 @@
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
 	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
 	
-	if(pressed)
+	if(down)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, [buttonTexture getFrameBuffer:1]);
 	}

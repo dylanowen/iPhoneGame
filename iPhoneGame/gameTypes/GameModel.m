@@ -43,6 +43,8 @@
 
 @implementation GameModel
 
+@synthesize paused = _paused;
+
 @synthesize view = _view;
 
 @synthesize textureLoader = _textureLoader;
@@ -74,12 +76,27 @@
 		controls = [[Controls alloc] initWithModel: self];
 		[environment deleteRadius:20 x:(ENV_WIDTH / 2) y:100];
 		
+		self.paused = false;
+		
 		return self;
 	}
 	return nil;
 }
 
 - (bool)update
+{
+	if(_paused)
+	{
+	
+		return YES;
+	}
+	else
+	{
+		return [self updateGame];
+	}
+}
+
+- (bool)updateGame
 {
 	//it's negative because up is negative...
 	if(controls.move->velocity.y < -0.5f)
@@ -100,6 +117,12 @@
 	MoveOrthoVector(&dynamicProjection, screenCenter);
 	
 	return YES;
+}
+
+- (void)setPaused:(bool)paused
+{
+	_paused = paused;
+	//display menu
 }
 
 - (bool)checkBulletHit:(BulletParticle *) bullet

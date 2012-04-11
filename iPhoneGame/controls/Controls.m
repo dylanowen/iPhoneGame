@@ -34,9 +34,12 @@
 			effect.transform.projectionMatrix = model->staticProjection;
 		}
 		
-		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, STATIC_VIEW_HEIGHT - 80) region:50 grabRegion:140 joyRadius:25 model:model];
-		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH - 80, STATIC_VIEW_HEIGHT - 80) region:50 grabRegion:140 joyRadius:25 toggleBounds:30 model:model];
+		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, STATIC_VIEW_HEIGHT - 85) region:50 grabRegion:140 joyRadius:25 model:model];
+		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH - 85, STATIC_VIEW_HEIGHT - 85) region:50 grabRegion:140 joyRadius:25 toggleBounds:30 model:model];
 		shootRope = [[NinjaRopeJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH / 2, STATIC_VIEW_HEIGHT / 2) region:40 grabRegion:25 joyRadius:25 toggleBounds:25 model:model];
+		pauseButton = [[Button alloc] initWithCenter:GLKVector2Make(STATIC_VIEW_WIDTH - 20, 20) texture:@"pauseButton.png" radius:12 callback:^(bool result){
+			model.paused = result;
+		} model:model];
 		
 		return self;
 	}
@@ -60,6 +63,10 @@
 		else if([self.look touchesBegan: vLoci])
 		{
 		
+		}
+		else if([pauseButton touchesBegan: vLoci])
+		{
+			
 		}
 		//NSLog(@"Not grabbed (%f, %f)", vLoci.x, vLoci.y);
 	}
@@ -88,6 +95,10 @@
 		{
 		
 		}
+		else if([pauseButton touchesMoved: vLoci lastTouch: vLast])
+		{
+			
+		}
 		//NSLog(@"Not grabbed (%f, %f)", last.x, last.y);
 	}
 }
@@ -114,6 +125,10 @@
 		{
 		
 		}
+		else if([pauseButton touchesEnded: vLoci lastTouch: vLast])
+		{
+			
+		}
 		//NSLog(@"Not grabbed (%f, %f)", last.x, last.y);
 	}
 }
@@ -122,6 +137,7 @@
 	[shootRope touchesCancelled];
 	[self.move touchesCancelled];
 	[self.look touchesCancelled];
+	[pauseButton touchesCancelled];
 }
 
 - (void)render
@@ -129,6 +145,7 @@
 	//[shootRope render];
 	[self.move render];
 	[self.look render];
+	[pauseButton render];
 }
 
 @end

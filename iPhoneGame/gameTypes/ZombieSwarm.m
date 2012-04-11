@@ -105,7 +105,7 @@
 	return nil;
 }
 
-- (bool)update
+- (bool)updateGame
 {
 	//do all the main stuff of the game
 	if(player.health <= 0)
@@ -115,7 +115,7 @@
 		return NO;
 	}
 	
-	[super update];
+	[super updateGame];
 	
 	[particles update];
 	

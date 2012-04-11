@@ -37,6 +37,7 @@
 		2C8E0878152BAD3600D4BAC3 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E0877152BAD3600D4BAC3 /* Item.m */; };
 		2C8E087A152BB26200D4BAC3 /* health.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8E0879152BB26200D4BAC3 /* health.png */; };
 		2C8EE3B31536289300FF6E4E /* Globals.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EE3B21536289300FF6E4E /* Globals.c */; };
+		2C8EE3B515362EAE00FF6E4E /* pauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8EE3B415362EAE00FF6E4E /* pauseButton.png */; };
 		2C901E02153568C500747795 /* healthParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C901E01153568C500747795 /* healthParticle.vsh */; };
 		2C91258415167CB200BA3DF6 /* Zombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258315167CB200BA3DF6 /* Zombie.m */; };
 		2C91258E15167D2D00BA3DF6 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258D15167D2D00BA3DF6 /* Character.m */; };
@@ -135,6 +136,7 @@
 		2C8E0879152BB26200D4BAC3 /* health.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = health.png; sourceTree = "<group>"; };
 		2C8EE3B0153624EC00FF6E4E /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		2C8EE3B21536289300FF6E4E /* Globals.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Globals.c; sourceTree = "<group>"; };
+		2C8EE3B415362EAE00FF6E4E /* pauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButton.png; sourceTree = "<group>"; };
 		2C901E01153568C500747795 /* healthParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = healthParticle.vsh; path = shaders/healthParticle.vsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		2C90FC2A152D607E00B5BB44 /* MatrixFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatrixFunctions.h; sourceTree = "<group>"; };
 		2C91258215167CB200BA3DF6 /* Zombie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Zombie.h; path = characters/Zombie.h; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 		CEC5BCE415030A64003724F5 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				2C8EE3B415362EAE00FF6E4E /* pauseButton.png */,
 				2C94CC1D152CE9CE002C998A /* background.png */,
 				2C8E0879152BB26200D4BAC3 /* health.png */,
 				2C2A0758152C05DD0066E88D /* zombie_skull.png */,
@@ -540,6 +543,7 @@
 				2C94CC1E152CE9CE002C998A /* background.png in Resources */,
 				2C8D246315353B1A00605AE7 /* circleGray.png in Resources */,
 				2C901E02153568C500747795 /* healthParticle.vsh in Resources */,
+				2C8EE3B515362EAE00FF6E4E /* pauseButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

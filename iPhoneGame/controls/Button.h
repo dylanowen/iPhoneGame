@@ -9,17 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-#define BUTTON_LENGTH 40
-#define BUTTON_LENGTH_HALF BUTTON_LENGTH / 2
-
 @class GameModel;
 @class TextureDescription;
 
 @interface Button : NSObject
 {
 @public
-	bool pressed;
 	bool down;
+	bool pressed;
 @protected
 	GLKBaseEffect *effect;
 	
@@ -32,9 +29,11 @@
 	TextureDescription *buttonTexture;
 	
 	GLuint vertexBuffer;
+	
+	void (^callback)();
 }
 
-- (id)initWithCenter:(GLKVector2) posit model:(GameModel *) model;
+- (id)initWithCenter:(GLKVector2) posit texture:(NSString *) textName radius:(unsigned) rad callback:(void(^)(bool result)) back model:(GameModel *) game;
 
 - (bool)touchesBegan:(GLKVector2) loci;
 - (bool)touchesMoved:(GLKVector2) loci lastTouch:(GLKVector2) last;

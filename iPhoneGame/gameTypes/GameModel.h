@@ -42,6 +42,8 @@
 	Background *background;
 }
 
+@property (nonatomic) bool paused;
+
 @property (strong, nonatomic) UIView *view;
 
 @property (strong, nonatomic) TextureLoader *textureLoader;
@@ -52,6 +54,7 @@
 - (id)initWithView:(UIView *) view;
 
 - (bool)update;
+- (bool)updateGame;
 - (bool)checkBulletHit:(BulletParticle *) bullet;
 
 - (void)itemPickedUp:(Item *) item;
