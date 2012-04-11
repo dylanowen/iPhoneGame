@@ -15,6 +15,7 @@
 @interface ToggleJoyStick()
 {
 	TextureDescription *redCircleTexture;
+	TextureDescription *grayCircleTexture;
 	
 	GLuint boundingVertexBuffer;
 }
@@ -23,9 +24,9 @@
 
 @implementation ToggleJoyStick
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR toggleBounds:(float) toggleB model:(GameModel *) game
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen toggleBounds:(float) toggleB model:(GameModel *) game
 {
-	self = [super initWithCenter: posit region:regionR grabRegion:regionR joyRadius:toggleB model:game];
+	self = [super initWithCenter: posit region:regionR grabRegion:grabRegion joyRadius:joyLen model:game];
 	if(self)
 	{
 		toggle = NO;
@@ -50,6 +51,7 @@
 			
 		lastVelocity = GLKVector2Make(1.0f, 0.0f);
 		redCircleTexture = [game.textureLoader getTextureDescription:@"circleRed.png"];
+		grayCircleTexture = [game.textureLoader getTextureDescription:@"circleGray.png"];
 		
 		return self;
 	}
@@ -106,7 +108,7 @@
 	}
 	else
 	{
-		effect.texture2d0.name = [texture getName];
+		effect.texture2d0.name = [grayCircleTexture getName];
 	}
 	
 	effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(origin.x, origin.y, 0);

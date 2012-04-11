@@ -34,9 +34,9 @@
 			effect.transform.projectionMatrix = model->staticProjection;
 		}
 		
-		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, STATIC_VIEW_HEIGHT - 80) region:50 grabRegion:150 joyRadius:25 model:model];
-		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH - 80, STATIC_VIEW_HEIGHT - 80) region:40 toggleBounds:25 model:model];
-		shootRope = [[NinjaRopeJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH / 2, STATIC_VIEW_HEIGHT / 2) region:30 toggleBounds:18 model:model];
+		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, STATIC_VIEW_HEIGHT - 80) region:50 grabRegion:140 joyRadius:25 model:model];
+		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH - 80, STATIC_VIEW_HEIGHT - 80) region:50 grabRegion:140 joyRadius:25 toggleBounds:30 model:model];
+		shootRope = [[NinjaRopeJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH / 2, STATIC_VIEW_HEIGHT / 2) region:40 grabRegion:25 joyRadius:25 toggleBounds:25 model:model];
 		
 		return self;
 	}

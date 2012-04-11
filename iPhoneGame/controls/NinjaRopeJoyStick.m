@@ -20,10 +20,10 @@
 
 @implementation NinjaRopeJoyStick
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR toggleBounds:(float) toggleB model:(GameModel *) game
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen toggleBounds:(float) toggleB model:(GameModel *) game
 {
 	//- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR toggleBounds:(float) toggleB model:(GameModel *) game
-	self = [super initWithCenter:posit region:regionR toggleBounds:toggleB model:game];
+	self = [super initWithCenter:posit region:regionR grabRegion:grabRegion joyRadius:joyLen toggleBounds:toggleB model:game];
 	if(self)
 	{
 		player = game->player;

@@ -159,6 +159,42 @@
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 	
 	glBindVertexArrayOES(0);
+	
+	//debug
+	/*
+	effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(origin.x, origin.y, 0);
+	[effect prepareToDraw];
+	
+	glBindBuffer(GL_ARRAY_BUFFER, [texture getFrameBuffer:0]);
+	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, (void *) 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	
+	float verticesRegion[] = {
+		(float) regionRadius, -(float) regionRadius,
+		(float) regionRadius, (float) regionRadius,
+		-(float) regionRadius, (float) regionRadius,
+		-(float) regionRadius, -(float) regionRadius
+	};
+	glEnableVertexAttribArray(GLKVertexAttribPosition);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, verticesRegion);
+	
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	
+	float verticesGrabRegion[] = {
+		(float) grabRadius, -(float) grabRadius,
+		(float) grabRadius, (float) grabRadius,
+		-(float) grabRadius, (float) grabRadius,
+		-(float) grabRadius, -(float) grabRadius
+	};
+	glEnableVertexAttribArray(GLKVertexAttribPosition);
+	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, verticesGrabRegion);
+	
+	glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+	
+	glDisableVertexAttribArray(GLKVertexAttribTexCoord0);
+	glDisableVertexAttribArray(GLKVertexAttribPosition);
+	*/
 }
 
 @end

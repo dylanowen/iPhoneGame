@@ -34,6 +34,7 @@
 		2C89157F151984FE00F91087 /* Sniper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89157E151984FD00F91087 /* Sniper.m */; };
 		2C8915851519863F00F91087 /* BulletParticleGrav.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915841519863F00F91087 /* BulletParticleGrav.m */; };
 		2C89158815198B8E00F91087 /* BulletParticleBouncy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89158715198B8D00F91087 /* BulletParticleBouncy.m */; };
+		2C8D246315353B1A00605AE7 /* circleGray.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D246215353B1A00605AE7 /* circleGray.png */; };
 		2C8D61BC1519AC6800379943 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D61BB1519AC6800379943 /* Player.m */; };
 		2C8E0874152BAB2B00D4BAC3 /* Pickups.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E0873152BAB2B00D4BAC3 /* Pickups.m */; };
 		2C8E0878152BAD3600D4BAC3 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E0877152BAD3600D4BAC3 /* Item.m */; };
@@ -129,6 +130,7 @@
 		2C8915841519863F00F91087 /* BulletParticleGrav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BulletParticleGrav.m; path = particles/BulletParticleGrav.m; sourceTree = "<group>"; };
 		2C89158615198B8D00F91087 /* BulletParticleBouncy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletParticleBouncy.h; path = particles/BulletParticleBouncy.h; sourceTree = "<group>"; };
 		2C89158715198B8D00F91087 /* BulletParticleBouncy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BulletParticleBouncy.m; path = particles/BulletParticleBouncy.m; sourceTree = "<group>"; };
+		2C8D246215353B1A00605AE7 /* circleGray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleGray.png; sourceTree = "<group>"; };
 		2C8D61BA1519AC6800379943 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = characters/Player.h; sourceTree = "<group>"; };
 		2C8D61BB1519AC6800379943 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Player.m; path = characters/Player.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2C8E0872152BAB2B00D4BAC3 /* Pickups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pickups.h; path = iPhoneGame/pickups/Pickups.h; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				2C912592151686C500BA3DF6 /* zombie.png */,
 				2C13BB5B150C72E40002FA77 /* character.png */,
 				CEAEABA9150330CB000F7448 /* circleRed.png */,
+				2C8D246215353B1A00605AE7 /* circleGray.png */,
 				CEC5BCE515030A64003724F5 /* circle.png */,
 				2CD7800E1516B2F5009EE721 /* font.png */,
 				2CF9C58115170F9500C21613 /* jump_button.png */,
@@ -540,6 +543,7 @@
 				2C8E087A152BB26200D4BAC3 /* health.png in Resources */,
 				2C2A0759152C05DD0066E88D /* zombie_skull.png in Resources */,
 				2C94CC1E152CE9CE002C998A /* background.png in Resources */,
+				2C8D246315353B1A00605AE7 /* circleGray.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
