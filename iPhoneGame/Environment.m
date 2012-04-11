@@ -32,8 +32,6 @@
 	//GLuint gVAO;
 }
 
-- (void)editRadius:(int) radius x:(int) x y:(int) y delete:(bool) del;
-
 @end
 
 @implementation Environment
@@ -62,8 +60,8 @@
 			for(unsigned j = 0; j < MAX_DELETE_RADIUS * 2; j++)
 			{
 				int randomBrown = (arc4random() % 5);
-				restorer[i][j][0] = browns[randomBrown][0] - 0.3f;
-				restorer[i][j][1] = browns[randomBrown][1] - 0.1f;
+				restorer[i][j][0] = browns[randomBrown][0] + 0.05f;
+				restorer[i][j][1] = browns[randomBrown][1] + 0.05f;
 				restorer[i][j][2] = browns[randomBrown][2];
 				restorer[i][j][3] = 1.0f;
 			}
@@ -162,87 +160,68 @@
 	glDeleteBuffers(1, &colorBuffer);
 }
 
+#define editRadius(sub, col) \
+radius = (radius > MAX_DELETE_RADIUS)?MAX_DELETE_RADIUS:radius;\
+int tempY, i = -radius, iEnd = radius, j, jEnd;\
+unsigned offset;\
+\
+if((i + x) < 1)\
+{\
+	i = 1 - x;\
+}\
+if(iEnd + x > (ENV_WIDTH - 1))\
+{\
+	iEnd = ENV_WIDTH - 1 - x;\
+}\
+\
+glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);\
+while(i < iEnd)\
+{\
+	tempY = (int) sqrt((radius * radius) - (i * i));\
+	\
+	if(tempY > 0)\
+	{\
+		if(y - tempY < 1)\
+		{\
+			j = 1;\
+			jEnd = tempY + y - 1;\
+		}\
+		else if(y + tempY > (ENV_HEIGHT - 1))\
+		{\
+			j = y - tempY;\
+			jEnd = tempY + ENV_HEIGHT - 1 - y;\
+		}\
+		else\
+		{\
+			j = y - tempY;\
+			jEnd = tempY * 2;\
+		}\
+		\
+		offset = ((i + x) * ENV_HEIGHT + j) * 4 * sizeof(float);\
+		tempY = jEnd * 4 * sizeof(float);\
+		\
+		glBufferSubData(GL_ARRAY_BUFFER, offset, tempY, sub);\
+		\
+		jEnd += j;\
+		while(j < jEnd)\
+		{\
+			dirt[i + x][j] = col;\
+			j++;\
+		}\
+	}\
+	i++;\
+}\
+glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 - (void)deleteRadius:(int) radius x:(int) x y:(int) y
 {
-	[self editRadius:radius x:x y:y delete:YES];
+	editRadius(clearer, NO)
 }
 
 - (void)restoreRadius:(int) radius x:(int) x y:(int) y
 {
-	[self editRadius:radius x:x y:y delete:NO];
-}
-
-- (void)editRadius:(int) radius x:(int) x y:(int) y delete:(bool) del
-{
-	radius = (radius > MAX_DELETE_RADIUS)?MAX_DELETE_RADIUS:radius; //keep the radius in bounds
-	int tempY, i = -radius, iEnd = radius, j, jEnd;
-	unsigned offset;
-	float **oWA;
-	bool collisionState;
-	
-	if(del)
-	{
-		oWA = (float **) clearer;
-		collisionState = NO;
-	}
-	else
-	{
-		oWA = (float **) restorer[0];
-		collisionState = YES;
-	}
-    
-	//keep inside bounds
-	if((i + x) < 1)
-	{
-		i = 1 - x;
-	}
-	if(iEnd + x > (ENV_WIDTH - 1))
-	{
-		iEnd = ENV_WIDTH - 1 - x;
-	}
-	
-	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-	while(i < iEnd)
-	{
-		tempY = (int) sqrt((radius * radius) - (i * i));
-		
-		//more bound checking
-		if(tempY > 0)
-		{
-			if(y - tempY < 1)
-			{
-				j = 1;
-				jEnd = tempY + y - 1;
-			}
-			else if(y + tempY > (ENV_HEIGHT - 1))
-			{
-				//error here if the destruction is larger than the environment height
-				j = y - tempY;
-				jEnd = tempY + ENV_HEIGHT - 1 - y;
-			}
-			else
-			{
-				j = y - tempY;
-				jEnd = tempY * 2;
-			}
-		
-			offset = ((i + x) * ENV_HEIGHT + j) * 4 * sizeof(float);
-			tempY = jEnd * 4 * sizeof(float);
-		
-			//clear out the buffer
-			glBufferSubData(GL_ARRAY_BUFFER, offset, tempY, oWA);
-		
-			//clear our own local array
-			jEnd += j;
-			while(j < jEnd)
-			{
-				dirt[i + x][j] = collisionState;
-				j++;
-			}
-		}
-		i++;
-	}
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	int k = 0;
+	editRadius(restorer[k++], YES)
 }
 
 - (void)editRect:(bool) del leftX:(int) x topY:(int) y width:(int) width height:(int) height
