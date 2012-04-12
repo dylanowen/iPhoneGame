@@ -51,12 +51,12 @@ enum
 
 @synthesize health = _health;
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
+- (id)initWithPosition:(GLKVector2) posit
 {
 	self = [super init];
 	if(self)
 	{
-		game = model;
+		GameModel *temp = game;
 		env = game->environment;
 		
 		textureEffect = [game.effectLoader getEffectForName:@"TextureEffect"];
@@ -281,7 +281,7 @@ enum
 	if(GLKVector2Length(GLKVector2Subtract(bullet->position, position)) < 6)
 	{
 		_health -= bullet->damage;
-		[self->game->particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed count:2];
+		[game->particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed count:2];
 		return YES;
 	}
 	return NO;

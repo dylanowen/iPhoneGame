@@ -26,8 +26,7 @@
 		velocity = veloc;
 		
 		positionAttribute = particles->bulletPositionAttribute;
-		env = particles.game->environment;
-		model = particles.game;
+		env = game->environment;
 		
 		destructionRadius = radius;
 		damage = dmg;
@@ -103,7 +102,7 @@
 		intJ = j / precision;
 		if(intI != lastI || intJ != lastJ)
 		{
-			if([model checkBulletHit:self])
+			if([game checkBulletHit:self])
 			{
 				return NO;
 			}

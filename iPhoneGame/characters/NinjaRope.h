@@ -18,7 +18,7 @@
 	GLKVector2 playerMovement;
 }
 
-- (id)initWithModel:(GameModel *) game player:(Player *) self;
+- (id)initWithPlayer:(Player *) self;
 
 - (void)shoot:(GLKVector2) direction;
 - (void)cancel;

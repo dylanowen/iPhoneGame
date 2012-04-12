@@ -21,6 +21,6 @@
 	NinjaRope *ninjaRope;
 }
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
+- (id)initWithPosition:(GLKVector2) posit;
 
 @end

@@ -16,14 +16,12 @@
 	
 }
 
-@property (nonatomic, strong) GameModel *mainGame;
 @property (strong, nonatomic) EAGLContext *context;
 
 @end
 
 @implementation GameViewController
 
-@synthesize mainGame = _mainGame;
 @synthesize context = _context;
 
 - (void)viewDidLoad
@@ -56,7 +54,7 @@
 	
 	//glClearColor(0.5, 0.5, 0.5, 1.0);
 	
-	self.mainGame = [[ZombieSwarm alloc] initWithView:self.view];
+	game = [[ZombieSwarm alloc] initWithView:self.view];
 }
 
 - (void)viewDidUnload
@@ -76,7 +74,7 @@
 - (void)glkViewControllerUpdate:(GLKViewController *)controller
 {
 	timeSinceUpdate = self.timeSinceLastUpdate;
-	if(![self.mainGame update])
+	if(![game update])
 	{
 		//self.paused = true;
 		[self performSegueWithIdentifier: @"gameOver" sender: self];
@@ -85,24 +83,24 @@
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-	[self.mainGame render];
+	[game render];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[self.mainGame->controls touchesBegan: touches];
+	[game->controls touchesBegan: touches];
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[self.mainGame->controls touchesMoved: touches];
+	[game->controls touchesMoved: touches];
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[self.mainGame->controls touchesEnded: touches];
+	[game->controls touchesEnded: touches];
 }
 - (void)touchesCancelled:(NSSet *)touches
 {
-	[self.mainGame->controls touchesCancelled: touches];
+	[game->controls touchesCancelled: touches];
 }
 
 - (void)didReceiveMemoryWarning

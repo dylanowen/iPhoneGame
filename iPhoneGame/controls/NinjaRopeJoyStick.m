@@ -8,6 +8,7 @@
 
 #import "NinjaRopeJoyStick.h"
 
+#import "Globals.h"
 #import "GameModel.h"
 #import "Player.h"
 #import "NinjaRope.h"
@@ -20,10 +21,10 @@
 
 @implementation NinjaRopeJoyStick
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen toggleBounds:(float) toggleB model:(GameModel *) game
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen toggleBounds:(float) toggleB
 {
-	//- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR toggleBounds:(float) toggleB model:(GameModel *) game
-	self = [super initWithCenter:posit region:regionR grabRegion:grabRegion joyRadius:joyLen toggleBounds:toggleB model:game];
+	//- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR toggleBounds:(float) toggleB
+	self = [super initWithCenter:posit region:regionR grabRegion:grabRegion joyRadius:joyLen toggleBounds:toggleB];
 	if(self)
 	{
 		player = game->player;

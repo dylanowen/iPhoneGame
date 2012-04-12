@@ -24,10 +24,6 @@
 	GLuint healthParticleTime;
 }
 
-@property (nonatomic, strong) GameModel *game;
-
-- (id)initWithModel:(GameModel *) game;
-
 - (void)addBulletWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg;
 - (void)addBulletGravWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg;
 - (void)addBulletBouncyWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg;

@@ -7,6 +7,8 @@
 //
 
 #import "ToggleJoyStick.h"
+
+#import "Globals.h"
 #import "GameModel.h"
 #import "TextureLoader.h"
 #import "BufferLoader.h"
@@ -24,9 +26,9 @@
 
 @implementation ToggleJoyStick
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen toggleBounds:(float) toggleB model:(GameModel *) game
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen toggleBounds:(float) toggleB
 {
-	self = [super initWithCenter: posit region:regionR grabRegion:grabRegion joyRadius:joyLen model:game];
+	self = [super initWithCenter: posit region:regionR grabRegion:grabRegion joyRadius:joyLen];
 	if(self)
 	{
 		toggle = NO;

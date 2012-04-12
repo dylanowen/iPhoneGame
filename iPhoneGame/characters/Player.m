@@ -8,6 +8,7 @@
 
 #import "Player.h"
 
+#import "Globals.h"
 #import "GameConstants.h"
 #import "MatrixFunctions.h"
 #import "GameModel.h"
@@ -43,22 +44,22 @@
 
 @implementation Player
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
+- (id)initWithPosition:(GLKVector2) posit
 {
-	self = [super initWithModel:model position:posit];
+	self = [super initWithPosition:posit];
 	if(self)
 	{
-		texture = [model.textureLoader getTextureDescription:@"character.png"];
-		particles = model->particles;
+		texture = [game.textureLoader getTextureDescription:@"character.png"];
+		particles = game->particles;
 		
-		laserEffect = [model.effectLoader getEffectForName:@"CharLaserSight"];
+		laserEffect = [game.effectLoader getEffectForName:@"CharLaserSight"];
 		if(laserEffect == nil)
 		{
-			laserEffect = [model.effectLoader addEffectForName:@"CharLaserSight"];
-			laserEffect.transform.projectionMatrix = model->staticProjection;
+			laserEffect = [game.effectLoader addEffectForName:@"CharLaserSight"];
+			laserEffect.transform.projectionMatrix = game->staticProjection;
 		}
 		
-		laserVertexBuffer = [model.bufferLoader getBufferForName:@"CharLaserSight"];
+		laserVertexBuffer = [game.bufferLoader getBufferForName:@"CharLaserSight"];
 		if(laserVertexBuffer == 0)
 		{
 			float vertices[] = {
@@ -75,13 +76,13 @@
 				45, -1,
 				45, 1,
 			};
-			laserVertexBuffer = [model.bufferLoader addBufferForName:@"CharLaserSight"];
+			laserVertexBuffer = [game.bufferLoader addBufferForName:@"CharLaserSight"];
 			glBindBuffer(GL_ARRAY_BUFFER, laserVertexBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		
-		laserIndicesBuffer = [model.bufferLoader getBufferForName:@"CharLaserIndicesSight"];
+		laserIndicesBuffer = [game.bufferLoader getBufferForName:@"CharLaserIndicesSight"];
 		if(laserIndicesBuffer == 0)
 		{
 			GLuint indices[] = {
@@ -92,13 +93,13 @@
 				8, 9, 10,
 				10, 11, 9,
 			};
-			laserIndicesBuffer = [model.bufferLoader addBufferForName:@"CharLaserIndicesSight"];
+			laserIndicesBuffer = [game.bufferLoader addBufferForName:@"CharLaserIndicesSight"];
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, laserIndicesBuffer);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		}
 	
-		laserColorOnBuffer = [model.bufferLoader getBufferForName:@"CharLaserOnSight"];
+		laserColorOnBuffer = [game.bufferLoader getBufferForName:@"CharLaserOnSight"];
 		if(laserColorOnBuffer == 0)
 		{
 			float color[48];
@@ -109,13 +110,13 @@
 				color[i + 2] = 0.1;
 				color[i + 3] = 1.0;
 			}
-			laserColorOnBuffer = [model.bufferLoader addBufferForName:@"CharLaserOnSight"];
+			laserColorOnBuffer = [game.bufferLoader addBufferForName:@"CharLaserOnSight"];
 			glBindBuffer(GL_ARRAY_BUFFER, laserColorOnBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		
-		laserColorOffBuffer = [model.bufferLoader getBufferForName:@"CharLaserOffSight"];
+		laserColorOffBuffer = [game.bufferLoader getBufferForName:@"CharLaserOffSight"];
 		if(laserColorOffBuffer == 0)
 		{
 			float color[48];
@@ -126,13 +127,13 @@
 				color[i + 2] = 0.1;
 				color[i + 3] = 0.7;
 			}
-			laserColorOffBuffer = [model.bufferLoader addBufferForName:@"CharLaserOffSight"];
+			laserColorOffBuffer = [game.bufferLoader addBufferForName:@"CharLaserOffSight"];
 			glBindBuffer(GL_ARRAY_BUFFER, laserColorOffBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		
-		laserNinjaColorBuffer = [model.bufferLoader getBufferForName:@"CharNinjaSight"];
+		laserNinjaColorBuffer = [game.bufferLoader getBufferForName:@"CharNinjaSight"];
 		if(laserNinjaColorBuffer == 0)
 		{
 			float color[48];
@@ -143,7 +144,7 @@
 				color[i + 2] = 0.1;
 				color[i + 3] = 1.0;
 			}
-			laserNinjaColorBuffer = [model.bufferLoader addBufferForName:@"CharNinjaSight"];
+			laserNinjaColorBuffer = [game.bufferLoader addBufferForName:@"CharNinjaSight"];
 			glBindBuffer(GL_ARRAY_BUFFER, laserNinjaColorBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -151,9 +152,9 @@
 		
 		currentGun = [[MachineGun alloc] initWithParticles:particles];
 		shootGun = false;
-		ninjaRope = [[NinjaRope alloc] initWithModel:game player:self];
+		ninjaRope = [[NinjaRope alloc] initWithPlayer:self];
 		
-		laserCenter = GLKMatrix4MakeTranslation(model.view.bounds.size.width / 2, model.view.bounds.size.height / 2, 0);
+		laserCenter = GLKMatrix4MakeTranslation(game.view.bounds.size.width / 2, game.view.bounds.size.height / 2, 0);
 
 		switchTexture = false;
 		characterTextureBuffer = [texture getFrameBuffer:currentFrame];
@@ -215,7 +216,7 @@
 	if(GLKVector2Length(GLKVector2Subtract(bullet->position, position)) < 6)
 	{
 		self.health -= bullet->damage;
-		[self->game->particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed count:4];
+		[game->particles addBloodWithPosition:bullet->position power:75 colorType:BloodColorRed count:4];
 		return YES;
 	}
 	return NO;

@@ -8,6 +8,8 @@
 
 #import "GameModel.h"
 
+#import "Globals.h"
+
 #import "MatrixFunctions.h"
 
 #import "TextureLoader.h"
@@ -55,6 +57,7 @@
 - (id)initWithView:(UIView *) view
 {
 	self = [super init];
+	game = self;
 	if(self)
 	{
 		self.view = view;
@@ -67,13 +70,13 @@
 		self.bufferLoader = [[BufferLoader alloc] init];
 		self.vaoLoader = [[VAOLoader alloc] init];
 		
-		background = [[Background alloc] initWithModel:self];
-		environment = [[Environment alloc] initWithModel: self];
-		particles = [[Particles alloc] initWithModel: self];
-		pickups = [[Pickups alloc] initWithModel:self];
+		background = [[Background alloc] init];
+		environment = [[Environment alloc] init];
+		particles = [[Particles alloc] init];
+		pickups = [[Pickups alloc] init];
 		
-		player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 100)];
-		controls = [[Controls alloc] initWithModel: self];
+		player = [[Player alloc] initWithPosition:GLKVector2Make(ENV_WIDTH / 2, 100)];
+		controls = [[Controls alloc] init];
 		[environment deleteRadius:20 x:(ENV_WIDTH / 2) y:100];
 		
 		self.paused = false;

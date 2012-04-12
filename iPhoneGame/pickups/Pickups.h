@@ -12,12 +12,6 @@
 @class GameModel;
 
 @interface Pickups : NSObject
-{
-@public
-	GameModel *game;
-}
-
-- (id)initWithModel:(GameModel *) game;
 
 - (void)addZombieSkullWithPosition:(GLKVector2) posit;
 - (void)addHealthWithPosition:(GLKVector2) posit;

@@ -25,7 +25,6 @@
 @property (strong, nonatomic) JoyStick *move;
 @property (strong, nonatomic) ToggleJoyStick *look;
 
-- (id)initWithModel: (GameModel *) game;
 - (void)render;
 
 - (void)touchesBegan:(NSSet *)touches;

@@ -8,6 +8,7 @@
 
 #import "Button.h"
 
+#import "Globals.h"
 #import "GameConstants.h"
 #import "GameModel.h"
 #import "TextureLoader.h"
@@ -22,7 +23,7 @@
 
 @implementation Button
 
-- (id)initWithCenter:(GLKVector2) posit texture:(NSString *) textName radius:(unsigned) rad callback:(void(^)(bool result))back model:(GameModel *) game
+- (id)initWithCenter:(GLKVector2) posit texture:(NSString *) textName radius:(unsigned) rad callback:(void(^)(bool result))back
 {
 	self = [super init];
 	if(self)

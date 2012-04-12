@@ -8,6 +8,7 @@
 
 #import "JoyStick.h"
 
+#import "Globals.h"
 #import "GameConstants.h"
 #import "GameModel.h"
 #import "TextureLoader.h"
@@ -17,7 +18,7 @@
 
 @implementation JoyStick
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen model:(GameModel *) game
+- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen
 {
 	self = [super init];
 	if(self)

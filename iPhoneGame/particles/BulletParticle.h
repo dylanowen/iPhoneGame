@@ -24,7 +24,6 @@
 	GLKVector2 velocity;
 	GLuint positionAttribute;
 	
-	GameModel *model;
 	Environment *env;
 	
 	unsigned destructionRadius;

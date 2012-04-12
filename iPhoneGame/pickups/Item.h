@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
-@class GameModel;
 @class Environment;
 @class Player;
 @class TextureDescription;
@@ -18,7 +17,6 @@
 {
 
 @protected
-	GameModel *game;
 	Environment *env;
 	Player *player;
 	
@@ -40,7 +38,7 @@
 	float pickupDistance;
 }
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
+- (id)initWithPosition:(GLKVector2) posit;
 
 - (bool)updateAndKeep;
 - (void)pickedUp;

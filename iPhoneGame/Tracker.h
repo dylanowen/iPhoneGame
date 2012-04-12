@@ -13,7 +13,7 @@
 
 @interface Tracker : NSObject
 
-- (id)initWithScale:(GLKVector2) scle width:(int) w height:(int) h red:(float) red green:(float) green blue:(float) blue model:(GameModel *)game;
+- (id)initWithScale:(GLKVector2) scle width:(int) w height:(int) h red:(float) red green:(float) green blue:(float) blue;
 
 - (void)updateTrackee:(GLKVector2) trackee center:(GLKVector2) center;
 - (void)render;

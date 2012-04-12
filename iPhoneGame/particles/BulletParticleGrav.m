@@ -40,7 +40,7 @@
 			intJ = j / precision;
 			if(intI != lastI || intJ != lastJ)
 			{
-				if([model checkBulletHit:self])
+				if([game checkBulletHit:self])
 				{
 					return NO;
 				}

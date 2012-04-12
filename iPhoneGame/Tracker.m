@@ -8,6 +8,7 @@
 
 #import "Tracker.h"
 
+#import "Globals.h"
 #import "GameModel.h"
 #import "EffectLoader.h"
 #import "BufferLoader.h"
@@ -35,7 +36,7 @@
 
 @implementation Tracker
 
-- (id)initWithScale:(GLKVector2) scle width:(int) w height:(int) h red:(float) red green:(float) green blue:(float) blue model:(GameModel *)game;
+- (id)initWithScale:(GLKVector2) scle width:(int) w height:(int) h red:(float) red green:(float) green blue:(float) blue;
 {
 	self = [super init];
 	if(self)

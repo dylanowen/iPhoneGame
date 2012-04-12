@@ -15,6 +15,7 @@ faster
 
 #import <GLKit/GLKit.h>
 
+#import "Globals.h"
 #import "GameModel.h"
 #import "GLProgram.h"
 #import "BulletParticle.h"
@@ -51,20 +52,17 @@ typedef struct
 
 @implementation Particles
 
-@synthesize game = _game;
 @synthesize bulletProgram = _bulletProgram;
 @synthesize bloodProgram = _bloodProgram;
 @synthesize bullets = _bullets;
 @synthesize blood = _blood;
 @synthesize healingEffect = _healingEffect;
 
-- (id)initWithModel:(GameModel *) game
+- (id)init
 {
 	self = [super init];
 	if(self)
 	{
-		self.game = game;
-
 		self.bullets = [[NSMutableArray arrayWithCapacity: 0] init];
 		self.blood = [[NSMutableArray arrayWithCapacity: 0] init];
 		self.healingEffect = [[NSMutableArray arrayWithCapacity:0] init];
@@ -220,7 +218,7 @@ typedef struct
 	if([self.bullets count] > 0)
 	{
 		[self.bulletProgram use];
-		glUniformMatrix4fv(bulletModelViewUniform, 1, 0, self.game->dynamicProjection.m);
+		glUniformMatrix4fv(bulletModelViewUniform, 1, 0, game->dynamicProjection.m);
 		glUniform4f(bulletColorUniform, 0.8, 0.8, 0.8, 1.0);
 		[self.bullets makeObjectsPerformSelector:@selector(render)];
 	}
@@ -228,14 +226,14 @@ typedef struct
 	if([self.blood count] > 0)
 	{
 		[self.bloodProgram use];
-		glUniformMatrix4fv(bloodModelViewUniform, 1, 0, self.game->dynamicProjection.m);
+		glUniformMatrix4fv(bloodModelViewUniform, 1, 0, game->dynamicProjection.m);
 		[self.blood makeObjectsPerformSelector:@selector(render)];
 	}
 	
 	if([self.healingEffect count] > 0)
 	{
 		[healthProgram use];
-		glUniformMatrix4fv(healthParticleModelViewUniform, 1, 0, self.game->dynamicProjection.m);
+		glUniformMatrix4fv(healthParticleModelViewUniform, 1, 0, game->dynamicProjection.m);
 		[self.healingEffect makeObjectsPerformSelector:@selector(render)];
 	}
 	

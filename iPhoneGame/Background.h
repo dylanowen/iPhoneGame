@@ -12,8 +12,6 @@
 
 @interface Background : NSObject
 
-- (id)initWithModel:(GameModel *) game;
-
 - (void)render;
 
 @end

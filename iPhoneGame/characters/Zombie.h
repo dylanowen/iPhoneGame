@@ -12,7 +12,7 @@
 
 @interface Zombie : Character
 
-- (id)initWithModel:(ZombieSwarm *) model position:(GLKVector2) posit;
+- (id)initWithPosition:(GLKVector2) posit;
 
 - (bool)update;
 

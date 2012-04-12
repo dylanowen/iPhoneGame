@@ -8,6 +8,8 @@
 
 #import "Background.h"
 
+#import "Globals.h"
+
 #import "GameModel.h"
 #import "TextureLoader.h"
 #import "BufferLoader.h"
@@ -15,8 +17,6 @@
 
 @interface Background()
 {
-	GameModel *game;
-	
 	GLKBaseEffect *textureEffect;
 	TextureDescription *texture;
 	
@@ -30,12 +30,11 @@
 
 @implementation Background
 
-- (id)initWithModel:(GameModel *) model
+- (id)init
 {
 	self = [super init];
 	if(self)
 	{
-		game = model;
 		
 		textureEffect = [game.effectLoader getEffectForName:@"TextureEffect"];
 		if(textureEffect == nil)
@@ -45,7 +44,7 @@
 			textureEffect.texture2d0.target = GLKTextureTarget2D;
 		}
 		
-		texture = [model.textureLoader getTextureDescription:@"background.png"];
+		texture = [game.textureLoader getTextureDescription:@"background.png"];
 		textureBuffer = [texture getFrameBuffer:0];
 		
 		vertexBuffer = [game.bufferLoader getBufferForName:@"Background"];

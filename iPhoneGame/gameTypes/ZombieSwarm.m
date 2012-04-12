@@ -71,8 +71,8 @@
 			{
 				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, player->position)) < 80);
-			[zombies addObject:[[Zombie alloc] initWithModel:self position:newPosition]];
-			[zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: DYNAMIC_VIEW_WIDTH height: DYNAMIC_VIEW_HEIGHT red: 0.0f green: 0.35f blue: 0.0f model:self]];
+			[zombies addObject:[[Zombie alloc] initWithPosition:newPosition]];
+			[zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: DYNAMIC_VIEW_WIDTH height: DYNAMIC_VIEW_HEIGHT red: 0.0f green: 0.35f blue: 0.0f]];
 			[environment deleteRadius:20 x:newPosition.x y:newPosition.y];
 		}
 		
@@ -98,7 +98,7 @@
 		 */
 		
 		_zombieKills = 0;
-		killDisplay = [[Text alloc] initWithModel:self text:@"kills 0" position:GLKVector2Make(5, 5)];
+		killDisplay = [[Text alloc] initWithPosition:GLKVector2Make(5, 5) text:@"kills 0"];
 		
 		return self;
 	}

@@ -8,15 +8,16 @@
 
 #import "ZombieSkull.h"
 
+#import "Globals.h"
 #import "GameModel.h"
 #import "BufferLoader.h"
 #import "TextureLoader.h"
 
 @implementation ZombieSkull
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
+- (id)initWithPosition:(GLKVector2) posit
 {
-	self = [super initWithModel:model position:posit];
+	self = [super initWithPosition:posit];
 	if(self)
 	{
 		vertexBuffer = [game.bufferLoader getBufferForName:@"Item"];
@@ -36,7 +37,7 @@
 		
 		pickupDistance = 10;
 		
-		texture = [model.textureLoader getTextureDescription:@"zombie_skull.png"];
+		texture = [game.textureLoader getTextureDescription:@"zombie_skull.png"];
 		
 		textureBuffer = [texture getFrameBuffer:0];
 		

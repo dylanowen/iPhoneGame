@@ -25,7 +25,7 @@
 
 @implementation Item
 
-- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
+- (id)initWithPosition:(GLKVector2) posit
 {
 	self = [super init];
 	if(self)
@@ -33,7 +33,6 @@
 		position = posit;
 		velocity = GLKVector2Make(0.0f, 0.0f);
 		
-		game = model;
 		env = game->environment;
 		player = game->player;
 		

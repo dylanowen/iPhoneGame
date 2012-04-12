@@ -60,7 +60,7 @@
 		
 		positionAttribute = model->bloodPositionAttribute;
 		colorAttribute = model->bloodColorAttribute;
-		env = model.game->environment;
+		env = game->environment;
 		
 		return self;
 	}

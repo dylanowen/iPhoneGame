@@ -36,7 +36,7 @@
 		2C8E0874152BAB2B00D4BAC3 /* Pickups.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E0873152BAB2B00D4BAC3 /* Pickups.m */; };
 		2C8E0878152BAD3600D4BAC3 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E0877152BAD3600D4BAC3 /* Item.m */; };
 		2C8E087A152BB26200D4BAC3 /* health.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8E0879152BB26200D4BAC3 /* health.png */; };
-		2C8EE3B31536289300FF6E4E /* Globals.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EE3B21536289300FF6E4E /* Globals.c */; };
+		2C8EE3B31536289300FF6E4E /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EE3B21536289300FF6E4E /* Globals.m */; };
 		2C8EE3B515362EAE00FF6E4E /* pauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8EE3B415362EAE00FF6E4E /* pauseButton.png */; };
 		2C901E02153568C500747795 /* healthParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C901E01153568C500747795 /* healthParticle.vsh */; };
 		2C91258415167CB200BA3DF6 /* Zombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258315167CB200BA3DF6 /* Zombie.m */; };
@@ -135,7 +135,7 @@
 		2C8E0877152BAD3600D4BAC3 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = iPhoneGame/pickups/Item.m; sourceTree = "<group>"; };
 		2C8E0879152BB26200D4BAC3 /* health.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = health.png; sourceTree = "<group>"; };
 		2C8EE3B0153624EC00FF6E4E /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
-		2C8EE3B21536289300FF6E4E /* Globals.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Globals.c; sourceTree = "<group>"; };
+		2C8EE3B21536289300FF6E4E /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 		2C8EE3B415362EAE00FF6E4E /* pauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButton.png; sourceTree = "<group>"; };
 		2C901E01153568C500747795 /* healthParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = healthParticle.vsh; path = shaders/healthParticle.vsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		2C90FC2A152D607E00B5BB44 /* MatrixFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatrixFunctions.h; sourceTree = "<group>"; };
@@ -361,7 +361,7 @@
 				2C92F04C151A4F430049C0F1 /* HighScore.m */,
 				CEBEF6B914FAD553008913F4 /* GameConstants.h */,
 				2C8EE3B0153624EC00FF6E4E /* Globals.h */,
-				2C8EE3B21536289300FF6E4E /* Globals.c */,
+				2C8EE3B21536289300FF6E4E /* Globals.m */,
 				2C90FC2A152D607E00B5BB44 /* MatrixFunctions.h */,
 				CE7A795614ECB05E00B8FA24 /* AppDelegate.h */,
 				CE7A795714ECB05E00B8FA24 /* AppDelegate.m */,
@@ -599,7 +599,7 @@
 				2C1CF170152D086D004A8FA6 /* ZombieSwarm.m in Sources */,
 				2C861305152E67A000679829 /* NinjaRope.m in Sources */,
 				2CDAAA3915338967009B0867 /* NinjaRopeJoyStick.m in Sources */,
-				2C8EE3B31536289300FF6E4E /* Globals.c in Sources */,
+				2C8EE3B31536289300FF6E4E /* Globals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
