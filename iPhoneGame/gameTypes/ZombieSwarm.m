@@ -62,7 +62,6 @@
 	{
 		zombies = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];
 		zombieTracker = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];
-		GLKVector2 trackScale = GLKVector2Make(DYNAMIC_VIEW_WIDTH / STATIC_VIEW_WIDTH, DYNAMIC_VIEW_HEIGHT / STATIC_VIEW_HEIGHT);
 		for(unsigned i = 0; i < NUMBER_OF_ZOMBIES; i++)
 		{
 			GLKVector2 newPosition;
@@ -72,7 +71,7 @@
 				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, player->position)) < 80);
 			[zombies addObject:[[Zombie alloc] initWithModel:self position:newPosition]];
-			[zombieTracker addObject:[[Tracker alloc] initWithModel:self scale: trackScale width: DYNAMIC_VIEW_WIDTH height: DYNAMIC_VIEW_HEIGHT red: 0.0f green: 0.35f blue: 0.0f]];
+			[zombieTracker addObject:[[Tracker alloc] initWithModel:self red: 0.0f green: 0.35f blue: 0.0f]];
 			[environment deleteRadius:20 x:newPosition.x y:newPosition.y];
 		}
 		

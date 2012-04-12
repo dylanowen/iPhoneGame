@@ -15,16 +15,11 @@
 
 @interface Tracker()
 {
-	int width, height;
 	float widthD2, heightD2;
 	
 	GLKBaseEffect *effect;
 	
 	GLuint vertex;
-	
-	GLKVector2 scale;
-	
-	GLKVector4 color;
 	
 	GLKMatrix4 modelView;
 	
@@ -36,17 +31,13 @@
 
 @implementation Tracker
 
-- (id)initWithModel:(GameModel *) model scale:(GLKVector2) scle width:(int) w height:(int) h red:(float) red green:(float) green blue:(float) blue;
+- (id)initWithModel:(GameModel *) model red:(float) red green:(float) green blue:(float) blue
 {
 	self = [super init];
 	if(self)
 	{
-		color = GLKVector4Make(red, green, blue, 0.8f);
-		scale = scle;
-		width = w;
-		height = h;
-		widthD2 = ((float) w / 2) - (8 * scale.x);
-		heightD2 = ((float) h / 2) - (8 * scale.y);
+		widthD2 = ((float) STATIC_VIEW_WIDTH / 2) - 4.0f;
+		heightD2 = ((float) STATIC_VIEW_HEIGHT / 2) - 4.0f;
 		
 		hide = true;
 		
@@ -55,8 +46,8 @@
 		{
 			effect = [model.effectLoader addEffectForName:[[NSString alloc] initWithFormat:@"Tracker%.2f%.2f%.2f", red, green, blue, nil]];
 			effect.useConstantColor = YES;
-			effect.constantColor = color;
-			effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, width, height, 0, 1, -1);
+			effect.constantColor = GLKVector4Make(red, green, blue, 0.8f);
+			effect.transform.projectionMatrix = model->staticProjection;
 		}
 		
 		vertexBuffer = [model.bufferLoader getBufferForName:@"Tracker"];
@@ -76,9 +67,7 @@
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
-		
-		
-		
+
 		return self;
 	}
 	return nil;
@@ -97,16 +86,11 @@
 		
 		float x = (heightD2 * temp.x) / temp.y;
 		float y = (widthD2 * temp.y) / temp.x;
-		if(temp.x < 0 && temp.y < 0)
-		{
-			x = -x;
-			y = -y;
-		}
-		else if(temp.x < 0)
+		if(temp.x < 0)
 		{
 			y = -y;
 		}
-		else if(temp.y < 0)
+		if(temp.y < 0)
 		{
 			x = -x;
 		}
@@ -128,9 +112,8 @@
 			y = -heightD2;
 		}
 		//NSLog(@"wh(%d, %d) (%f, %f) => (%f, %f)", width, height, temp.x, temp.y, x, y);
-		modelView = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(x + widthD2 + (8 * scale.x), y + heightD2 + (8 * scale.y), 0.0f), GLKMatrix4MakeScale(scale.x, scale.y, 1));
-		//GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(x + widthD2, y + heightD2, 0.0f);
-		modelView = GLKMatrix4Rotate(modelView, atan2f(temp.y, temp.x), 0, 0, 1);
+
+		modelView = GLKMatrix4Rotate(GLKMatrix4MakeTranslation(x + widthD2, y + heightD2, 0.0f), atan2f(temp.y, temp.x), 0, 0, 1);
 	}
 }
 
