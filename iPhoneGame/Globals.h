@@ -9,9 +9,6 @@
 #ifndef iPhoneGame_Globals_h
 #define iPhoneGame_Globals_h
 
-@class GameModel;
-@class GameViewController;
-
 extern float timeSinceUpdate;
 
 #endif

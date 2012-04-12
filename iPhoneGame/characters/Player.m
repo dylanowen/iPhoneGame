@@ -151,7 +151,7 @@
 		shootGun = false;
 		ninjaRope = [[NinjaRope alloc] initWithModel:game player:self];
 		
-		laserCenter = GLKMatrix4MakeTranslation(game->view.bounds.size.width / 2, game->view.bounds.size.height / 2, 0);
+		laserCenter = GLKMatrix4MakeTranslation(STATIC_VIEW_WIDTH / 2, STATIC_VIEW_HEIGHT / 2, 0);
 
 		switchTexture = false;
 		characterTextureBuffer = [texture getFrameBuffer:currentFrame];

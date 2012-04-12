@@ -50,12 +50,12 @@
 @synthesize bufferLoader = _bufferLoader;
 @synthesize vaoLoader = _vaoLoader;
 
-- (id)initWithView:(UIView *) uiView
+- (id)initWithView:(GameViewController *) gameController
 {
 	self = [super init];
 	if(self)
 	{
-		view = uiView;
+		controller = gameController;
 		
 		staticProjection = GLKMatrix4MakeOrtho(0, STATIC_VIEW_WIDTH, STATIC_VIEW_HEIGHT, 0, 0, 10);
 		dynamicProjection = CenterOrtho(0, 0);

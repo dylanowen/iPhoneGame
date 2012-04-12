@@ -55,14 +55,14 @@
 
 @synthesize zombieKills = _zombieKills;
 
-- (id)initWithView:(UIView *) uiView
+- (id)initWithView:(GameViewController *) gameView
 {
-	self = [super initWithView:uiView];
+	self = [super initWithView:gameView];
 	if(self)
 	{
 		zombies = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];
 		zombieTracker = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];
-		GLKVector2 trackScale = GLKVector2Make(DYNAMIC_VIEW_WIDTH / self->view.bounds.size.width, DYNAMIC_VIEW_HEIGHT / self->view.bounds.size.height);
+		GLKVector2 trackScale = GLKVector2Make(DYNAMIC_VIEW_WIDTH / STATIC_VIEW_WIDTH, DYNAMIC_VIEW_HEIGHT / STATIC_VIEW_HEIGHT);
 		for(unsigned i = 0; i < NUMBER_OF_ZOMBIES; i++)
 		{
 			GLKVector2 newPosition;
@@ -207,7 +207,7 @@
 		player.health += 150;
 		[particles addHealingEffect:player->position];
 	}
-	killDisplay.str = [[NSString alloc] initWithFormat:@"kills %d", zombieKills];
+	[killDisplay setText:[[NSString alloc] initWithFormat:@"kills %d", zombieKills]];
 }
 
 @end

@@ -55,7 +55,7 @@
 	
 	glDisable(GL_STENCIL_TEST);
 	
-	game = [[ZombieSwarm alloc] initWithView:self.view];
+	game = [[ZombieSwarm alloc] initWithView:self];
 }
 
 - (void)viewDidUnload

@@ -13,9 +13,10 @@
 
 @interface Text : NSObject
 
-@property (strong, nonatomic) NSString *str;
-
 - (id)initWithModel:(GameModel *)model position:(GLKVector2) posit text:(NSString *)text;
+
+- (void)setText:(NSString *) text;
+
 - (void)render;
 
 @end

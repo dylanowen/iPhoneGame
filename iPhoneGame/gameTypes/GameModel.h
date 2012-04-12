@@ -12,6 +12,7 @@
 #import "GameConstants.h"
 #import "Controls.h"
 
+@class GameViewController;
 @class TextureLoader;
 @class EffectLoader;
 @class BufferLoader;
@@ -28,7 +29,7 @@
 @interface GameModel : NSObject
 {
 @public
-	UIView *view;
+	GameViewController *controller;
 	
 	Environment *environment;
 	Particles *particles;
@@ -50,7 +51,7 @@
 @property (strong, nonatomic) BufferLoader *bufferLoader;
 @property (strong, nonatomic) VAOLoader *vaoLoader;
 
-- (id)initWithView:(UIView *) uiView;
+- (id)initWithView:(GameViewController *) gameController;
 
 - (bool)update;
 - (bool)checkBulletHit:(BulletParticle *) bullet;

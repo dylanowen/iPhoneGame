@@ -41,7 +41,7 @@
 		self.look = [[ToggleJoyStick alloc] initWithModel:model center: GLKVector2Make(STATIC_VIEW_WIDTH - 85, STATIC_VIEW_HEIGHT - 85) region:50 grabRegion:140 joyRadius:25 toggleBounds:30];
 		shootRope = [[NinjaRopeJoyStick alloc] initWithModel:model center: GLKVector2Make(STATIC_VIEW_WIDTH / 2, STATIC_VIEW_HEIGHT / 2) region:40 grabRegion:25 joyRadius:25 toggleBounds:25];
 		pauseButton = [[Button alloc] initWithModel:model center:GLKVector2Make(STATIC_VIEW_WIDTH - 20, 20) texture:@"pauseButton.png" radius:12 callback:^(bool result){
-			[(GameViewController *) model->view pauseGame];
+			[model->controller pauseGame];
 		}];
 		
 		return self;
