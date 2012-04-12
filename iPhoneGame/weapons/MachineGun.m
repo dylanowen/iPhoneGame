@@ -17,6 +17,7 @@
 	self = [super initWithParticles:part];
 	if(self)
 	{
+		name = @"Machine Gun";
 		fireSpeed = 0.05;
 		return self;
 	}

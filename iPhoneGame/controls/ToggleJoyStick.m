@@ -26,9 +26,9 @@
 
 @implementation ToggleJoyStick
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen toggleBounds:(float) toggleB
+- (id)initWithModel:(GameModel *) model center:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen toggleBounds:(float) toggleB
 {
-	self = [super initWithCenter: posit region:regionR grabRegion:grabRegion joyRadius:joyLen];
+	self = [super initWithModel: model center: posit region:regionR grabRegion:grabRegion joyRadius:joyLen];
 	if(self)
 	{
 		toggle = NO;

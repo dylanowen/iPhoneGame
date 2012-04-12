@@ -20,6 +20,8 @@
 	GLKBaseEffect *textureEffect;
 	TextureDescription *texture;
 	
+	GameModel *game;
+	
 	GLuint vertexBuffer;
 	GLuint textureBuffer;
 	
@@ -30,11 +32,12 @@
 
 @implementation Background
 
-- (id)init
+- (id)initWithModel:(GameModel *) model
 {
 	self = [super init];
 	if(self)
 	{
+		game = model;
 		
 		textureEffect = [game.effectLoader getEffectForName:@"TextureEffect"];
 		if(textureEffect == nil)

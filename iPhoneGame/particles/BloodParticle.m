@@ -31,7 +31,7 @@
 
 @implementation BloodParticle
 
-- (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc colorType:(int) colorType
+- (id)initWithParticles:(Particles *) particles position:(GLKVector2) posit velocity:(GLKVector2) veloc colorType:(int) colorType
 {
 	self = [super init];
 	if(self)
@@ -58,9 +58,9 @@
 			color[2] += .7f;
 		}
 		
-		positionAttribute = model->bloodPositionAttribute;
-		colorAttribute = model->bloodColorAttribute;
-		env = game->environment;
+		positionAttribute = particles->bloodPositionAttribute;
+		colorAttribute = particles->bloodColorAttribute;
+		env = particles->game->environment;
 		
 		return self;
 	}

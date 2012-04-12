@@ -51,12 +51,12 @@ enum
 
 @synthesize health = _health;
 
-- (id)initWithPosition:(GLKVector2) posit
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
 {
 	self = [super init];
 	if(self)
 	{
-		GameModel *temp = game;
+		game = model;
 		env = game->environment;
 		
 		textureEffect = [game.effectLoader getEffectForName:@"TextureEffect"];

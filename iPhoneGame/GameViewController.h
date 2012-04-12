@@ -8,6 +8,11 @@
 
 #import <GLKit/GLKit.h>
 
-@interface GameViewController : GLKViewController <GLKViewControllerDelegate>
+@interface GameViewController : GLKViewController <GLKViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIView *pauseView;
+
+- (void)pauseGame;
+- (IBAction)resumeGame:(id)sender;
 
 @end

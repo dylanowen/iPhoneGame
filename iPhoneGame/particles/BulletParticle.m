@@ -26,6 +26,7 @@
 		velocity = veloc;
 		
 		positionAttribute = particles->bulletPositionAttribute;
+		game = particles->game;
 		env = game->environment;
 		
 		destructionRadius = radius;

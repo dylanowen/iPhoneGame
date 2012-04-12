@@ -13,6 +13,10 @@
 
 @interface Weapon : NSObject
 {
+@public
+	NSString *name;
+@protected
+	
 	float timeSinceShot;
 	
 	float fireSpeed;

@@ -12,6 +12,17 @@
 
 @implementation BouncyMachineGun
 
+- (id)initWithParticles:(Particles *) part
+{
+	self = [super initWithParticles:part];
+	if(self)
+	{
+		name = @"Bouncy Machine Gun";
+		return self;
+	}
+	return nil;
+}
+
 - (void)shootAtPosition:(GLKVector2) playerPosition direction:(GLKVector2) dir
 {
 	if(timeSinceShot > fireSpeed)

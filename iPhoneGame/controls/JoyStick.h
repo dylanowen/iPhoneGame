@@ -18,6 +18,8 @@
 	GLKVector2 velocity;
 	GLKVector2 lastVelocity;
 @protected
+	GameModel *game;
+	
 	GLKBaseEffect *effect;
 	
 	GLKVector2 position;
@@ -38,7 +40,7 @@
 	GLuint vao;
 }
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen;
+- (id)initWithModel:(GameModel *) model center:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen;
 
 - (bool)touchesBegan:(GLKVector2) loci;
 - (bool)touchesMoved:(GLKVector2) loci lastTouch:(GLKVector2) last;

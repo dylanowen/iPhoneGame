@@ -18,6 +18,8 @@
 	bool down;
 	bool pressed;
 @protected
+	GameModel *game;
+	
 	GLKBaseEffect *effect;
 	
 	GLKVector2 position;
@@ -33,7 +35,7 @@
 	void (^callback)();
 }
 
-- (id)initWithCenter:(GLKVector2) posit texture:(NSString *) textName radius:(unsigned) rad callback:(void(^)(bool result)) back;
+- (id)initWithModel:(GameModel *) model center:(GLKVector2) posit texture:(NSString *) textName radius:(unsigned) rad callback:(void(^)(bool result))back;
 
 - (bool)touchesBegan:(GLKVector2) loci;
 - (bool)touchesMoved:(GLKVector2) loci lastTouch:(GLKVector2) last;

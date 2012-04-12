@@ -58,11 +58,13 @@ typedef struct
 @synthesize blood = _blood;
 @synthesize healingEffect = _healingEffect;
 
-- (id)init
+- (id)initWithModel:(GameModel *) model
 {
 	self = [super init];
 	if(self)
 	{
+		game = model;
+		
 		self.bullets = [[NSMutableArray arrayWithCapacity: 0] init];
 		self.blood = [[NSMutableArray arrayWithCapacity: 0] init];
 		self.healingEffect = [[NSMutableArray arrayWithCapacity:0] init];

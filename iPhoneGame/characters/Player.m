@@ -36,17 +36,15 @@
 	GLuint laserNinjaColorBuffer;
 	
 	GLKMatrix4 laserCenter;
-	
-	Weapon *currentGun;
 }
 
 @end
 
 @implementation Player
 
-- (id)initWithPosition:(GLKVector2) posit
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
 {
-	self = [super initWithPosition:posit];
+	self = [super initWithModel:model position:posit];
 	if(self)
 	{
 		texture = [game.textureLoader getTextureDescription:@"character.png"];
@@ -150,11 +148,10 @@
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		
-		currentGun = [[MachineGun alloc] initWithParticles:particles];
 		shootGun = false;
-		ninjaRope = [[NinjaRope alloc] initWithPlayer:self];
+		ninjaRope = [[NinjaRope alloc] initWithModel:game player:self];
 		
-		laserCenter = GLKMatrix4MakeTranslation(game.view.bounds.size.width / 2, game.view.bounds.size.height / 2, 0);
+		laserCenter = GLKMatrix4MakeTranslation(game->view.bounds.size.width / 2, game->view.bounds.size.height / 2, 0);
 
 		switchTexture = false;
 		characterTextureBuffer = [texture getFrameBuffer:currentFrame];

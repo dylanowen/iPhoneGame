@@ -23,11 +23,12 @@
 
 @implementation Button
 
-- (id)initWithCenter:(GLKVector2) posit texture:(NSString *) textName radius:(unsigned) rad callback:(void(^)(bool result))back
+- (id)initWithModel:(GameModel *) model center:(GLKVector2) posit texture:(NSString *) textName radius:(unsigned) rad callback:(void(^)(bool result))back
 {
 	self = [super init];
 	if(self)
 	{
+		game = model;
 		position = posit;
 		//assume that the control effect has already been generated
 		effect = [game.effectLoader getEffectForName:@"ControlEffect"];
@@ -75,7 +76,7 @@
 	GLKVector2 temp = GLKVector2Subtract(loci, position);
 	if(GLKVector2Length(temp) <= radius)
 	{
-		down = !down;
+		down = true;
 		callback(down);
 		lastTouch = loci;
 		return YES;
@@ -107,6 +108,7 @@
 
 - (void)touchesCancelled
 {
+	down = false;
 	lastTouch = GLKVector2Make(-1, -1);
 }
 

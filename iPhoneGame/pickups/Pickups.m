@@ -12,17 +12,20 @@
 
 @interface Pickups()
 {
+	GameModel *game;
+	
 	NSMutableArray *items;
 }
 @end
 
 @implementation Pickups
 
-- (id)init
+- (id)initWithModel:(GameModel *) model
 {
 	self = [super init];
 	if(self)
 	{
+		game = model;
 		items = [[NSMutableArray alloc] init];
 		
 		return self;
@@ -32,7 +35,7 @@
 
 - (void)addZombieSkullWithPosition:(GLKVector2) posit
 {
-	[items addObject:[[ZombieSkull alloc] initWithPosition:posit]];
+	[items addObject:[[ZombieSkull alloc] initWithModel:game position:posit]];
 }
 
 - (void)addHealthWithPosition:(GLKVector2) posit

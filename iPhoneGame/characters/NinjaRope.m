@@ -26,6 +26,7 @@ enum
 
 @interface NinjaRope()
 {
+	GameModel *game;
 	Environment *environment;
 	
 	Player *player;
@@ -49,11 +50,12 @@ enum
 
 @implementation NinjaRope
 
-- (id)initWithPlayer:(Player *) user
+- (id)initWithModel:(GameModel *) model player:(Player *) user
 {
 	self = [super init];
 	if(self)
 	{
+		game = model;
 		environment = game->environment;
 		
 		player = user;

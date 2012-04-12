@@ -40,7 +40,7 @@
 		[self addTexture:@"circle.png" frames:1];
 		[self addTexture:@"font.png" frames:40];
 		[self addTexture:@"jump_button.png" frames:2];
-		[self addTexture:@"pauseButton.png" frames:2];
+		[self addTexture:@"pauseButton.png" frames:1];
 		[self addTexture:@"health.png" frames:1];
 		[self addTexture:@"zombie_skull.png" frames:1];
 		[self addTexture:@"background.png" frames:1];

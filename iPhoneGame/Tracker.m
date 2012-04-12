@@ -36,7 +36,7 @@
 
 @implementation Tracker
 
-- (id)initWithScale:(GLKVector2) scle width:(int) w height:(int) h red:(float) red green:(float) green blue:(float) blue;
+- (id)initWithModel:(GameModel *) model scale:(GLKVector2) scle width:(int) w height:(int) h red:(float) red green:(float) green blue:(float) blue;
 {
 	self = [super init];
 	if(self)
@@ -50,16 +50,16 @@
 		
 		hide = true;
 		
-		effect = [game.effectLoader getEffectForName:[[NSString alloc] initWithFormat:@"Tracker%.2f%.2f%.2f", red, green, blue, nil]];
+		effect = [model.effectLoader getEffectForName:[[NSString alloc] initWithFormat:@"Tracker%.2f%.2f%.2f", red, green, blue, nil]];
 		if(effect == nil)
 		{
-			effect = [game.effectLoader addEffectForName:[[NSString alloc] initWithFormat:@"Tracker%.2f%.2f%.2f", red, green, blue, nil]];
+			effect = [model.effectLoader addEffectForName:[[NSString alloc] initWithFormat:@"Tracker%.2f%.2f%.2f", red, green, blue, nil]];
 			effect.useConstantColor = YES;
 			effect.constantColor = color;
 			effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, width, height, 0, 1, -1);
 		}
 		
-		vertexBuffer = [game.bufferLoader getBufferForName:@"Tracker"];
+		vertexBuffer = [model.bufferLoader getBufferForName:@"Tracker"];
 		if(vertexBuffer == 0)
 		{
 			float vertices[] = {
@@ -71,7 +71,7 @@
 				2, 3,
 				2, 6
 			};
-			vertexBuffer = [game.bufferLoader addBufferForName:@"Tracker"];
+			vertexBuffer = [model.bufferLoader addBufferForName:@"Tracker"];
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);

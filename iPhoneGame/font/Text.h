@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
+@class GameModel;
+
 @interface Text : NSObject
 
 @property (strong, nonatomic) NSString *str;
 
-- (id)initWithPosition:(GLKVector2) posit text:(NSString *)text;
+- (id)initWithModel:(GameModel *)model position:(GLKVector2) posit text:(NSString *)text;
 - (void)render;
 
 @end

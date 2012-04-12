@@ -45,22 +45,17 @@
 
 @implementation GameModel
 
-@synthesize paused = _paused;
-
-@synthesize view = _view;
-
 @synthesize textureLoader = _textureLoader;
 @synthesize effectLoader = _effectLoader;
 @synthesize bufferLoader = _bufferLoader;
 @synthesize vaoLoader = _vaoLoader;
 
-- (id)initWithView:(UIView *) view
+- (id)initWithView:(UIView *) uiView
 {
 	self = [super init];
-	game = self;
 	if(self)
 	{
-		self.view = view;
+		view = uiView;
 		
 		staticProjection = GLKMatrix4MakeOrtho(0, STATIC_VIEW_WIDTH, STATIC_VIEW_HEIGHT, 0, 0, 10);
 		dynamicProjection = CenterOrtho(0, 0);
@@ -70,16 +65,15 @@
 		self.bufferLoader = [[BufferLoader alloc] init];
 		self.vaoLoader = [[VAOLoader alloc] init];
 		
-		background = [[Background alloc] init];
-		environment = [[Environment alloc] init];
-		particles = [[Particles alloc] init];
-		pickups = [[Pickups alloc] init];
+		background = [[Background alloc] initWithModel:self];
+		environment = [[Environment alloc] initWithModel:self];
+		particles = [[Particles alloc] initWithModel:self];
+		pickups = [[Pickups alloc] initWithModel:self];
 		
-		player = [[Player alloc] initWithPosition:GLKVector2Make(ENV_WIDTH / 2, 100)];
-		controls = [[Controls alloc] init];
+		availableWeapons = [[NSMutableArray alloc] init];
+		player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 100)];
+		controls = [[Controls alloc] initWithModel:self];
 		[environment deleteRadius:20 x:(ENV_WIDTH / 2) y:100];
-		
-		self.paused = false;
 		
 		return self;
 	}
@@ -87,19 +81,6 @@
 }
 
 - (bool)update
-{
-	if(_paused)
-	{
-	
-		return YES;
-	}
-	else
-	{
-		return [self updateGame];
-	}
-}
-
-- (bool)updateGame
 {
 	//it's negative because up is negative...
 	if(controls.move->velocity.y < -0.5f)
@@ -120,12 +101,6 @@
 	MoveOrthoVector(&dynamicProjection, screenCenter);
 	
 	return YES;
-}
-
-- (void)setPaused:(bool)paused
-{
-	_paused = paused;
-	//display menu
 }
 
 - (bool)checkBulletHit:(BulletParticle *) bullet

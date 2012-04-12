@@ -16,6 +16,6 @@
 	float toggleBounds;
 }
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen toggleBounds:(float) toggleB;
+- (id)initWithModel:(GameModel *) model center:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen toggleBounds:(float) toggleB;
 
 @end

@@ -16,6 +16,8 @@
 @interface Particles : NSObject
 {
 @public
+	GameModel *game;
+	
 	GLuint bulletPositionAttribute;
 	GLuint bloodPositionAttribute;
 	GLuint bloodColorAttribute;
@@ -23,6 +25,8 @@
 	GLuint healthParticleInitialPosition;
 	GLuint healthParticleTime;
 }
+
+- (id)initWithModel:(GameModel *) model;
 
 - (void)addBulletWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg;
 - (void)addBulletGravWithPosition:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg;

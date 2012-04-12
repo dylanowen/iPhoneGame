@@ -10,10 +10,12 @@
 
 #import "Globals.h"
 #import "ZombieSwarm.h"
+#import "Player.h"
+#import "Weapon.h"
 
 @interface GameViewController()
 {
-	
+	GameModel *game;
 }
 
 @property (strong, nonatomic) EAGLContext *context;
@@ -21,6 +23,7 @@
 @end
 
 @implementation GameViewController
+@synthesize pauseView = _pauseView;
 
 @synthesize context = _context;
 
@@ -52,13 +55,12 @@
 	
 	glDisable(GL_STENCIL_TEST);
 	
-	//glClearColor(0.5, 0.5, 0.5, 1.0);
-	
 	game = [[ZombieSwarm alloc] initWithView:self.view];
 }
 
 - (void)viewDidUnload
 {
+	[self setPauseView:nil];
 	[super viewDidUnload];
 	
 	//tear down openGL
@@ -69,6 +71,7 @@
 		[EAGLContext setCurrentContext:nil];
 	}
 	self.context = nil;
+	game = nil;
 }
 
 - (void)glkViewControllerUpdate:(GLKViewController *)controller
@@ -76,7 +79,6 @@
 	timeSinceUpdate = self.timeSinceLastUpdate;
 	if(![game update])
 	{
-		//self.paused = true;
 		[self performSegueWithIdentifier: @"gameOver" sender: self];
 	}
 }
@@ -101,6 +103,35 @@
 - (void)touchesCancelled:(NSSet *)touches
 {
 	[game->controls touchesCancelled: touches];
+}
+
+- (void)pauseGame
+{
+	self.paused = true;
+	self.pauseView.hidden = false;
+}
+
+- (IBAction)resumeGame:(id)sender
+{
+	self.pauseView.hidden = true;
+	self.paused = false;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+	return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+	return [game->availableWeapons count];
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+	return ((Weapon *) [game->availableWeapons objectAtIndex:row])->name;
+}
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+	game->player->currentGun = [game->availableWeapons objectAtIndex:row];
 }
 
 - (void)didReceiveMemoryWarning

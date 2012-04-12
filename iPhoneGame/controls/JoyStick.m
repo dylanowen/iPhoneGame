@@ -18,31 +18,32 @@
 
 @implementation JoyStick
 
-- (id)initWithCenter:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen
+- (id)initWithModel:(GameModel *) model center:(GLKVector2) posit region:(unsigned) regionR grabRegion:(unsigned) grabRegion joyRadius:(float) joyLen
 {
 	self = [super init];
 	if(self)
 	{
+		game = model;
 		position = origin = posit;
 		regionRadius = regionR;
 		grabRadius = grabRegion;
 		joyLength = joyLen;
 		
 		//assume that the control effect has already been generated
-		effect = [game.effectLoader getEffectForName:@"ControlEffect"];
+		effect = [model.effectLoader getEffectForName:@"ControlEffect"];
 		
 		lastTouch = GLKVector2Make(-1, -1);
 		velocity = GLKVector2Make(0, 0);
 		
-		texture = [game.textureLoader getTextureDescription:@"circle.png"];
+		texture = [model.textureLoader getTextureDescription:@"circle.png"];
 		
 		NSString *name = [[NSString alloc] initWithFormat:@"JoyStick%f", joyLength];
-		vao = [game.vaoLoader getVAOForName:name];
+		vao = [model.vaoLoader getVAOForName:name];
 		if(vao == 0)
 		{
-			vao = [game.vaoLoader addVAOForName:name];
+			vao = [model.vaoLoader addVAOForName:name];
 			
-			GLuint vertexBuffer = [game.bufferLoader getBufferForName:name];
+			GLuint vertexBuffer = [model.bufferLoader getBufferForName:name];
 			if(vertexBuffer == 0)
 			{
 				float vertices[] = {
@@ -51,7 +52,7 @@
 					-joyLength, joyLength,
 					-joyLength, -joyLength
 				};
-				vertexBuffer = [game.bufferLoader addBufferForName:name];
+				vertexBuffer = [model.bufferLoader addBufferForName:name];
 				glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 				glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 				glBindBuffer(GL_ARRAY_BUFFER, 0);

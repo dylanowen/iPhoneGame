@@ -28,12 +28,15 @@
 @interface GameModel : NSObject
 {
 @public
+	UIView *view;
+	
 	Environment *environment;
 	Particles *particles;
 	Pickups *pickups;
 	Controls *controls;
 	
 	Player *player;
+	NSMutableArray *availableWeapons;
 	GLKVector2 screenCenter;
 	
 	GLKMatrix4 staticProjection;
@@ -42,19 +45,14 @@
 	Background *background;
 }
 
-@property (nonatomic) bool paused;
-
-@property (strong, nonatomic) UIView *view;
-
 @property (strong, nonatomic) TextureLoader *textureLoader;
 @property (strong, nonatomic) EffectLoader *effectLoader;
 @property (strong, nonatomic) BufferLoader *bufferLoader;
 @property (strong, nonatomic) VAOLoader *vaoLoader;
 
-- (id)initWithView:(UIView *) view;
+- (id)initWithView:(UIView *) uiView;
 
 - (bool)update;
-- (bool)updateGame;
 - (bool)checkBulletHit:(BulletParticle *) bullet;
 
 - (void)itemPickedUp:(Item *) item;

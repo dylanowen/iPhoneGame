@@ -16,6 +16,8 @@
 
 @interface Environment()
 {
+	GameModel *game;
+	
 	GLProgram *program;
 	
 	float clearer[MAX_DELETE_RADIUS * 2][4];
@@ -39,11 +41,13 @@
 @synthesize width = _width;
 @synthesize height = _height;
 
-- (id)init
+- (id)initWithModel:(GameModel *) model
 {
 	self = [super init];
 	if(self)
 	{
+		game = model;
+		
 		float browns[5][3] = {
 			{183/256.0f, 123/256.0f, 63/256.0f},
 			{212/256.0f ,144/256.0f ,80/256.0f},

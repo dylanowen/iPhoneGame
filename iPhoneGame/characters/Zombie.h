@@ -12,7 +12,7 @@
 
 @interface Zombie : Character
 
-- (id)initWithPosition:(GLKVector2) posit;
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
 
 - (bool)update;
 

@@ -31,7 +31,7 @@
 
 @synthesize str = _str;
 
-- (id)initWithPosition:(GLKVector2) posit text:(NSString *)text
+- (id)initWithModel:(GameModel *)model position:(GLKVector2) posit text:(NSString *)text
 {
 	self = [super init];
 	if(self)
@@ -40,7 +40,7 @@
 		
 		position = posit;
 		
-		vertexBuffer = [game.bufferLoader getBufferForName:@"Font"];
+		vertexBuffer = [model.bufferLoader getBufferForName:@"Font"];
 		if(vertexBuffer == 0)
 		{
 			float vertices[] = {
@@ -49,18 +49,18 @@
 				0, 18,
 				0, 0
 			};
-			vertexBuffer = [game.bufferLoader addBufferForName:@"Font"];
+			vertexBuffer = [model.bufferLoader addBufferForName:@"Font"];
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 		}
 		
-		texture = [game.textureLoader getTextureDescription:@"font.png"];
-		effect = [game.effectLoader getEffectForName:@"Font"];
+		texture = [model.textureLoader getTextureDescription:@"font.png"];
+		effect = [model.effectLoader getEffectForName:@"Font"];
 		if(effect == nil)
 		{
-			effect = [game.effectLoader addEffectForName:@"Font"];
-			effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, game.view.bounds.size.width, game.view.bounds.size.height, 0, 1, -1);
+			effect = [model.effectLoader addEffectForName:@"Font"];
+			effect.transform.projectionMatrix = GLKMatrix4MakeOrtho(0, model->view.bounds.size.width, model->view.bounds.size.height, 0, 1, -1);
 			effect.texture2d0.name = [texture getName];
 			effect.texture2d0.envMode = GLKTextureEnvModeReplace;
 			effect.texture2d0.target = GLKTextureTarget2D;

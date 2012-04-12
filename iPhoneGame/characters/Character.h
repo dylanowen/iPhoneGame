@@ -20,6 +20,7 @@
 @interface Character : NSObject
 {
 @protected
+	GameModel *game;
 	Environment *env;
 	
 	GLKBaseEffect *textureEffect;
@@ -42,7 +43,7 @@
 
 @property (nonatomic) int health;
 
-- (id)initWithPosition:(GLKVector2) posit;
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit;
 - (void)respawn:(GLKVector2) posit;
 - (void)update;
 - (void)updateVelocity;

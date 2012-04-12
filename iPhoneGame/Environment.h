@@ -24,6 +24,8 @@
 @property (nonatomic) int width;
 @property (nonatomic) int height;
 
+- (id)initWithModel:(GameModel *) model;
+
 - (void)deleteRadius:(int) radius x:(int) x y:(int) y;
 - (void)restoreRadius:(int) radius x:(int) x y:(int) y;
 

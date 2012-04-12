@@ -13,6 +13,7 @@
 
 @interface Pickups : NSObject
 
+- (id)initWithModel:(GameModel *) model;
 - (void)addZombieSkullWithPosition:(GLKVector2) posit;
 - (void)addHealthWithPosition:(GLKVector2) posit;
 

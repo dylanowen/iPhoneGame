@@ -28,9 +28,9 @@
 
 @implementation Zombie
 
-- (id)initWithPosition:(GLKVector2) posit
+- (id)initWithModel:(GameModel *) model position:(GLKVector2) posit
 {
-	self = [super initWithPosition:posit];
+	self = [super initWithModel:model position:posit];
 	if(self)
 	{
 		player = (Character *) game->player;

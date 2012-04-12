@@ -10,6 +10,8 @@
 
 #import <GLKit/GLKit.h>
 
+#import "GameViewController.h"
+
 #import "Globals.h"
 #import "GameConstants.h"
 #import "GameModel.h"
@@ -20,26 +22,26 @@
 @synthesize move = _move;
 @synthesize look = _look;
 
-- (id)init
+- (id)initWithModel:(GameModel *) model
 {
 	self = [super init];
 	if(self)
 	{
 		
-		GLKBaseEffect *effect = [game.effectLoader getEffectForName:@"ControlEffect"];
+		GLKBaseEffect *effect = [model.effectLoader getEffectForName:@"ControlEffect"];
 		if(effect == nil)
 		{
-			effect = [game.effectLoader addEffectForName:@"ControlEffect"];
+			effect = [model.effectLoader addEffectForName:@"ControlEffect"];
 			effect.texture2d0.envMode = GLKTextureEnvModeReplace;
 			effect.texture2d0.target = GLKTextureTarget2D;
-			effect.transform.projectionMatrix = game->staticProjection;
+			effect.transform.projectionMatrix = model->staticProjection;
 		}
 		
-		self.move = [[JoyStick alloc] initWithCenter: GLKVector2Make(80, STATIC_VIEW_HEIGHT - 85) region:50 grabRegion:140 joyRadius:25];
-		self.look = [[ToggleJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH - 85, STATIC_VIEW_HEIGHT - 85) region:50 grabRegion:140 joyRadius:25 toggleBounds:30];
-		shootRope = [[NinjaRopeJoyStick alloc] initWithCenter: GLKVector2Make(STATIC_VIEW_WIDTH / 2, STATIC_VIEW_HEIGHT / 2) region:40 grabRegion:25 joyRadius:25 toggleBounds:25];
-		pauseButton = [[Button alloc] initWithCenter:GLKVector2Make(STATIC_VIEW_WIDTH - 20, 20) texture:@"pauseButton.png" radius:12 callback:^(bool result){
-			game.paused = result;
+		self.move = [[JoyStick alloc] initWithModel:model center: GLKVector2Make(80, STATIC_VIEW_HEIGHT - 85) region:50 grabRegion:140 joyRadius:25];
+		self.look = [[ToggleJoyStick alloc] initWithModel:model center: GLKVector2Make(STATIC_VIEW_WIDTH - 85, STATIC_VIEW_HEIGHT - 85) region:50 grabRegion:140 joyRadius:25 toggleBounds:30];
+		shootRope = [[NinjaRopeJoyStick alloc] initWithModel:model center: GLKVector2Make(STATIC_VIEW_WIDTH / 2, STATIC_VIEW_HEIGHT / 2) region:40 grabRegion:25 joyRadius:25 toggleBounds:25];
+		pauseButton = [[Button alloc] initWithModel:model center:GLKVector2Make(STATIC_VIEW_WIDTH - 20, 20) texture:@"pauseButton.png" radius:12 callback:^(bool result){
+			[(GameViewController *) model->view pauseGame];
 		}];
 		
 		return self;

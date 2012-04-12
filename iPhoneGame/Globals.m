@@ -9,4 +9,3 @@
 #import "Globals.h"
 
 float timeSinceUpdate;
-GameModel *game;

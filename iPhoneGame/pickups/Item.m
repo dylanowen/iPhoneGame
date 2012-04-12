@@ -25,11 +25,12 @@
 
 @implementation Item
 
-- (id)initWithPosition:(GLKVector2) posit
+- (id)initWithModel:(GameModel *)model position:(GLKVector2) posit
 {
 	self = [super init];
 	if(self)
 	{
+		game = model;
 		position = posit;
 		velocity = GLKVector2Make(0.0f, 0.0f);
 		

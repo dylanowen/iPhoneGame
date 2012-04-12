@@ -55,14 +55,14 @@
 
 @synthesize zombieKills = _zombieKills;
 
-- (id)initWithView:(UIView *) view
+- (id)initWithView:(UIView *) uiView
 {
-	self = [super initWithView:view];
+	self = [super initWithView:uiView];
 	if(self)
 	{
 		zombies = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];
 		zombieTracker = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];
-		GLKVector2 trackScale = GLKVector2Make(DYNAMIC_VIEW_WIDTH / self.view.bounds.size.width, DYNAMIC_VIEW_HEIGHT / self.view.bounds.size.height);
+		GLKVector2 trackScale = GLKVector2Make(DYNAMIC_VIEW_WIDTH / self->view.bounds.size.width, DYNAMIC_VIEW_HEIGHT / self->view.bounds.size.height);
 		for(unsigned i = 0; i < NUMBER_OF_ZOMBIES; i++)
 		{
 			GLKVector2 newPosition;
@@ -71,10 +71,18 @@
 			{
 				newPosition = GLKVector2Make(arc4random() % (ENV_WIDTH - 20) + 10, arc4random() % (ENV_HEIGHT - 20) + 10);
 			}while(GLKVector2Length(GLKVector2Subtract(newPosition, player->position)) < 80);
-			[zombies addObject:[[Zombie alloc] initWithPosition:newPosition]];
-			[zombieTracker addObject:[[Tracker alloc] initWithScale: trackScale width: DYNAMIC_VIEW_WIDTH height: DYNAMIC_VIEW_HEIGHT red: 0.0f green: 0.35f blue: 0.0f]];
+			[zombies addObject:[[Zombie alloc] initWithModel:self position:newPosition]];
+			[zombieTracker addObject:[[Tracker alloc] initWithModel:self scale: trackScale width: DYNAMIC_VIEW_WIDTH height: DYNAMIC_VIEW_HEIGHT red: 0.0f green: 0.35f blue: 0.0f]];
 			[environment deleteRadius:20 x:newPosition.x y:newPosition.y];
 		}
+		
+		[availableWeapons addObject:[[MachineGun alloc] initWithParticles:particles]];
+		[availableWeapons addObject:[[ShotGun alloc] initWithParticles:particles]];
+		[availableWeapons addObject:[[Sniper alloc] initWithParticles:particles]];
+		[availableWeapons addObject:[[BouncyMachineGun alloc] initWithParticles:particles]];
+		[availableWeapons addObject:[[BouncyShotGun alloc] initWithParticles:particles]];
+		
+		player->currentGun = [availableWeapons objectAtIndex:0];
 		
 		/*
 		Settings *settings = [Settings sharedManager];
@@ -98,14 +106,14 @@
 		 */
 		
 		_zombieKills = 0;
-		killDisplay = [[Text alloc] initWithPosition:GLKVector2Make(5, 5) text:@"kills 0"];
+		killDisplay = [[Text alloc] initWithModel:self position:GLKVector2Make(5, 5) text:@"kills 0"];
 		
 		return self;
 	}
 	return nil;
 }
 
-- (bool)updateGame
+- (bool)update
 {
 	//do all the main stuff of the game
 	if(player.health <= 0)
@@ -115,7 +123,7 @@
 		return NO;
 	}
 	
-	[super updateGame];
+	[super update];
 	
 	[particles update];
 	
