@@ -29,7 +29,6 @@
 	self = [super initWithParticles:parts position:posit velocity:veloc destructionRadius:radius damage:dmg];
 	if(self)
 	{
-		//particles = parts;
 		bounceCount = 5;
 		return self;
 	}
@@ -71,7 +70,7 @@
 				position.x = ((float) (i - stepX * destructionRadius)) / precision;
 				position.y = ((float) (j - stepY * destructionRadius)) / precision;
 				[env deleteRadius:destructionRadius x:lastI y:lastJ];
-				velocity = GLKVector2Negate(velocity);
+				velocity.x = -velocity.x;
 				movement[0] = velocity.x * precision;
 				movement[1] = velocity.y * precision;
 				[self calculateStep:movement];

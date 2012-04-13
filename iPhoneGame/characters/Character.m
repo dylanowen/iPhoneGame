@@ -37,7 +37,6 @@ enum
 	float characterCenter[2];
 	
 	int CV[4][COLLISION_HEIGHT][2];
-	int CVFF[4][COLLISION_HEIGHT][2];
 	int CVCount[4];
 }
 
@@ -241,7 +240,7 @@ enum
 	if((stepY > 0 && rating[CVBottom] > 1) || (stepY < 0 && rating[CVTop] > 1))
 	{
 		*y = *y - stepY;
-		velocity.x = 0;
+		//velocity.x = 0;
 		velocity.y = -velocity.y / 4;
 		cY = YES;
 	}
@@ -269,7 +268,10 @@ enum
 	
 	for(unsigned k = 0; k < CVCount[index]; k++)
 	{
-		count = (env->dirt[x + CV[index][k][0]][y + CV[index][k][1]])?(count + 1):count;
+		if(env->dirt[x + CV[index][k][0]][y + CV[index][k][1]])
+		{
+			count++;
+		}
 	}
 	
 	return count;
@@ -478,10 +480,6 @@ enum
 		CV[CVLeft][i][1] = tempCVleft[i][1];
 		CV[CVRight][i][0] = tempCVright[i][0];
 		CV[CVRight][i][1] = tempCVright[i][1];
-		CVFF[CVLeft][i][0] = CV[CVLeft][i][0] * precision;
-		CVFF[CVLeft][i][1] = CV[CVLeft][i][1] * precision;
-		CVFF[CVRight][i][0] = CV[CVRight][i][0] * precision;
-		CVFF[CVRight][i][1] = CV[CVRight][i][1] * precision;
 	}
 	for(unsigned i = 0; i < COLLISION_WIDTH; i++)
 	{
@@ -489,10 +487,6 @@ enum
 		CV[CVTop][i][1] = tempCVtop[i][1];
 		CV[CVBottom][i][0] = tempCVbottom[i][0];
 		CV[CVBottom][i][1] = tempCVbottom[i][1];
-		CVFF[CVTop][i][0] = CV[CVTop][i][0] * precision;
-		CVFF[CVTop][i][1] = CV[CVTop][i][1] * precision;
-		CVFF[CVBottom][i][0] = CV[CVBottom][i][0] * precision;
-		CVFF[CVBottom][i][1] = CV[CVBottom][i][1] * precision;
 	}
 }
 

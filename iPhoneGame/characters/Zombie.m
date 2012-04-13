@@ -108,7 +108,7 @@
 		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(10.0f, 0.0f)) velocity:GLKVector2Make(75.0f, 0.0f) destructionRadius:8 damage:50];
 		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(5.0f, 8.6f)) velocity:GLKVector2Make(37.0f, 65.0f) destructionRadius:8 damage:50];
 		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(-5.0f, 8.6f)) velocity:GLKVector2Make(-37.0f, 65.0f) destructionRadius:8 damage:50];
-		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(7.0f, 0.0f)) velocity:GLKVector2Make(-75.0f, 0.0f) destructionRadius:8 damage:50];
+		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(-10.0f, 0.0f)) velocity:GLKVector2Make(-75.0f, 0.0f) destructionRadius:8 damage:50];
 		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(-5.0f, -8.6f)) velocity:GLKVector2Make(-37.0f, -65.0f) destructionRadius:8 damage:50];
 		[particles addBulletWithPosition:GLKVector2Add(position, GLKVector2Make(5.0f, -8.6f)) velocity:GLKVector2Make(37.0f, -65.0f) destructionRadius:8 damage:50];
 		return NO;

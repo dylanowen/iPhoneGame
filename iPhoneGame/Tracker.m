@@ -36,8 +36,8 @@
 	self = [super init];
 	if(self)
 	{
-		widthD2 = ((float) STATIC_VIEW_WIDTH / 2) - 4.0f;
-		heightD2 = ((float) STATIC_VIEW_HEIGHT / 2) - 4.0f;
+		widthD2 = ((float) STATIC_VIEW_WIDTH / 2) - 8.0f;
+		heightD2 = ((float) STATIC_VIEW_HEIGHT / 2) - 8.0f;
 		
 		hide = true;
 		
@@ -76,16 +76,12 @@
 - (void)updateTrackee:(GLKVector2) trackee center:(GLKVector2) center
 {
 	GLKVector2 temp = GLKVector2Subtract(trackee, center);
-	if(temp.x < widthD2 && temp.x > -widthD2 && temp.y < heightD2 && temp.y > -heightD2)
-	{
-		hide = true;
-	}
-	else
+	if(temp.x > DYNAMIC_VIEW_WIDTH / 2 || temp.x < -DYNAMIC_VIEW_WIDTH / 2 || temp.y > DYNAMIC_VIEW_HEIGHT / 2 || temp.y < -DYNAMIC_VIEW_HEIGHT / 2)
 	{
 		hide = false;
 		
-		float x = (heightD2 * temp.x) / temp.y;
-		float y = (widthD2 * temp.y) / temp.x;
+		float x = heightD2 * temp.x / temp.y;
+		float y = widthD2 * temp.y / temp.x;
 		if(temp.x < 0)
 		{
 			y = -y;
@@ -94,7 +90,6 @@
 		{
 			x = -x;
 		}
-		
 		if(x > widthD2)
 		{
 			x = widthD2;
@@ -111,9 +106,12 @@
 		{
 			y = -heightD2;
 		}
-		//NSLog(@"wh(%d, %d) (%f, %f) => (%f, %f)", width, height, temp.x, temp.y, x, y);
 
-		modelView = GLKMatrix4Rotate(GLKMatrix4MakeTranslation(x + widthD2, y + heightD2, 0.0f), atan2f(temp.y, temp.x), 0, 0, 1);
+		modelView = GLKMatrix4Rotate(GLKMatrix4MakeTranslation(x + STATIC_VIEW_WIDTH / 2, y + STATIC_VIEW_HEIGHT / 2, 0.0f), atan2f(temp.y, temp.x), 0, 0, 1);
+	}
+	else
+	{
+		hide = true;
 	}
 }
 
