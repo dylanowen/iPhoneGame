@@ -88,7 +88,7 @@
 				bounceCount--;
 				return YES;
 			}
-			else if([env getDirtX:intI Y:intJ])
+			else if([env checkDirtX:intI Y:intJ])
 			{
 				if(stepX == 0)
 				{
@@ -101,8 +101,8 @@
 				else if(stepX > 0 && stepY > 0)
 				{
 					//coming from top left
-					bool left = [env getDirtX:intI - 1 Y:intJ];
-					bool up = [env getDirtX:intI Y:intJ - 1];
+					bool left = [env checkDirtX:intI - 1 Y:intJ];
+					bool up = [env checkDirtX:intI Y:intJ - 1];
 					if((left && up) || (!left && !up))
 					{
 						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, -0.9f));
@@ -120,8 +120,8 @@
 				else if(stepX > 0 && stepY < 0)
 				{
 					//coming from bottom left
-					bool left = [env getDirtX:intI - 1 Y:intJ];
-					bool down = [env getDirtX:intI Y:intJ + 1];
+					bool left = [env checkDirtX:intI - 1 Y:intJ];
+					bool down = [env checkDirtX:intI Y:intJ + 1];
 					if((left && down) || (!left && !down))
 					{
 						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, -0.9f));
@@ -138,8 +138,8 @@
 				else if(stepX < 0 && stepY > 0)
 				{
 					//coming from top right
-					bool right = [env getDirtX:intI + 1 Y:intJ];
-					bool up = [env getDirtX:intI Y:intJ - 1];
+					bool right = [env checkDirtX:intI + 1 Y:intJ];
+					bool up = [env checkDirtX:intI Y:intJ - 1];
 					if((right && up) || (!right && !up))
 					{
 						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, -0.9f));
@@ -156,8 +156,8 @@
 				else
 				{
 					//coming from bottom right
-					bool right = [env getDirtX:intI + 1 Y:intJ];
-					bool down = [env getDirtX:intI Y:intJ + 1];
+					bool right = [env checkDirtX:intI + 1 Y:intJ];
+					bool down = [env checkDirtX:intI Y:intJ + 1];
 					if((right && down) || (!right && !down))
 					{
 						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, -0.9f));

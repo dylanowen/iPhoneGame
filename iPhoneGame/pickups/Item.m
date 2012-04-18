@@ -132,7 +132,7 @@
 		intY = y / precision;
 		
 		collision = false;
-		if([env getDirtX:intX Y:intY] || intX < 1 || intY < 1 || intX > ENV_WIDTH || intY > ENV_HEIGHT)
+		if([env checkDirtX:intX Y:intY] || intX < 1 || intY < 1 || intX > ENV_WIDTH || intY > ENV_HEIGHT)
 		{
 			collision = true;
 		}

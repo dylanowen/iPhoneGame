@@ -268,7 +268,7 @@ enum
 	
 	for(unsigned k = 0; k < CVCount[index]; k++)
 	{
-		if([env getDirtX:x + CV[index][k][0] Y:y + CV[index][k][1]])
+		if([env checkDirtX:x + CV[index][k][0] Y:y + CV[index][k][1]])
 		{
 			count++;
 		}

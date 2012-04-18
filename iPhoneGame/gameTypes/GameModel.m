@@ -66,14 +66,12 @@
 		self.vaoLoader = [[VAOLoader alloc] init];
 		
 		background = [[Background alloc] initWithModel:self];
-		environment = [[Environment alloc] initWithModel:self];
 		particles = [[Particles alloc] initWithModel:self];
 		pickups = [[Pickups alloc] initWithModel:self];
 		
 		availableWeapons = [[NSMutableArray alloc] init];
-		player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 100)];
 		controls = [[Controls alloc] initWithModel:self];
-		[environment deleteRadius:20 x:(ENV_WIDTH / 2) y:100];
+		
 		
 		return self;
 	}

@@ -12,6 +12,8 @@
 		2C1CF170152D086D004A8FA6 /* ZombieSwarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1CF16F152D086D004A8FA6 /* ZombieSwarm.m */; };
 		2C2A0759152C05DD0066E88D /* zombie_skull.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2A0758152C05DD0066E88D /* zombie_skull.png */; };
 		2C2A0761152C18310066E88D /* HealingParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2A0760152C18300066E88D /* HealingParticle.m */; };
+		2C5431D4153E7FE000D30C14 /* RegularEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5431D3153E7FE000D30C14 /* RegularEnvironment.m */; };
+		2C5431D8153E814100D30C14 /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5431D7153E814000D30C14 /* Environment.m */; };
 		2C6EF570151D2EB000CFDCA3 /* VAOLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */; };
 		2C805AFC1519BA3600C2702A /* BouncyMachineGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C805AFB1519BA3600C2702A /* BouncyMachineGun.m */; };
 		2C805AFF1519BBE100C2702A /* BouncyShotGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C805AFE1519BBE100C2702A /* BouncyShotGun.m */; };
@@ -36,6 +38,7 @@
 		2C8E0874152BAB2B00D4BAC3 /* Pickups.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E0873152BAB2B00D4BAC3 /* Pickups.m */; };
 		2C8E0878152BAD3600D4BAC3 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E0877152BAD3600D4BAC3 /* Item.m */; };
 		2C8E087A152BB26200D4BAC3 /* health.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8E0879152BB26200D4BAC3 /* health.png */; };
+		2C8EBFEF153EA7C00003BA6A /* InfiniteEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EBFEE153EA7C00003BA6A /* InfiniteEnvironment.m */; };
 		2C8EE3B31536289300FF6E4E /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EE3B21536289300FF6E4E /* Globals.m */; };
 		2C8EE3B515362EAE00FF6E4E /* pauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8EE3B415362EAE00FF6E4E /* pauseButton.png */; };
 		2C901E02153568C500747795 /* healthParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C901E01153568C500747795 /* healthParticle.vsh */; };
@@ -71,7 +74,6 @@
 		CE884EE214F73981001B26DA /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = CE884EE114F73981001B26DA /* GLProgram.m */; };
 		CEAEABA715032D74000F7448 /* ToggleJoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAEABA615032D74000F7448 /* ToggleJoyStick.m */; };
 		CEAEABAA150330CB000F7448 /* circleRed.png in Resources */ = {isa = PBXBuildFile; fileRef = CEAEABA9150330CB000F7448 /* circleRed.png */; };
-		CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB48AAA14F3190F00E5AD9E /* Environment.m */; };
 		CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC12C6B14FC70F700EF1392 /* Tracker.m */; };
 		CEC5BCE615030A64003724F5 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC5BCE515030A64003724F5 /* circle.png */; };
 		CEE52F891502BE1D00DDF174 /* particleShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CEE52F821502BE0200DDF174 /* particleShader.fsh */; };
@@ -89,6 +91,10 @@
 		2C2A075E152C17510066E88D /* Particle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Particle.h; path = particles/Particle.h; sourceTree = "<group>"; };
 		2C2A075F152C18300066E88D /* HealingParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HealingParticle.h; path = particles/HealingParticle.h; sourceTree = "<group>"; };
 		2C2A0760152C18300066E88D /* HealingParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HealingParticle.m; path = particles/HealingParticle.m; sourceTree = "<group>"; };
+		2C5431D2153E7FE000D30C14 /* RegularEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegularEnvironment.h; path = environment/RegularEnvironment.h; sourceTree = "<group>"; };
+		2C5431D3153E7FE000D30C14 /* RegularEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegularEnvironment.m; path = environment/RegularEnvironment.m; sourceTree = "<group>"; };
+		2C5431D6153E814000D30C14 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Environment.h; path = environment/Environment.h; sourceTree = "<group>"; };
+		2C5431D7153E814000D30C14 /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Environment.m; path = environment/Environment.m; sourceTree = "<group>"; };
 		2C6EF56E151D2EB000CFDCA3 /* VAOLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VAOLoader.h; path = loaders/VAOLoader.h; sourceTree = "<group>"; };
 		2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VAOLoader.m; path = loaders/VAOLoader.m; sourceTree = "<group>"; };
 		2C805AFA1519BA3600C2702A /* BouncyMachineGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BouncyMachineGun.h; path = weapons/BouncyMachineGun.h; sourceTree = "<group>"; };
@@ -135,6 +141,8 @@
 		2C8E0876152BAD3600D4BAC3 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = iPhoneGame/pickups/Item.h; sourceTree = "<group>"; };
 		2C8E0877152BAD3600D4BAC3 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = iPhoneGame/pickups/Item.m; sourceTree = "<group>"; };
 		2C8E0879152BB26200D4BAC3 /* health.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = health.png; sourceTree = "<group>"; };
+		2C8EBFED153EA7C00003BA6A /* InfiniteEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfiniteEnvironment.h; path = environment/InfiniteEnvironment.h; sourceTree = "<group>"; };
+		2C8EBFEE153EA7C00003BA6A /* InfiniteEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfiniteEnvironment.m; path = environment/InfiniteEnvironment.m; sourceTree = "<group>"; };
 		2C8EE3B0153624EC00FF6E4E /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		2C8EE3B21536289300FF6E4E /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 		2C8EE3B415362EAE00FF6E4E /* pauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButton.png; sourceTree = "<group>"; };
@@ -197,8 +205,6 @@
 		CEAEABA515032D74000F7448 /* ToggleJoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToggleJoyStick.h; path = controls/ToggleJoyStick.h; sourceTree = "<group>"; };
 		CEAEABA615032D74000F7448 /* ToggleJoyStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToggleJoyStick.m; path = controls/ToggleJoyStick.m; sourceTree = "<group>"; };
 		CEAEABA9150330CB000F7448 /* circleRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleRed.png; sourceTree = "<group>"; };
-		CEB48AA914F3190F00E5AD9E /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Environment.h; sourceTree = "<group>"; };
-		CEB48AAA14F3190F00E5AD9E /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Environment.m; sourceTree = "<group>"; };
 		CEBEF6B914FAD553008913F4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GameConstants.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CEC12C6A14FC70F700EF1392 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; };
 		CEC12C6B14FC70F700EF1392 /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tracker.m; sourceTree = "<group>"; };
@@ -234,6 +240,19 @@
 				2C1CF16F152D086D004A8FA6 /* ZombieSwarm.m */,
 			);
 			name = "Game Types";
+			sourceTree = "<group>";
+		};
+		2C5431D1153E7FCA00D30C14 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				2C5431D6153E814000D30C14 /* Environment.h */,
+				2C5431D7153E814000D30C14 /* Environment.m */,
+				2C5431D2153E7FE000D30C14 /* RegularEnvironment.h */,
+				2C5431D3153E7FE000D30C14 /* RegularEnvironment.m */,
+				2C8EBFED153EA7C00003BA6A /* InfiniteEnvironment.h */,
+				2C8EBFEE153EA7C00003BA6A /* InfiniteEnvironment.m */,
+			);
+			name = Environment;
 			sourceTree = "<group>";
 		};
 		2C89154F151944ED00F91087 /* Loaders */ = {
@@ -379,11 +398,10 @@
 				2CD386401519B7B500694CB9 /* Settings.m */,
 				2C94CC19152CE7FF002C998A /* Background.h */,
 				2C94CC1A152CE7FF002C998A /* Background.m */,
-				CEB48AA914F3190F00E5AD9E /* Environment.h */,
-				CEB48AAA14F3190F00E5AD9E /* Environment.m */,
 				CEC12C6A14FC70F700EF1392 /* Tracker.h */,
 				CEC12C6B14FC70F700EF1392 /* Tracker.m */,
 				2C1CF167152D0792004A8FA6 /* Game Types */,
+				2C5431D1153E7FCA00D30C14 /* Environment */,
 				CEC5BCE115030367003724F5 /* Particles */,
 				2C8E0875152BAB3000D4BAC3 /* Pickups */,
 				2C89156E1519766600F91087 /* Weapons */,
@@ -562,7 +580,6 @@
 				CE7A795814ECB05E00B8FA24 /* AppDelegate.m in Sources */,
 				CE7A795E14ECB05E00B8FA24 /* ViewController.m in Sources */,
 				CE7A796E14EDEC1200B8FA24 /* GameViewController.m in Sources */,
-				CEB48AAB14F3190F00E5AD9E /* Environment.m in Sources */,
 				CE884EE214F73981001B26DA /* GLProgram.m in Sources */,
 				CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */,
 				CEAEABA715032D74000F7448 /* ToggleJoyStick.m in Sources */,
@@ -604,6 +621,9 @@
 				2C861305152E67A000679829 /* NinjaRope.m in Sources */,
 				2CDAAA3915338967009B0867 /* NinjaRopeJoyStick.m in Sources */,
 				2C8EE3B31536289300FF6E4E /* Globals.m in Sources */,
+				2C5431D4153E7FE000D30C14 /* RegularEnvironment.m in Sources */,
+				2C5431D8153E814100D30C14 /* Environment.m in Sources */,
+				2C8EBFEF153EA7C00003BA6A /* InfiniteEnvironment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,7 +18,7 @@
 #import "Controls.h"
 
 #import "Background.h"
-#import "Environment.h"
+#import "RegularEnvironment.h"
 #import "Particles.h"
 #import "Pickups.h"
 #import "Controls.h"
@@ -60,6 +60,10 @@
 	self = [super initWithView:gameView];
 	if(self)
 	{
+		environment = [[RegularEnvironment alloc] initWithModel:self];
+		player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 100)];
+		[environment deleteRadius:20 x:(ENV_WIDTH / 2) y:100];
+		
 		zombies = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];
 		zombieTracker = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];
 		for(unsigned i = 0; i < NUMBER_OF_ZOMBIES; i++)

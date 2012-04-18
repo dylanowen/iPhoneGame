@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Environment.h"
+#import "RegularEnvironment.h"
 
 #import <GLKit/GLKit.h>
 
@@ -14,10 +14,8 @@
 #import "GameModel.h"
 #import "GLProgram.h"
 
-@interface Environment()
+@interface RegularEnvironment()
 {
-	GameModel *game;
-	
 	GLProgram *program;
 	
 	float clearer[MAX_DELETE_RADIUS * 2][4];
@@ -39,17 +37,13 @@
 
 @end
 
-@implementation Environment
-
-@synthesize width = _width;
-@synthesize height = _height;
+@implementation RegularEnvironment
 
 - (id)initWithModel:(GameModel *) model
 {
-	self = [super init];
+	self = [super initWithModel:model];
 	if(self)
 	{
-		game = model;
 		
 		float browns[5][3] = {
 			{183/256.0f, 123/256.0f, 63/256.0f},
@@ -327,7 +321,7 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-- (bool)getDirtX:(unsigned) x Y:(unsigned) y
+- (bool)checkDirtX:(unsigned) x Y:(unsigned) y
 {
 	return dirt[y][x];
 }

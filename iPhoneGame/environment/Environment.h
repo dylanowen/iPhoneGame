@@ -2,23 +2,19 @@
 //  Environment.h
 //  iPhoneGame
 //
-//  Created by Lion User on 20/02/2012.
+//  Created by Dylan Owen on 4/17/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <GLKit/GLKit.h>
-
-#import "GameConstants.h"
-
-#define MAX_DELETE_RADIUS 200
 
 @class GameModel;
 
 @interface Environment : NSObject
-
-@property (nonatomic) int width;
-@property (nonatomic) int height;
+{
+@protected
+	GameModel *game;
+}
 
 - (id)initWithModel:(GameModel *) model;
 
@@ -29,7 +25,7 @@
 
 - (void)changeColor:(float[4]) newColor x:(int) x y:(int) y;
 
-- (bool)getDirtX:(unsigned) x Y:(unsigned) y;
+- (bool)checkDirtX:(unsigned) x Y:(unsigned) y;
 
 - (void)render:(float) x;
 
