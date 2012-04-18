@@ -16,10 +16,6 @@
 @class GameModel;
 
 @interface Environment : NSObject
-{
-@public
-	bool dirt[ENV_WIDTH][ENV_HEIGHT];
-}
 
 @property (nonatomic) int width;
 @property (nonatomic) int height;
@@ -32,6 +28,8 @@
 - (void)editRect:(bool) del leftX:(int) x topY:(int) y width:(int) width height:(int) height;
 
 - (void)changeColor:(float[4]) newColor x:(int) x y:(int) y;
+
+- (bool)getDirtX:(unsigned) x Y:(unsigned) y;
 
 - (void)render:(float) x;
 

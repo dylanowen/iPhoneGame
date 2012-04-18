@@ -87,7 +87,7 @@
 					return NO;
 				}
 				
-				if(env->dirt[intI][intJ])
+				if([env getDirtX:intI Y:intJ])
 				{
 					if(!start)
 					{

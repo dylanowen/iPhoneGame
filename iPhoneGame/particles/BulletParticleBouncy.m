@@ -46,7 +46,6 @@
 	
 	int movement[2] = {(int) (velocity.x * timeSinceUpdate * precision), (int) (velocity.y * timeSinceUpdate * precision)};
 	
-	
 	i = (int) (position.x * precision);
 	j = (int) (position.y * precision);
 	
@@ -65,12 +64,114 @@
 			{
 				return NO;
 			}
-			else if(i < precision || j < precision || i >= widthBound || j >= heightBound || env->dirt[intI][intJ])
+			if(i < precision || i >= widthBound)
 			{
 				position.x = ((float) (i - stepX * destructionRadius)) / precision;
 				position.y = ((float) (j - stepY * destructionRadius)) / precision;
-				[env deleteRadius:destructionRadius x:lastI y:lastJ];
-				velocity.x = -velocity.x;
+				[env deleteRadius:destructionRadius x:intI y:intJ];
+				velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, 0.9f));
+				movement[0] = velocity.x * precision;
+				movement[1] = velocity.y * precision;
+				[self calculateStep:movement];
+				bounceCount--;
+				return YES;
+			}
+			else if(j < precision || j >= heightBound)
+			{
+				position.x = ((float) (i - stepX * destructionRadius)) / precision;
+				position.y = ((float) (j - stepY * destructionRadius)) / precision;
+				[env deleteRadius:destructionRadius x:intI y:intJ];
+				velocity = GLKVector2Multiply(velocity, GLKVector2Make(0.9f, -0.9f));
+				movement[0] = velocity.x * precision;
+				movement[1] = velocity.y * precision;
+				[self calculateStep:movement];
+				bounceCount--;
+				return YES;
+			}
+			else if([env getDirtX:intI Y:intJ])
+			{
+				if(stepX == 0)
+				{
+					velocity = GLKVector2Multiply(velocity, GLKVector2Make(0.9f, -0.9f));
+				}
+				else if(stepY == 0)
+				{
+					velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, 0.9f));
+				}
+				else if(stepX > 0 && stepY > 0)
+				{
+					//coming from top left
+					bool left = [env getDirtX:intI - 1 Y:intJ];
+					bool up = [env getDirtX:intI Y:intJ - 1];
+					if((left && up) || (!left && !up))
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, -0.9f));
+					}
+					else if(left)
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(0.9f, -0.9f));
+					}
+					else if(up)
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, 0.9f));
+					}
+					
+				}
+				else if(stepX > 0 && stepY < 0)
+				{
+					//coming from bottom left
+					bool left = [env getDirtX:intI - 1 Y:intJ];
+					bool down = [env getDirtX:intI Y:intJ + 1];
+					if((left && down) || (!left && !down))
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, -0.9f));
+					}
+					else if(left)
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(0.9f, -0.9f));
+					}
+					else if(down)
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, 0.9f));
+					}
+				}
+				else if(stepX < 0 && stepY > 0)
+				{
+					//coming from top right
+					bool right = [env getDirtX:intI + 1 Y:intJ];
+					bool up = [env getDirtX:intI Y:intJ - 1];
+					if((right && up) || (!right && !up))
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, -0.9f));
+					}
+					else if(right)
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(0.9f, -0.9f));
+					}
+					else if(up)
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, 0.9f));
+					}
+				}
+				else
+				{
+					//coming from bottom right
+					bool right = [env getDirtX:intI + 1 Y:intJ];
+					bool down = [env getDirtX:intI Y:intJ + 1];
+					if((right && down) || (!right && !down))
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, -0.9f));
+					}
+					else if(right)
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(0.9f, -0.9f));
+					}
+					else if(down)
+					{
+						velocity = GLKVector2Multiply(velocity, GLKVector2Make(-0.9f, 0.9f));
+					}
+				}
+				[env deleteRadius:destructionRadius x:intI y:intJ];
 				movement[0] = velocity.x * precision;
 				movement[1] = velocity.y * precision;
 				[self calculateStep:movement];

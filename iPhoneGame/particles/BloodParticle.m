@@ -125,7 +125,7 @@
 				{
 					return NO;
 				}	
-				if(env->dirt[intI][intJ])
+				if([env getDirtX:intI Y:intJ])
 				{
 					[env changeColor:color x:intI y:intJ];
 					return NO;

@@ -47,6 +47,7 @@
 
 - (void)calculateStep:(int[2]) movement
 {
+	//NSLog(@"%d %d", movement[0], movement[1]);
 	if(movement[0] != 0 || movement[1] != 0)
 	{
 		if(movement[0] == 0)
@@ -59,14 +60,14 @@
 			stepX = (movement[0] < 0)?-precision:precision;
 			stepY = 0;
 		}
-		else if(abs(movement[0]) > abs(movement[1]))
-		{
-			stepX = (movement[0] < 0)?-precision:precision;
-			stepY = movement[1] / movement[0];
-		}
 		else if(abs(movement[0]) < abs(movement[1]))
 		{
-			stepX = movement[0] / movement[1];
+			stepX = (movement[0] < 0)?-precision:precision;
+			stepY = movement[1] * precision / abs(movement[0]);
+		}
+		else if(abs(movement[0]) > abs(movement[1]))
+		{
+			stepX = movement[0] * precision / abs(movement[1]);
 			stepY = (movement[1] < 0)?-precision:precision;
 		}
 		else
@@ -138,7 +139,7 @@
 				return NO;
 			}
 		
-			if(env->dirt[intI][intJ])
+			if([env getDirtX:intI Y:intJ])
 			{
 				if(!start)
 				{

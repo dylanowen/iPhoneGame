@@ -149,7 +149,7 @@ enum
 			intJ = j / precision;
 			if(intI != lastI || intJ != lastJ)
 			{
-				if(intI < 1 || intJ < 0 || intI >= ENV_WIDTH || intJ >= ENV_HEIGHT || environment->dirt[intI][intJ])
+				if(intI < 1 || intJ < 0 || intI >= ENV_WIDTH || intJ >= ENV_HEIGHT || [environment getDirtX:intI Y:intJ])
 				{
 					state = stuck;
 					position.x = ((float) i) / precision;

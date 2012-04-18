@@ -23,6 +23,9 @@
 	float clearer[MAX_DELETE_RADIUS * 2][4];
 	float restorer[MAX_DELETE_RADIUS * 2][MAX_DELETE_RADIUS * 2][4];
 	
+	//stored y, x
+	bool dirt[ENV_HEIGHT][ENV_WIDTH];
+	
 	GLuint positionAttribute;
 	GLuint colorAttribute;
 	GLuint modelViewUniform;
@@ -102,11 +105,11 @@
 		float *vertices = malloc(vertexBufferSize);
 		float *colors = malloc(colorBufferSize);
 
-		for(unsigned i = 0; i < ENV_WIDTH; i++)
+		for(unsigned j = 0; j < ENV_HEIGHT; j++)
 		{
-			for(unsigned j = 0; j < ENV_HEIGHT; j++)
+			for(unsigned i = 0; i < ENV_WIDTH; i++)
 			{
-				unsigned off = i * ENV_HEIGHT + j;
+				unsigned off = j * ENV_WIDTH + i;
 				unsigned offVertices = off * 2;
 				unsigned offColor = off * 4;
 				
@@ -119,7 +122,7 @@
 				colors[offColor + 2] = browns[randomBrown][2];
 				colors[offColor + 3] = 1.0f;
 				
-				dirt[i][j] = YES;
+				dirt[j][i] = YES;
 			}
 		}
 		
@@ -164,54 +167,54 @@
 
 #define editRadius(sub, col) \
 radius = (radius > MAX_DELETE_RADIUS)?MAX_DELETE_RADIUS:radius;\
-int tempY, i = -radius, iEnd = radius, j, jEnd;\
+int tempX, i, iEnd, j = -radius, jEnd = radius;\
 unsigned offset;\
 \
-if((i + x) < 1)\
+if((j + y) < 1)\
 {\
-	i = 1 - x;\
+	j = 1 - y;\
 }\
-if(iEnd + x > (ENV_WIDTH - 1))\
+if(jEnd + y > (ENV_HEIGHT - 1))\
 {\
-	iEnd = ENV_WIDTH - 1 - x;\
+	jEnd = ENV_HEIGHT - 1 - y;\
 }\
 \
 glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);\
-while(i < iEnd)\
+while(j < jEnd)\
 {\
-	tempY = (int) sqrt((radius * radius) - (i * i));\
+	tempX = (int) sqrt((radius * radius) - (j * j));\
 	\
-	if(tempY > 0)\
+	if(tempX > 0)\
 	{\
-		if(y - tempY < 1)\
+		if(x - tempX < 1)\
 		{\
-			j = 1;\
-			jEnd = tempY + y - 1;\
+			i = 1;\
+			iEnd = tempX + x - 1;\
 		}\
-		else if(y + tempY > (ENV_HEIGHT - 1))\
+		else if(x + tempX > (ENV_WIDTH - 1))\
 		{\
-			j = y - tempY;\
-			jEnd = tempY + ENV_HEIGHT - 1 - y;\
+			i = x - tempX;\
+			iEnd = tempX + ENV_WIDTH - 1 - x;\
 		}\
 		else\
 		{\
-			j = y - tempY;\
-			jEnd = tempY * 2;\
+			i = x - tempX;\
+			iEnd = tempX * 2;\
 		}\
 		\
-		offset = ((i + x) * ENV_HEIGHT + j) * 4 * sizeof(float);\
-		tempY = jEnd * 4 * sizeof(float);\
+		offset = ((j + y) * ENV_WIDTH + i) * 4 * sizeof(float);\
+		tempX = iEnd * 4 * sizeof(float);\
 		\
-		glBufferSubData(GL_ARRAY_BUFFER, offset, tempY, sub);\
+		glBufferSubData(GL_ARRAY_BUFFER, offset, tempX, sub);\
 		\
-		jEnd += j;\
-		while(j < jEnd)\
+		iEnd += i;\
+		while(i < iEnd)\
 		{\
-			dirt[i + x][j] = col;\
-			j++;\
+			dirt[j + y][i] = col;\
+			i++;\
 		}\
 	}\
-	i++;\
+	j++;\
 }\
 glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -231,7 +234,8 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 	float **oWA;
 	bool collisionState;
 	
-	height = (height > MAX_DELETE_RADIUS * 2)?MAX_DELETE_RADIUS * 2:height; //keep the height in bounds
+	width = (width > MAX_DELETE_RADIUS * 2)?MAX_DELETE_RADIUS * 2:width; //keep the width in bounds with the max_delete_radius
+	
 	if(x < 1)
 	{
 		x = 1;
@@ -263,15 +267,15 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 	int endX = x + width;
 	int endY = y + height;
 	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-	for(int i = x; i < endX; i++)
+	for(int j = y; j < endY; j++)
 	{
 		//clear out the buffer
-		glBufferSubData(GL_ARRAY_BUFFER, (i * ENV_HEIGHT + y) * 4 * sizeof(float), height * 4 * sizeof(float), oWA);
+		glBufferSubData(GL_ARRAY_BUFFER, (j * ENV_WIDTH + x) * 4 * sizeof(float), width * 4 * sizeof(float), oWA);
 		
 		//clear our own local array
-		for(int j = y; j < endY; j++)
+		for(int i = x; i < endX; i++)
 		{
-			dirt[i][j] = collisionState;
+			dirt[j][i] = collisionState;
 		}
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -287,21 +291,21 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 	//original position
 	if(x >= 0 && x < ENV_WIDTH && y >= 0 && y < ENV_HEIGHT)
 	{
-		offset = (x * ENV_HEIGHT + y) * change;
+		offset = (y * ENV_WIDTH + x) * change;
 		glBufferSubData(GL_ARRAY_BUFFER, offset, length, newColor);
 	}
 	//left
 	x--;
 	if(x >= 0 && x < ENV_WIDTH && y >= 0 && y < ENV_HEIGHT)
 	{
-		offset = (x * ENV_HEIGHT + y) * change;
+		offset = (y * ENV_WIDTH + x) * change;
 		glBufferSubData(GL_ARRAY_BUFFER, offset, length, newColor);
 	}
 	//right
 	x += 2;
 	if(x >= 0 && x < ENV_WIDTH && y >= 0 && y < ENV_HEIGHT)
 	{
-		offset = (x * ENV_HEIGHT + y) * change;
+		offset = (y * ENV_WIDTH + x) * change;
 		glBufferSubData(GL_ARRAY_BUFFER, offset, length, newColor);
 	}
 	//up
@@ -309,18 +313,23 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 	y--;
 	if(x >= 0 && x < ENV_WIDTH && y >= 0 && y < ENV_HEIGHT)
 	{
-		offset = (x * ENV_HEIGHT + y) * change;
+		offset = (y * ENV_WIDTH + x) * change;
 		glBufferSubData(GL_ARRAY_BUFFER, offset, length, newColor);
 	}
 	//down
 	y += 2;
 	if(x >= 0 && x < ENV_WIDTH && y >= 0 && y < ENV_HEIGHT)
 	{
-		offset = (x * ENV_HEIGHT + y) * change;
+		offset = (y * ENV_WIDTH + x) * change;
 		glBufferSubData(GL_ARRAY_BUFFER, offset, length, newColor);
 	}
 	
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+- (bool)getDirtX:(unsigned) x Y:(unsigned) y
+{
+	return dirt[y][x];
 }
 
 - (void)render:(float) x
@@ -331,16 +340,16 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 	
 	glUniformMatrix4fv(modelViewUniform, 1, 0, game->dynamicProjection.m);
 	
-	int start = floor(game->screenCenter.x) - DYNAMIC_VIEW_WIDTH / 2, end = DYNAMIC_VIEW_WIDTH + 1;
+	int start = floor(game->screenCenter.y) - DYNAMIC_VIEW_HEIGHT / 2, end = DYNAMIC_VIEW_HEIGHT + 1;
 	if(start < 0)
 	{
 		start = 0;
 	}
-	else if(end + start > ENV_WIDTH)
+	else if(end + start > ENV_HEIGHT)
 	{
-		end = ENV_WIDTH - start;
+		end = ENV_HEIGHT - start;
 	}
-	glDrawArrays(GL_POINTS, start * ENV_HEIGHT, end * ENV_HEIGHT);
+	glDrawArrays(GL_POINTS, start * ENV_WIDTH, end * ENV_WIDTH);
 	
 	glBindVertexArrayOES(0);
 	
@@ -359,7 +368,7 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 			debugColor[offset * 4 + 0] = 1.0f;
 			debugColor[offset * 4 + 1] = 1.0f;
 			debugColor[offset * 4 + 2] = 1.0f;
-			if(dirt[i][j])
+			if(dirt[j][i])
 			{
 				debugColor[offset * 4 + 3] = 0.1f;
 			}
@@ -369,12 +378,12 @@ glBindBuffer(GL_ARRAY_BUFFER, 0);
 			}
 		}
 	}
-	[self.program use];
+	[program use];
 	glEnableVertexAttribArray(positionAttribute);
 	glVertexAttribPointer(positionAttribute, 2, GL_FLOAT, GL_FALSE, 0, debugVertices);
 	glEnableVertexAttribArray(colorAttribute);
 	glVertexAttribPointer(colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, debugColor);
-	glUniformMatrix4fv(modelViewUniform, 1, 0, self.game.projectionMatrix.m);
+	glUniformMatrix4fv(modelViewUniform, 1, 0, game->dynamicProjection.m);
 	glDrawArrays(GL_POINTS, 0, ENV_WIDTH * ENV_HEIGHT);
 	glDisableVertexAttribArray(colorAttribute);
 	glDisableVertexAttribArray(positionAttribute);
