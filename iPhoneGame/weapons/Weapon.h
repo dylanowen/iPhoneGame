@@ -27,6 +27,6 @@
 - (id)initWithParticles:(Particles *) part;
 
 - (void)update;
-- (void)shootAtPosition:(GLKVector2) position direction:(GLKVector2) dir;
+- (void)shootAtPosition:(GLKVector2) playerPosition direction:(GLKVector2) dir startVelocity:(GLKVector2) vel;
 
 @end

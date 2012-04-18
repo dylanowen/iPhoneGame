@@ -178,7 +178,7 @@
 	
 	if(shootGun)
 	{
-		[currentGun shootAtPosition:position direction: lookGun];
+		[currentGun shootAtPosition:position direction: lookGun startVelocity: velocity];
 	}
 	
 	if(animateTimer >= .25f)

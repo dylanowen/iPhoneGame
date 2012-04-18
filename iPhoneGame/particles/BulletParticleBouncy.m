@@ -24,7 +24,7 @@
 
 @implementation BulletParticleBouncy
 
-- (id)initWithParticles:(Particles *) parts position:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg
+- (id)initWithParticles:(Particles *) parts position:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damageDivider:(int) dmg
 {
 	self = [super initWithParticles:parts position:posit velocity:veloc destructionRadius:radius damage:dmg];
 	if(self)

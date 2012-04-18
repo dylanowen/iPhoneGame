@@ -31,7 +31,7 @@
 	timeSinceShot += timeSinceUpdate;
 }
 
-- (void)shootAtPosition:(GLKVector2) playerPosition direction:(GLKVector2) dir
+- (void)shootAtPosition:(GLKVector2) playerPosition direction:(GLKVector2) dir startVelocity:(GLKVector2) vel
 {
 	timeSinceShot = 0;
 }

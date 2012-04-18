@@ -36,7 +36,6 @@
 		widthBound = (ENV_WIDTH - 1) * precision;
 		heightBound = (ENV_HEIGHT - 1) * precision;
 		
-		//something is wrong here?
 		int movement[2] = {(int) (velocity.x * precision), (int) (velocity.y * precision)};
 		[self calculateStep:movement];
 		
@@ -164,6 +163,11 @@
 	position.x += ((float) movement[0]) / precision;
 	position.y += ((float) movement[1]) / precision;
 	return YES;
+}
+
+- (void)calculateDamage
+{
+	
 }
 
 - (void)render

@@ -42,5 +42,6 @@
 - (id)initWithParticles:(Particles *) model position:(GLKVector2) posit velocity:(GLKVector2) veloc destructionRadius:(unsigned) radius damage:(int) dmg;
 
 - (void)calculateStep:(int[2]) movement;
+- (void)calculateDamage;
 
 @end

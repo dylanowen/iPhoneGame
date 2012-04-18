@@ -24,13 +24,13 @@
 	return nil;
 }
 
-- (void)shootAtPosition:(GLKVector2) playerPosition direction:(GLKVector2) dir
+- (void)shootAtPosition:(GLKVector2) playerPosition direction:(GLKVector2) dir startVelocity:(GLKVector2) vel
 {
 	if(timeSinceShot > fireSpeed)
 	{
 		timeSinceShot = 0;
 		GLKVector2 awayFromPlayer = GLKVector2Add(playerPosition, GLKVector2MultiplyScalar(dir, 10));
-		[particles addBulletWithPosition: awayFromPlayer velocity:GLKVector2MultiplyScalar(dir, 150) destructionRadius:10 damage:80];
+		[particles addBulletWithPosition: awayFromPlayer velocity:GLKVector2Add(GLKVector2MultiplyScalar(dir, 150), vel) destructionRadius:10 damage:80];
 	}
 }
 

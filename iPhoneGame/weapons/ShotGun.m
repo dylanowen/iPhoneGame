@@ -24,14 +24,14 @@
 	return nil;
 }
 
-- (void)shootAtPosition:(GLKVector2) playerPosition direction:(GLKVector2) dir
+- (void)shootAtPosition:(GLKVector2) playerPosition direction:(GLKVector2) dir startVelocity:(GLKVector2) vel
 {
 	if(timeSinceShot > fireSpeed)
 	{
 		timeSinceShot = 0;
 		GLKVector2 awayFromPlayer = GLKVector2Add(playerPosition, GLKVector2MultiplyScalar(dir, 7));
-		GLKVector2 velocityUp = GLKVector2MultiplyScalar(dir, 200);
-		GLKVector2 velocityDown = GLKVector2MultiplyScalar(dir, 200);
+		GLKVector2 velocityUp = GLKVector2Add(GLKVector2MultiplyScalar(dir, 200), vel);
+		GLKVector2 velocityDown = GLKVector2Add(GLKVector2MultiplyScalar(dir, 200), vel);
 		GLKVector2 movementUp = GLKVector2MultiplyScalar(GLKVector2Normalize(GLKVector2Make(-velocityUp.y, velocityUp.x)), 10);
 		GLKVector2 movementDown = GLKVector2MultiplyScalar(movementUp, -1);
 		
