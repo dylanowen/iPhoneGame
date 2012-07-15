@@ -62,6 +62,7 @@
 	{
 		environment = [[RegularEnvironment alloc] initWithModel:self];
 		player = [[Player alloc] initWithModel:self position:GLKVector2Make(ENV_WIDTH / 2, 100)];
+		[controls->shootRope setPlayer:player];
 		[environment deleteRadius:20 x:(ENV_WIDTH / 2) y:100];
 		
 		zombies = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ZOMBIES];

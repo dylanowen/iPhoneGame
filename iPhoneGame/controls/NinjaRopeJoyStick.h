@@ -8,6 +8,10 @@
 
 #import "ToggleJoyStick.h"
 
+@class Player;
+
 @interface NinjaRopeJoyStick : ToggleJoyStick
+
+- (void)setPlayer:(Player *) play;
 
 @end
