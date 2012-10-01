@@ -57,11 +57,11 @@
 	{
 		NSLog(@"No saved files to load");
 		self.highScores = [[NSMutableArray alloc] initWithObjects:
-								 [NSNumber numberWithUnsignedInt:0], [[NSString alloc] initWithString:@"nobody"], 
-								 [NSNumber numberWithUnsignedInt:0], [[NSString alloc] initWithString:@"nobody"], 
-								 [NSNumber numberWithUnsignedInt:0], [[NSString alloc] initWithString:@"nobody"], 
-								 [NSNumber numberWithUnsignedInt:0], [[NSString alloc] initWithString:@"nobody"], 
-								 [NSNumber numberWithUnsignedInt:0], [[NSString alloc] initWithString:@"nobody"], 
+								 [NSNumber numberWithUnsignedInt:0], @"nobody",
+								 [NSNumber numberWithUnsignedInt:0], @"nobody",
+								 [NSNumber numberWithUnsignedInt:0], @"nobody", 
+								 [NSNumber numberWithUnsignedInt:0], @"nobody",
+								 [NSNumber numberWithUnsignedInt:0], @"nobody", 
 								 nil];
 		[self saveFilePaths];
 	}
