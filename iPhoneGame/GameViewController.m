@@ -9,7 +9,7 @@
 #import "GameViewController.h"
 
 #import "Globals.h"
-#import "ZombieSwarm.h"
+#import "GameModel.h"
 #import "Player.h"
 #import "Weapon.h"
 
@@ -55,7 +55,7 @@
 	
 	glDisable(GL_STENCIL_TEST);
 	
-	game = [[ZombieSwarm alloc] initWithView:self];
+	game = [[GameModel alloc] initWithView:self];
 }
 
 - (void)viewDidUnload
@@ -79,7 +79,7 @@
 	timeSinceUpdate = self.timeSinceLastUpdate;
 	if(![game update])
 	{
-		[self performSegueWithIdentifier: @"gameOver" sender: self];
+		//[self performSegueWithIdentifier: @"gameOver" sender: self];
 	}
 }
 
@@ -90,19 +90,19 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[game->controls touchesBegan: touches];
+	//[game->controls touchesBegan: touches];
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[game->controls touchesMoved: touches];
+	//[game->controls touchesMoved: touches];
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	[game->controls touchesEnded: touches];
+	//[game->controls touchesEnded: touches];
 }
 - (void)touchesCancelled:(NSSet *)touches
 {
-	[game->controls touchesCancelled: touches];
+	//[game->controls touchesCancelled: touches];
 }
 
 - (void)pauseGame

@@ -9,56 +9,17 @@
 /* Begin PBXBuildFile section */
 		2C13BB5C150C72E40002FA77 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C13BB5B150C72E40002FA77 /* character.png */; };
 		2C1CF16A152D07B1004A8FA6 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1CF169152D07B1004A8FA6 /* GameModel.m */; };
-		2C1CF170152D086D004A8FA6 /* ZombieSwarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1CF16F152D086D004A8FA6 /* ZombieSwarm.m */; };
 		2C2A0759152C05DD0066E88D /* zombie_skull.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2A0758152C05DD0066E88D /* zombie_skull.png */; };
-		2C2A0761152C18310066E88D /* HealingParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2A0760152C18300066E88D /* HealingParticle.m */; };
-		2C5431D4153E7FE000D30C14 /* RegularEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5431D3153E7FE000D30C14 /* RegularEnvironment.m */; };
 		2C5431D8153E814100D30C14 /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5431D7153E814000D30C14 /* Environment.m */; };
-		2C6EF570151D2EB000CFDCA3 /* VAOLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */; };
-		2C805AFC1519BA3600C2702A /* BouncyMachineGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C805AFB1519BA3600C2702A /* BouncyMachineGun.m */; };
-		2C805AFF1519BBE100C2702A /* BouncyShotGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C805AFE1519BBE100C2702A /* BouncyShotGun.m */; };
-		2C861305152E67A000679829 /* NinjaRope.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C861304152E67A000679829 /* NinjaRope.m */; };
-		2C8915521519451700F91087 /* TextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915511519451700F91087 /* TextureLoader.m */; };
-		2C891555151945C900F91087 /* TextureDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C891554151945C900F91087 /* TextureDescription.m */; };
-		2C89155815194A9000F91087 /* EffectLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89155715194A9000F91087 /* EffectLoader.m */; };
-		2C89155B15194F9700F91087 /* BufferLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89155A15194F9700F91087 /* BufferLoader.m */; };
-		2C8915601519544200F91087 /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89155D1519544200F91087 /* Controls.m */; };
-		2C8915611519544200F91087 /* JoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89155F1519544200F91087 /* JoyStick.m */; };
-		2C8915681519545D00F91087 /* BloodParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915631519545D00F91087 /* BloodParticle.m */; };
-		2C8915691519545D00F91087 /* BulletParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915651519545D00F91087 /* BulletParticle.m */; };
-		2C89156A1519545D00F91087 /* Particles.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915671519545D00F91087 /* Particles.m */; };
-		2C89156D1519766300F91087 /* Weapon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89156C1519766200F91087 /* Weapon.m */; };
-		2C8915711519786200F91087 /* MachineGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915701519786200F91087 /* MachineGun.m */; };
-		2C89157715197A7D00F91087 /* ShotGun.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89157615197A7D00F91087 /* ShotGun.m */; };
-		2C89157F151984FE00F91087 /* Sniper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89157E151984FD00F91087 /* Sniper.m */; };
-		2C8915851519863F00F91087 /* BulletParticleGrav.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8915841519863F00F91087 /* BulletParticleGrav.m */; };
-		2C89158815198B8E00F91087 /* BulletParticleBouncy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C89158715198B8D00F91087 /* BulletParticleBouncy.m */; };
 		2C8D246315353B1A00605AE7 /* circleGray.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8D246215353B1A00605AE7 /* circleGray.png */; };
-		2C8D61BC1519AC6800379943 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D61BB1519AC6800379943 /* Player.m */; };
-		2C8E0874152BAB2B00D4BAC3 /* Pickups.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E0873152BAB2B00D4BAC3 /* Pickups.m */; };
-		2C8E0878152BAD3600D4BAC3 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E0877152BAD3600D4BAC3 /* Item.m */; };
 		2C8E087A152BB26200D4BAC3 /* health.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8E0879152BB26200D4BAC3 /* health.png */; };
-		2C8EBFEF153EA7C00003BA6A /* InfiniteEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EBFEE153EA7C00003BA6A /* InfiniteEnvironment.m */; };
 		2C8EE3B31536289300FF6E4E /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C8EE3B21536289300FF6E4E /* Globals.m */; };
 		2C8EE3B515362EAE00FF6E4E /* pauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C8EE3B415362EAE00FF6E4E /* pauseButton.png */; };
 		2C901E02153568C500747795 /* healthParticle.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2C901E01153568C500747795 /* healthParticle.vsh */; };
-		2C91258415167CB200BA3DF6 /* Zombie.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258315167CB200BA3DF6 /* Zombie.m */; };
-		2C91258E15167D2D00BA3DF6 /* Character.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91258D15167D2D00BA3DF6 /* Character.m */; };
 		2C912593151686C500BA3DF6 /* zombie.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C912592151686C500BA3DF6 /* zombie.png */; };
-		2C92F049151A4F020049C0F1 /* HighScoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C92F048151A4F020049C0F1 /* HighScoreController.m */; };
-		2C92F04D151A4F430049C0F1 /* HighScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C92F04C151A4F430049C0F1 /* HighScore.m */; };
-		2C930AAB152C033800349E9A /* ZombieSkull.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C930AAA152C033800349E9A /* ZombieSkull.m */; };
-		2C94CC1B152CE7FF002C998A /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C94CC1A152CE7FF002C998A /* Background.m */; };
 		2C94CC1E152CE9CE002C998A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C94CC1D152CE9CE002C998A /* background.png */; };
 		2C9B45021536B4E50001D024 /* pauseButtonWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C9B45011536B4E40001D024 /* pauseButtonWhite.png */; };
-		2CD3863D1519B7AB00694CB9 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */; };
-		2CD386411519B7B500694CB9 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD386401519B7B500694CB9 /* Settings.m */; };
-		2CD386441519B7BE00694CB9 /* WeaponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD386431519B7BD00694CB9 /* WeaponViewController.m */; };
 		2CD7800F1516B2F5009EE721 /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7800E1516B2F5009EE721 /* font.png */; };
-		2CD780191516B3CE009EE721 /* Text.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD780171516B3CE009EE721 /* Text.m */; };
-		2CDA49E615178CD8009D86A0 /* Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA49E515178CD8009D86A0 /* Button.m */; };
-		2CDAAA3915338967009B0867 /* NinjaRopeJoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAAA3815338967009B0867 /* NinjaRopeJoyStick.m */; };
-		2CF9C58215170F9500C21613 /* jump_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CF9C58115170F9500C21613 /* jump_button.png */; };
 		CE7A794814ECB05E00B8FA24 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794714ECB05E00B8FA24 /* UIKit.framework */; };
 		CE7A794A14ECB05E00B8FA24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794914ECB05E00B8FA24 /* Foundation.framework */; };
 		CE7A794C14ECB05E00B8FA24 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A794B14ECB05E00B8FA24 /* CoreGraphics.framework */; };
@@ -66,15 +27,12 @@
 		CE7A795414ECB05E00B8FA24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A795314ECB05E00B8FA24 /* main.m */; };
 		CE7A795814ECB05E00B8FA24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A795714ECB05E00B8FA24 /* AppDelegate.m */; };
 		CE7A795B14ECB05E00B8FA24 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE7A795914ECB05E00B8FA24 /* MainStoryboard.storyboard */; };
-		CE7A795E14ECB05E00B8FA24 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A795D14ECB05E00B8FA24 /* ViewController.m */; };
 		CE7A796E14EDEC1200B8FA24 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7A796D14EDEC1200B8FA24 /* GameViewController.m */; };
 		CE7A797114EDECBE00B8FA24 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797014EDECBE00B8FA24 /* QuartzCore.framework */; };
 		CE7A797314EDECC800B8FA24 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797214EDECC800B8FA24 /* OpenGLES.framework */; };
 		CE7A797514EDECCE00B8FA24 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A797414EDECCE00B8FA24 /* GLKit.framework */; };
 		CE884EE214F73981001B26DA /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = CE884EE114F73981001B26DA /* GLProgram.m */; };
-		CEAEABA715032D74000F7448 /* ToggleJoyStick.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAEABA615032D74000F7448 /* ToggleJoyStick.m */; };
 		CEAEABAA150330CB000F7448 /* circleRed.png in Resources */ = {isa = PBXBuildFile; fileRef = CEAEABA9150330CB000F7448 /* circleRed.png */; };
-		CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC12C6B14FC70F700EF1392 /* Tracker.m */; };
 		CEC5BCE615030A64003724F5 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC5BCE515030A64003724F5 /* circle.png */; };
 		CEE52F891502BE1D00DDF174 /* particleShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CEE52F821502BE0200DDF174 /* particleShader.fsh */; };
 		CEE52F8A1502BE1D00DDF174 /* particleShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CEE52F831502BE0200DDF174 /* particleShader.vsh */; };
@@ -85,103 +43,25 @@
 		2C13BB5B150C72E40002FA77 /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = character.png; sourceTree = "<group>"; };
 		2C1CF168152D07B1004A8FA6 /* GameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameModel.h; path = gameTypes/GameModel.h; sourceTree = "<group>"; };
 		2C1CF169152D07B1004A8FA6 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameModel.m; path = gameTypes/GameModel.m; sourceTree = "<group>"; };
-		2C1CF16E152D086D004A8FA6 /* ZombieSwarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZombieSwarm.h; path = gameTypes/ZombieSwarm.h; sourceTree = "<group>"; };
-		2C1CF16F152D086D004A8FA6 /* ZombieSwarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZombieSwarm.m; path = gameTypes/ZombieSwarm.m; sourceTree = "<group>"; };
 		2C2A0758152C05DD0066E88D /* zombie_skull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie_skull.png; sourceTree = "<group>"; };
-		2C2A075E152C17510066E88D /* Particle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Particle.h; path = particles/Particle.h; sourceTree = "<group>"; };
-		2C2A075F152C18300066E88D /* HealingParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HealingParticle.h; path = particles/HealingParticle.h; sourceTree = "<group>"; };
-		2C2A0760152C18300066E88D /* HealingParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HealingParticle.m; path = particles/HealingParticle.m; sourceTree = "<group>"; };
-		2C5431D2153E7FE000D30C14 /* RegularEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegularEnvironment.h; path = environment/RegularEnvironment.h; sourceTree = "<group>"; };
-		2C5431D3153E7FE000D30C14 /* RegularEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegularEnvironment.m; path = environment/RegularEnvironment.m; sourceTree = "<group>"; };
 		2C5431D6153E814000D30C14 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Environment.h; path = environment/Environment.h; sourceTree = "<group>"; };
 		2C5431D7153E814000D30C14 /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Environment.m; path = environment/Environment.m; sourceTree = "<group>"; };
-		2C6EF56E151D2EB000CFDCA3 /* VAOLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VAOLoader.h; path = loaders/VAOLoader.h; sourceTree = "<group>"; };
-		2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VAOLoader.m; path = loaders/VAOLoader.m; sourceTree = "<group>"; };
-		2C805AFA1519BA3600C2702A /* BouncyMachineGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BouncyMachineGun.h; path = weapons/BouncyMachineGun.h; sourceTree = "<group>"; };
-		2C805AFB1519BA3600C2702A /* BouncyMachineGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BouncyMachineGun.m; path = weapons/BouncyMachineGun.m; sourceTree = "<group>"; };
-		2C805AFD1519BBE100C2702A /* BouncyShotGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BouncyShotGun.h; path = weapons/BouncyShotGun.h; sourceTree = "<group>"; };
-		2C805AFE1519BBE100C2702A /* BouncyShotGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BouncyShotGun.m; path = weapons/BouncyShotGun.m; sourceTree = "<group>"; };
-		2C861303152E67A000679829 /* NinjaRope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NinjaRope.h; path = characters/NinjaRope.h; sourceTree = "<group>"; };
-		2C861304152E67A000679829 /* NinjaRope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NinjaRope.m; path = characters/NinjaRope.m; sourceTree = "<group>"; };
-		2C8915501519451700F91087 /* TextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureLoader.h; path = loaders/TextureLoader.h; sourceTree = "<group>"; };
-		2C8915511519451700F91087 /* TextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextureLoader.m; path = loaders/TextureLoader.m; sourceTree = "<group>"; };
-		2C891553151945C900F91087 /* TextureDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextureDescription.h; path = loaders/TextureDescription.h; sourceTree = "<group>"; };
-		2C891554151945C900F91087 /* TextureDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextureDescription.m; path = loaders/TextureDescription.m; sourceTree = "<group>"; };
-		2C89155615194A9000F91087 /* EffectLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EffectLoader.h; path = loaders/EffectLoader.h; sourceTree = "<group>"; };
-		2C89155715194A9000F91087 /* EffectLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EffectLoader.m; path = loaders/EffectLoader.m; sourceTree = "<group>"; };
-		2C89155915194F9700F91087 /* BufferLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BufferLoader.h; path = loaders/BufferLoader.h; sourceTree = "<group>"; };
-		2C89155A15194F9700F91087 /* BufferLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BufferLoader.m; path = loaders/BufferLoader.m; sourceTree = "<group>"; };
-		2C89155C1519544200F91087 /* Controls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controls.h; path = controls/Controls.h; sourceTree = "<group>"; };
-		2C89155D1519544200F91087 /* Controls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Controls.m; path = controls/Controls.m; sourceTree = "<group>"; };
-		2C89155E1519544200F91087 /* JoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JoyStick.h; path = controls/JoyStick.h; sourceTree = "<group>"; };
-		2C89155F1519544200F91087 /* JoyStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JoyStick.m; path = controls/JoyStick.m; sourceTree = "<group>"; };
-		2C8915621519545D00F91087 /* BloodParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BloodParticle.h; path = particles/BloodParticle.h; sourceTree = "<group>"; };
-		2C8915631519545D00F91087 /* BloodParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BloodParticle.m; path = particles/BloodParticle.m; sourceTree = "<group>"; };
-		2C8915641519545D00F91087 /* BulletParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletParticle.h; path = particles/BulletParticle.h; sourceTree = "<group>"; };
-		2C8915651519545D00F91087 /* BulletParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BulletParticle.m; path = particles/BulletParticle.m; sourceTree = "<group>"; };
-		2C8915661519545D00F91087 /* Particles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Particles.h; path = particles/Particles.h; sourceTree = "<group>"; };
-		2C8915671519545D00F91087 /* Particles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Particles.m; path = particles/Particles.m; sourceTree = "<group>"; };
-		2C89156B1519766100F91087 /* Weapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Weapon.h; path = weapons/Weapon.h; sourceTree = "<group>"; };
-		2C89156C1519766200F91087 /* Weapon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Weapon.m; path = weapons/Weapon.m; sourceTree = "<group>"; };
-		2C89156F1519786200F91087 /* MachineGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MachineGun.h; path = weapons/MachineGun.h; sourceTree = "<group>"; };
-		2C8915701519786200F91087 /* MachineGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MachineGun.m; path = weapons/MachineGun.m; sourceTree = "<group>"; };
-		2C89157515197A7D00F91087 /* ShotGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShotGun.h; path = weapons/ShotGun.h; sourceTree = "<group>"; };
-		2C89157615197A7D00F91087 /* ShotGun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShotGun.m; path = weapons/ShotGun.m; sourceTree = "<group>"; };
-		2C89157D151984FD00F91087 /* Sniper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sniper.h; path = weapons/Sniper.h; sourceTree = "<group>"; };
-		2C89157E151984FD00F91087 /* Sniper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sniper.m; path = weapons/Sniper.m; sourceTree = "<group>"; };
-		2C8915831519863F00F91087 /* BulletParticleGrav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletParticleGrav.h; path = particles/BulletParticleGrav.h; sourceTree = "<group>"; };
-		2C8915841519863F00F91087 /* BulletParticleGrav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BulletParticleGrav.m; path = particles/BulletParticleGrav.m; sourceTree = "<group>"; };
-		2C89158615198B8D00F91087 /* BulletParticleBouncy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BulletParticleBouncy.h; path = particles/BulletParticleBouncy.h; sourceTree = "<group>"; };
-		2C89158715198B8D00F91087 /* BulletParticleBouncy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BulletParticleBouncy.m; path = particles/BulletParticleBouncy.m; sourceTree = "<group>"; };
 		2C8D246215353B1A00605AE7 /* circleGray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleGray.png; sourceTree = "<group>"; };
-		2C8D61BA1519AC6800379943 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = characters/Player.h; sourceTree = "<group>"; };
-		2C8D61BB1519AC6800379943 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Player.m; path = characters/Player.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		2C8E0872152BAB2B00D4BAC3 /* Pickups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pickups.h; path = iPhoneGame/pickups/Pickups.h; sourceTree = "<group>"; };
-		2C8E0873152BAB2B00D4BAC3 /* Pickups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pickups.m; path = iPhoneGame/pickups/Pickups.m; sourceTree = "<group>"; };
-		2C8E0876152BAD3600D4BAC3 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = iPhoneGame/pickups/Item.h; sourceTree = "<group>"; };
-		2C8E0877152BAD3600D4BAC3 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = iPhoneGame/pickups/Item.m; sourceTree = "<group>"; };
 		2C8E0879152BB26200D4BAC3 /* health.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = health.png; sourceTree = "<group>"; };
-		2C8EBFED153EA7C00003BA6A /* InfiniteEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfiniteEnvironment.h; path = environment/InfiniteEnvironment.h; sourceTree = "<group>"; };
-		2C8EBFEE153EA7C00003BA6A /* InfiniteEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfiniteEnvironment.m; path = environment/InfiniteEnvironment.m; sourceTree = "<group>"; };
 		2C8EE3B0153624EC00FF6E4E /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		2C8EE3B21536289300FF6E4E /* Globals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Globals.m; sourceTree = "<group>"; };
 		2C8EE3B415362EAE00FF6E4E /* pauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButton.png; sourceTree = "<group>"; };
 		2C901E01153568C500747795 /* healthParticle.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = healthParticle.vsh; path = shaders/healthParticle.vsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		2C90FC2A152D607E00B5BB44 /* MatrixFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatrixFunctions.h; sourceTree = "<group>"; };
-		2C91258215167CB200BA3DF6 /* Zombie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Zombie.h; path = characters/Zombie.h; sourceTree = "<group>"; };
-		2C91258315167CB200BA3DF6 /* Zombie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Zombie.m; path = characters/Zombie.m; sourceTree = "<group>"; };
-		2C91258C15167D2D00BA3DF6 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Character.h; path = characters/Character.h; sourceTree = "<group>"; };
-		2C91258D15167D2D00BA3DF6 /* Character.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Character.m; path = characters/Character.m; sourceTree = "<group>"; };
 		2C912592151686C500BA3DF6 /* zombie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie.png; sourceTree = "<group>"; };
-		2C92F047151A4F020049C0F1 /* HighScoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScoreController.h; sourceTree = "<group>"; };
-		2C92F048151A4F020049C0F1 /* HighScoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScoreController.m; sourceTree = "<group>"; };
-		2C92F04B151A4F430049C0F1 /* HighScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighScore.h; sourceTree = "<group>"; };
-		2C92F04C151A4F430049C0F1 /* HighScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighScore.m; sourceTree = "<group>"; };
-		2C930AA9152C033800349E9A /* ZombieSkull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZombieSkull.h; path = iPhoneGame/pickups/ZombieSkull.h; sourceTree = "<group>"; };
-		2C930AAA152C033800349E9A /* ZombieSkull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZombieSkull.m; path = iPhoneGame/pickups/ZombieSkull.m; sourceTree = "<group>"; };
-		2C94CC19152CE7FF002C998A /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
-		2C94CC1A152CE7FF002C998A /* Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Background.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2C94CC1D152CE9CE002C998A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		2C9B45011536B4E40001D024 /* pauseButtonWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButtonWhite.png; sourceTree = "<group>"; };
-		2CD3863B1519B7AB00694CB9 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
-		2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
-		2CD3863F1519B7B500694CB9 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
-		2CD386401519B7B500694CB9 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
-		2CD386421519B7BD00694CB9 /* WeaponViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeaponViewController.h; sourceTree = "<group>"; };
-		2CD386431519B7BD00694CB9 /* WeaponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeaponViewController.m; sourceTree = "<group>"; };
 		2CD7800E1516B2F5009EE721 /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = font.png; sourceTree = "<group>"; };
-		2CD780161516B3CE009EE721 /* Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Text.h; path = iPhoneGame/font/Text.h; sourceTree = "<group>"; };
-		2CD780171516B3CE009EE721 /* Text.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Text.m; path = iPhoneGame/font/Text.m; sourceTree = "<group>"; };
-		2CDA49E415178CD8009D86A0 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Button.h; path = controls/Button.h; sourceTree = "<group>"; };
-		2CDA49E515178CD8009D86A0 /* Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Button.m; path = controls/Button.m; sourceTree = "<group>"; };
-		2CDAAA3715338967009B0867 /* NinjaRopeJoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NinjaRopeJoyStick.h; path = controls/NinjaRopeJoyStick.h; sourceTree = "<group>"; };
-		2CDAAA3815338967009B0867 /* NinjaRopeJoyStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NinjaRopeJoyStick.m; path = controls/NinjaRopeJoyStick.m; sourceTree = "<group>"; };
 		2CF9C57315170D8200C21613 /* character.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = character.xcf; sourceTree = "<group>"; };
 		2CF9C57415170D8200C21613 /* CollisionVertex.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CollisionVertex.xcf; sourceTree = "<group>"; };
 		2CF9C57515170D8200C21613 /* font.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = font.xcf; sourceTree = "<group>"; };
 		2CF9C57615170D8200C21613 /* jump_button.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jump_button.xcf; sourceTree = "<group>"; };
 		2CF9C57715170D8200C21613 /* zombie.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = zombie.xcf; sourceTree = "<group>"; };
-		2CF9C58115170F9500C21613 /* jump_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = jump_button.png; path = iPhoneGame/textures/jump_button.png; sourceTree = SOURCE_ROOT; };
 		CE7A794314ECB05E00B8FA24 /* iPhoneGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7A794714ECB05E00B8FA24 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CE7A794914ECB05E00B8FA24 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -193,8 +73,6 @@
 		CE7A795614ECB05E00B8FA24 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CE7A795714ECB05E00B8FA24 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CE7A795A14ECB05E00B8FA24 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		CE7A795C14ECB05E00B8FA24 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CE7A795D14ECB05E00B8FA24 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CE7A796C14EDEC1200B8FA24 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		CE7A796D14EDEC1200B8FA24 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		CE7A797014EDECBE00B8FA24 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -202,12 +80,8 @@
 		CE7A797414EDECCE00B8FA24 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		CE884EE014F73981001B26DA /* GLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLProgram.h; sourceTree = "<group>"; };
 		CE884EE114F73981001B26DA /* GLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLProgram.m; sourceTree = "<group>"; };
-		CEAEABA515032D74000F7448 /* ToggleJoyStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToggleJoyStick.h; path = controls/ToggleJoyStick.h; sourceTree = "<group>"; };
-		CEAEABA615032D74000F7448 /* ToggleJoyStick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToggleJoyStick.m; path = controls/ToggleJoyStick.m; sourceTree = "<group>"; };
 		CEAEABA9150330CB000F7448 /* circleRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circleRed.png; sourceTree = "<group>"; };
 		CEBEF6B914FAD553008913F4 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GameConstants.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		CEC12C6A14FC70F700EF1392 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; };
-		CEC12C6B14FC70F700EF1392 /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tracker.m; sourceTree = "<group>"; };
 		CEC5BCE515030A64003724F5 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		CEE52F821502BE0200DDF174 /* particleShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = particleShader.fsh; path = shaders/particleShader.fsh; sourceTree = "<group>"; };
 		CEE52F831502BE0200DDF174 /* particleShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = particleShader.vsh; path = shaders/particleShader.vsh; sourceTree = "<group>"; };
@@ -236,8 +110,6 @@
 			children = (
 				2C1CF168152D07B1004A8FA6 /* GameModel.h */,
 				2C1CF169152D07B1004A8FA6 /* GameModel.m */,
-				2C1CF16E152D086D004A8FA6 /* ZombieSwarm.h */,
-				2C1CF16F152D086D004A8FA6 /* ZombieSwarm.m */,
 			);
 			name = "Game Types";
 			sourceTree = "<group>";
@@ -247,10 +119,6 @@
 			children = (
 				2C5431D6153E814000D30C14 /* Environment.h */,
 				2C5431D7153E814000D30C14 /* Environment.m */,
-				2C5431D2153E7FE000D30C14 /* RegularEnvironment.h */,
-				2C5431D3153E7FE000D30C14 /* RegularEnvironment.m */,
-				2C8EBFED153EA7C00003BA6A /* InfiniteEnvironment.h */,
-				2C8EBFEE153EA7C00003BA6A /* InfiniteEnvironment.m */,
 			);
 			name = Environment;
 			sourceTree = "<group>";
@@ -258,16 +126,6 @@
 		2C89154F151944ED00F91087 /* Loaders */ = {
 			isa = PBXGroup;
 			children = (
-				2C89155615194A9000F91087 /* EffectLoader.h */,
-				2C89155715194A9000F91087 /* EffectLoader.m */,
-				2C8915501519451700F91087 /* TextureLoader.h */,
-				2C8915511519451700F91087 /* TextureLoader.m */,
-				2C891553151945C900F91087 /* TextureDescription.h */,
-				2C891554151945C900F91087 /* TextureDescription.m */,
-				2C89155915194F9700F91087 /* BufferLoader.h */,
-				2C89155A15194F9700F91087 /* BufferLoader.m */,
-				2C6EF56E151D2EB000CFDCA3 /* VAOLoader.h */,
-				2C6EF56F151D2EB000CFDCA3 /* VAOLoader.m */,
 			);
 			name = Loaders;
 			sourceTree = "<group>";
@@ -275,18 +133,6 @@
 		2C89156E1519766600F91087 /* Weapons */ = {
 			isa = PBXGroup;
 			children = (
-				2C89156B1519766100F91087 /* Weapon.h */,
-				2C89156C1519766200F91087 /* Weapon.m */,
-				2C89157515197A7D00F91087 /* ShotGun.h */,
-				2C89157615197A7D00F91087 /* ShotGun.m */,
-				2C805AFD1519BBE100C2702A /* BouncyShotGun.h */,
-				2C805AFE1519BBE100C2702A /* BouncyShotGun.m */,
-				2C89156F1519786200F91087 /* MachineGun.h */,
-				2C8915701519786200F91087 /* MachineGun.m */,
-				2C805AFA1519BA3600C2702A /* BouncyMachineGun.h */,
-				2C805AFB1519BA3600C2702A /* BouncyMachineGun.m */,
-				2C89157D151984FD00F91087 /* Sniper.h */,
-				2C89157E151984FD00F91087 /* Sniper.m */,
 			);
 			name = Weapons;
 			sourceTree = "<group>";
@@ -294,12 +140,6 @@
 		2C8E0875152BAB3000D4BAC3 /* Pickups */ = {
 			isa = PBXGroup;
 			children = (
-				2C8E0872152BAB2B00D4BAC3 /* Pickups.h */,
-				2C8E0873152BAB2B00D4BAC3 /* Pickups.m */,
-				2C8E0876152BAD3600D4BAC3 /* Item.h */,
-				2C8E0877152BAD3600D4BAC3 /* Item.m */,
-				2C930AA9152C033800349E9A /* ZombieSkull.h */,
-				2C930AAA152C033800349E9A /* ZombieSkull.m */,
 			);
 			name = Pickups;
 			path = ..;
@@ -308,14 +148,6 @@
 		2C91258015167C7C00BA3DF6 /* Characters */ = {
 			isa = PBXGroup;
 			children = (
-				2C91258C15167D2D00BA3DF6 /* Character.h */,
-				2C91258D15167D2D00BA3DF6 /* Character.m */,
-				2C861303152E67A000679829 /* NinjaRope.h */,
-				2C861304152E67A000679829 /* NinjaRope.m */,
-				2C8D61BA1519AC6800379943 /* Player.h */,
-				2C8D61BB1519AC6800379943 /* Player.m */,
-				2C91258215167CB200BA3DF6 /* Zombie.h */,
-				2C91258315167CB200BA3DF6 /* Zombie.m */,
 			);
 			name = Characters;
 			sourceTree = "<group>";
@@ -323,8 +155,6 @@
 		2CD7801A1516B3FA009EE721 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				2CD780161516B3CE009EE721 /* Text.h */,
-				2CD780171516B3CE009EE721 /* Text.m */,
 			);
 			name = Font;
 			path = ..;
@@ -376,30 +206,14 @@
 			isa = PBXGroup;
 			children = (
 				CE7A795914ECB05E00B8FA24 /* MainStoryboard.storyboard */,
-				2C92F047151A4F020049C0F1 /* HighScoreController.h */,
-				2C92F048151A4F020049C0F1 /* HighScoreController.m */,
-				2C92F04B151A4F430049C0F1 /* HighScore.h */,
-				2C92F04C151A4F430049C0F1 /* HighScore.m */,
 				CEBEF6B914FAD553008913F4 /* GameConstants.h */,
 				2C8EE3B0153624EC00FF6E4E /* Globals.h */,
 				2C8EE3B21536289300FF6E4E /* Globals.m */,
 				2C90FC2A152D607E00B5BB44 /* MatrixFunctions.h */,
 				CE7A795614ECB05E00B8FA24 /* AppDelegate.h */,
 				CE7A795714ECB05E00B8FA24 /* AppDelegate.m */,
-				2CD386421519B7BD00694CB9 /* WeaponViewController.h */,
-				2CD386431519B7BD00694CB9 /* WeaponViewController.m */,
-				2CD3863B1519B7AB00694CB9 /* MainMenuViewController.h */,
-				2CD3863C1519B7AB00694CB9 /* MainMenuViewController.m */,
-				CE7A795C14ECB05E00B8FA24 /* ViewController.h */,
-				CE7A795D14ECB05E00B8FA24 /* ViewController.m */,
 				CE7A796C14EDEC1200B8FA24 /* GameViewController.h */,
 				CE7A796D14EDEC1200B8FA24 /* GameViewController.m */,
-				2CD3863F1519B7B500694CB9 /* Settings.h */,
-				2CD386401519B7B500694CB9 /* Settings.m */,
-				2C94CC19152CE7FF002C998A /* Background.h */,
-				2C94CC1A152CE7FF002C998A /* Background.m */,
-				CEC12C6A14FC70F700EF1392 /* Tracker.h */,
-				CEC12C6B14FC70F700EF1392 /* Tracker.m */,
 				2C1CF167152D0792004A8FA6 /* Game Types */,
 				2C5431D1153E7FCA00D30C14 /* Environment */,
 				CEC5BCE115030367003724F5 /* Particles */,
@@ -443,19 +257,6 @@
 		CEC5BCE115030367003724F5 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
-				2C8915661519545D00F91087 /* Particles.h */,
-				2C8915671519545D00F91087 /* Particles.m */,
-				2C2A075E152C17510066E88D /* Particle.h */,
-				2C2A075F152C18300066E88D /* HealingParticle.h */,
-				2C2A0760152C18300066E88D /* HealingParticle.m */,
-				2C8915621519545D00F91087 /* BloodParticle.h */,
-				2C8915631519545D00F91087 /* BloodParticle.m */,
-				2C8915641519545D00F91087 /* BulletParticle.h */,
-				2C8915651519545D00F91087 /* BulletParticle.m */,
-				2C8915831519863F00F91087 /* BulletParticleGrav.h */,
-				2C8915841519863F00F91087 /* BulletParticleGrav.m */,
-				2C89158615198B8D00F91087 /* BulletParticleBouncy.h */,
-				2C89158715198B8D00F91087 /* BulletParticleBouncy.m */,
 			);
 			name = Particles;
 			sourceTree = "<group>";
@@ -463,16 +264,6 @@
 		CEC5BCE315030373003724F5 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				2C89155C1519544200F91087 /* Controls.h */,
-				2C89155D1519544200F91087 /* Controls.m */,
-				2C89155E1519544200F91087 /* JoyStick.h */,
-				2C89155F1519544200F91087 /* JoyStick.m */,
-				CEAEABA515032D74000F7448 /* ToggleJoyStick.h */,
-				CEAEABA615032D74000F7448 /* ToggleJoyStick.m */,
-				2CDAAA3715338967009B0867 /* NinjaRopeJoyStick.h */,
-				2CDAAA3815338967009B0867 /* NinjaRopeJoyStick.m */,
-				2CDA49E415178CD8009D86A0 /* Button.h */,
-				2CDA49E515178CD8009D86A0 /* Button.m */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -491,7 +282,6 @@
 				2C8D246215353B1A00605AE7 /* circleGray.png */,
 				CEC5BCE515030A64003724F5 /* circle.png */,
 				2CD7800E1516B2F5009EE721 /* font.png */,
-				2CF9C58115170F9500C21613 /* jump_button.png */,
 				2CF9C57215170D8200C21613 /* sources */,
 			);
 			name = Textures;
@@ -558,7 +348,6 @@
 				2C13BB5C150C72E40002FA77 /* character.png in Resources */,
 				2C912593151686C500BA3DF6 /* zombie.png in Resources */,
 				2CD7800F1516B2F5009EE721 /* font.png in Resources */,
-				2CF9C58215170F9500C21613 /* jump_button.png in Resources */,
 				2C8E087A152BB26200D4BAC3 /* health.png in Resources */,
 				2C2A0759152C05DD0066E88D /* zombie_skull.png in Resources */,
 				2C94CC1E152CE9CE002C998A /* background.png in Resources */,
@@ -578,52 +367,11 @@
 			files = (
 				CE7A795414ECB05E00B8FA24 /* main.m in Sources */,
 				CE7A795814ECB05E00B8FA24 /* AppDelegate.m in Sources */,
-				CE7A795E14ECB05E00B8FA24 /* ViewController.m in Sources */,
 				CE7A796E14EDEC1200B8FA24 /* GameViewController.m in Sources */,
 				CE884EE214F73981001B26DA /* GLProgram.m in Sources */,
-				CEC12C6C14FC70F700EF1392 /* Tracker.m in Sources */,
-				CEAEABA715032D74000F7448 /* ToggleJoyStick.m in Sources */,
-				2C91258415167CB200BA3DF6 /* Zombie.m in Sources */,
-				2C91258E15167D2D00BA3DF6 /* Character.m in Sources */,
-				2CD780191516B3CE009EE721 /* Text.m in Sources */,
-				2CDA49E615178CD8009D86A0 /* Button.m in Sources */,
-				2C8915521519451700F91087 /* TextureLoader.m in Sources */,
-				2C891555151945C900F91087 /* TextureDescription.m in Sources */,
-				2C89155815194A9000F91087 /* EffectLoader.m in Sources */,
-				2C89155B15194F9700F91087 /* BufferLoader.m in Sources */,
-				2C8915601519544200F91087 /* Controls.m in Sources */,
-				2C8915611519544200F91087 /* JoyStick.m in Sources */,
-				2C8915681519545D00F91087 /* BloodParticle.m in Sources */,
-				2C8915691519545D00F91087 /* BulletParticle.m in Sources */,
-				2C89156A1519545D00F91087 /* Particles.m in Sources */,
-				2C89156D1519766300F91087 /* Weapon.m in Sources */,
-				2C8915711519786200F91087 /* MachineGun.m in Sources */,
-				2C89157715197A7D00F91087 /* ShotGun.m in Sources */,
-				2C89157F151984FE00F91087 /* Sniper.m in Sources */,
-				2C8915851519863F00F91087 /* BulletParticleGrav.m in Sources */,
-				2C89158815198B8E00F91087 /* BulletParticleBouncy.m in Sources */,
-				2C8D61BC1519AC6800379943 /* Player.m in Sources */,
-				2CD3863D1519B7AB00694CB9 /* MainMenuViewController.m in Sources */,
-				2CD386411519B7B500694CB9 /* Settings.m in Sources */,
-				2CD386441519B7BE00694CB9 /* WeaponViewController.m in Sources */,
-				2C805AFC1519BA3600C2702A /* BouncyMachineGun.m in Sources */,
-				2C805AFF1519BBE100C2702A /* BouncyShotGun.m in Sources */,
-				2C92F049151A4F020049C0F1 /* HighScoreController.m in Sources */,
-				2C92F04D151A4F430049C0F1 /* HighScore.m in Sources */,
-				2C6EF570151D2EB000CFDCA3 /* VAOLoader.m in Sources */,
-				2C8E0874152BAB2B00D4BAC3 /* Pickups.m in Sources */,
-				2C8E0878152BAD3600D4BAC3 /* Item.m in Sources */,
-				2C930AAB152C033800349E9A /* ZombieSkull.m in Sources */,
-				2C2A0761152C18310066E88D /* HealingParticle.m in Sources */,
-				2C94CC1B152CE7FF002C998A /* Background.m in Sources */,
 				2C1CF16A152D07B1004A8FA6 /* GameModel.m in Sources */,
-				2C1CF170152D086D004A8FA6 /* ZombieSwarm.m in Sources */,
-				2C861305152E67A000679829 /* NinjaRope.m in Sources */,
-				2CDAAA3915338967009B0867 /* NinjaRopeJoyStick.m in Sources */,
 				2C8EE3B31536289300FF6E4E /* Globals.m in Sources */,
-				2C5431D4153E7FE000D30C14 /* RegularEnvironment.m in Sources */,
 				2C5431D8153E814100D30C14 /* Environment.m in Sources */,
-				2C8EBFEF153EA7C00003BA6A /* InfiniteEnvironment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

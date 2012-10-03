@@ -1,175 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="39u-Uj-Gay">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="12C54" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="39u-Uj-Gay">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
-        <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <deployment defaultVersion="1536" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
     <scenes>
-        <!--Main Menu View Controller-->
-        <scene sceneID="5">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
-                <viewController id="2" customClass="MainMenuViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Game Yay" lineBreakMode="tailTruncation" minimumFontSize="10" id="yl4-Z7-yQP">
-                                <rect key="frame" x="195" y="33" width="90" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rwb-JC-bWh">
-                                <rect key="frame" x="271" y="115" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Select">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="XAI-1u-qCr" kind="modal" id="iZF-JM-mjv"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Weapon 1" lineBreakMode="tailTruncation" minimumFontSize="10" id="QvP-KJ-emO">
-                                <rect key="frame" x="136" y="122" width="127" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SZu-MF-xsF">
-                                <rect key="frame" x="204" y="218" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Start">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="39u-Uj-Gay" kind="modal" id="mzM-XM-yaD"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <connections>
-                        <outlet property="weaponLabel" destination="QvP-KJ-emO" id="kwR-rr-7D2"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="160" y="148"/>
-        </scene>
-        <!--Weapon View Controller-->
-        <scene sceneID="CPY-wu-m3O">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="l7e-nK-dZw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="XAI-1u-qCr" customClass="WeaponViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ywg-5b-YgU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="plJ-f1-eeW">
-                                <rect key="frame" x="78" y="113" width="178" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Bouncy Machine Gun">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="regularBullet:" destination="XAI-1u-qCr" eventType="touchUpInside" id="O0u-PZ-yxU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gah-7a-A7U">
-                                <rect key="frame" x="124" y="158" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Sniper">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="sniper:" destination="XAI-1u-qCr" eventType="touchUpInside" id="E1j-I6-uH8"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZJ0-zC-VAf">
-                                <rect key="frame" x="101" y="203" width="119" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Machine Gun">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="machineGun:" destination="XAI-1u-qCr" eventType="touchUpInside" id="PWg-jD-XMj"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6fI-Vb-ayk">
-                                <rect key="frame" x="114" y="248" width="92" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Shot Gun">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="shotgun:" destination="XAI-1u-qCr" eventType="touchUpInside" id="IrU-Da-L85"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4Wl-1A-tuh">
-                                <rect key="frame" x="77" y="293" width="167" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Bouncy ShotGun">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="bulletsWithGravity:" destination="XAI-1u-qCr" eventType="touchUpInside" id="wkd-O6-rfG"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <connections>
-                        <segue destination="2" kind="modal" identifier="selectedGun" id="Spm-Aj-sWg"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="210" y="829"/>
-        </scene>
         <!--GLKit View Controller-->
         <scene sceneID="hLJ-Bf-srL">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Yzs-MY-jwx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <glkViewController autoresizesArchivedViewToFullSize="NO" preferredFramesPerSecond="30" id="39u-Uj-Gay" customClass="GameViewController" sceneMemberID="viewController">
                     <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" enableSetNeedsDisplay="NO" id="mqC-9G-KRm">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
@@ -222,154 +60,19 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="pauseView" destination="sW8-vP-No5" id="pJg-G1-Rcg"/>
-                        <segue destination="Kca-ZB-iqW" kind="modal" identifier="gameOver" id="wPx-rt-d6P"/>
                     </connections>
                 </glkViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yzs-MY-jwx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="752" y="172"/>
-        </scene>
-        <!--High Score Controller-->
-        <scene sceneID="KyJ-uL-9dg">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qrh-dU-Gj5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="Kca-ZB-iqW" customClass="HighScoreController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Vqz-7d-LeS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You Lost :(" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="yf5-7X-gsV">
-                                <rect key="frame" x="26" y="20" width="268" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IGf-uf-Bx2">
-                                <rect key="frame" x="105" y="423" width="110" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Play Again?">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="2" kind="modal" id="ITs-fQ-iAF"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Asq-QS-RNu">
-                                <rect key="frame" x="20" y="75" width="280" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="0vG-5Q-6Hf">
-                                <rect key="frame" x="20" y="104" width="280" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="yQd-Yn-1Hx">
-                                <rect key="frame" x="20" y="133" width="280" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="vgE-oL-2Wt">
-                                <rect key="frame" x="20" y="162" width="274" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="5Yf-cP-vVi">
-                                <rect key="frame" x="20" y="191" width="274" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qin-rC-M9i">
-                                <rect key="frame" x="95" y="299" width="131" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Update Scores">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="updateScores:" destination="Kca-ZB-iqW" eventType="touchUpInside" id="yTa-Cc-DaI"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <connections>
-                        <outlet property="score1" destination="Asq-QS-RNu" id="L9F-QS-i4L"/>
-                        <outlet property="score2" destination="0vG-5Q-6Hf" id="pXb-TB-wGu"/>
-                        <outlet property="score3" destination="yQd-Yn-1Hx" id="9Kr-UK-LnB"/>
-                        <outlet property="score4" destination="vgE-oL-2Wt" id="hAH-Ud-veJ"/>
-                        <outlet property="score5" destination="5Yf-cP-vVi" id="NKB-1A-Kba"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="1140" y="736"/>
+            <point key="canvasLocation" x="426" y="574"/>
         </scene>
     </scenes>
     <resources>
         <image name="pauseButtonWhite.png" width="50" height="50"/>
     </resources>
-    <classes>
-        <class className="GameViewController" superclassName="GLKViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GameViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="resumeGame:"/>
-                <relationship kind="outlet" name="pauseView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="HighScoreController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/HighScoreController.h"/>
-            <relationships>
-                <relationship kind="action" name="updateScores:"/>
-                <relationship kind="outlet" name="score1" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="score2" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="score3" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="score4" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="score5" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="MainMenuViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainMenuViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="weaponLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="WeaponViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WeaponViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="bulletsWithGravity:"/>
-                <relationship kind="action" name="machineGun:"/>
-                <relationship kind="action" name="regularBullet:"/>
-                <relationship kind="action" name="shotgun:"/>
-                <relationship kind="action" name="sniper:"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <nil key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="ITs-fQ-iAF"/>
-    </inferredMetricsTieBreakers>
 </document>

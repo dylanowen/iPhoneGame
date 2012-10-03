@@ -10,7 +10,6 @@
 #import <GLKit/GLKit.h>
 
 #import "GameConstants.h"
-#import "Controls.h"
 
 @class GameViewController;
 @class TextureLoader;
